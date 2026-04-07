@@ -1,8 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f3425">
+  <title>Weekly Training Plan</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap');
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{min-height:100%}
-  body{background:linear-gradient(180deg,#0b2b1f 0%,#114d36 42%,#0f3d2b 100%)}
+  body{-webkit-text-size-adjust:100%;background:linear-gradient(180deg,#0b2b1f 0%,#114d36 42%,#0f3d2b 100%)}
   button{font:inherit}
   .wrap{--text:#effbf4;--muted:#b7d4c4;--line:rgba(207,244,223,.14);--accent:#47d68d;--accent-dark:#1f9f63;--accent-soft:rgba(101,220,152,.18);--strength-soft:rgba(85,180,124,.22);position:relative;width:100%;max-width:none;min-height:100vh;min-height:100dvh;margin:0;padding:2.25rem 2.5rem 2rem;overflow:hidden;border:none;border-radius:0;background:radial-gradient(circle at top right,rgba(92,255,171,.24),transparent 26%),radial-gradient(circle at left 20% top 0,rgba(36,115,74,.42),transparent 30%),linear-gradient(180deg,#143e2d 0%,#0f3425 38%,#0c281d 100%);box-shadow:none;color:var(--text);font-family:'Barlow',sans-serif}
   .wrap:before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,0) 42%)}
@@ -63,9 +70,11 @@
   .bottom-note{margin-top:1.2rem;padding:1rem 1.1rem;border:1px solid rgba(207,244,223,.10);border-radius:20px;background:rgba(10,41,29,.52);color:#a5cdb8;font-size:.84rem}
   @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
   @media(max-width:768px){.wrap{padding:1.2rem 1rem 1rem}.day-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}}
-  @media(max-width:540px){.wrap{padding:1rem .8rem .8rem}.header{gap:.75rem}.header-badge,.progress-meta{width:100%;text-align:left}.progress-meta{flex-direction:column;align-items:flex-start}.day-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.sessions{grid-template-columns:1fr}.session-card{padding:.95rem}.session-title{font-size:.96rem}.bottom-note{font-size:.8rem}}
+  @media(max-width:540px){.wrap{padding:1rem .8rem .8rem}.header{gap:.75rem}.header h1{font-size:clamp(2.35rem,11vw,3.3rem)}.header .week{font-size:1.06rem;line-height:1.45}.header-badge,.progress-meta{width:100%;text-align:left}.progress-meta{flex-direction:column;align-items:flex-start}.progress-labels{font-size:1.05rem}.progress-caption{font-size:.92rem;line-height:1.45}.day-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.day-tab{font-size:1rem;padding:1rem .35rem}.sessions{grid-template-columns:1fr}.session-card{padding:1rem}.session-title{font-size:1.08rem}.ex-text{font-size:1rem}.ex-sets{font-size:.86rem}.bottom-note{font-size:.88rem;line-height:1.45}}
   @media(prefers-reduced-motion:reduce){.day-content.visible,.day-tab,.session-card,.exercise-item,.progress-fill{animation:none;transition:none}}
 </style>
+</head>
+<body>
 
 <div class="wrap">
   <div class="header">
@@ -383,3 +392,5 @@
     updateDayTabs();
   </script>
 </div>
+</body>
+</html>
