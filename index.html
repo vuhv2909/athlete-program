@@ -106,7 +106,7 @@
     <div class="header-copy">
       <span class="eyebrow">Performance Week</span>
       <h1>Weekly Training Plan</h1>
-      <span class="week">Morning cardio for fat loss, evening strength for performance and aesthetics, with one full rest day.</span>
+      <span class="week">Morning Zone 2 cardio every training day, followed by a clean 6-day PUSH / PULL / LEGS &amp; CORE split at night.</span>
     </div>
     <div class="header-badge">
       <strong>7-Day Cycle</strong>
@@ -115,9 +115,10 @@
   </div>
 
   <div class="hero-strip">
-    <div class="hero-chip"><strong>AM</strong><span>Cardio &amp; Fat Loss</span></div>
-    <div class="hero-chip"><strong>PM</strong><span>Strength &amp; Aesthetic</span></div>
-    <div class="hero-chip"><strong>6</strong><span>Training days</span></div>
+    <div class="hero-chip"><strong>AM</strong><span>Zone 2 · 30 min</span></div>
+    <div class="hero-chip"><strong>Push</strong><span>Mon &amp; Thu</span></div>
+    <div class="hero-chip"><strong>Pull</strong><span>Tue &amp; Fri</span></div>
+    <div class="hero-chip"><strong>Legs</strong><span>Wed &amp; Sat</span></div>
     <div class="hero-chip"><strong>1</strong><span>Full rest day</span></div>
   </div>
 
@@ -145,36 +146,33 @@
 
   <div id="day-0" class="day-content visible">
     <div class="sessions">
-      <div class="session-card" id="s0-run">
+      <div class="session-card" id="s0-zone2">
         <div class="session-header">
           <div class="session-icon run">&#9674;</div>
           <div class="session-meta">
             <div class="session-type">Morning &middot; 30 min</div>
-            <div class="session-title">Cardio &amp; Fat Loss</div>
+            <div class="session-title">Zone 2 Run</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s0-run')">
-            <div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div><div class="ex-text">Zone 2 endurance run</div><div class="ex-sets">30 min &middot; speed 7&ndash;8</div></div>
-          </li>
+          <li class="exercise-item" onclick="toggleEx(this,'s0-zone2')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Zone 2 Run</div><div class="ex-sets">30 min</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
-      <div class="session-card" id="s0-gym">
+      <div class="session-card" id="s0-push">
         <div class="session-header">
           <div class="session-icon gym">&#9632;</div>
           <div class="session-meta">
-            <div class="session-type">Evening &middot; 60 min</div>
-            <div class="session-title">Lower Body &amp; Power Focus</div>
+            <div class="session-type">Evening &middot; PUSH</div>
+            <div class="session-title">Chest, Shoulders, and Triceps</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s0-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Box Jump</div><div class="ex-sets">3 &times; 5 &middot; explosive focus</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s0-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Barbell Squat</div><div class="ex-sets">3 &times; 6&ndash;8 &middot; RPE 8</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s0-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Leg Extension</div><div class="ex-sets">3 &times; 12&ndash;15 &middot; tempo 3-1-1</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s0-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Romanian Deadlift</div><div class="ex-sets">3 &times; 10</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s0-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Plank</div><div class="ex-sets">3 &times; 60 sec</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s0-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Bench Press</div><div class="ex-sets">3 &times; 10&ndash;12</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s0-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Overhead Press</div><div class="ex-sets">3 &times; 10</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s0-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Dumbbell Lateral Raise</div><div class="ex-sets">3 &times; 15</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s0-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Push-up</div><div class="ex-sets">3 &times; max</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s0-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Tricep Pushdown</div><div class="ex-sets">3 &times; 12</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
@@ -183,33 +181,33 @@
 
   <div id="day-1" class="day-content">
     <div class="sessions">
-      <div class="session-card" id="s1-run">
+      <div class="session-card" id="s1-zone2">
         <div class="session-header">
           <div class="session-icon run">&#9674;</div>
           <div class="session-meta">
             <div class="session-type">Morning &middot; 30 min</div>
-            <div class="session-title">Cardio &amp; Fat Loss</div>
+            <div class="session-title">Zone 2 Run</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s1-run')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Incline treadmill walk</div><div class="ex-sets">30 min &middot; 6% incline &middot; speed 5.5</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s1-zone2')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Zone 2 Run</div><div class="ex-sets">30 min</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
-      <div class="session-card" id="s1-gym">
+      <div class="session-card" id="s1-pull">
         <div class="session-header">
           <div class="session-icon gym">&#9632;</div>
           <div class="session-meta">
-            <div class="session-type">Evening &middot; 60 min</div>
-            <div class="session-title">Chest &amp; Shoulders (V-Taper Focus)</div>
+            <div class="session-type">Evening &middot; PULL</div>
+            <div class="session-title">Lats, Back, and Biceps</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s1-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Med-Ball Slam</div><div class="ex-sets">3 &times; 8 &middot; power output</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s1-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Incline Dumbbell Press</div><div class="ex-sets">3 &times; 8&ndash;10 &middot; upper chest</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s1-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Lateral Raise</div><div class="ex-sets">4 &times; 15 &middot; moderate-heavy</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s1-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Pull-ups</div><div class="ex-sets">3 &times; max reps &middot; lat focus</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s1-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Face Pull</div><div class="ex-sets">3 &times; 15 &middot; rear delts and posture</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Pull-up / Lat Pulldown</div><div class="ex-sets">3 &times; max</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">One-Arm Dumbbell Row</div><div class="ex-sets">3 &times; 10&ndash;12 each side</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Face Pull</div><div class="ex-sets">3 &times; 15</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Dumbbell Hammer Curl</div><div class="ex-sets">3 &times; 12</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Kettlebell Swing</div><div class="ex-sets">3 &times; 20</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
@@ -218,33 +216,34 @@
 
   <div id="day-2" class="day-content">
     <div class="sessions">
-      <div class="session-card" id="s2-run">
+      <div class="session-card" id="s2-zone2">
         <div class="session-header">
           <div class="session-icon run">&#9674;</div>
           <div class="session-meta">
             <div class="session-type">Morning &middot; 30 min</div>
-            <div class="session-title">Sprint Workout</div>
+            <div class="session-title">Zone 2 Run</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s2-run')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Sprint intervals</div><div class="ex-sets">8 rounds &middot; 15 sec fast / 45 sec walk</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s2-zone2')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Zone 2 Run</div><div class="ex-sets">30 min</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
-      <div class="session-card" id="s2-gym">
+      <div class="session-card" id="s2-legs">
         <div class="session-header">
           <div class="session-icon gym">&#9632;</div>
           <div class="session-meta">
-            <div class="session-type">Evening &middot; 60 min</div>
-            <div class="session-title">Agility &amp; Core</div>
+            <div class="session-type">Evening &middot; LEGS &amp; CORE</div>
+            <div class="session-title">Legs, Glutes, and Abs</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s2-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">20m Sprint</div><div class="ex-sets">5 reps &middot; rest 60 sec</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s2-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Agility Drill</div><div class="ex-sets">4 rounds &middot; zigzag run</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s2-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Hanging Leg Raise</div><div class="ex-sets">4 &times; 12 &middot; lower abs</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s2-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Russian Twist</div><div class="ex-sets">3 &times; 20</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s2-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Light cycling</div><div class="ex-sets">10 min cooldown</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Goblet Squat</div><div class="ex-sets">4 &times; 12</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Bulgarian Split Squat</div><div class="ex-sets">3 &times; 10 each side</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Stiff-Leg Deadlift</div><div class="ex-sets">3 &times; 12</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Calf Raise</div><div class="ex-sets">4 &times; 20</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Plank</div><div class="ex-sets">3 &times; 60 sec</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Lying Leg Raise</div><div class="ex-sets">3 &times; 15</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
@@ -253,33 +252,33 @@
 
   <div id="day-3" class="day-content">
     <div class="sessions">
-      <div class="session-card" id="s3-run">
+      <div class="session-card" id="s3-zone2">
         <div class="session-header">
           <div class="session-icon run">&#9674;</div>
           <div class="session-meta">
             <div class="session-type">Morning &middot; 30 min</div>
-            <div class="session-title">Cardio &amp; Fat Loss</div>
+            <div class="session-title">Zone 2 Run</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s3-run')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Zone 2 endurance run</div><div class="ex-sets">30 min &middot; speed 7&ndash;8</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s3-zone2')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Zone 2 Run</div><div class="ex-sets">30 min</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
-      <div class="session-card" id="s3-gym">
+      <div class="session-card" id="s3-push">
         <div class="session-header">
           <div class="session-icon gym">&#9632;</div>
           <div class="session-meta">
-            <div class="session-type">Evening &middot; 60 min</div>
-            <div class="session-title">Full Body &amp; Arms</div>
+            <div class="session-type">Evening &middot; PUSH</div>
+            <div class="session-title">Chest, Shoulders, and Triceps</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s3-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Kettlebell Swing</div><div class="ex-sets">3 &times; 12 &middot; hip drive</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s3-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Goblet Squat</div><div class="ex-sets">3 &times; 10 &middot; mind-muscle focus</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s3-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Dumbbell Row</div><div class="ex-sets">3 &times; 10 &middot; back thickness</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s3-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Bicep Curl</div><div class="ex-sets">3 &times; 12</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s3-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Tricep Extension</div><div class="ex-sets">3 &times; 12</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s3-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Bench Press</div><div class="ex-sets">3 &times; 10&ndash;12</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s3-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Overhead Press</div><div class="ex-sets">3 &times; 10</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s3-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Dumbbell Lateral Raise</div><div class="ex-sets">3 &times; 15</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s3-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Push-up</div><div class="ex-sets">3 &times; max</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s3-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Tricep Pushdown</div><div class="ex-sets">3 &times; 12</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
@@ -288,33 +287,33 @@
 
   <div id="day-4" class="day-content">
     <div class="sessions">
-      <div class="session-card" id="s4-run">
+      <div class="session-card" id="s4-zone2">
         <div class="session-header">
           <div class="session-icon run">&#9674;</div>
           <div class="session-meta">
-            <div class="session-type">Morning &middot; 20 min</div>
-            <div class="session-title">Recovery Cardio</div>
+            <div class="session-type">Morning &middot; 30 min</div>
+            <div class="session-title">Zone 2 Run</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s4-run')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Recovery run</div><div class="ex-sets">20 min &middot; speed 6</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s4-zone2')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Zone 2 Run</div><div class="ex-sets">30 min</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
-      <div class="session-card" id="s4-gym">
+      <div class="session-card" id="s4-pull">
         <div class="session-header">
           <div class="session-icon gym">&#9632;</div>
           <div class="session-meta">
-            <div class="session-type">Evening &middot; 60 min</div>
-            <div class="session-title">Shoulders &amp; Back (Width)</div>
+            <div class="session-type">Evening &middot; PULL</div>
+            <div class="session-title">Lats, Back, and Biceps</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s4-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Broad Jump</div><div class="ex-sets">3 &times; 5 &middot; standing jump</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s4-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Dumbbell Shoulder Press</div><div class="ex-sets">3 &times; 10</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s4-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Lat Pulldown</div><div class="ex-sets">3 &times; 10&ndash;12 &middot; width focus</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s4-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Dumbbell Flyes</div><div class="ex-sets">3 &times; 12 &middot; chest detail</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s4-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Lateral Raise</div><div class="ex-sets">3 &times; 20 &middot; light weight burn</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Pull-up / Lat Pulldown</div><div class="ex-sets">3 &times; max</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">One-Arm Dumbbell Row</div><div class="ex-sets">3 &times; 10&ndash;12 each side</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Face Pull</div><div class="ex-sets">3 &times; 15</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Dumbbell Hammer Curl</div><div class="ex-sets">3 &times; 12</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Kettlebell Swing</div><div class="ex-sets">3 &times; 20</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
@@ -323,31 +322,34 @@
 
   <div id="day-5" class="day-content">
     <div class="sessions">
-      <div class="session-card" id="s5-run">
+      <div class="session-card" id="s5-zone2">
         <div class="session-header">
           <div class="session-icon run">&#9674;</div>
           <div class="session-meta">
-            <div class="session-type">Morning &middot; 45 min</div>
-            <div class="session-title">Relaxed Zone 2 Run</div>
+            <div class="session-type">Morning &middot; 30 min</div>
+            <div class="session-title">Zone 2 Run</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s5-run')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Relaxed Zone 2 run</div><div class="ex-sets">45 min &middot; easy pace</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s5-zone2')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Zone 2 Run</div><div class="ex-sets">30 min</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
-      <div class="session-card" id="s5-gym">
+      <div class="session-card" id="s5-legs">
         <div class="session-header">
           <div class="session-icon gym">&#9632;</div>
           <div class="session-meta">
-            <div class="session-type">Evening &middot; 60 min</div>
-            <div class="session-title">Recovery &amp; Details</div>
+            <div class="session-type">Evening &middot; LEGS &amp; CORE</div>
+            <div class="session-title">Legs, Glutes, and Abs</div>
           </div>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s5-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Calf Raises</div><div class="ex-sets">4 &times; 15 &middot; calf definition</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s5-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Side Plank</div><div class="ex-sets">3 &times; 45 sec each side</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s5-gym')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Stretching</div><div class="ex-sets">20 min &middot; full body</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Goblet Squat</div><div class="ex-sets">4 &times; 12</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Bulgarian Split Squat</div><div class="ex-sets">3 &times; 10 each side</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Stiff-Leg Deadlift</div><div class="ex-sets">3 &times; 12</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Calf Raise</div><div class="ex-sets">4 &times; 20</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Plank</div><div class="ex-sets">3 &times; 60 sec</div></div></li>
+          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Lying Leg Raise</div><div class="ex-sets">3 &times; 15</div></div></li>
         </ul>
         <div class="session-complete-badge">Session complete</div>
       </div>
