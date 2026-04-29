@@ -1,353 +1,169 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f5f5f7">
-  <title>Weekly Training Plan</title>
+
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{min-height:100%}
-  body{-webkit-text-size-adjust:100%;background:
-    radial-gradient(circle at top left,rgba(151,198,255,.34),transparent 28%),
-    radial-gradient(circle at top right,rgba(194,236,255,.58),transparent 32%),
-    radial-gradient(circle at bottom center,rgba(224,231,255,.42),transparent 36%),
-    linear-gradient(180deg,#f8fafc 0%,#f5f5f7 44%,#eef2f7 100%);
-    color:#1d1d1f;
-    font-family:"SF Pro Text","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-  button{font:inherit}
-  .wrap{--text:#1d1d1f;--muted:#6e6e73;--line:rgba(15,23,42,.08);--line-strong:rgba(15,23,42,.12);--accent:#0a84ff;--accent-dark:#0071e3;--accent-soft:rgba(10,132,255,.10);--accent-glow:rgba(10,132,255,.18);position:relative;width:100%;max-width:none;min-height:100vh;min-height:100dvh;margin:0;padding:2.2rem 1.35rem 1.8rem;overflow:hidden;border:none;border-radius:0;background:transparent;color:var(--text)}
-  .wrap:before{content:'';position:absolute;inset:0;pointer-events:none;background:
-    radial-gradient(circle at 12% 0,rgba(255,255,255,.82),transparent 28%),
-    radial-gradient(circle at 88% 8%,rgba(196,231,255,.72),transparent 24%),
-    linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,0) 42%)}
-  .wrap-inner{position:relative;z-index:1;max-width:1120px;margin:0 auto}
-  .header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:1.25rem;margin-bottom:1.35rem}
-  .header-copy{display:flex;flex-direction:column;gap:.5rem}
-  .eyebrow,.progress-kicker,.session-type{text-transform:uppercase;font-weight:700}
-  .eyebrow{font-size:.74rem;letter-spacing:.22em;color:#6e6e73}
-  .header h1{font-size:clamp(3rem,7vw,5.6rem);line-height:.92;font-weight:700;letter-spacing:-.065em}
-  .header .week{max-width:46rem;font-size:1.08rem;color:var(--muted);font-weight:500;line-height:1.55}
-  .header-badge{flex-shrink:0;padding:1rem 1.15rem;border:1px solid rgba(15,23,42,.08);border-radius:26px;background:rgba(255,255,255,.68);box-shadow:0 18px 44px rgba(15,23,42,.08);text-align:right;backdrop-filter:blur(22px) saturate(160%)}
-  .header-badge strong{display:block;font-size:1rem;letter-spacing:-.02em}
-  .header-badge span{font-size:.78rem;color:var(--muted)}
-  .hero-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem;margin-bottom:1.25rem}
-  .hero-chip{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:.28rem;padding:1rem 1.05rem;border:1px solid rgba(15,23,42,.06);border-radius:24px;background:rgba(255,255,255,.7);box-shadow:0 18px 42px rgba(15,23,42,.06);color:var(--text);font-size:.96rem;font-weight:600;backdrop-filter:blur(18px) saturate(160%)}
-  .hero-chip strong{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#6e6e73}
-  .progress-bar-wrap{margin-bottom:1.35rem;padding:1.35rem;border:1px solid rgba(15,23,42,.06);border-radius:32px;background:rgba(255,255,255,.76);box-shadow:0 24px 60px rgba(15,23,42,.08);backdrop-filter:blur(20px) saturate(155%)}
-  .progress-meta{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.8rem}
-  .progress-kicker{font-size:.72rem;letter-spacing:.22em;color:#6e6e73;margin-bottom:.3rem}
-  .progress-labels{display:flex;align-items:baseline;gap:.75rem;font-size:1.08rem}
-  #prog-label{font-weight:600;letter-spacing:-.02em}
-  .progress-pill{display:inline-flex;align-items:center;justify-content:center;min-width:84px;padding:.68rem 1rem;border-radius:999px;background:linear-gradient(135deg,#32a4ff,#0071e3);color:#fff;font-size:1.18rem;font-weight:700;letter-spacing:-.02em;box-shadow:0 16px 34px rgba(10,132,255,.24)}
-  .progress-track{height:12px;overflow:hidden;border-radius:999px;background:#e8edf3}
-  .progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#65b8ff 0%,#0a84ff 48%,#0071e3 100%);box-shadow:0 0 24px var(--accent-glow);transition:width .4s ease}
-  .progress-caption{margin-top:.82rem;font-size:.9rem;color:var(--muted)}
-  .day-tabs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.55rem;margin-bottom:1.6rem;padding:.55rem;border:1px solid rgba(15,23,42,.06);border-radius:26px;background:rgba(255,255,255,.72);backdrop-filter:blur(18px) saturate(150%);box-shadow:0 16px 42px rgba(15,23,42,.07)}
-  .day-tab{position:relative;padding:.95rem .35rem;border:1px solid transparent;border-radius:18px;background:transparent;color:var(--muted);cursor:pointer;font-size:.96rem;font-weight:600;letter-spacing:-.01em;transition:transform .15s ease,background .15s ease,color .15s ease,border-color .15s ease,box-shadow .15s ease}
-  .day-tab:hover{transform:translateY(-1px);background:rgba(255,255,255,.72);color:var(--text)}
-  .day-tab.active{background:#fff;color:#111827;box-shadow:0 10px 24px rgba(15,23,42,.08);border-color:rgba(15,23,42,.06)}
-  .day-tab.rest{border-style:dashed}
-  .day-tab.done{background:#eef6ff;color:#0a84ff;border-color:rgba(10,132,255,.12)}
-  .day-tab.active.done{color:#111827}
-  .day-content{display:none}
-  .day-content.visible{display:block;animation:fadeUp .25s ease}
-  .sessions{display:grid;grid-template-columns:minmax(0,1fr));gap:1.35rem}
-  .session-card{position:relative;max-width:780px;min-height:100%;margin:0 auto;padding:1.45rem 1.45rem 1.5rem;border:1px solid rgba(15,23,42,.06);border-radius:34px;background:rgba(255,255,255,.78);box-shadow:0 24px 64px rgba(15,23,42,.08);backdrop-filter:blur(22px) saturate(155%);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
-  .session-card:before{content:'';position:absolute;left:1.35rem;right:1.35rem;top:0;height:3px;border-radius:999px;background:linear-gradient(90deg,#72bfff,rgba(10,132,255,0))}
-  .session-card:hover{transform:translateY(-3px);box-shadow:0 28px 72px rgba(15,23,42,.11);border-color:rgba(15,23,42,.1)}
-  .session-card.all-done{background:linear-gradient(180deg,rgba(246,251,255,.92),rgba(235,247,255,.9));border-color:rgba(10,132,255,.16)}
-  .session-card.all-done:before{background:linear-gradient(90deg,#65b8ff,#0071e3)}
-  .session-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.05rem;padding-bottom:1.05rem;border-bottom:1px solid rgba(15,23,42,.06)}
-  .session-icon{width:54px;height:54px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:18px;font-size:1rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 14px 28px rgba(15,23,42,.1)}
-  .session-icon.run{background:linear-gradient(135deg,#d6ecff,#f2f8ff);color:#0a84ff}
-  .session-icon.gym{background:linear-gradient(135deg,#dff0ff,#f8fbff);color:#0071e3}
-  .session-meta{flex:1;min-width:0}
-  .session-type{margin-bottom:.2rem;font-size:.76rem;letter-spacing:.18em;color:#0a84ff}
-  .session-title{font-size:1.32rem;font-weight:650;line-height:1.1;letter-spacing:-.03em}
-  .exercise-list{list-style:none;display:flex;flex-direction:column;gap:.78rem}
-  .exercise-item{position:relative;display:flex;align-items:flex-start;gap:.9rem;padding:1rem 1rem;border:1px solid rgba(15,23,42,.06);border-radius:22px;background:linear-gradient(180deg,#fbfcfe,#f7f9fc);cursor:pointer;transition:transform .12s ease,background .12s ease,border-color .12s ease,box-shadow .12s ease}
-  .exercise-item:before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:999px;background:transparent;transition:background .12s ease}
-  .exercise-item:hover{transform:translateX(2px);border-color:rgba(10,132,255,.12);background:#ffffff;box-shadow:0 12px 30px rgba(15,23,42,.06)}
-  .exercise-item.checked{border-color:rgba(10,132,255,.16);background:linear-gradient(180deg,#edf6ff,#f8fbff)}
-  .exercise-item.checked:before{background:linear-gradient(180deg,#72bfff,#0071e3)}
-  .exercise-item.checked .ex-text{color:#6e6e73;text-decoration:line-through}
-  .ex-check{width:22px;height:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;border:1.5px solid rgba(15,23,42,.18);border-radius:999px;background:#fff;transition:all .15s ease}
-  .exercise-item.checked .ex-check{border-color:#0a84ff;background:linear-gradient(135deg,#32a4ff,#0071e3);box-shadow:0 12px 24px rgba(10,132,255,.22)}
-  .checkmark{display:none;width:9px;height:7px}.exercise-item.checked .checkmark{display:block}
-  .ex-text{font-size:.99rem;font-weight:600;line-height:1.38;letter-spacing:-.015em}
-  .ex-sets{margin-top:3px;color:#6e6e73;font-size:.82rem;line-height:1.42}
-  .session-complete-badge{display:none;margin-top:1rem;padding:.72rem .95rem;border:1px solid rgba(10,132,255,.12);border-radius:18px;background:#eef6ff;color:#0071e3;text-align:center;font-size:.82rem;font-weight:700;letter-spacing:-.01em}
-  .session-card.all-done .session-complete-badge{display:block}
-  .rest-card{max-width:780px;margin:0 auto;padding:4.6rem 1.8rem;border:1px solid rgba(15,23,42,.06);border-radius:36px;background:rgba(255,255,255,.76);color:var(--muted);text-align:center;box-shadow:0 24px 64px rgba(15,23,42,.08);backdrop-filter:blur(22px) saturate(150%)}
-  .rest-card .rest-icon{width:82px;height:82px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;border-radius:26px;background:linear-gradient(135deg,#ebf4ff,#ffffff);color:#0a84ff;font-size:2rem;box-shadow:0 16px 34px rgba(15,23,42,.08)}
-  .rest-card p{font-size:.98rem}
-  .bottom-note{max-width:780px;margin:1.25rem auto 0;padding:1rem 1.1rem;border:1px solid rgba(15,23,42,.06);border-radius:22px;background:rgba(255,255,255,.72);color:#6e6e73;font-size:.86rem;backdrop-filter:blur(16px) saturate(150%);box-shadow:0 18px 44px rgba(15,23,42,.06)}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-  @media(max-width:900px){.wrap{padding:1.5rem 1rem 1rem}.header{grid-template-columns:1fr}.hero-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.day-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}}
-  @media(max-width:540px){.wrap{padding:1rem .8rem .8rem}.header{gap:.8rem}.header h1{font-size:clamp(2.6rem,13vw,3.8rem)}.header .week{font-size:1rem;line-height:1.5}.header-badge,.progress-meta{width:100%;text-align:left}.header-badge{padding:.95rem 1rem}.progress-meta{flex-direction:column;align-items:flex-start}.progress-labels{font-size:1.02rem}.progress-caption{font-size:.92rem;line-height:1.48}.hero-strip{grid-template-columns:1fr 1fr;gap:.65rem}.hero-chip{min-width:0;padding:.85rem .8rem}.day-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.day-tab{font-size:.95rem;padding:.95rem .3rem}.session-card{padding:1.05rem}.session-title{font-size:1.14rem}.ex-text{font-size:.98rem}.ex-sets{font-size:.84rem}.bottom-note{font-size:.88rem;line-height:1.45}}
-  @media(prefers-reduced-motion:reduce){.day-content.visible,.day-tab,.session-card,.exercise-item,.progress-fill{animation:none;transition:none}}
+*{box-sizing:border-box;margin:0;padding:0}
+.w{font-family:var(--font-sans);color:var(--color-text-primary);padding:0 0 2rem}
+.topbar{padding:1.25rem 0 1rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.25rem}
+.topbar h2{font-size:18px;font-weight:500;margin-bottom:3px}
+.topbar p{font-size:12px;color:var(--color-text-secondary)}
+.tabs{display:flex;gap:4px;margin-bottom:1.25rem}
+.tab{padding:7px 16px;font-size:13px;border:0.5px solid var(--color-border-secondary);border-radius:20px;cursor:pointer;background:transparent;color:var(--color-text-secondary);transition:all .15s}
+.tab.on{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+.pane{display:none}.pane.on{display:block}
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:1rem}
+.dc{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px 6px;cursor:pointer;transition:all .15s;text-align:center}
+.dc:hover{background:var(--color-background-secondary);border-color:var(--color-border-secondary)}
+.dc.on{background:var(--color-background-secondary);border-color:var(--color-border-primary)}
+.dc-name{font-size:10px;color:var(--color-text-secondary);margin-bottom:5px;font-weight:500}
+.dc-type{font-size:10px;font-weight:500;padding:2px 6px;border-radius:10px;display:inline-block;margin-bottom:5px}
+.pull-bg{background:#E1F5EE;color:#085041}
+.push-bg{background:#E6F1FB;color:#0C447C}
+.legs-bg{background:#FAECE7;color:#712B13}
+.cardio-bg{background:#FAEEDA;color:#633806}
+.rest-bg{background:#F1EFE8;color:#444441}
+@media(prefers-color-scheme:dark){
+.pull-bg{background:#085041;color:#9FE1CB}
+.push-bg{background:#0C447C;color:#B5D4F4}
+.legs-bg{background:#712B13;color:#F5C4B3}
+.cardio-bg{background:#633806;color:#FAC775}
+.rest-bg{background:#444441;color:#D3D1C7}}
+.dc-focus{font-size:10px;color:var(--color-text-primary);font-weight:500;line-height:1.3}
+.dc-time{font-size:10px;color:var(--color-text-secondary);margin-top:3px}
+.detail{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;background:var(--color-background-primary)}
+.dh{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;gap:8px;flex-wrap:wrap}
+.dh-title{font-size:15px;font-weight:500}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-size:11px;padding:3px 9px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary)}
+.pl{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--color-text-secondary);margin:12px 0 6px}
+.el{display:flex;flex-direction:column;gap:5px}
+.ex{display:grid;grid-template-columns:1fr auto;align-items:center;padding:8px 10px;border-radius:var(--border-radius-md);background:var(--color-background-secondary);gap:8px}
+.ex-n{font-size:13px;font-weight:500}
+.ex-m{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.ex-s{font-size:12px;font-weight:500;color:var(--color-text-secondary);white-space:nowrap;text-align:right}
+.tip{border-left:3px solid #378ADD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;background:var(--color-background-secondary);padding:10px 12px;margin-top:1rem;font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+.tip.warn{border-left-color:#EF9F27}
+.sc-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:1.25rem}
+.sc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.sc-lbl{font-size:10px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.sc-val{font-size:18px;font-weight:500}
+.sc-sub{font-size:10px;color:var(--color-text-secondary);margin-top:2px}
+.principle{display:flex;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary);align-items:flex-start}
+.principle:last-child{border-bottom:none}
+.p-num{font-size:13px;font-weight:500;color:var(--color-text-secondary);min-width:24px}
+.p-text{font-size:13px;line-height:1.5}
+.p-sub{font-size:11px;color:var(--color-text-secondary);margin-top:3px}
+.sec-title{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--color-text-secondary);margin:1.25rem 0 .75rem}
+.safe-badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;background:#E1F5EE;color:#085041;margin-left:6px;vertical-align:middle}
+@media(prefers-color-scheme:dark){.safe-badge{background:#085041;color:#9FE1CB}}
 </style>
-</head>
-<body>
 
-<div class="wrap">
-  <div class="wrap-inner">
-  <div class="header">
-    <div class="header-copy">
-      <span class="eyebrow">Precision Split</span>
-      <h1>Weekly Training Plan</h1>
-      <span class="week">A clean 6-day PUSH / PULL / LEGS split built for shape, posture, and consistency.</span>
-    </div>
-    <div class="header-badge">
-      <strong>6 Training Days</strong>
-      <span>1 reset day built in</span>
-    </div>
-  </div>
-
-  <div class="hero-strip">
-    <div class="hero-chip"><strong>Push</strong><span>Mon &amp; Thu</span></div>
-    <div class="hero-chip"><strong>Pull</strong><span>Tue &amp; Fri</span></div>
-    <div class="hero-chip"><strong>Legs</strong><span>Wed &amp; Sat</span></div>
-    <div class="hero-chip"><strong>1</strong><span>Full rest day</span></div>
-  </div>
-
-  <div class="progress-bar-wrap">
-    <div class="progress-meta">
-      <div>
-        <div class="progress-kicker">Completion</div>
-        <div class="progress-labels"><span id="prog-label">Weekly progress</span></div>
-      </div>
-      <span class="progress-pill" id="prog-pct">0%</span>
-    </div>
-    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
-    <p class="progress-caption">Mark sets as you go and keep the whole week visible at a glance.</p>
-  </div>
-
-  <div class="day-tabs">
-    <button class="day-tab active" type="button" onclick="showDay(0)">Mon</button>
-    <button class="day-tab" type="button" onclick="showDay(1)">Tue</button>
-    <button class="day-tab" type="button" onclick="showDay(2)">Wed</button>
-    <button class="day-tab" type="button" onclick="showDay(3)">Thu</button>
-    <button class="day-tab" type="button" onclick="showDay(4)">Fri</button>
-    <button class="day-tab" type="button" onclick="showDay(5)">Sat</button>
-    <button class="day-tab rest" type="button" onclick="showDay(6)">Sun</button>
-  </div>
-
-  <div id="day-0" class="day-content visible">
-    <div class="sessions">
-      <div class="session-card" id="s0-push">
-        <div class="session-header">
-          <div class="session-icon gym">&#9632;</div>
-          <div class="session-meta">
-            <div class="session-type">Evening &middot; PUSH</div>
-            <div class="session-title">Upper Chest, Delts, and Triceps</div>
-          </div>
-        </div>
-        <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s0-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Incline Dumbbell Press</div><div class="ex-sets">3 &times; 8&ndash;10</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s0-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Machine Shoulder Press</div><div class="ex-sets">3 &times; 10&ndash;12 &middot; alternate single-arm sets for core</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s0-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Pec Deck</div><div class="ex-sets">2&ndash;3 sets &middot; full squeeze and stretch</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s0-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Cable Lateral Raise</div><div class="ex-sets">3 &times; 10&ndash;15 &middot; keep the cable behind the hip</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s0-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Dips</div><div class="ex-sets">3 &times; max reps</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s0-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Overhead Cable Extension</div><div class="ex-sets">3 &times; 10&ndash;15 &middot; stretch the triceps fully</div></div></li>
-        </ul>
-        <div class="session-complete-badge">Session complete</div>
-      </div>
-    </div>
-  </div>
-
-  <div id="day-1" class="day-content">
-    <div class="sessions">
-      <div class="session-card" id="s1-pull">
-        <div class="session-header">
-          <div class="session-icon gym">&#9632;</div>
-          <div class="session-meta">
-            <div class="session-type">Evening &middot; PULL</div>
-            <div class="session-title">Lats, Posture, and Biceps</div>
-          </div>
-        </div>
-        <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Wide-Grip Lat Pulldown</div><div class="ex-sets">3 &times; 10&ndash;12</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Negative Pull-up</div><div class="ex-sets">3 &times; 5&ndash;8</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Chest-Supported Row</div><div class="ex-sets">3 &times; 8&ndash;10</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Face Pull</div><div class="ex-sets">3 &times; 15&ndash;20</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Reverse Cable Fly</div><div class="ex-sets">3 &times; 15&ndash;20</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">EZ-Bar Curl</div><div class="ex-sets">3 &times; 10&ndash;15</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s1-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Farmer's Walk</div><div class="ex-sets">2 &times; 45 sec</div></div></li>
-        </ul>
-        <div class="session-complete-badge">Session complete</div>
-      </div>
-    </div>
-  </div>
-
-  <div id="day-2" class="day-content">
-    <div class="sessions">
-      <div class="session-card" id="s2-legs">
-        <div class="session-header">
-          <div class="session-icon gym">&#9632;</div>
-          <div class="session-meta">
-            <div class="session-type">Evening &middot; LEGS</div>
-            <div class="session-title">Glutes, Quads, and Calves</div>
-          </div>
-        </div>
-        <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Seated Leg Curl</div><div class="ex-sets">3 &times; 10&ndash;15</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Hip Thrust</div><div class="ex-sets">4 &times; 10&ndash;12</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Leg Press</div><div class="ex-sets">3 &times; 10&ndash;12</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Dumbbell Romanian Deadlift</div><div class="ex-sets">3 &times; 10&ndash;12 &middot; switch to lying leg curl if needed</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Leg Extension</div><div class="ex-sets">3 &times; 12&ndash;15</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s2-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Seated Calf Raise</div><div class="ex-sets">4 &times; 15&ndash;20</div></div></li>
-        </ul>
-        <div class="session-complete-badge">Session complete</div>
-      </div>
-    </div>
-  </div>
-
-  <div id="day-3" class="day-content">
-    <div class="sessions">
-      <div class="session-card" id="s3-push">
-        <div class="session-header">
-          <div class="session-icon gym">&#9632;</div>
-          <div class="session-meta">
-            <div class="session-type">Evening &middot; PUSH</div>
-            <div class="session-title">Upper Chest, Delts, and Triceps</div>
-          </div>
-        </div>
-        <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s3-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Incline Dumbbell Press</div><div class="ex-sets">3 &times; 8&ndash;10</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s3-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Machine Shoulder Press</div><div class="ex-sets">3 &times; 10&ndash;12 &middot; alternate single-arm sets for core</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s3-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Pec Deck</div><div class="ex-sets">2&ndash;3 sets &middot; full squeeze and stretch</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s3-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Cable Lateral Raise</div><div class="ex-sets">3 &times; 10&ndash;15 &middot; keep the cable behind the hip</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s3-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Dips</div><div class="ex-sets">3 &times; max reps</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s3-push')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Overhead Cable Extension</div><div class="ex-sets">3 &times; 10&ndash;15 &middot; stretch the triceps fully</div></div></li>
-        </ul>
-        <div class="session-complete-badge">Session complete</div>
-      </div>
-    </div>
-  </div>
-
-  <div id="day-4" class="day-content">
-    <div class="sessions">
-      <div class="session-card" id="s4-pull">
-        <div class="session-header">
-          <div class="session-icon gym">&#9632;</div>
-          <div class="session-meta">
-            <div class="session-type">Evening &middot; PULL</div>
-            <div class="session-title">Lats, Posture, and Biceps</div>
-          </div>
-        </div>
-        <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Wide-Grip Lat Pulldown</div><div class="ex-sets">3 &times; 10&ndash;12</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Negative Pull-up</div><div class="ex-sets">3 &times; 5&ndash;8</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Chest-Supported Row</div><div class="ex-sets">3 &times; 8&ndash;10</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Face Pull</div><div class="ex-sets">3 &times; 15&ndash;20</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Reverse Cable Fly</div><div class="ex-sets">3 &times; 15&ndash;20</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">EZ-Bar Curl</div><div class="ex-sets">3 &times; 10&ndash;15</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s4-pull')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Farmer's Walk</div><div class="ex-sets">2 &times; 45 sec</div></div></li>
-        </ul>
-        <div class="session-complete-badge">Session complete</div>
-      </div>
-    </div>
-  </div>
-
-  <div id="day-5" class="day-content">
-    <div class="sessions">
-      <div class="session-card" id="s5-legs">
-        <div class="session-header">
-          <div class="session-icon gym">&#9632;</div>
-          <div class="session-meta">
-            <div class="session-type">Evening &middot; LEGS</div>
-            <div class="session-title">Glutes, Quads, and Calves</div>
-          </div>
-        </div>
-        <ul class="exercise-list">
-          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Seated Leg Curl</div><div class="ex-sets">3 &times; 10&ndash;15</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Hip Thrust</div><div class="ex-sets">4 &times; 10&ndash;12</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Leg Press</div><div class="ex-sets">3 &times; 10&ndash;12</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Dumbbell Romanian Deadlift</div><div class="ex-sets">3 &times; 10&ndash;12 &middot; switch to lying leg curl if needed</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Leg Extension</div><div class="ex-sets">3 &times; 12&ndash;15</div></div></li>
-          <li class="exercise-item" onclick="toggleEx(this,'s5-legs')"><div class="ex-check"><svg class="checkmark" viewBox="0 0 9 7" fill="none"><polyline points="1,3.5 3.5,6 8,1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="ex-text">Seated Calf Raise</div><div class="ex-sets">4 &times; 15&ndash;20</div></div></li>
-        </ul>
-        <div class="session-complete-badge">Session complete</div>
-      </div>
-    </div>
-  </div>
-
-  <div id="day-6" class="day-content">
-    <div class="rest-card">
-      <div class="rest-icon">&#9900;</div>
-      <p style="font-size:1.05rem;font-weight:600;margin-bottom:.4rem;color:var(--text)">Rest Day</p>
-      <p>Complete rest day. Eat clean, sleep 8 hours, and let your body recover fully.</p>
-    </div>
-  </div>
-
-  <div class="bottom-note">Tap any exercise to mark it done &mdash; weekly progress updates instantly while you train.</div>
-  </div>
-
-  <script>
-    function updateProgress() {
-      const all = document.querySelectorAll('.exercise-item');
-      const done = document.querySelectorAll('.exercise-item.checked');
-      const pct = all.length ? Math.round((done.length / all.length) * 100) : 0;
-
-      document.getElementById('prog-fill').style.width = pct + '%';
-      document.getElementById('prog-pct').textContent = pct + '%';
-      document.getElementById('prog-label').textContent = done.length + ' of ' + all.length + ' exercises done';
-    }
-
-    function checkSessionComplete(cardId) {
-      const card = document.getElementById(cardId);
-      if (!card) return;
-
-      const items = card.querySelectorAll('.exercise-item');
-      const done = card.querySelectorAll('.exercise-item.checked');
-
-      if (items.length > 0 && items.length === done.length) {
-        card.classList.add('all-done');
-      } else {
-        card.classList.remove('all-done');
-      }
-    }
-
-    function toggleEx(el, cardId) {
-      el.classList.toggle('checked');
-      checkSessionComplete(cardId);
-      updateProgress();
-      updateDayTabs();
-    }
-
-    function updateDayTabs() {
-      const days = [0,1,2,3,4,5];
-
-      days.forEach(d => {
-        const content = document.getElementById('day-' + d);
-        if (!content) return;
-
-        const items = content.querySelectorAll('.exercise-item');
-        if (items.length === 0) return;
-
-        const done = content.querySelectorAll('.exercise-item.checked');
-        const tab = document.querySelectorAll('.day-tab')[d];
-
-        if (done.length === items.length) {
-          tab.classList.add('done');
-        } else {
-          tab.classList.remove('done');
-        }
-      });
-    }
-
-    function showDay(idx) {
-      document.querySelectorAll('.day-content').forEach(d => d.classList.remove('visible'));
-      document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
-      document.getElementById('day-' + idx).classList.add('visible');
-      document.querySelectorAll('.day-tab')[idx].classList.add('active');
-    }
-
-    updateProgress();
-    updateDayTabs();
-  </script>
+<div class="w">
+<div class="topbar">
+  <h2>Lean Aesthetic Program</h2>
+  <p>Thân hình gọn đẹp · An toàn cho lưng · Duy trì sức khỏe bền vững</p>
 </div>
-</body>
-</html>
+
+<div class="tabs">
+  <button class="tab on" onclick="sw('schedule')">Lịch tập</button>
+  <button class="tab" onclick="sw('principle')">Nguyên tắc</button>
+</div>
+
+<div id="pane-schedule" class="pane on">
+  <div class="sc-row">
+    <div class="sc"><div class="sc-lbl">Triết lý</div><div class="sc-val" style="font-size:14px;line-height:1.3">Form đẹp</div><div class="sc-sub">Hơn tạ nặng</div></div>
+    <div class="sc"><div class="sc-lbl">Pull : Push</div><div class="sc-val" style="color:#1D9E75">2 : 1</div><div class="sc-sub">Fix tư thế gù</div></div>
+    <div class="sc"><div class="sc-lbl">Cardio</div><div class="sc-val">Zone 2</div><div class="sc-sub">3× / tuần nhẹ</div></div>
+    <div class="sc"><div class="sc-lbl">Squat / Deadlift</div><div class="sc-val" style="color:#E24B4A">Thay thế</div><div class="sc-sub">Bài an toàn hơn</div></div>
+  </div>
+
+  <div class="wk" id="wk">
+    <div class="dc on" onclick="pick(0)"><div class="dc-name">T.2</div><div class="dc-type pull-bg">PULL A</div><div class="dc-focus">Lưng · Tay trước</div><div class="dc-time">65 phút</div></div>
+    <div class="dc" onclick="pick(1)"><div class="dc-name">T.3</div><div class="dc-type legs-bg">LEGS</div><div class="dc-focus">Chân nhẹ · An toàn</div><div class="dc-time">60 phút</div></div>
+    <div class="dc" onclick="pick(2)"><div class="dc-name">T.4</div><div class="dc-type push-bg">PUSH</div><div class="dc-focus">Vai · Ngực trên</div><div class="dc-time">65 phút</div></div>
+    <div class="dc" onclick="pick(3)"><div class="dc-name">T.5</div><div class="dc-type cardio-bg">CARDIO</div><div class="dc-focus">Zone 2 · Core</div><div class="dc-time">50 phút</div></div>
+    <div class="dc" onclick="pick(4)"><div class="dc-name">T.6</div><div class="dc-type pull-bg">PULL B</div><div class="dc-focus">Lưng dày · Tư thế</div><div class="dc-time">65 phút</div></div>
+    <div class="dc" onclick="pick(5)"><div class="dc-name">T.7</div><div class="dc-type cardio-bg">ACTIVE</div><div class="dc-focus">Bơi · Cầu lông · Đi bộ</div><div class="dc-time">45–60 phút</div></div>
+    <div class="dc" onclick="pick(6)"><div class="dc-name">CN</div><div class="dc-type rest-bg">NGHỈ</div><div class="dc-focus">Mobility · Nghỉ ngơi</div><div class="dc-time">Tùy ý</div></div>
+  </div>
+
+  <div class="detail" id="detail"></div>
+</div>
+
+<div id="pane-principle" class="pane">
+  <div class="sec-title">Nguyên tắc lean aesthetic — khác gì bodybuilding thông thường</div>
+  <div class="detail">
+    <div class="principle"><div class="p-num">01</div><div><div class="p-text">Rep range 10–15 là chủ đạo, không phải 4–6</div><div class="p-sub">Cơ bắp cân đối, không phình to. Tạ vừa phải nhưng cảm nhận cơ rõ hơn.</div></div></div>
+    <div class="principle"><div class="p-num">02</div><div><div class="p-text">Mind-muscle connection quan trọng hơn tạ nặng</div><div class="p-sub">Mỗi rep phải cảm thấy đúng cơ co lại. Nếu không cảm thấy — giảm tạ, không tăng.</div></div></div>
+    <div class="principle"><div class="p-num">03</div><div><div class="p-text">Không bao giờ tập đau — đặc biệt lưng và khớp</div><div class="p-sub">Đau cơ mỏi sau tập là bình thường. Đau nhói trong khi tập là dừng ngay.</div></div></div>
+    <div class="principle"><div class="p-num">04</div><div><div class="p-text">Tăng tạ từ từ — mỗi 1–2 tuần tăng một bậc nhỏ</div><div class="p-sub">Progression nhẹ nhàng là chìa khóa của thân hình đẹp bền vững, không chấn thương.</div></div></div>
+    <div class="principle"><div class="p-num">05</div><div><div class="p-text">Pull nhiều gấp đôi Push — mãi mãi với bạn</div><div class="p-sub">Vì bạn đang gù + cổ rùa. Lưng mạnh hơn ngực mới có tư thế đứng như VĐV thật sự.</div></div></div>
+    <div class="principle"><div class="p-num">06</div><div><div class="p-text">Bỏ Squat tạ nặng và Deadlift khi lưng chưa ổn</div><div class="p-sub">Thay bằng Goblet Squat, Leg Press, Hip Thrust — hiệu quả tương đương, an toàn hơn nhiều.</div></div></div>
+    <div class="principle"><div class="p-num">07</div><div><div class="p-text">Đốt mỡ đến 80% từ bếp — không phải cardio</div><div class="p-sub">Thâm hụt 400 kcal/ngày từ ăn, giữ 180g protein. Cardio chỉ hỗ trợ thêm.</div></div></div>
+    <div class="principle"><div class="p-num">08</div><div><div class="p-text">Ngủ 8 tiếng và kiểm soát stress</div><div class="p-sub">Cortisol cao do thiếu ngủ và stress sẽ giữ mỡ bụng cứng đầu. Không có lịch tập nào fix được cái này.</div></div></div>
+  </div>
+</div>
+</div>
+
+<script>
+const days=[
+  {title:"Thứ 2 — Pull A · Lưng rộng + Tay trước",type:"PULL A",time:"65 phút",note:"Focus cảm nhận cơ lưng co lại mỗi rep. Đây là buổi xây V-taper — sự khác biệt giữa thân hình đẹp và bình thường.",safe:true,
+   warm:[{n:"Band pull-apart",m:"Kích hoạt vai sau + xương bả vai",s:"3×20"},{n:"Scapular shrug (xà hoặc cáp)",m:"Học kích hoạt lưng trước khi kéo",s:"2×10"}],
+   main:[{n:"Pull-up hoặc Lat Pulldown",m:"Lưng rộng — bài số 1 tạo V-taper",s:"4×8–12"},{n:"Seated Cable Row (grip rộng)",m:"Lưng giữa — kéo về ngực, không về bụng",s:"4×10–12"},{n:"Single-arm DB Row",m:"Lưng dày từng bên — không bù cột sống",s:"3×12/bên"},{n:"Face Pull (cáp ngang tầm mắt)",m:"Vai sau + fix cổ rùa — tập mỗi buổi Pull",s:"4×20"},{n:"Straight-arm Pulldown",m:"Lưng rộng isolation — co cơ rõ nhất",s:"3×15"}],
+   core:[{n:"EZ-bar Curl hoặc DB Curl",m:"Tay trước — kiểm soát chậm xuống",s:"3×12"},{n:"Hammer Curl",m:"Cơ cánh tay + forearm",s:"3×12"}]},
+  {title:"Thứ 3 — Legs · Phiên bản an toàn cho lưng",type:"LEGS",time:"60 phút",note:"KHÔNG có Barbell Squat hay Deadlift. Những bài này vẫn xây cơ chân và mông hiệu quả nhưng không áp lực lên cột sống.",safe:true,
+   warm:[{n:"Hip circle + Glute bridge",m:"Kích hoạt mông — quan trọng trước khi tập chân",s:"2×15 mỗi bài"},{n:"Leg swing trước sau + ngang",m:"Khớp háng + hamstring",s:"2×12/bên"}],
+   main:[{n:"Goblet Squat (tạ đơn ôm trước ngực)",m:"Squat an toàn nhất cho lưng — đùi trước + mông",s:"4×12–15"},{n:"Leg Press (chân đặt cao)",m:"Đùi + mông, không áp lực cột sống",s:"4×12–15"},{n:"Hip Thrust (tạ đặt lên hông)",m:"Mông — bài số 1 cho vòng 3 gọn đẹp",s:"4×12–15"},{n:"Leg Curl (máy nằm)",m:"Hamstring — kiểm soát chậm khi hạ xuống",s:"3×12–15"},{n:"Leg Extension (máy)",m:"Đùi trước — isolation hoàn toàn",s:"3×15"},{n:"Calf Raise (máy hoặc bậc thang)",m:"Bắp chân",s:"4×20"}],
+   core:[{n:"Wall sit (ngồi tường)",m:"Isometric đùi — không áp lực lưng",s:"3×45 giây"},{n:"Lying leg raise",m:"Bụng dưới — nằm phẳng, không cong lưng",s:"3×15"}]},
+  {title:"Thứ 4 — Push · Vai + Ngực trên",type:"PUSH",time:"65 phút",note:"Push chỉ 1 lần/tuần. Tập incline là chính — an toàn hơn flat bench khi vai đang yếu. Không cần tạ nặng, cần cảm nhận đúng.",safe:false,
+   warm:[{n:"Band external rotation",m:"Khởi động cơ xoay vai ngoài",s:"2×20"},{n:"Arm circle + shoulder mobility",m:"Khớp vai",s:"2×15"}],
+   main:[{n:"Dumbbell Shoulder Press (ngồi)",m:"Vai toàn diện — ngồi an toàn hơn đứng cho lưng",s:"4×10–12"},{n:"Incline DB Press (30–45 độ)",m:"Ngực trên — không flat bench",s:"4×10–12"},{n:"Lateral Raise (tạ đơn hoặc cáp)",m:"Vai giữa — tạo bờ vai rộng tự nhiên",s:"4×15"},{n:"Cable Chest Fly (Incline)",m:"Ngực trên isolation — co cơ cuối hành trình",s:"3×15"},{n:"Rear Delt Fly (cúi hoặc máy)",m:"Vai sau — tư thế + cân bằng",s:"3×15"},{n:"Overhead Tricep Extension (cáp)",m:"Tay sau — long head",s:"3×12"}],
+   core:[{n:"Plank",m:"Core ổn định cơ bản",s:"3×40 giây"},{n:"Dead bug",m:"Core sâu — lưng phải chạm sàn suốt",s:"3×10/bên"}]},
+  {title:"Thứ 5 — Zone 2 Cardio + Core",type:"CARDIO",time:"50 phút",note:"Ngày không tập tạ. Zone 2 là vùng đốt mỡ trực tiếp nhất — đi bộ nhanh hoặc đạp xe nhẹ nhịp tim 120–140, vẫn nói chuyện được.",safe:true,
+   warm:[],
+   main:[{n:"Đi bộ nhanh hoặc đạp xe nhẹ",m:"Nhịp tim 120–140 — Zone 2, vẫn nói được",s:"30–35 phút"},{n:"Bơi lội nhẹ (nếu có hồ)",m:"Không áp lực khớp, tốt cho lưng",s:"Thay thế cho đi bộ"}],
+   core:[{n:"Chin tuck (10 lần)",m:"Fix cổ rùa — làm ngay sau cardio",s:"3 lần"},{n:"Thoracic extension (foam roller)",m:"Đặt roller ngang lưng trên, thả người ra sau",s:"90 giây"},{n:"Bird dog",m:"Core ổn định — an toàn tuyệt đối cho lưng",s:"3×10/bên"},{n:"Glute bridge",m:"Kích hoạt mông + giảm áp lực lưng dưới",s:"3×20"},{n:"Hollow body hold",m:"Core nén toàn diện",s:"3×25 giây"}]},
+  {title:"Thứ 6 — Pull B · Lưng dày + Tư thế",type:"PULL B",time:"65 phút",note:"Pull lần 2 — focus vào lưng dày và tư thế. Chest-supported row là bài tốt nhất cho lưng dày mà không mỏi cột sống.",safe:true,
+   warm:[{n:"Foam rolling lưng trên",m:"Giải phóng cơ trước khi kích hoạt",s:"5 phút"},{n:"Cat-cow + Thoracic rotation",m:"Khởi động cột sống",s:"2×10"}],
+   main:[{n:"Chest-supported DB Row (nằm sấp)",m:"Lưng giữa không áp lực cột sống — tốt nhất cho bạn",s:"4×12"},{n:"Wide-grip Lat Pulldown",m:"Lưng rộng — V-taper",s:"4×12"},{n:"Cable Row (grip hẹp, kéo về hông)",m:"Lưng dưới giữa + co cơ tốt",s:"3×12"},{n:"Face Pull",m:"Vai sau + cổ rùa — bài chữ ký mỗi buổi Pull",s:"4×20"},{n:"Trap-3 Raise (tạ nhẹ, nằm nghiêng 45 độ)",m:"Fix vai cụp từ gốc rễ",s:"3×15"},{n:"Shrug (tạ đơn hoặc đòn)",m:"Cơ thang trên",s:"3×15"}],
+   core:[{n:"EZ Curl + Concentration Curl",m:"Tay trước — ngày 2",s:"3×12 mỗi bài"},{n:"Doorway chest stretch",m:"Giải phóng ngực căng sau tuần tập",s:"2×60 giây"}]},
+  {title:"Thứ 7 — Active Day · Tự do",type:"ACTIVE",time:"45–60 phút",note:"Chọn thứ bạn thích và duy trì được. Không cần cố. Đây là ngày nạp năng lượng tinh thần — vận động nhẹ nhàng.",safe:true,
+   warm:[],
+   main:[{n:"Bơi lội",m:"Tốt nhất — không áp lực khớp, V-taper tự nhiên",s:"Ưu tiên"},{n:"Cầu lông / Bóng đá nhẹ",m:"Vui + đốt calo + xã hội",s:"Tùy thích"},{n:"Đi bộ 5–7km",m:"Zone 2 nhẹ nhàng — tốt cho lưng",s:"Thay thế"}],
+   core:[{n:"Tự do — không bắt buộc",m:"Nếu muốn: 10 phút stretching + mobility",s:"Tùy ý"}]},
+  {title:"Chủ nhật — Nghỉ hoàn toàn",type:"NGHỈ",time:"Tùy ý",note:"Cơ phát triển khi nghỉ, không khi tập. Hôm nay: ăn đủ đạm, ngủ 8 tiếng, không cảm thấy tội lỗi vì không tập.",safe:true,
+   warm:[],
+   main:[{n:"Foam rolling 10 phút",m:"Nếu muốn — nhẹ thôi",s:"Tùy ý"},{n:"Thoracic extension + Wall angel",m:"Duy trì fix tư thế hàng ngày",s:"10 phút"},{n:"Đi bộ nhẹ",m:"Nếu muốn ra ngoài",s:"Tùy ý"}],
+   core:[{n:"Nghỉ ngơi thật sự",m:"Không có nghĩa vụ",s:""}]}
+];
+
+function pick(i){
+  document.querySelectorAll('.dc').forEach((c,j)=>c.classList.toggle('on',j===i));
+  const d=days[i];
+  let h=`<div class="dh"><div class="dh-title">${d.title}</div><div class="pills"><span class="pill">${d.time}</span></div></div>`;
+  if(d.warm.length){
+    h+=`<div class="pl">Khởi động</div><div class="el">`;
+    d.warm.forEach(e=>h+=`<div class="ex"><div><div class="ex-n">${e.n}</div><div class="ex-m">${e.m}</div></div><div class="ex-s">${e.s}</div></div>`);
+    h+=`</div>`;
+  }
+  if(d.main.length){
+    h+=`<div class="pl">Tập chính</div><div class="el">`;
+    d.main.forEach(e=>h+=`<div class="ex"><div><div class="ex-n">${e.n}</div><div class="ex-m">${e.m}</div></div><div class="ex-s">${e.s}</div></div>`);
+    h+=`</div>`;
+  }
+  if(d.core.length){
+    h+=`<div class="pl">Core / Kết thúc</div><div class="el">`;
+    d.core.forEach(e=>h+=`<div class="ex"><div><div class="ex-n">${e.n}</div><div class="ex-m">${e.m}</div></div><div class="ex-s">${e.s}</div></div>`);
+    h+=`</div>`;
+  }
+  h+=`<div class="tip">${d.note}</div>`;
+  if(d.safe) h+=`<div class="tip warn" style="margin-top:8px">Lưng: nếu bất kỳ bài nào gây đau lưng — dừng bài đó ngay, không cố. Thay bằng phiên bản nhẹ hơn hoặc bỏ qua hôm đó.</div>`;
+  document.getElementById('detail').innerHTML=h;
+}
+
+function sw(t){
+  document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',['schedule','principle'][i]===t));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.getElementById('pane-'+t).classList.add('on');
+}
+
+pick(0);
+</script>
