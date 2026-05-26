@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lean Aesthetic Program</title>
+  <title>Tactical Hardcore Program - 12 Month Mission</title>
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
   <style>
     :root {
@@ -638,16 +638,16 @@
   <main class="app">
     <section class="hero">
       <div>
-        <h1>Lean Aesthetic Program</h1>
+        <h1>Tactical Hardcore Program</h1>
       </div>
 
       <aside class="hero-panel" aria-live="polite">
         <div class="today-label">Buổi đang chọn</div>
-        <div class="today-title" id="todayTitle">Pull A</div>
+        <div class="today-title" id="todayTitle">STRENGTH UPPER</div>
         <div class="today-meta">
-          <span class="meta-pill" id="todayType">Pull</span>
-          <span class="meta-pill" id="todayTime">65 phút</span>
-          <span class="meta-pill" id="todaySafety">An toàn lưng</span>
+          <span class="meta-pill" id="todayType">Strength</span>
+          <span class="meta-pill" id="todayTime">70 phút</span>
+          <span class="meta-pill" id="todaySafety">Tactical</span>
         </div>
       </aside>
     </section>
@@ -657,30 +657,30 @@
         <button class="tab on" type="button" role="tab" aria-selected="true" aria-controls="pane-schedule" onclick="switchPane('schedule')">Lịch tập</button>
         <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="pane-principles" onclick="switchPane('principles')">Nguyên tắc</button>
       </div>
-      <div class="toolbar-note">2 Pull - 1 Push - Zone 2 nhẹ - ưu tiên form</div>
+      <div class="toolbar-note">12 tháng. Kỷ luật. Tactical. Không nhân nhượng.</div>
     </nav>
 
     <section id="pane-schedule" class="pane on">
       <div class="stats" aria-label="Tóm tắt chương trình">
         <div class="stat">
-          <div class="stat-label">Triết lý</div>
-          <div class="stat-value">Form đẹp</div>
-          <div class="stat-sub">Hơn tạ nặng</div>
+          <div class="stat-label">Mục tiêu 12 tháng</div>
+          <div class="stat-value">75kg</div>
+          <div class="stat-sub">BF 12-15%</div>
         </div>
         <div class="stat">
-          <div class="stat-label">Pull : Push</div>
-          <div class="stat-value" style="color: var(--green)">2 : 1</div>
-          <div class="stat-sub">Cân bằng tư thế</div>
+          <div class="stat-label">Pull-up đích</div>
+          <div class="stat-value" style="color: var(--green)">15+</div>
+          <div class="stat-sub">Liên tục, không nghỉ</div>
         </div>
         <div class="stat">
-          <div class="stat-label">Cardio</div>
-          <div class="stat-value">Zone 2</div>
-          <div class="stat-sub">3 lần mỗi tuần</div>
+          <div class="stat-label">Chạy 5km</div>
+          <div class="stat-value">&lt;22 phút</div>
+          <div class="stat-sub">Chuẩn lính cơ bản</div>
         </div>
         <div class="stat">
-          <div class="stat-label">Squat / Deadlift</div>
-          <div class="stat-value" style="color: var(--red)">Thay thế</div>
-          <div class="stat-sub">Bài an toàn hơn</div>
+          <div class="stat-label">Ruck đích</div>
+          <div class="stat-value" style="color: var(--orange)">15kg / 10km</div>
+          <div class="stat-sub">Dưới 90 phút</div>
         </div>
       </div>
 
@@ -701,178 +701,178 @@
     const days = [
       {
         day: "T.2",
-        title: "Thứ 2 - Pull A",
-        focus: "Lưng rộng + tay trước",
-        type: "PULL A",
+        title: "Thứ 2 - STRENGTH UPPER",
+        focus: "Sức mạnh thân trên - kéo mạnh, đẩy nặng",
+        type: "STRENGTH",
         tone: "pull",
-        time: "65 phút",
+        time: "70 phút",
         safe: true,
-        note: "Focus cảm nhận cơ lưng co lại mỗi rep. Đây là buổi xây V-taper - sự khác biệt giữa thân hình đẹp và bình thường.",
+        note: "MỤC TIÊU TUẦN NÀY: tăng 2.5kg ở Lat Pulldown HOẶC thêm 1 rep mỗi bài chính. Nếu không đạt = lặp lại tuần. Ghi số liệu vào sổ. Nghỉ ĐÚNG 2 phút giữa set nặng - không nhiều, không ít. Form sai = set không tính.",
         warm: [
-          { n: "Band pull-apart", m: "Kích hoạt vai sau + xương bả vai", s: "3x20" },
-          { n: "Scapular shrug (xà hoặc cáp)", m: "Học kích hoạt lưng trước khi kéo", s: "2x10" }
+          { n: "Band pull-apart + Face pull khô", m: "Kích hoạt vai sau - bắt buộc, không skip", s: "2x20" },
+          { n: "Scapular pull-up (treo xà)", m: "Học kích hoạt lưng", s: "2x8" },
+          { n: "Push-up khởi động", m: "Bơm máu ngực vai", s: "2x15" }
         ],
         main: [
-          { n: "Pull-up hoặc Lat Pulldown", m: "Lưng rộng - bài số 1 tạo V-taper", s: "4x8-12" },
-          { n: "Seated Cable Row (grip rộng)", m: "Lưng giữa - kéo về ngực, không về bụng", s: "4x10-12" },
-          { n: "Single-arm DB Row", m: "Lưng dày từng bên - không bù cột sống", s: "3x12/bên" },
-          { n: "Face Pull (cáp ngang tầm mắt)", m: "Vai sau + fix cổ rùa - tập mỗi buổi Pull", s: "4x20" },
-          { n: "Straight-arm Pulldown", m: "Lưng rộng isolation - co cơ rõ nhất", s: "3x15" }
+          { n: "Lat Pulldown (grip rộng) + Dead hang cuối buổi", m: "Test pull-up mỗi 2 tuần. Khi pull-up được 3 cái → đổi sang pull-up 5x5", s: "5x8-10" },
+          { n: "Weighted Dip HOẶC Push-up explosive", m: "Sức đẩy - không thay bằng máy", s: "4x6-10" },
+          { n: "Pendlay Row (barbell)", m: "Kéo bùng nổ từ sàn - lưng dày, sức mạnh thật", s: "4x6-8" },
+          { n: "Standing Overhead Press (barbell)", m: "Press đứng - bài KING của thân trên, core làm việc cùng", s: "4x6-8" },
+          { n: "Face Pull", m: "Vai sau + tư thế - mỗi buổi pull", s: "3x15" }
         ],
         core: [
-          { n: "EZ-bar Curl hoặc DB Curl", m: "Tay trước - kiểm soát chậm xuống", s: "3x12" },
-          { n: "Hammer Curl", m: "Cơ cánh tay + forearm", s: "3x12" }
+          { n: "Hanging leg raise → Toes to bar", m: "Core + grip - mục tiêu 15 rep toes to bar", s: "4x8-12" },
+          { n: "Hollow body hold", m: "Core tactical - đếm thời gian", s: "3x45-60 giây" }
         ]
       },
       {
         day: "T.3",
-        title: "Thứ 3 - Legs",
-        focus: "Chân nhẹ + an toàn lưng",
-        type: "LEGS",
-        tone: "legs",
-        time: "60 phút",
+        title: "Thứ 3 - METCON / HIIT",
+        focus: "Work capacity - tactical conditioning",
+        type: "METCON",
+        tone: "cardio",
+        time: "45 phút",
         safe: true,
-        note: "Không có Barbell Squat hay Deadlift. Những bài này vẫn xây cơ chân và mông hiệu quả nhưng không tạo áp lực lớn lên cột sống.",
+        note: "Buổi này TÍNH GIỜ. Ghi thời gian hoàn thành, lần sau phải nhanh hơn. Đây là buổi mô phỏng cường độ chiến đấu - tim phải đập 170+ trong nhiều đoạn. Mệt nôn là dấu hiệu đang làm đúng. Luân phiên workout A và B mỗi tuần.",
         warm: [
-          { n: "Hip circle + Glute bridge", m: "Kích hoạt mông - quan trọng trước khi tập chân", s: "2x15 mỗi bài" },
-          { n: "Leg swing trước sau + ngang", m: "Khớp háng + hamstring", s: "2x12/bên" }
+          { n: "Jogging + dynamic stretch", m: "Nâng nhịp tim", s: "5-8 phút" }
         ],
         main: [
-          { n: "Goblet Squat", m: "Squat an toàn cho lưng - đùi trước + mông", s: "4x12-15" },
-          { n: "Leg Press (chân đặt cao)", m: "Đùi + mông, không áp lực cột sống", s: "4x12-15" },
-          { n: "Hip Thrust", m: "Mông - bài số 1 cho vòng 3 gọn đẹp", s: "4x12-15" },
-          { n: "Leg Curl (máy nằm)", m: "Hamstring - kiểm soát chậm khi hạ xuống", s: "3x12-15" },
-          { n: "Leg Extension (máy)", m: "Đùi trước - isolation hoàn toàn", s: "3x15" },
-          { n: "Calf Raise", m: "Bắp chân", s: "4x20" }
+          { n: "WORKOUT A - 'Cindy' rút gọn", m: "20 phút AMRAP: 5 pull-up (hoặc band-assisted) + 10 push-up + 15 squat. Đếm số vòng. Mục tiêu: 12+ vòng.", s: "20 phút" },
+          { n: "WORKOUT B - 'Combat Conditioning'", m: "5 vòng tính giờ: 400m chạy + 15 burpee + 20 jump squat + 10 push-up. Mục tiêu: dưới 22 phút.", s: "5 vòng" },
+          { n: "WORKOUT C (luân phiên) - EMOM 20 phút", m: "Phút lẻ: 12 burpee. Phút chẵn: 15 KB swing (nếu có) hoặc 20 mountain climber.", s: "20 phút" }
         ],
         core: [
-          { n: "Wall sit", m: "Isometric đùi - không áp lực lưng", s: "3x45 giây" },
-          { n: "Lying leg raise", m: "Bụng dưới - nằm phẳng, không cong lưng", s: "3x15" }
+          { n: "Plank to push-up", m: "Core + vai", s: "3x10/bên" },
+          { n: "Russian twist có tạ", m: "Core xoay - quan trọng cho sport", s: "3x20" }
         ]
       },
       {
         day: "T.4",
-        title: "Thứ 4 - Push",
-        focus: "Vai + ngực trên",
-        type: "PUSH",
-        tone: "push",
-        time: "65 phút",
-        safe: false,
-        note: "Push chỉ 1 lần mỗi tuần. Tập incline là chính - an toàn hơn flat bench khi vai đang yếu. Không cần tạ nặng, cần cảm nhận đúng.",
+        title: "Thứ 4 - STRENGTH LOWER + POWER",
+        focus: "Sức mạnh chân + explosive power",
+        type: "LEGS",
+        tone: "legs",
+        time: "75 phút",
+        safe: true,
+        note: "MỤC TIÊU: deadlift tăng 2.5-5kg mỗi 2 tuần. Box jump cao thêm 5cm mỗi tháng. Đây là buổi xây chân lính - không chỉ to mà phải explosive. Ghi PR (personal record) mỗi 4 tuần.",
         warm: [
-          { n: "Band external rotation", m: "Khởi động cơ xoay vai ngoài", s: "2x20" },
-          { n: "Arm circle + shoulder mobility", m: "Khớp vai", s: "2x15" }
+          { n: "Hip circle + Glute bridge có tạ", m: "Kích hoạt mông - không skip", s: "2x15" },
+          { n: "Leg swing + Cossack squat + 90/90", m: "Mobility khớp háng", s: "2x10/bên" },
+          { n: "Bodyweight squat + Jumping jack", m: "Bơm máu", s: "1x20 mỗi bài" }
         ],
         main: [
-          { n: "Dumbbell Shoulder Press (ngồi)", m: "Vai toàn diện - ngồi an toàn hơn đứng cho lưng", s: "4x10-12" },
-          { n: "Incline DB Press (30-45 độ)", m: "Ngực trên - không flat bench", s: "4x10-12" },
-          { n: "Lateral Raise", m: "Vai giữa - tạo bờ vai rộng tự nhiên", s: "4x15" },
-          { n: "Cable Chest Fly (Incline)", m: "Ngực trên isolation - co cơ cuối hành trình", s: "3x15" },
-          { n: "Rear Delt Fly", m: "Vai sau - tư thế + cân bằng", s: "3x15" },
-          { n: "Overhead Tricep Extension", m: "Tay sau - long head", s: "3x12" }
+          { n: "Dumbbell Deadlift HOẶC Romanian Deadlift", m: "Tăng tải mỗi tuần. Lưng phẳng tuyệt đối - cong lưng = stop ngay", s: "5x5" },
+          { n: "Box Jump (cao 50-70cm)", m: "EXPLOSIVE POWER - bài tactical thật. Nhảy CAO không phải nhảy NHANH", s: "5x3" },
+          { n: "Bulgarian Split Squat (có tạ)", m: "Chân đơn - cân bằng + sức mạnh chống chấn thương sport", s: "4x8/bên" },
+          { n: "Romanian Deadlift (nếu chính là DB Deadlift ở trên)", m: "Posterior chain - chống chấn thương khi chạy/đá bóng", s: "3x10" },
+          { n: "Standing Calf Raise", m: "Bắp chân - sprint nhanh, nhảy cao", s: "4x12-15" }
         ],
         core: [
-          { n: "Plank", m: "Core ổn định cơ bản", s: "3x40 giây" },
-          { n: "Dead bug", m: "Core sâu - lưng phải chạm sàn suốt", s: "3x10/bên" }
+          { n: "Farmer's Carry NẶNG", m: "Đi 30-40m. Tải = 50% cân nặng cơ thể mỗi tay (mục tiêu)", s: "4 lượt" },
+          { n: "Turkish Get-up", m: "BÀI VUA của tactical - core + shoulder + hip cùng lúc", s: "3x3/bên" }
         ]
       },
       {
         day: "T.5",
-        title: "Thứ 5 - Zone 2",
-        focus: "Cardio + core",
-        type: "CARDIO",
+        title: "Thứ 5 - ĐÁ BÓNG (hoặc Fartlek)",
+        focus: "Sport / Sức bền tim mạch thực chiến",
+        type: "SPORT",
         tone: "cardio",
-        time: "50 phút",
+        time: "60-90 phút",
         safe: true,
-        note: "Ngày không tập tạ. Zone 2 là vùng đốt mỡ trực tiếp nhất - đi bộ nhanh hoặc đạp xe nhẹ, nhịp tim 120-140, vẫn nói chuyện được.",
-        warm: [],
+        note: "Đá bóng = test sức bền thật. Đá HẾT SỨC, không 'đá cho có'. Nếu không đá được → Fartlek 40 phút (chạy biến tốc) thay thế. Sau buổi: stretching 10 phút + Kegel 3x10 + uống nước + ăn 40g protein trong 1 tiếng.",
+        warm: [
+          { n: "Jogging + dynamic stretch + sprint nhẹ", m: "Bắt buộc - tránh chấn thương", s: "8-10 phút" }
+        ],
         main: [
-          { n: "Đi bộ nhanh hoặc đạp xe nhẹ", m: "Nhịp tim 120-140 - Zone 2, vẫn nói được", s: "30-35 phút" },
-          { n: "Bơi nhẹ (nếu có hồ)", m: "Không áp lực khớp, tốt cho lưng", s: "Thay thế" }
+          { n: "Đá bóng 60-90 phút", m: "Chơi hết sức. Theo sát đối phương, không đứng nhìn.", s: "Full match" },
+          { n: "PHƯƠNG ÁN B - Fartlek 40 phút", m: "Chạy 2 phút Z2 + tăng tốc 1 phút Z4 + 30s sprint Z5 + 2 phút phục hồi - lặp lại 6-8 lượt", s: "40 phút" }
         ],
         core: [
-          { n: "Chin tuck", m: "Fix cổ rùa - làm ngay sau cardio", s: "3 lượt" },
-          { n: "Thoracic extension", m: "Đặt roller ngang lưng trên, thả người ra sau", s: "90 giây" },
-          { n: "Bird dog", m: "Core ổn định - an toàn cho lưng", s: "3x10/bên" },
-          { n: "Glute bridge", m: "Kích hoạt mông + giảm áp lực lưng dưới", s: "3x20" },
-          { n: "Hollow body hold", m: "Core nén toàn diện", s: "3x25 giây" }
+          { n: "Stretching toàn thân", m: "Hamstring, hông, bắp chân", s: "10 phút" },
+          { n: "Kegel", m: "3x10, siết 5s thả 5s", s: "Sau buổi" }
         ]
       },
       {
         day: "T.6",
-        title: "Thứ 6 - Pull B",
-        focus: "Lưng dày + tư thế",
-        type: "PULL B",
-        tone: "pull",
+        title: "Thứ 6 - HYPERTROPHY + CARDIO ĐỆM",
+        focus: "Sức bền cơ + đốt mỡ",
+        type: "PUSH/PULL",
+        tone: "push",
         time: "65 phút",
-        safe: true,
-        note: "Pull lần 2 - focus vào lưng dày và tư thế. Chest-supported row là bài tốt cho lưng dày mà không làm mỏi cột sống.",
+        safe: false,
+        note: "Buổi rep cao, superset, nghỉ ngắn (45-60 giây). Mục tiêu: push-up đến failure mỗi buổi - tuần này 30, tuần sau 32, tháng sau 50. Cuối buổi: incline walking 15 phút để đốt thêm calo + phục hồi.",
         warm: [
-          { n: "Foam rolling lưng trên", m: "Giải phóng cơ trước khi kích hoạt", s: "5 phút" },
-          { n: "Cat-cow + Thoracic rotation", m: "Khởi động cột sống", s: "2x10" }
+          { n: "Band external rotation", m: "Khởi động xoay vai", s: "2x15" },
+          { n: "Arm circle + shoulder dislocate", m: "Mobility vai", s: "2x10" }
         ],
         main: [
-          { n: "Chest-supported DB Row", m: "Lưng giữa, ít áp lực cột sống", s: "4x12" },
-          { n: "Wide-grip Lat Pulldown", m: "Lưng rộng - V-taper", s: "4x12" },
-          { n: "Cable Row (grip hẹp)", m: "Kéo về hông, co cơ tốt", s: "3x12" },
-          { n: "Face Pull", m: "Vai sau + cổ rùa - bài chữ ký mỗi buổi Pull", s: "4x20" },
-          { n: "Trap-3 Raise", m: "Fix vai cụp từ gốc rễ", s: "3x15" },
-          { n: "Shrug", m: "Cơ thang trên", s: "3x15" }
+          { n: "Superset: Incline DB Press + Chest-supported Row", m: "Push-pull cân bằng - nghỉ 60s sau cả 2 bài", s: "4x10-12 mỗi bài" },
+          { n: "Superset: Lateral Raise + Rear Delt Fly", m: "Vai toàn diện + tư thế", s: "3x15 mỗi bài" },
+          { n: "PUSH-UP TEST đến failure", m: "Ghi số rep. Tuần này +2 so với tuần trước. Mục tiêu lính: 50+ liên tục.", s: "3 set max" },
+          { n: "Inverted Row (TRX/thanh thấp)", m: "Bodyweight pull - bổ trợ pull-up", s: "3x12-15" },
+          { n: "Superset: EZ Curl + Tricep Pushdown", m: "Tay - rep cao cho sức bền", s: "3x12 mỗi bài" }
         ],
         core: [
-          { n: "EZ Curl + Concentration Curl", m: "Tay trước - ngày 2", s: "3x12 mỗi bài" },
-          { n: "Doorway chest stretch", m: "Giải phóng ngực căng sau tuần tập", s: "2x60 giây" }
+          { n: "Ab wheel rollout HOẶC Plank với chân nhấc", m: "Core nâng cao", s: "3x8-12" },
+          { n: "Incline walking máy chạy", m: "Cardio đệm - độ dốc 10%, tốc độ 5-6 km/h", s: "15 phút" }
         ]
       },
       {
         day: "T.7",
-        title: "Thứ 7 - Active",
-        focus: "Tự do + vận động nhẹ",
-        type: "ACTIVE",
+        title: "Thứ 7 - RUCK MARCH (TACTICAL CORE)",
+        focus: "Sức bền có tải - bài lính đích thực",
+        type: "RUCK",
         tone: "cardio",
-        time: "45-60 phút",
+        time: "60-90 phút",
         safe: true,
-        note: "Chọn thứ bạn thích và duy trì được. Không cần cố. Đây là ngày nạp năng lượng tinh thần - vận động nhẹ nhàng.",
-        warm: [],
+        note: "ĐÂY LÀ BUỔI TACTICAL NHẤT trong tuần. Đeo balo 10kg đi nhanh 5-8km. Mỗi 4 tuần tăng 2kg tải HOẶC 1km quãng đường. Mục tiêu 6 tháng: ruck 15kg đi 10km dưới 90 phút. Đây là chuẩn lính bộ binh.",
+        warm: [
+          { n: "Đi bộ thường 5 phút + dynamic stretch", m: "Khởi động trước khi đeo balo", s: "5 phút" }
+        ],
         main: [
-          { n: "Bơi", m: "Ưu tiên - không áp lực khớp, V-taper tự nhiên", s: "Ưu tiên" },
-          { n: "Cầu lông / bóng đá nhẹ", m: "Vui + đốt calo + xã hội", s: "Tùy thích" },
-          { n: "Đi bộ 5-7km", m: "Zone 2 nhẹ nhàng - tốt cho lưng", s: "Thay thế" }
+          { n: "Ruck March - đeo balo 10kg, đi 5-7km", m: "Đi NHANH (5.5-6.5 km/h), không phải đi dạo. Địa hình lý tưởng: dốc, cầu thang, công viên có đồi.", s: "60-80 phút" },
+          { n: "PHƯƠNG ÁN B - Hike/leo núi nhẹ có tải", m: "Nếu có dịp cuối tuần - thay thế hoàn hảo", s: "Tùy địa hình" },
+          { n: "Sprint cuối buổi (sau khi bỏ balo)", m: "6 lượt sprint 60m hết sức - explosive power", s: "6 lượt" }
         ],
         core: [
-          { n: "Tự do", m: "Nếu muốn: 10 phút stretching + mobility", s: "Tùy ý" }
+          { n: "Stretching + foam roll", m: "Hồi phục sau ruck", s: "10 phút" }
         ]
       },
       {
         day: "CN",
-        title: "Chủ nhật - Nghỉ",
-        focus: "Mobility + nghỉ ngơi",
-        type: "NGHỈ",
+        title: "Chủ nhật - PHỤC HỒI CHIẾN LƯỢC",
+        focus: "Recovery có mục đích",
+        type: "RECOVERY",
         tone: "rest",
-        time: "Tùy ý",
+        time: "30-45 phút",
         safe: true,
-        note: "Cơ phát triển khi nghỉ, không phải khi tập. Hôm nay: ăn đủ đạm, ngủ 8 tiếng, không cảm thấy tội lỗi vì không tập.",
+        note: "PHỤC HỒI = MỘT PHẦN CỦA TRAINING. Lính đặc nhiệm hiểu điều này hơn ai hết. Hôm nay: ngủ bù nếu cần, ăn nhiều protein (180-200g), foam rolling kỹ, mobility. Kegel hàng ngày KHÔNG NGHỈ. Tuần thứ 8 sẽ là 'deload week' - giảm 40% volume cả tuần.",
         warm: [],
         main: [
-          { n: "Foam rolling", m: "Nếu muốn - nhẹ thôi", s: "10 phút" },
-          { n: "Thoracic extension + Wall angel", m: "Duy trì fix tư thế hằng ngày", s: "10 phút" },
-          { n: "Đi bộ nhẹ", m: "Nếu muốn ra ngoài", s: "Tùy ý" }
+          { n: "Đi bộ thư giãn 30-40 phút", m: "Zone 1 - phục hồi máu cơ", s: "30-40 phút" },
+          { n: "Yoga / mobility toàn thân", m: "Hông, vai, lưng trên - 15-20 phút", s: "20 phút" },
+          { n: "Foam rolling kỹ", m: "Cơ căng sau tuần tập nặng - đặc biệt IT band, quad, lưng trên", s: "10-15 phút" }
         ],
         core: [
-          { n: "Nghỉ ngơi thật sự", m: "Không có nghĩa vụ", s: "" }
+          { n: "Kegel", m: "3x10 - không nghỉ ngày nào", s: "Hàng ngày" },
+          { n: "Cân + đo + chụp ảnh tiến độ", m: "Mỗi Chủ Nhật - ghi data để theo dõi", s: "5 phút" }
         ]
       }
     ];
 
     const principles = [
-      ["01", "Rep range 10-15 là chủ đạo", "Cơ bắp cân đối, không phình to. Tạ vừa phải nhưng cảm nhận cơ rõ hơn."],
-      ["02", "Mind-muscle connection hơn tạ nặng", "Mỗi rep phải cảm thấy đúng cơ co lại. Nếu không cảm thấy, giảm tạ."],
-      ["03", "Không tập đau", "Đặc biệt là lưng và khớp. Đau nhói trong khi tập là dừng ngay."],
-      ["04", "Tăng tạ từ từ", "Mỗi 1-2 tuần tăng một bậc nhỏ. Progression nhẹ giúp đẹp bền vững."],
-      ["05", "Pull nhiều gấp đôi Push", "Lưng mạnh hơn ngực sẽ giúp tư thế đứng đẹp hơn."],
-      ["06", "Thay Squat nặng và Deadlift", "Dùng Goblet Squat, Leg Press, Hip Thrust để hiệu quả mà an toàn hơn."],
-      ["07", "Đốt mỡ chủ yếu từ bếp", "Giữ thâm hụt khoảng 400 kcal mỗi ngày và đủ protein. Cardio chỉ hỗ trợ."],
-      ["08", "Ngủ 8 tiếng", "Kiểm soát stress để phục hồi tốt hơn và giữ lịch tập ổn định."]
+      ["01", "ĐO LƯỜNG TẤT CẢ - không đo = không tiến bộ", "Ghi sổ MỖI BUỔI: tạ, rep, thời gian, cân nặng. Mỗi Chủ Nhật: cân + đo vòng eo + chụp ảnh. Không có data = không biết mình đang tiến hay lùi."],
+      ["02", "PROGRESSIVE OVERLOAD bắt buộc", "Mỗi tuần PHẢI có một tiến bộ: +2.5kg HOẶC +1 rep HOẶC -5 giây metcon. Nếu 3 tuần không tiến = lịch sai hoặc dinh dưỡng/ngủ kém - dừng lại review."],
+      ["03", "DINH DƯỠNG quan trọng gấp 3 lần lịch tập", "2000-2100 kcal/ngày. 160-180g protein/ngày (1.8-2g/kg). Đếm calo bằng MyFitnessPal. Cân thực phẩm. Không có 'tôi ăn sạch lắm' - chỉ có số liệu."],
+      ["04", "NGỦ 7-8 TIẾNG - không nhân nhượng", "Thiếu ngủ giảm testosterone 15%, giảm phục hồi 30%, tăng đói 25%. Đi ngủ trước 23h. Không màn hình 30 phút trước ngủ. Đây là vũ khí bí mật."],
+      ["05", "COMPOUND trên isolation - bodyweight là chuẩn vàng", "Pull-up, deadlift, press, row, carry, ruck. Mục tiêu lính: 15 pull-up, 50 push-up, 100 squat liên tục, 5km dưới 25 phút, ruck 15kg đi 10km."],
+      ["06", "LOADED CARRY + RUCK mỗi tuần - không skip", "Farmer's carry và Ruck march là 2 bài chữ ký tactical. Rẻ, không trang bị đặc biệt, nhưng xây tất cả: grip + core + tim phổi + chân + mental toughness."],
+      ["07", "PHỤC HỒI là vũ khí - tuần thứ 8 deload", "Tập nặng 7 tuần, tuần 8 giảm 40% volume. Đây không phải lười - đây là cách cơ thể supercompensate và mạnh lên. Bỏ deload = chấn thương trong tháng 3-4."],
+      ["08", "AN TOÀN LƯNG - không đánh đổi", "DB/RDL thay barbell deadlift truyền thống. Bulgarian split squat thay back squat nặng. Lưng phẳng tuyệt đối. Sức mạnh không cần đánh đổi với cột sống."],
+      ["09", "KỶ LUẬT > Động lực", "Động lực biến mất trong 2 tuần. Kỷ luật là tập đúng lịch kể cả khi không muốn. Mưa? Tập. Bận? Tập 30 phút thay vì 70. Ốm nhẹ? Walk + mobility. Chỉ nghỉ khi sốt thật."],
+      ["10", "TEST mỗi 4 tuần - không có test = không có tactical", "Mỗi tháng test: 5km timed run, max push-up, max pull-up, ruck 5km timed. Ghi vào sổ. So sánh tháng trước. Đây là cách biết bạn đang trở thành 'lính' hay chỉ tập cho có."]
     ];
 
     const weekEl = document.getElementById("week");
