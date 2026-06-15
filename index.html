@@ -1,234 +1,994 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lịch tập v2 - Testosterone & Khớp gối</title>
+  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --surface: rgba(255, 255, 255, .82);
+      --surface-solid: #ffffff;
+      --surface-soft: #f8f8fa;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --faint: #a1a1a6;
+      --line: rgba(0, 0, 0, .08);
+      --line-strong: rgba(0, 0, 0, .14);
+      --blue: #0071e3;
+      --green: #1d9e75;
+      --orange: #bf6a02;
+      --red: #d94444;
+      --pink: #a12463;
+      --shadow: 0 18px 48px rgba(0, 0, 0, .08);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --max: 1120px;
+    }
 
-<style>
-.root{padding:1rem 0;font-family:var(--font-sans)}
-.header-bar{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;flex-wrap:wrap}
-.badge{font-size:12px;padding:4px 10px;border-radius:var(--border-radius-md)}
-.badge-teal{background:#E1F5EE;color:#0F6E56}
-.badge-purple{background:#EEEDFE;color:#3C3489}
-.badge-amber{background:#FAEEDA;color:#854F0B}
-.week-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-bottom:1.5rem}
-.day-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:10px;cursor:pointer;transition:border-color 0.15s}
-.day-card:hover{border-color:var(--color-border-primary)}
-.day-card.active{border:2px solid #185FA5}
-.day-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em}
-.day-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;line-height:1.3}
-.day-tags{display:flex;flex-wrap:wrap;gap:4px}
-.tag{font-size:11px;padding:2px 7px;border-radius:var(--border-radius-md)}
-.tag-cardio{background:#E1F5EE;color:#0F6E56}
-.tag-strength{background:#EEEDFE;color:#3C3489}
-.tag-rest{background:#F1EFE8;color:#5F5E5A}
-.tag-hiit{background:#FAEEDA;color:#854F0B}
-.tag-test{background:#FBEAF0;color:#72243E}
-.detail-panel{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1.5rem}
-.detail-title{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:1rem}
-.session-row{display:grid;grid-template-columns:80px 1fr;gap:12px;margin-bottom:1rem}
-.session-time{font-size:12px;font-weight:500;color:var(--color-text-secondary);padding-top:2px;line-height:1.5}
-.session-block{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 14px}
-.session-block-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
-.ex-list{list-style:none;padding:0;margin:0}
-.ex-list li{font-size:13px;color:var(--color-text-secondary);padding:3px 0;display:flex;align-items:flex-start;gap:6px;line-height:1.5}
-.ex-list li::before{content:"·";color:var(--color-text-tertiary);flex-shrink:0}
-.highlight-item{color:#0F6E56 !important;font-weight:500}
-.knee-note{font-size:12px;background:#FAEEDA;color:#854F0B;border-radius:var(--border-radius-md);padding:6px 10px;margin-top:6px;display:inline-block}
-.test-note{font-size:12px;background:#FBEAF0;color:#72243E;border-radius:var(--border-radius-md);padding:6px 10px;margin-top:6px;display:inline-block}
-.tip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:1.5rem}
-.tip-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
-.tip-card-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
-.tip-card-body{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
-.section-label{font-size:14px;font-weight:500;color:var(--color-text-secondary);margin:0 0 10px}
-</style>
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #101012;
+        --surface: rgba(29, 29, 31, .82);
+        --surface-solid: #1d1d1f;
+        --surface-soft: #242426;
+        --text: #f5f5f7;
+        --muted: #a1a1a6;
+        --faint: #6e6e73;
+        --line: rgba(255, 255, 255, .1);
+        --line-strong: rgba(255, 255, 255, .18);
+        --shadow: 0 18px 48px rgba(0, 0, 0, .38);
+      }
+    }
 
-<div class="root">
-<h2 class="sr-only">Lịch tập v2 – tối ưu testosterone, bảo vệ khớp gối, giảm mỡ bền bỉ</h2>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<div class="header-bar">
-  <span style="font-size:18px;font-weight:500;color:var(--color-text-primary)">Lịch tập v2</span>
-  <span class="badge badge-teal">Cardio nền</span>
-  <span class="badge badge-purple">Tạ compound</span>
-  <span class="badge badge-amber">Bảo vệ gối</span>
-</div>
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
 
-<p class="section-label">Bấm vào ngày để xem chi tiết</p>
-<div class="week-grid" id="weekGrid"></div>
-<div class="detail-panel" id="detailPanel"></div>
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(0, 113, 227, .13), transparent 32rem),
+        linear-gradient(180deg, rgba(255, 255, 255, .8), transparent 16rem),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.45;
+      letter-spacing: 0;
+    }
 
-<p class="section-label">Nguyên tắc bảo vệ khớp gối</p>
-<div class="tip-grid">
-  <div class="tip-card">
-    <div class="tip-card-title"><i class="ti ti-run" aria-hidden="true" style="font-size:16px;margin-right:4px"></i>Kỹ thuật chạy</div>
-    <div class="tip-card-body">Tiếp đất bằng giữa bàn chân, không bằng gót. Bước ngắn, nhịp ~170 bước/phút. Ngả người nhẹ về trước.</div>
-  </div>
-  <div class="tip-card">
-    <div class="tip-card-title"><i class="ti ti-arrows-up-down" aria-hidden="true" style="font-size:16px;margin-right:4px"></i>Squat & deadlift</div>
-    <div class="tip-card-body">Gối không vượt qua mũi chân quá nhiều. Xuống từ từ (3 giây), lên nhanh. Tạ nhẹ, reps cao hơn.</div>
-  </div>
-  <div class="tip-card">
-    <div class="tip-card-title"><i class="ti ti-heart" aria-hidden="true" style="font-size:16px;margin-right:4px"></i>Cardio thay thế</div>
-    <div class="tip-card-body">Đạp xe / elliptical tác động lên gối thấp hơn ~40% so với chạy. Dùng xen kẽ 2–3 buổi/tuần.</div>
-  </div>
-  <div class="tip-card">
-    <div class="tip-card-title"><i class="ti ti-bolt" aria-hidden="true" style="font-size:16px;margin-right:4px"></i>Cơ bảo vệ gối</div>
-    <div class="tip-card-body">Cơ mông (glute) và đùi trước (quad) mạnh = gối được bảo vệ tốt hơn. Hip thrust & leg press là ưu tiên.</div>
-  </div>
-</div>
-</div>
+    button {
+      border: 0;
+      color: inherit;
+      font: inherit;
+      background: none;
+    }
 
-<script>
-const days = [
-  {
-    label:"Thứ 2",title:"Cardio + Core",
-    tags:["cardio"],
-    morning:{title:"Sáng – 30 phút",items:[
-      {t:"5 phút đi bộ khởi động",h:false},
-      {t:"20 phút chạy nhẹ – nhịp tim 130–145 bpm, tiếp đất giữa bàn chân",h:false},
-      {t:"5 phút giãn cơ bắp chân, đùi",h:false}
-    ]},
-    evening:{title:"Tối – 60 phút",items:[
-      {t:"10 phút khởi động: jumping jack, leg swing, hip circle",h:false},
-      {t:"20 phút đạp xe hoặc elliptical – thay thế chạy để giảm tải gối",h:false},
-      {t:"Plank 3×45 giây",h:false},
-      {t:"Dead bug 3×12",h:false},
-      {t:"Hanging knee raise (hoặc lying leg raise) 3×15",h:false},
-      {t:"Bird-dog 3×12 mỗi bên – cơ lõi + lưng dưới",h:false},
-      {t:"10 phút giãn toàn thân",h:false}
-    ]},
-    note:null
-  },
-  {
-    label:"Thứ 3",title:"Compound lớn – Tăng testosterone",
-    tags:["strength","test"],
-    morning:{title:"Sáng – 30 phút",items:[
-      {t:"5 phút khởi động nhẹ",h:false},
-      {t:"20 phút chạy nhẹ hoặc đi bộ nhanh",h:false},
-      {t:"5 phút giãn cơ hông, đùi",h:false}
-    ]},
-    evening:{title:"Tối – 60 phút",items:[
-      {t:"10 phút warm-up: chạy nhẹ + hip flexor stretch",h:false},
-      {t:"Barbell squat (hoặc goblet squat) 4×12 – bài số 1 tăng testosterone",h:true},
-      {t:"Romanian deadlift 4×10 – kéo căng chuỗi sau, kích thích hormone mạnh",h:true},
-      {t:"Hip thrust 3×15 – cơ mông + bảo vệ gối + testosterone",h:true},
-      {t:"Dumbbell row 3×12 mỗi bên",h:false},
-      {t:"10 phút chạy hạ nhịp + giãn cơ sâu",h:false}
-    ]},
-    note:"test"
-  },
-  {
-    label:"Thứ 4",title:"Chạy dài – Đốt mỡ tối ưu",
-    tags:["cardio"],
-    morning:{title:"Sáng – 30 phút",items:[
-      {t:"5 phút đi bộ",h:false},
-      {t:"20 phút chạy nhẹ, bước ngắn, nhịp đều",h:false},
-      {t:"5 phút giãn bắp chân",h:false}
-    ]},
-    evening:{title:"Tối – 60 phút",items:[
-      {t:"5 phút khởi động",h:false},
-      {t:"40 phút chạy bền – nhịp tim 135–150 bpm, tốc độ nói chuyện được",h:true},
-      {t:"Buổi quan trọng nhất tuần cho đốt mỡ và cải thiện tuần hoàn",h:false},
-      {t:"15 phút yoga / giãn cơ sâu: đùi, bắp chân, hông",h:false}
-    ]},
-    note:"knee"
-  },
-  {
-    label:"Thứ 5",title:"HIIT + Hạ thân – Bảo vệ gối",
-    tags:["hiit","strength"],
-    morning:{title:"Sáng – 30 phút",items:[
-      {t:"5 phút khởi động",h:false},
-      {t:"20 phút đạp xe máy cường độ vừa – không chạy sáng hôm này",h:false},
-      {t:"5 phút giãn",h:false}
-    ]},
-    evening:{title:"Tối – 60 phút",items:[
-      {t:"10 phút warm-up nhẹ",h:false},
-      {t:"HIIT 20 phút trên bike hoặc elliptical – 30 giây tối đa / 30 giây nghỉ × 20 vòng",h:false},
-      {t:"Hip thrust nặng hơn 4×12 – ưu tiên bài này",h:true},
-      {t:"Leg press 3×15 – thay squat để giảm tải gối hôm nay",h:false},
-      {t:"Glute bridge 3×20",h:false},
-      {t:"Calf raise 3×20",h:false},
-      {t:"10 phút giãn cơ chân + foam roll đùi trước",h:false}
-    ]},
-    note:"knee"
-  },
-  {
-    label:"Thứ 6",title:"Thượng thân + Cardio nhẹ",
-    tags:["strength","cardio"],
-    morning:{title:"Sáng – 30 phút",items:[
-      {t:"5 phút đi bộ nhanh",h:false},
-      {t:"20 phút chạy phục hồi – nhịp tim dưới 135, rất nhẹ",h:false},
-      {t:"5 phút giãn vai, cổ, lưng",h:false}
-    ]},
-    evening:{title:"Tối – 60 phút",items:[
-      {t:"10 phút khởi động",h:false},
-      {t:"Pull-down hoặc assisted pull-up 3×12",h:false},
-      {t:"Dumbbell row 3×12",h:false},
-      {t:"Bench press hoặc dumbbell press 3×12",h:false},
-      {t:"Overhead press 3×10 – kích thích testosterone tốt cho thượng thân",h:true},
-      {t:"Tricep pushdown 3×15",h:false},
-      {t:"Bicep curl 3×15",h:false},
-      {t:"10 phút chạy nhẹ + giãn vai, ngực, lưng",h:false}
-    ]},
-    note:null
-  },
-  {
-    label:"Thứ 7",title:"Chạy dài nhất + Phục hồi",
-    tags:["cardio","rest"],
-    morning:{title:"Sáng – 30 phút",items:[
-      {t:"Đi bộ ngoài trời 20–25 phút – không chạy",h:false},
-      {t:"Hít thở sâu, thư giãn tinh thần",h:false},
-      {t:"5 phút giãn nhẹ",h:false}
-    ]},
-    evening:{title:"Tối – 60 phút",items:[
-      {t:"10 phút warm-up",h:false},
-      {t:"45 phút chạy dài nhất tuần – nhịp tim 135–145, không cần nhanh",h:true},
-      {t:"Không kiểm tra tốc độ, chỉ kiểm tra nhịp tim",h:false},
-      {t:"5 phút cool-down + 10 phút giãn cơ sâu toàn thân",h:false}
-    ]},
-    note:"knee"
-  }
-];
+    .app {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
 
-const tagLabel={cardio:"Cardio",strength:"Tạ",rest:"Phục hồi",hiit:"HIIT",test:"Testosterone"};
-const tagClass={cardio:"tag-cardio",strength:"tag-strength",rest:"tag-rest",hiit:"tag-hiit",test:"tag-test"};
-let selected=0;
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+      gap: 28px;
+      align-items: end;
+      padding: 34px 0 24px;
+    }
 
-function renderGrid(){
-  document.getElementById('weekGrid').innerHTML=days.map((d,i)=>`
-    <div class="day-card${i===selected?' active':''}" onclick="sel(${i})">
-      <div class="day-label">${d.label}</div>
-      <div class="day-title">${d.title}</div>
-      <div class="day-tags">${d.tags.map(t=>`<span class="tag ${tagClass[t]}">${tagLabel[t]}</span>`).join('')}</div>
-    </div>`).join('');
-}
+    .eyebrow {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
 
-function noteHTML(type){
-  if(type==='knee') return `<div class="knee-note"><i class="ti ti-shield-check" aria-hidden="true" style="font-size:13px;margin-right:4px"></i>Chú ý kỹ thuật bảo vệ gối hôm nay</div>`;
-  if(type==='test') return `<div class="test-note"><i class="ti ti-bolt" aria-hidden="true" style="font-size:13px;margin-right:4px"></i>Buổi tập kích thích testosterone mạnh nhất tuần</div>`;
-  return '';
-}
+    h1 {
+      max-width: 760px;
+      font-size: clamp(42px, 7vw, 82px);
+      font-weight: 700;
+      line-height: .96;
+      letter-spacing: 0;
+    }
 
-function renderDetail(){
-  const d=days[selected];
-  document.getElementById('detailPanel').innerHTML=`
-    <div class="detail-title">${d.label} – ${d.title}</div>
-    ${d.note?noteHTML(d.note):''}
-    <div style="margin-top:${d.note?'12px':'0'}">
-    <div class="session-row">
-      <div class="session-time">Sáng<br>30 phút</div>
-      <div class="session-block">
-        <div class="session-block-title">${d.morning.title}</div>
-        <ul class="ex-list">${d.morning.items.map(i=>`<li><span class="${i.h?'highlight-item':''}">${i.t}</span></li>`).join('')}</ul>
+    .hero-copy {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 19px;
+      margin-top: 18px;
+    }
+
+    .hero-panel {
+      justify-self: end;
+      width: 100%;
+      max-width: 360px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+
+    .today-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .today-title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .today-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, .45);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      margin: 8px 0 22px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, .06);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+      width: min(360px, 100%);
+      border-radius: 999px;
+      background: var(--surface-soft);
+      padding: 4px;
+    }
+
+    .tab {
+      min-height: 38px;
+      cursor: pointer;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      transition: background .18s ease, color .18s ease, box-shadow .18s ease;
+    }
+
+    .tab.on {
+      background: var(--surface-solid);
+      color: var(--text);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, .08);
+    }
+
+    .toolbar-note {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      padding-right: 10px;
+      white-space: nowrap;
+    }
+
+    .pane {
+      display: none;
+    }
+
+    .pane.on {
+      display: block;
+      animation: rise .22s ease both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      min-height: 118px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--surface-solid);
+      padding: 16px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+      margin-bottom: 9px;
+    }
+
+    .stat-value {
+      font-size: 25px;
+      font-weight: 750;
+      line-height: 1.08;
+    }
+
+    .stat-sub {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .week {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .day-card {
+      min-height: 154px;
+      cursor: pointer;
+      text-align: left;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--surface-solid);
+      padding: 14px;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .day-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .08);
+    }
+
+    .day-card.on {
+      border-color: rgba(0, 113, 227, .42);
+      background: linear-gradient(180deg, rgba(0, 113, 227, .08), var(--surface-solid) 54%);
+      box-shadow: 0 16px 34px rgba(0, 113, 227, .14);
+    }
+
+    .day-name {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .type {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 750;
+      margin-bottom: 12px;
+    }
+
+    .cardio { background: rgba(29, 158, 117, .12); color: #0b7f5d; }
+    .strength { background: rgba(0, 113, 227, .12); color: #005ebd; }
+    .hybrid { background: rgba(191, 106, 2, .13); color: #9a5400; }
+    .recovery { background: rgba(110, 110, 115, .14); color: var(--muted); }
+    .test { background: rgba(161, 36, 99, .12); color: var(--pink); }
+
+    .day-focus {
+      min-height: 42px;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.22;
+    }
+
+    .day-time {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    .workout {
+      display: grid;
+      grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+      gap: 18px;
+      align-items: start;
+      margin-top: 16px;
+    }
+
+    .summary {
+      position: sticky;
+      top: 88px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+
+    .summary-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+
+    .summary h2 {
+      font-size: 30px;
+      font-weight: 750;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .safe {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: rgba(29, 158, 117, .13);
+      color: #0b7f5d;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .safe.warn {
+      background: rgba(191, 106, 2, .14);
+      color: var(--orange);
+    }
+
+    .safe.test {
+      background: rgba(161, 36, 99, .12);
+      color: var(--pink);
+    }
+
+    .summary-note {
+      color: var(--muted);
+      font-size: 15px;
+      margin-top: 12px;
+    }
+
+    .quick-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .quick {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .quick-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      margin-bottom: 4px;
+    }
+
+    .quick-value {
+      font-size: 17px;
+      font-weight: 750;
+      text-align: right;
+    }
+
+    .detail {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .section {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-solid);
+      overflow: hidden;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 58px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 750;
+    }
+
+    .section-count {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .exercise {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 15px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .exercise:last-child {
+      border-bottom: 0;
+    }
+
+    .exercise-name {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .exercise-meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .sets {
+      min-width: 86px;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--text);
+      padding: 8px 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .callout {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-solid);
+      padding: 18px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .callout strong {
+      color: var(--text);
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .principle {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-solid);
+      padding: 20px;
+    }
+
+    .principle-num {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .principle-title {
+      font-size: 20px;
+      font-weight: 750;
+      line-height: 1.18;
+    }
+
+    .principle-text {
+      color: var(--muted);
+      font-size: 15px;
+      margin-top: 10px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background:
+          radial-gradient(circle at top left, rgba(0, 113, 227, .18), transparent 30rem),
+          var(--bg);
+      }
+
+      .meta-pill {
+        background: rgba(255, 255, 255, .06);
+      }
+
+      .cardio { color: #7ad8b7; }
+      .strength { color: #75bfff; }
+      .hybrid { color: #ffc36b; }
+      .recovery { color: #d1d1d6; }
+      .test { color: #ffb0cf; }
+      .safe { color: #7ad8b7; }
+      .safe.warn { color: #ffc36b; }
+      .safe.test { color: #ffb0cf; }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .hero-panel {
+        justify-self: stretch;
+        max-width: none;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .week {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scroll-snap-type: x mandatory;
+      }
+
+      .day-card {
+        min-width: 160px;
+        scroll-snap-align: start;
+      }
+
+      .workout {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .app {
+        width: min(100% - 22px, var(--max));
+        padding-top: 22px;
+      }
+
+      .hero {
+        padding-top: 16px;
+      }
+
+      h1 {
+        font-size: 44px;
+      }
+
+      .hero-copy {
+        font-size: 17px;
+      }
+
+      .toolbar {
+        align-items: stretch;
+        border-radius: 22px;
+        flex-direction: column;
+      }
+
+      .tabs {
+        width: 100%;
+      }
+
+      .toolbar-note {
+        padding: 0 8px 4px;
+        white-space: normal;
+      }
+
+      .stats,
+      .principles {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        min-height: 0;
+      }
+
+      .summary h2 {
+        font-size: 26px;
+      }
+
+      .summary-top {
+        flex-direction: column;
+      }
+
+      .exercise {
+        grid-template-columns: 1fr;
+      }
+
+      .sets {
+        justify-self: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Lịch mới, giao diện cũ</div>
+        <h1>Lịch tập v2</h1>
+        <p class="hero-copy">Tập trung cardio nền, compound để giữ testosterone, và điều chỉnh bài để đầu gối dễ chịu hơn trong dài hạn.</p>
       </div>
-    </div>
-    <div class="session-row">
-      <div class="session-time">Tối<br>60 phút</div>
-      <div class="session-block">
-        <div class="session-block-title">${d.evening.title}</div>
-        <ul class="ex-list">${d.evening.items.map(i=>`<li><span class="${i.h?'highlight-item':''}">${i.t}</span></li>`).join('')}</ul>
-      </div>
-    </div>
-    </div>
-    <button onclick="sendPrompt('Giải thích chi tiết kỹ thuật và lưu ý cho buổi ${d.label}: ${d.title}')" style="margin-top:8px;font-size:13px">Kỹ thuật & lưu ý chi tiết ↗</button>
-  `;
-}
 
-function sel(i){selected=i;renderGrid();renderDetail();}
-renderGrid();renderDetail();
-</script>
+      <aside class="hero-panel" aria-live="polite">
+        <div class="today-label">Buổi đang chọn</div>
+        <div class="today-title" id="todayTitle">Cardio + Core</div>
+        <div class="today-meta">
+          <span class="meta-pill" id="todayType">Cardio</span>
+          <span class="meta-pill" id="todayTime">30' + 60'</span>
+          <span class="meta-pill" id="todaySafety">Knee-friendly</span>
+        </div>
+      </aside>
+    </section>
+
+    <nav class="toolbar" aria-label="Điều hướng chương trình">
+      <div class="tabs" role="tablist">
+        <button class="tab on" type="button" role="tab" aria-selected="true" aria-controls="pane-schedule" onclick="switchPane('schedule')">Lịch tập</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="pane-principles" onclick="switchPane('principles')">Lưu ý gối</button>
+      </div>
+      <div class="toolbar-note">Giữ giao diện cũ, cập nhật nội dung v2.</div>
+    </nav>
+
+    <section id="pane-schedule" class="pane on">
+      <div class="stats" aria-label="Tóm tắt chương trình">
+        <div class="stat">
+          <div class="stat-label">Cardio nền</div>
+          <div class="stat-value">3 buổi</div>
+          <div class="stat-sub">Chạy nhẹ, chạy dài, phục hồi</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Buổi tạ chính</div>
+          <div class="stat-value" style="color: var(--blue)">2 buổi</div>
+          <div class="stat-sub">Compound + upper body</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Knee-friendly</div>
+          <div class="stat-value" style="color: var(--green)">Bike / elliptical</div>
+          <div class="stat-sub">Giảm tải cho đầu gối</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Khung ngày</div>
+          <div class="stat-value" style="color: var(--orange)">30' + 60'</div>
+          <div class="stat-sub">Sáng nhẹ, tối là chính</div>
+        </div>
+      </div>
+
+      <div class="week" id="week" aria-label="Lịch tập trong tuần"></div>
+
+      <div class="workout">
+        <aside class="summary" id="summary"></aside>
+        <div class="detail" id="detail"></div>
+      </div>
+    </section>
+
+    <section id="pane-principles" class="pane">
+      <div class="principles" id="principles"></div>
+    </section>
+  </main>
+
+  <script>
+    const item = (n, m = "", s = "") => ({ n, m, s });
+
+    const days = [
+      {
+        day: "T.2",
+        title: "Cardio + Core",
+        focus: "Cardio nền, core, giảm tải gối",
+        type: "CARDIO",
+        tone: "cardio",
+        time: "30' + 60'",
+        badge: "Knee-friendly",
+        badgeClass: "",
+        note: "Một ngày mở tuần khá sạch: sáng nhẹ để đánh thức tim phổi, tối ưu tiên cardio ít tải lên gối và core ổn định thân người.",
+        morningTitle: "Sáng - 30 phút",
+        morning: [
+          item("5 phút đi bộ khởi động"),
+          item("20 phút chạy nhẹ", "Nhịp tim 130-145 bpm, tiếp đất giữa bàn chân"),
+          item("5 phút giãn bắp chân, đùi")
+        ],
+        eveningTitle: "Tối - 60 phút",
+        evening: [
+          item("10 phút khởi động", "Jumping jack, leg swing, hip circle"),
+          item("Đạp xe hoặc elliptical", "20 phút để thay thế chạy và giảm tải gối"),
+          item("Plank", "", "3 x 45 giây"),
+          item("Dead bug", "", "3 x 12"),
+          item("Hanging knee raise hoặc lying leg raise", "", "3 x 15"),
+          item("Bird-dog", "Core + lưng dưới", "3 x 12 mỗi bên"),
+          item("Giãn toàn thân", "", "10 phút")
+        ],
+        callout: "Giữ nhịp nhẹ ở buổi sáng. Mục tiêu hôm nay là tích lũy volume sạch, không phải cố ép tốc độ."
+      },
+      {
+        day: "T.3",
+        title: "Compound lớn - Tăng testosterone",
+        focus: "Squat, hinge, glute, kéo lưng",
+        type: "STRENGTH",
+        tone: "test",
+        time: "30' + 60'",
+        badge: "Testosterone focus",
+        badgeClass: "test",
+        note: "Đây là buổi compound rõ nhất tuần. Ưu tiên các bài lớn, kiểm soát form tốt, và không hy sinh kỹ thuật chỉ để tăng tạ.",
+        morningTitle: "Sáng - 30 phút",
+        morning: [
+          item("5 phút khởi động nhẹ"),
+          item("20 phút chạy nhẹ hoặc đi bộ nhanh"),
+          item("5 phút giãn hông, đùi")
+        ],
+        eveningTitle: "Tối - 60 phút",
+        evening: [
+          item("10 phút warm-up", "Chạy nhẹ + hip flexor stretch"),
+          item("Barbell squat hoặc goblet squat", "Bài số 1 của buổi", "4 x 12"),
+          item("Romanian deadlift", "Kéo căng chuỗi sau", "4 x 10"),
+          item("Hip thrust", "Mông + bảo vệ gối", "3 x 15"),
+          item("Dumbbell row", "", "3 x 12 mỗi bên"),
+          item("Chạy hạ nhịp + giãn cơ sâu", "", "10 phút")
+        ],
+        callout: "Buổi này được phép nặng hơn, nhưng chỉ khi squat và RDL vẫn giữ lưng chắc, gối đi đúng quỹ đạo."
+      },
+      {
+        day: "T.4",
+        title: "Chạy dài - Đốt mỡ tối ưu",
+        focus: "Chạy bền, tim phổi, cải thiện tuần hoàn",
+        type: "CARDIO",
+        tone: "cardio",
+        time: "30' + 60'",
+        badge: "Knee-friendly",
+        badgeClass: "",
+        note: "Buổi quan trọng nhất tuần cho aerobic base. Mục tiêu là đều, bền, và giữ cảm giác còn kiểm soát được nhịp thở.",
+        morningTitle: "Sáng - 30 phút",
+        morning: [
+          item("5 phút đi bộ"),
+          item("20 phút chạy nhẹ", "Bước ngắn, nhịp đều"),
+          item("5 phút giãn bắp chân")
+        ],
+        eveningTitle: "Tối - 60 phút",
+        evening: [
+          item("5 phút khởi động"),
+          item("Chạy bền", "Nhịp tim 135-150 bpm, vẫn nói chuyện được", "40 phút"),
+          item("Yoga / giãn cơ sâu", "Đùi, bắp chân, hông", "15 phút")
+        ],
+        callout: "Nếu đầu gối khó chịu, giảm tốc trước khi giảm thời lượng. Hôm nay ưu tiên chất lượng chuyển động hơn là pace."
+      },
+      {
+        day: "T.5",
+        title: "HIIT + Hạ thân - Bảo vệ gối",
+        focus: "HIIT low-impact, glute, leg press",
+        type: "HYBRID",
+        tone: "hybrid",
+        time: "30' + 60'",
+        badge: "Knee-aware",
+        badgeClass: "warn",
+        note: "Ngày này vẫn nặng, nhưng theo kiểu thân thiện với gối hơn: HIIT trên bike hoặc elliptical, rồi đẩy trọng tâm xuống mông và đùi trước.",
+        morningTitle: "Sáng - 30 phút",
+        morning: [
+          item("5 phút khởi động"),
+          item("Đạp xe máy cường độ vừa", "20 phút, không chạy sáng hôm nay"),
+          item("5 phút giãn")
+        ],
+        eveningTitle: "Tối - 60 phút",
+        evening: [
+          item("10 phút warm-up nhẹ"),
+          item("HIIT trên bike hoặc elliptical", "30 giây tối đa / 30 giây nghỉ", "20 vòng"),
+          item("Hip thrust", "Ưu tiên bài này", "4 x 12"),
+          item("Leg press", "Thay squat để giảm tải gối", "3 x 15"),
+          item("Glute bridge", "", "3 x 20"),
+          item("Calf raise", "", "3 x 20"),
+          item("Giãn cơ chân + foam roll đùi trước", "", "10 phút")
+        ],
+        callout: "Nếu gối nhạy trong ngày này, giữ shin ổn định ở leg press và đừng khóa gối mạnh ở cuối rep."
+      },
+      {
+        day: "T.6",
+        title: "Thượng thân + Cardio nhẹ",
+        focus: "Upper body, OHP, cardio phục hồi",
+        type: "STRENGTH",
+        tone: "strength",
+        time: "30' + 60'",
+        badge: "Upper-body day",
+        badgeClass: "",
+        note: "Buổi này cân bằng hơn: sáng chạy recovery rất nhẹ, tối tập thượng thân để giữ sức mạnh mà không đè thêm vào đầu gối.",
+        morningTitle: "Sáng - 30 phút",
+        morning: [
+          item("5 phút đi bộ nhanh"),
+          item("20 phút chạy phục hồi", "Nhịp tim dưới 135, rất nhẹ"),
+          item("5 phút giãn vai, cổ, lưng")
+        ],
+        eveningTitle: "Tối - 60 phút",
+        evening: [
+          item("10 phút khởi động"),
+          item("Pull-down hoặc assisted pull-up", "", "3 x 12"),
+          item("Dumbbell row", "", "3 x 12"),
+          item("Bench press hoặc dumbbell press", "", "3 x 12"),
+          item("Overhead press", "Điểm nhấn của buổi", "3 x 10"),
+          item("Tricep pushdown", "", "3 x 15"),
+          item("Bicep curl", "", "3 x 15"),
+          item("Chạy nhẹ + giãn vai, ngực, lưng", "", "10 phút")
+        ],
+        callout: "Giữ recovery run đúng nghĩa recovery. Nếu sáng đã lỡ chạy gắt, tối giảm bớt 1 bài tay để hồi phục tốt hơn."
+      },
+      {
+        day: "T.7",
+        title: "Chạy dài nhất + Phục hồi",
+        focus: "Long run nhẹ, nhịp tim ổn định, xả tuần",
+        type: "RECOVERY",
+        tone: "recovery",
+        time: "30' + 60'",
+        badge: "Long easy run",
+        badgeClass: "",
+        note: "Đây là buổi chạy dài nhất tuần nhưng không phải buổi chạy nhanh. Chỉ theo nhịp tim và cảm giác, không cần chase pace.",
+        morningTitle: "Sáng - 30 phút",
+        morning: [
+          item("Đi bộ ngoài trời", "20-25 phút, không chạy"),
+          item("Hít thở sâu, thư giãn tinh thần"),
+          item("5 phút giãn nhẹ")
+        ],
+        eveningTitle: "Tối - 60 phút",
+        evening: [
+          item("10 phút warm-up"),
+          item("Chạy dài nhất tuần", "Nhịp tim 135-145, không cần nhanh", "45 phút"),
+          item("Cool-down + giãn cơ sâu toàn thân", "", "15 phút")
+        ],
+        callout: "Nếu thấy gối nặng sau 20-25 phút, đổi ngay sang đi bộ dốc nhẹ hoặc elliptical thay vì cố chạy hết bài."
+      }
+    ];
+
+    const principles = [
+      ["01", "Kỹ thuật chạy", "Tiếp đất bằng giữa bàn chân, không dập gót. Giữ bước ngắn, nhịp khoảng 170 bước/phút và nghiêng người nhẹ về trước."],
+      ["02", "Squat & deadlift", "Gối không trôi quá nhiều ra trước. Xuống có kiểm soát, lên dứt khoát. Thà tạ nhẹ hơn còn hơn form làm gối hoặc lưng chịu đòn."],
+      ["03", "Cardio thay thế", "Bike và elliptical có tải lên gối thấp hơn chạy. Dùng chúng 2-3 buổi mỗi tuần là cách thông minh để vẫn giữ cardio mà không phá hồi phục."],
+      ["04", "Cơ bảo vệ gối", "Glute và quad đủ mạnh sẽ đỡ gối rất nhiều. Hip thrust, glute bridge và leg press là những bài đáng ưu tiên khi gối đang nhạy."]
+    ];
+
+    const weekEl = document.getElementById("week");
+    const summaryEl = document.getElementById("summary");
+    const detailEl = document.getElementById("detail");
+    const todayTitle = document.getElementById("todayTitle");
+    const todayType = document.getElementById("todayType");
+    const todayTime = document.getElementById("todayTime");
+    const todaySafety = document.getElementById("todaySafety");
+
+    function renderWeek() {
+      weekEl.innerHTML = days.map((d, i) => `
+        <button class="day-card ${i === 0 ? "on" : ""}" type="button" onclick="pick(${i})">
+          <div class="day-name">${d.day}</div>
+          <div class="type ${d.tone}">${d.type}</div>
+          <div class="day-focus">${d.focus}</div>
+          <div class="day-time">${d.time}</div>
+        </button>
+      `).join("");
+    }
+
+    function section(title, items) {
+      if (!items.length) return "";
+      return `
+        <section class="section">
+          <div class="section-head">
+            <div class="section-title">${title}</div>
+            <div class="section-count">${items.length} mục</div>
+          </div>
+          ${items.map(item => `
+            <div class="exercise">
+              <div>
+                <div class="exercise-name">${item.n}</div>
+                ${item.m ? `<div class="exercise-meta">${item.m}</div>` : ""}
+              </div>
+              <div class="sets">${item.s || "Theo bài"}</div>
+            </div>
+          `).join("")}
+        </section>
+      `;
+    }
+
+    function pick(index) {
+      const day = days[index];
+      document.querySelectorAll(".day-card").forEach((card, i) => {
+        card.classList.toggle("on", i === index);
+      });
+
+      todayTitle.textContent = day.title;
+      todayType.textContent = day.type;
+      todayTime.textContent = day.time;
+      todaySafety.textContent = day.badge;
+
+      summaryEl.innerHTML = `
+        <div class="summary-top">
+          <div>
+            <div class="eyebrow">${day.day} / ${day.type}</div>
+            <h2>${day.title}</h2>
+          </div>
+          <div class="safe ${day.badgeClass}">${day.badge}</div>
+        </div>
+        <p class="summary-note">${day.note}</p>
+        <div class="quick-grid">
+          <div class="quick">
+            <div class="quick-label">Khung ngày</div>
+            <div class="quick-value">${day.time}</div>
+          </div>
+          <div class="quick">
+            <div class="quick-label">Trọng tâm</div>
+            <div class="quick-value">${day.focus}</div>
+          </div>
+        </div>
+      `;
+
+      detailEl.innerHTML = `
+        ${section(day.morningTitle, day.morning)}
+        ${section(day.eveningTitle, day.evening)}
+        <div class="callout"><strong>Lưu ý:</strong> ${day.callout}</div>
+      `;
+    }
+
+    function renderPrinciples() {
+      document.getElementById("principles").innerHTML = principles.map(item => `
+        <article class="principle">
+          <div class="principle-num">${item[0]}</div>
+          <h2 class="principle-title">${item[1]}</h2>
+          <p class="principle-text">${item[2]}</p>
+        </article>
+      `).join("");
+    }
+
+    function switchPane(name) {
+      document.querySelectorAll(".tab").forEach((tab, i) => {
+        const active = (name === "schedule" && i === 0) || (name === "principles" && i === 1);
+        tab.classList.toggle("on", active);
+        tab.setAttribute("aria-selected", active ? "true" : "false");
+      });
+
+      document.querySelectorAll(".pane").forEach(pane => pane.classList.remove("on"));
+      document.getElementById(`pane-${name}`).classList.add("on");
+    }
+
+    renderWeek();
+    renderPrinciples();
+    pick(0);
+  </script>
+</body>
+</html>
