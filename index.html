@@ -31,6 +31,7 @@
     font-size: 14px;
     line-height: 1.6;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   /* HEADER */
@@ -179,6 +180,7 @@
     flex: 1;
     padding: 32px;
     max-width: 900px;
+    width: 100%;
   }
 
   /* PAGE SECTIONS */
@@ -464,6 +466,13 @@
   .goal-table tr:last-child td { border-bottom: none; }
   .goal-table .target { color: var(--accent); font-weight: 600; }
 
+  .table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
   /* NUTRITION GRID */
   .nutr-grid {
     display: grid;
@@ -728,28 +737,10 @@
   .pain-btn.sel-warn { background: var(--yellow); border-color: var(--yellow); color: #000; }
   .pain-btn.sel-bad { background: var(--red); border-color: var(--red); color: #fff; }
 
-  @media (max-width: 768px) {
-    .sidebar { display: none; }
-    .main { padding: 16px; }
-    .rule-grid { grid-template-columns: 1fr; }
-    .nutr-grid { grid-template-columns: 1fr 1fr; }
-    .pain-tracker { grid-template-columns: 1fr 1fr; }
-    .avoid-list { grid-template-columns: 1fr; }
-    .overview-grid { grid-template-columns: 1fr; }
-    .log-form { grid-template-columns: 1fr; }
-    .mobile-tabs {
-      display: flex !important;
-      overflow-x: auto;
-      gap: 6px;
-      padding: 10px 16px;
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-    }
-  }
-
   .mobile-tabs { display: none; }
   .mobile-tab-btn {
     flex-shrink: 0;
+    min-height: 38px;
     padding: 7px 14px;
     border-radius: 20px;
     border: 1px solid var(--border);
@@ -764,6 +755,187 @@
     background: rgba(0,229,160,0.15);
     border-color: var(--accent);
     color: var(--accent);
+  }
+
+  .mobile-tabs::-webkit-scrollbar,
+  .table-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .mobile-tabs::-webkit-scrollbar-thumb,
+  .table-scroll::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 999px;
+  }
+
+  .mobile-tabs::-webkit-scrollbar-track,
+  .table-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  @media (max-width: 768px) {
+    header {
+      height: 54px;
+      padding: 0 14px;
+    }
+
+    .logo {
+      font-size: 18px;
+      letter-spacing: 1.4px;
+    }
+
+    .phase-badge {
+      padding: 4px 10px;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .layout {
+      margin-top: 54px;
+      min-height: calc(100vh - 54px);
+    }
+
+    .sidebar { display: none; }
+
+    .main {
+      padding: 14px 14px 90px;
+      max-width: none;
+    }
+
+    .day-header {
+      margin-bottom: 18px;
+    }
+
+    .day-header h1 {
+      font-size: 34px;
+      line-height: 0.96;
+    }
+
+    .day-header .subtitle {
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .goals {
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .goal-chip {
+      font-size: 11px;
+      padding: 5px 10px;
+    }
+
+    .ex-card {
+      grid-template-columns: 30px 1fr 34px;
+      gap: 0 10px;
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    .ex-num {
+      font-size: 22px;
+    }
+
+    .ex-name {
+      font-size: 13px;
+    }
+
+    .ex-note,
+    .ex-warning {
+      font-size: 11px;
+    }
+
+    .ex-check {
+      width: 34px;
+      height: 34px;
+      margin-top: 0;
+    }
+
+    .warmup-item {
+      align-items: flex-start;
+      padding: 10px 12px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      margin-top: 22px;
+    }
+
+    .rule-grid { grid-template-columns: 1fr; }
+    .nutr-grid { grid-template-columns: 1fr 1fr; }
+    .pain-tracker { grid-template-columns: 1fr 1fr; }
+    .avoid-list { grid-template-columns: 1fr; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .log-form { grid-template-columns: 1fr; }
+
+    .mobile-tabs {
+      display: flex !important;
+      position: sticky;
+      top: 54px;
+      z-index: 99;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(22,27,39,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      scroll-snap-type: x proximity;
+      overscroll-behavior-x: contain;
+    }
+
+    .mobile-tab-btn {
+      scroll-snap-align: start;
+    }
+
+    .week-table,
+    .goal-table {
+      min-width: 640px;
+    }
+
+    .week-table th, .week-table td,
+    .goal-table th, .goal-table td {
+      white-space: nowrap;
+    }
+
+    .pain-btn {
+      width: 28px;
+      height: 28px;
+      font-size: 11px;
+    }
+
+    .log-field input,
+    .log-field textarea,
+    .log-field select,
+    .btn {
+      min-height: 42px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .main {
+      padding: 12px 12px 88px;
+    }
+
+    .day-header h1 {
+      font-size: 30px;
+    }
+
+    .phase-badge {
+      display: none;
+    }
+
+    .nutr-grid,
+    .pain-tracker {
+      grid-template-columns: 1fr;
+    }
+
+    .ov-card,
+    .rule-card,
+    .pain-card,
+    .nutr-card {
+      padding: 12px;
+    }
   }
 </style>
 </head>
@@ -913,7 +1085,7 @@
       </div>
 
       <div class="section-title">Tổng lịch tuần</div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:28px;">
+      <div class="table-scroll" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow-x:auto;overflow-y:hidden;margin-bottom:28px;">
         <table class="week-table">
           <thead>
             <tr>
@@ -971,7 +1143,7 @@
       </div>
 
       <div class="section-title">Mục tiêu cuối 4 tuần</div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:28px;">
+      <div class="table-scroll" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow-x:auto;overflow-y:hidden;margin-bottom:28px;">
         <table class="goal-table">
           <thead>
             <tr>
@@ -1512,9 +1684,25 @@ function showPage(id, el) {
   if (el) el.classList.add('active');
 
   const mobileBtn = document.querySelector(`.mobile-tab-btn[data-page="${id}"]`);
-  if (mobileBtn) mobileBtn.classList.add('active');
+  if (mobileBtn) {
+    mobileBtn.classList.add('active');
+    mobileBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
 
   buildExercises(id);
+
+  if (window.innerWidth <= 768) {
+    const headerEl = document.querySelector('header');
+    const mainEl = document.querySelector('.main');
+    const headerHeight = headerEl ? headerEl.offsetHeight : 0;
+    const tabsHeight = mobileTabsEl ? mobileTabsEl.offsetHeight : 0;
+    const mainTop = mainEl ? mainEl.getBoundingClientRect().top + window.scrollY : 0;
+
+    window.scrollTo({
+      top: Math.max(mainTop - headerHeight - tabsHeight - 8, 0),
+      behavior: 'smooth'
+    });
+  }
 }
 
 function showPageByName(id) {
