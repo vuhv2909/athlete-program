@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ronaldo-Style Striker Plan</title>
+<title>Cut + Posture + Proportion Phase</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -192,14 +192,8 @@
     padding: 32px;
   }
 
-  .page {
-    display: none;
-  }
-
-  .page.active {
-    display: block;
-    animation: fadeIn 0.2s ease;
-  }
+  .page { display: none; }
+  .page.active { display: block; animation: fadeIn 0.2s ease; }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(6px); }
@@ -450,14 +444,12 @@
     color: var(--muted);
   }
 
-  .goal-table,
-  .week-table {
+  .goal-table, .week-table {
     width: 100%;
     border-collapse: collapse;
   }
 
-  .goal-table th,
-  .week-table th {
+  .goal-table th, .week-table th {
     text-align: left;
     padding: 10px 12px;
     font-size: 11px;
@@ -469,20 +461,17 @@
     background: var(--bg3);
   }
 
-  .goal-table td,
-  .week-table td {
+  .goal-table td, .week-table td {
     padding: 10px 12px;
     font-size: 13px;
     border-bottom: 1px solid rgba(42, 51, 71, 0.5);
   }
 
-  .goal-table tr:last-child td,
-  .week-table tr:last-child td {
+  .goal-table tr:last-child td, .week-table tr:last-child td {
     border-bottom: none;
   }
 
-  .goal-table .target,
-  .week-table .day-name {
+  .goal-table .target, .week-table .day-name {
     color: var(--accent);
     font-weight: 600;
   }
@@ -502,10 +491,10 @@
     text-transform: uppercase;
   }
 
-  .type-strength { background: rgba(77, 159, 255, 0.15); color: var(--blue); }
+  .type-upper { background: rgba(77, 159, 255, 0.15); color: var(--blue); }
   .type-cardio { background: rgba(0, 229, 160, 0.12); color: var(--accent); }
-  .type-football { background: rgba(255, 209, 102, 0.12); color: var(--yellow); }
-  .type-power { background: rgba(255, 77, 109, 0.12); color: #ff8fa3; }
+  .type-lower { background: rgba(255, 209, 102, 0.12); color: var(--yellow); }
+  .type-posture { background: rgba(255, 77, 109, 0.12); color: #ff8fa3; }
   .type-rest { background: var(--bg3); color: var(--muted); }
 
   .table-scroll {
@@ -527,17 +516,14 @@
     margin-bottom: 20px;
   }
 
-  .ov-card,
-  .nutr-card,
-  .pain-card {
+  .ov-card, .nutr-card, .pain-card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 16px;
   }
 
-  .ov-card h3,
-  .nutr-card .n-label {
+  .ov-card h3, .nutr-card .n-label {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -551,9 +537,7 @@
     color: var(--text);
   }
 
-  .stat-big,
-  .nutr-card .n-val,
-  .pain-card .pain-val {
+  .stat-big, .nutr-card .n-val, .pain-card .pain-val {
     font-family: "Bebas Neue", sans-serif;
     line-height: 1;
   }
@@ -938,8 +922,8 @@
 <body>
 
 <header>
-  <div class="logo">STRIKER · PLAN</div>
-  <div class="phase-badge">12 Weeks · Ronaldo Style</div>
+  <div class="logo">LEAN · POSTURE</div>
+  <div class="phase-badge">8-12 Weeks · Phase 1</div>
 </header>
 
 <div class="mobile-tabs" id="mobileTabs"></div>
@@ -947,12 +931,12 @@
 <div class="layout">
   <nav class="sidebar">
     <div class="sidebar-section">
-      <div class="sidebar-label">Tổng quan</div>
+      <div class="sidebar-label">Tong quan</div>
       <div class="nav-item active" onclick="showPage('overview', this)">
         <div class="nav-dot">◎</div>
         <div>
-          <span>Tổng quan</span>
-          <span class="day-type">Mục tiêu & cấu trúc</span>
+          <span>Tong quan</span>
+          <span class="day-type">Fix body shape</span>
         </div>
       </div>
     </div>
@@ -960,54 +944,54 @@
     <div class="sidebar-divider"></div>
 
     <div class="sidebar-section">
-      <div class="sidebar-label">Lịch tập tuần</div>
+      <div class="sidebar-label">Lich tap tuan</div>
       <div class="nav-item" onclick="showPage('thu2', this)">
         <div class="nav-dot">T2</div>
         <div>
-          <span>Lower + Sprint</span>
-          <span class="day-type">Acceleration · Legs</span>
+          <span>Upper + Posture</span>
+          <span class="day-type">Vai · Lung tren · Co</span>
         </div>
       </div>
       <div class="nav-item" onclick="showPage('thu3', this)">
         <div class="nav-dot">T3</div>
         <div>
-          <span>Upper Athletic</span>
-          <span class="day-type">Chest · Lats · Shoulders</span>
+          <span>Cardio + Core</span>
+          <span class="day-type">Dot mo · Eo · Core</span>
         </div>
       </div>
       <div class="nav-item" onclick="showPage('thu4', this)">
         <div class="nav-dot">T4</div>
         <div>
-          <span>Zone 2 + Mobility</span>
-          <span class="day-type">Incline walk · Prehab</span>
+          <span>Lower Light</span>
+          <span class="day-type">Mong · Dui sau · Bap chan</span>
         </div>
       </div>
       <div class="nav-item" onclick="showPage('thu5', this)">
         <div class="nav-dot">T5</div>
         <div>
-          <span>Football Day</span>
-          <span class="day-type">Match · Team training</span>
+          <span>Football / Cardio</span>
+          <span class="day-type">Lean · Conditioning</span>
         </div>
       </div>
       <div class="nav-item" onclick="showPage('thu6', this)">
         <div class="nav-dot">T6</div>
         <div>
-          <span>Full Body Power</span>
-          <span class="day-type">Strength · Athleticism</span>
+          <span>Posture + Back</span>
+          <span class="day-type">Dung thang hon</span>
         </div>
       </div>
       <div class="nav-item" onclick="showPage('thu7', this)">
         <div class="nav-dot">T7</div>
         <div>
-          <span>Speed / Plyo</span>
-          <span class="day-type">Options A · B · C</span>
+          <span>Long Cardio</span>
+          <span class="day-type">Dot mo ben vung</span>
         </div>
       </div>
       <div class="nav-item" onclick="showPage('cn', this)">
         <div class="nav-dot">CN</div>
         <div>
           <span>Rest</span>
-          <span class="day-type">Walk · Sleep · Reset</span>
+          <span class="day-type">Recovery</span>
         </div>
       </div>
     </div>
@@ -1015,33 +999,33 @@
     <div class="sidebar-divider"></div>
 
     <div class="sidebar-section">
-      <div class="sidebar-label">Công cụ</div>
+      <div class="sidebar-label">Cong cu</div>
       <div class="nav-item" onclick="showPage('warmup', this)">
         <div class="nav-dot">↑</div>
         <div>
           <span>Warm-up</span>
-          <span class="day-type">FIFA 11+ style</span>
+          <span class="day-type">Moi buoi tap</span>
         </div>
       </div>
       <div class="nav-item" onclick="showPage('rules', this)">
         <div class="nav-dot">⚑</div>
         <div>
           <span>Rules</span>
-          <span class="day-type">Progression · Deload</span>
+          <span class="day-type">Progress · Pain · Tracking</span>
         </div>
       </div>
       <div class="nav-item" onclick="showPage('nutrition', this)">
         <div class="nav-dot">◉</div>
         <div>
           <span>Nutrition</span>
-          <span class="day-type">Protein · Calories · Meals</span>
+          <span class="day-type">Deficit · Protein</span>
         </div>
       </div>
       <div class="nav-item" onclick="showPage('log', this)">
         <div class="nav-dot">✎</div>
         <div>
           <span>Log</span>
-          <span class="day-type">Track every session</span>
+          <span class="day-type">Track every week</span>
         </div>
       </div>
     </div>
@@ -1050,392 +1034,345 @@
   <main class="main">
     <div id="page-overview" class="page active">
       <div class="day-header">
-        <div class="eyebrow">Final plan · 12 weeks</div>
-        <h1>RONALDO-STYLE STRIKER PHYSIQUE</h1>
-        <p class="subtitle">Lean, strong, athletic, fast, healthy. Xây form kiểu tiền đạo hiện đại, không phải kiểu bodybuilder bulky.</p>
+        <div class="eyebrow">Phase 1 · 8-12 weeks</div>
+        <h1>CUT + POSTURE + PROPORTION</h1>
+        <p class="subtitle">Muc tieu hien tai la giam mo, sua posture, can lai ti le co the. Chua uu tien qua nhieu vao speed hay football performance.</p>
       </div>
 
       <div class="overview-grid">
         <div class="ov-card">
-          <h3>Build</h3>
-          <p>Lean upper body<br>Strong legs<br>Visible abs if diet is right</p>
+          <h3>Priority now</h3>
+          <p>Eo nho hon<br>Co it rua hon<br>Vai lung tren mo hon</p>
         </div>
         <div class="ov-card">
-          <h3>Performance</h3>
-          <p>Acceleration, repeated sprinting, power, football stamina, healthy joints</p>
+          <h3>Reduce this look</h3>
+          <p>Mo bung, lung, co<br>Vong lung<br>Dui tren nhin qua to</p>
         </div>
         <div class="ov-card">
-          <h3>Weekly rhythm</h3>
+          <h3>Main rhythm</h3>
           <div class="stat-big">6</div>
-          <p>training days + 1 full rest day</p>
+          <p>days with 2 upper/posture sessions, 3 cardio slots, 1 lighter lower day</p>
         </div>
         <div class="ov-card">
-          <h3>Main rule</h3>
-          <p>Sprint fresh, lift hard with control, keep cardio regular, and do not add random junk workouts.</p>
+          <h3>Mindset</h3>
+          <p>Gon hon, dung thang hon, nam tinh hon. Giu suc manh o muc toi thieu, khong bo het tap ta.</p>
         </div>
       </div>
 
-      <div class="section-title">Tổng lịch tuần</div>
+      <div class="section-title">Tong lich tuan</div>
       <div class="table-scroll" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow-x:auto;overflow-y:hidden;margin-bottom:28px;">
         <table class="week-table">
           <thead>
             <tr>
-              <th>Ngày</th>
-              <th>Buổi tập</th>
-              <th>Loại</th>
-              <th>Trọng tâm</th>
+              <th>Ngay</th>
+              <th>Buoi tap</th>
+              <th>Loai</th>
+              <th>Trong tam</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu2')">Monday</td>
-              <td>Lower strength + acceleration</td>
-              <td><span class="type-badge type-power">Power</span></td>
-              <td class="day-desc">Sprint đầu buổi, sau đó strength chân</td>
+              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu2')">Thu 2</td>
+              <td>Upper body + posture</td>
+              <td><span class="type-badge type-upper">Upper</span></td>
+              <td class="day-desc">Vai rong hon, co it rua, than tren can lai voi dui</td>
             </tr>
             <tr>
-              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu3')">Tuesday</td>
-              <td>Upper athletic physique</td>
-              <td><span class="type-badge type-strength">Strength</span></td>
-              <td class="day-desc">Upper chest, lats, shoulders, arms, abs</td>
-            </tr>
-            <tr>
-              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu4')">Wednesday</td>
-              <td>Incline walk + mobility</td>
+              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu3')">Thu 3</td>
+              <td>Cardio giam mo + core</td>
               <td><span class="type-badge type-cardio">Cardio</span></td>
-              <td class="day-desc">Zone 2, prehab, recovery support</td>
+              <td class="day-desc">Dot nang luong, eo gon, core chac</td>
             </tr>
             <tr>
-              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu5')">Thursday</td>
-              <td>Football / team training / match</td>
-              <td><span class="type-badge type-football">Football</span></td>
-              <td class="day-desc">FIFA 11+ style warm-up, no extra hard conditioning</td>
+              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu4')">Thu 4</td>
+              <td>Lower body nhe</td>
+              <td><span class="type-badge type-lower">Lower</span></td>
+              <td class="day-desc">Mong, dui sau, bap chan, khong pump quad</td>
             </tr>
             <tr>
-              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu6')">Friday</td>
-              <td>Full-body strength + power</td>
-              <td><span class="type-badge type-strength">Strength</span></td>
-              <td class="day-desc">Full-body athletic strength, carry, core</td>
+              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu5')">Thu 5</td>
+              <td>Football hoac cardio</td>
+              <td><span class="type-badge type-cardio">Cardio</span></td>
+              <td class="day-desc">Lean hon, conditioning vua phai</td>
             </tr>
             <tr>
-              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu7')">Saturday</td>
-              <td>Speed / plyometrics / conditioning</td>
-              <td><span class="type-badge type-power">Power</span></td>
-              <td class="day-desc">Choose A, B, or C based on how your legs feel</td>
+              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu6')">Thu 6</td>
+              <td>Posture + upper/back + mobility</td>
+              <td><span class="type-badge type-posture">Posture</span></td>
+              <td class="day-desc">Dung thang hon, vai mo hon, lung tren dep hon</td>
             </tr>
             <tr>
-              <td class="day-name" style="cursor:pointer" onclick="showPageByName('cn')">Sunday</td>
-              <td>Rest</td>
+              <td class="day-name" style="cursor:pointer" onclick="showPageByName('thu7')">Thu 7</td>
+              <td>Cardio dai</td>
+              <td><span class="type-badge type-cardio">Cardio</span></td>
+              <td class="day-desc">Giam mo ben vung, it rui ro hon hiit nang</td>
+            </tr>
+            <tr>
+              <td class="day-name" style="cursor:pointer" onclick="showPageByName('cn')">Chu nhat</td>
+              <td>Nghi</td>
               <td><span class="type-badge type-rest">Rest</span></td>
-              <td class="day-desc">Walk lightly, stretch if needed, sleep, prep food</td>
+              <td class="day-desc">Di bo nhe neu muon, khong tap nang</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="section-title">Track every 2 weeks</div>
+      <div class="section-title">Muc tieu 8-12 tuan</div>
       <div class="table-scroll" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow-x:auto;overflow-y:hidden;margin-bottom:28px;">
         <table class="goal-table">
           <thead>
             <tr>
-              <th>What to track</th>
-              <th>What you want</th>
+              <th>Target</th>
+              <th>Ket qua mong muon</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Body weight</td><td class="target">Stable or slowly improving</td></tr>
-            <tr><td>Waist</td><td class="target">Smaller if cutting</td></tr>
-            <tr><td>Mirror photos</td><td class="target">Leaner, sharper, more athletic</td></tr>
-            <tr><td>Pull-ups</td><td class="target">More reps</td></tr>
-            <tr><td>Squat / leg press</td><td class="target">Stronger with clean form</td></tr>
-            <tr><td>10–30 m sprint</td><td class="target">Faster feeling</td></tr>
-            <tr><td>Football stamina</td><td class="target">Better recovery between efforts</td></tr>
-            <tr><td>Sleep</td><td class="target">7–9 hours consistently</td></tr>
+            <tr><td>Eo</td><td class="target">Nho hon ro rang</td></tr>
+            <tr><td>Mo bung / lung / co</td><td class="target">Giam dan theo tung 2 tuan</td></tr>
+            <tr><td>Co rua</td><td class="target">Giam, dau it lao ra truoc hon</td></tr>
+            <tr><td>Vai / lung tren</td><td class="target">Mo hon, than tren can doi hon</td></tr>
+            <tr><td>Vong lung</td><td class="target">Giam dan</td></tr>
+            <tr><td>Dui</td><td class="target">Khong pump them</td></tr>
+            <tr><td>Bap chan / cang chan</td><td class="target">Can doi hon</td></tr>
+            <tr><td>Tong the</td><td class="target">Nhin cao, gon, nam tinh hon</td></tr>
           </tbody>
         </table>
       </div>
 
-      <div class="section-title">Do not sabotage the plan</div>
+      <div class="section-title">Giam manh tam thoi</div>
       <div class="avoid-list">
-        <div class="avoid-item">Program-hop every week</div>
-        <div class="avoid-item">Random extra workouts</div>
-        <div class="avoid-item">Training to failure on everything</div>
-        <div class="avoid-item">Hard conditioning after football</div>
-        <div class="avoid-item">Sprinting when hamstrings feel bad</div>
-        <div class="avoid-item">Dirty bulk</div>
-        <div class="avoid-item">Skipping protein</div>
-        <div class="avoid-item">Ignoring pain signals</div>
+        <div class="avoid-item">Leg press high-rep</div>
+        <div class="avoid-item">Leg extension</div>
+        <div class="avoid-item">Squat volume cao</div>
+        <div class="avoid-item">Bulgarian / lunge nhieu set</div>
+        <div class="avoid-item">Drop set pump chan</div>
+        <div class="avoid-item">Tap quad kieu bodybuilding</div>
+        <div class="avoid-item">Chay chet nguoi vao ngay cardio</div>
+        <div class="avoid-item">Tap xong an bu thoai mai</div>
       </div>
     </div>
 
     <div id="page-warmup" class="page">
       <div class="day-header">
-        <div class="eyebrow">Before football / sprints / plyos</div>
-        <h1>FIFA 11+ STYLE WARM-UP</h1>
-        <p class="subtitle">Dùng trước football, sprinting và plyometrics. Mục tiêu là giảm risk chấn thương và bật cơ thể vào trạng thái chơi thể thao.</p>
+        <div class="eyebrow">Bat buoc moi buoi</div>
+        <h1>WARM-UP CHUNG</h1>
+        <p class="subtitle">Muc tieu la vao bai em, mo khop hon, va nhat la giu co / lung / hong o vi tri tot hon.</p>
       </div>
 
       <div class="warmup-list">
-        <div class="warmup-item"><div class="w-num">1</div>Jog nhẹ hoặc skip nhẹ <strong>2–3 phút</strong></div>
-        <div class="warmup-item"><div class="w-num">2</div>Dynamic hip mobility + leg swings <strong>1–2 vòng</strong></div>
-        <div class="warmup-item"><div class="w-num">3</div>Glute activation / mini-band walk <strong>2 × 10–12</strong></div>
-        <div class="warmup-item"><div class="w-num">4</div>A-skips / marching drills <strong>2 × 15–20 m</strong></div>
-        <div class="warmup-item"><div class="w-num">5</div>Controlled deceleration + direction change <strong>2–3 reps</strong></div>
-        <div class="warmup-item"><div class="w-num">6</div>Progressive build-up runs <strong>3–4 reps</strong></div>
+        <div class="warmup-item"><div class="w-num">1</div>5-7 phut bike, walk nhanh hoac treadmill nhe</div>
+        <div class="warmup-item"><div class="w-num">2</div>Shoulder roll + band pull-apart <strong>1-2 x 15</strong></div>
+        <div class="warmup-item"><div class="w-num">3</div>Hip flexor stretch <strong>30-45s/ben</strong></div>
+        <div class="warmup-item"><div class="w-num">4</div>Glute bridge <strong>1-2 x 12</strong></div>
+        <div class="warmup-item"><div class="w-num">5</div>Dead bug khong ta <strong>1 x 8/ben</strong></div>
+        <div class="warmup-item"><div class="w-num">6</div>Chin tuck nhe <strong>1 x 10-12</strong></div>
       </div>
 
-      <div class="section-title">For lifting days</div>
+      <div class="section-title">Them cho ngay lower</div>
       <div class="warmup-list">
-        <div class="warmup-item"><div class="w-num">+</div>10–15 phút dynamic warm-up, hip mobility, glute activation</div>
-        <div class="warmup-item"><div class="w-num">+</div>Sprint days: luôn sprint trước khi lift khi cơ thể còn fresh</div>
+        <div class="warmup-item"><div class="w-num">+</div>Tibialis raise <strong>1 x 20</strong></div>
+        <div class="warmup-item"><div class="w-num">+</div>Calf raise cham <strong>1 x 15</strong></div>
+        <div class="warmup-item"><div class="w-num">+</div>Hamstring hinge pattern khong ta <strong>1 x 10</strong></div>
       </div>
     </div>
 
     <div id="page-rules" class="page">
       <div class="day-header">
-        <div class="eyebrow">Non-negotiables</div>
-        <h1>RULES & PROGRESSION</h1>
-        <p class="subtitle">Kế hoạch này hoạt động khi mình kiểm soát cường độ, tăng tải từ từ, và biết lúc nào cần giảm volume.</p>
+        <div class="eyebrow">Core rules</div>
+        <h1>RULES & TRACKING</h1>
+        <p class="subtitle">Khong co spot reduction. Minh dang giam mo toan than, sua posture, va can lai ti le co the.</p>
       </div>
 
       <div class="rule-grid">
         <div class="rule-card">
-          <h4>Lift with reps in reserve</h4>
-          <div class="rule-row"><span>Most sets</span><span class="val">1–3 reps left</span></div>
-          <div class="rule-row"><span>Do not chase failure</span><span class="val">Every set</span></div>
-          <div class="rule-row"><span>Friday if Thursday hard</span><span class="val">Cut 1–2 leg sets</span></div>
-          <div class="rule-row"><span>Sprint work</span><span class="val">Stop when speed drops</span></div>
+          <h4>After 2 weeks</h4>
+          <div class="rule-row"><span>Can giam nhe, eo giam</span><span class="val">Giu nguyen</span></div>
+          <div class="rule-row"><span>Can khong doi, eo giam</span><span class="val">Giu nguyen</span></div>
+          <div class="rule-row"><span>Can va eo khong doi</span><span class="val">-150/-200 kcal</span></div>
+          <div class="rule-row"><span>Met qua, yeu qua</span><span class="val">+100/+200 kcal hoac giam cardio</span></div>
         </div>
 
         <div class="rule-card">
-          <h4>Progression</h4>
-          <div class="rule-row"><span>Hit top reps clean</span><span class="val">Add weight next time</span></div>
-          <div class="rule-row"><span>Cardio feels easy</span><span class="val">Add 5–10 minutes</span></div>
-          <div class="rule-row"><span>Sprinting feels easy</span><span class="val">Add 1–2 reps next week</span></div>
-          <div class="rule-row"><span>Pain appears</span><span class="val">Stop and replace</span></div>
+          <h4>Every week track</h4>
+          <div class="rule-row"><span>Can nang sang</span><span class="val">Moi ngay, lay TB 7 ngay</span></div>
+          <div class="rule-row"><span>Vong eo ngang ron</span><span class="val">1 lan/tuan</span></div>
+          <div class="rule-row"><span>Vong dui / bap chan</span><span class="val">2 tuan/lan</span></div>
+          <div class="rule-row"><span>Anh truoc-ngang-sau</span><span class="val">2 tuan/lan</span></div>
         </div>
       </div>
 
-      <div class="section-title">Deload</div>
-      <div class="info-box tip">
-        <p style="font-size:13px;color:var(--text);">Every 4th or 5th week, reduce total volume by about <strong>30–40%</strong>. Giữ nhịp tập nhưng để cơ thể hồi phục và bật lại tốt hơn.</p>
+      <div class="section-title">Pain rule</div>
+      <div class="info-box warn">
+        <p style="font-size:13px;color:var(--muted);">Neu mot bai lam dau ro rang o goi, lung duoi, co, hoac vai: dung bai do, giam tai, doi bien the, hoac bo qua hom do. Muc tieu phase nay la dep dang hon, khong phai co gang gang suc.</p>
       </div>
 
-      <div class="section-title">Evidence pillars behind this plan</div>
+      <div class="section-title">General reminders</div>
       <div class="info-box note">
-        <p style="font-size:13px;color:var(--muted);">Plan này bám theo các trụ cột lớn: strength + sprint + plyometric cho speed/power, cardio đều đặn cho sức bền và sức khỏe, tối thiểu 2 ngày strengthening/tuần, và protein đủ để hỗ trợ adaptation.</p>
+        <p style="font-size:13px;color:var(--muted);">Van giu suc manh toi thieu de khong yeu di, nhung trong tam 8-12 tuan toi la lean + posture. Sau khi gon hon va dung dang tot hon, luc do quay lai phase strong/athletic se hop ly hon nhieu.</p>
       </div>
     </div>
 
     <div id="page-thu2" class="page">
       <div class="day-header">
-        <div class="eyebrow">Monday</div>
-        <h1>LOWER STRENGTH + ACCELERATION</h1>
-        <p class="subtitle">Sprint trước, lift sau. Đây là ngày xây chân mạnh và tăng tốc đầu quãng đúng kiểu tiền đạo.</p>
+        <div class="eyebrow">Thu 2</div>
+        <h1>UPPER BODY + POSTURE</h1>
+        <p class="subtitle">Muc tieu la vai rong hon, lung tren khoe hon, co it rua, than tren can doi hon so voi dui.</p>
       </div>
       <div class="goals">
-        <div class="goal-chip"><div class="dot"></div>Acceleration</div>
-        <div class="goal-chip"><div class="dot"></div>Leg strength</div>
-        <div class="goal-chip"><div class="dot"></div>Hamstrings</div>
-        <div class="goal-chip"><div class="dot"></div>Calves</div>
-        <div class="goal-chip"><div class="dot"></div>Core</div>
+        <div class="goal-chip"><div class="dot"></div>Vai rong hon</div>
+        <div class="goal-chip"><div class="dot"></div>Lung tren khoe</div>
+        <div class="goal-chip"><div class="dot"></div>Co it rua</div>
+        <div class="goal-chip"><div class="dot"></div>Than tren can lai</div>
       </div>
-      <div class="section-title">Bài tập</div>
+      <div class="section-title">Bai tap</div>
       <div class="exercise-list" id="ex-thu2"></div>
-      <div class="info-box tip"><span style="font-size:12px;color:var(--muted);">Rest 2–3 phút giữa các sprint. Nếu tốc độ tụt, dừng phần sprint ở đó.</span></div>
     </div>
 
     <div id="page-thu3" class="page">
       <div class="day-header">
-        <div class="eyebrow">Tuesday</div>
-        <h1>UPPER ATHLETIC PHYSIQUE</h1>
-        <p class="subtitle">Upper chest, shoulders, lats, arms, abs. Đây là phần build form striker: nhìn lean, rộng và athletic.</p>
+        <div class="eyebrow">Thu 3</div>
+        <h1>CARDIO + CORE</h1>
+        <p class="subtitle">Day nay khong phai de chay chet nguoi. Day la buoi dot nang luong, giam mo, va cai thien dang.</p>
       </div>
       <div class="goals">
-        <div class="goal-chip"><div class="dot"></div>Upper chest</div>
-        <div class="goal-chip"><div class="dot"></div>Lats</div>
-        <div class="goal-chip"><div class="dot"></div>Shoulders</div>
-        <div class="goal-chip"><div class="dot"></div>Arms</div>
-        <div class="goal-chip"><div class="dot"></div>Abs</div>
+        <div class="goal-chip"><div class="dot"></div>Deficit nang luong</div>
+        <div class="goal-chip"><div class="dot"></div>Eo gon hon</div>
+        <div class="goal-chip"><div class="dot"></div>Core chac hon</div>
       </div>
-      <div class="section-title">Bài tập</div>
+      <div class="section-title">Bai tap</div>
       <div class="exercise-list" id="ex-thu3"></div>
-      <div class="info-box note"><span style="font-size:12px;color:var(--muted);">Giữ đa số set ở mức còn 1–3 reps trong tank. Không cần tập như bodybuilder chase failure mọi set.</span></div>
     </div>
 
     <div id="page-thu4" class="page">
       <div class="day-header">
-        <div class="eyebrow">Wednesday</div>
-        <h1>INCLINE WALK + MOBILITY</h1>
-        <p class="subtitle">Zone 2 nhẹ nhàng nhưng rất có giá trị. Giúp mình lean hơn, khỏe tim phổi hơn và hồi phục tốt hơn cho football lẫn sprint.</p>
+        <div class="eyebrow">Thu 4</div>
+        <h1>LOWER BODY LIGHT</h1>
+        <p class="subtitle">Tap chan gon hon, khong lam dui to them. Uu tien mong, dui sau, bap chan, cang chan.</p>
       </div>
       <div class="goals">
-        <div class="goal-chip"><div class="dot"></div>Zone 2</div>
-        <div class="goal-chip"><div class="dot"></div>Recovery</div>
-        <div class="goal-chip"><div class="dot"></div>Hip mobility</div>
-        <div class="goal-chip"><div class="dot"></div>Prehab core</div>
+        <div class="goal-chip"><div class="dot"></div>Khong pump quad</div>
+        <div class="goal-chip"><div class="dot"></div>Mong / dui sau</div>
+        <div class="goal-chip"><div class="dot"></div>Bap chan</div>
+        <div class="goal-chip"><div class="dot"></div>Cang chan</div>
       </div>
-      <div class="section-title">Bài tập</div>
+      <div class="section-title">Bai tap</div>
       <div class="exercise-list" id="ex-thu4"></div>
-      <div class="info-box tip"><span style="font-size:12px;color:var(--muted);">Good start: incline 6–12%, tốc độ brisk nhưng vẫn nói chuyện được.</span></div>
+      <div class="info-box warn"><span style="font-size:12px;color:var(--red);">Tam thoi giam manh squat volume cao, leg extension, leg press high-rep va lunges nhieu set.</span></div>
     </div>
 
     <div id="page-thu5" class="page">
       <div class="day-header">
-        <div class="eyebrow">Thursday</div>
-        <h1>FOOTBALL DAY</h1>
-        <p class="subtitle">Match, đá sân, hoặc team training. Football đã là acceleration, cutting, repeated sprinting và conditioning rất thật rồi.</p>
+        <div class="eyebrow">Thu 5</div>
+        <h1>FOOTBALL HOAC CARDIO</h1>
+        <p class="subtitle">Neu co bong thi da 60-90 phut. Neu khong co bong thi cardio deu tay, khong can interval nang luc nay.</p>
       </div>
       <div class="goals">
-        <div class="goal-chip"><div class="dot"></div>Football sharpness</div>
-        <div class="goal-chip"><div class="dot"></div>Repeated sprinting</div>
-        <div class="goal-chip"><div class="dot"></div>Game fitness</div>
+        <div class="goal-chip"><div class="dot"></div>Lean hon</div>
+        <div class="goal-chip"><div class="dot"></div>Conditioning vua du</div>
       </div>
-      <div class="section-title">Bài tập</div>
+      <div class="section-title">Bai tap</div>
       <div class="exercise-list" id="ex-thu5"></div>
-      <div class="info-box warn"><span style="font-size:12px;color:var(--red);">Không thêm extra hard conditioning sau football.</span></div>
     </div>
 
     <div id="page-thu6" class="page">
       <div class="day-header">
-        <div class="eyebrow">Friday</div>
-        <h1>FULL-BODY STRENGTH + POWER</h1>
-        <p class="subtitle">Ngày giữ cho mình mạnh và athletic thực sự, không chỉ lean-looking. Nếu Thursday quá gắt, giảm 1–2 set chân.</p>
+        <div class="eyebrow">Thu 6</div>
+        <h1>POSTURE + BACK / SHOULDER</h1>
+        <p class="subtitle">Ngay nay giup dung thang hon, vai mo hon, co do nhon ra, va lung do gu / vong.</p>
       </div>
       <div class="goals">
-        <div class="goal-chip"><div class="dot"></div>Deadlift pattern</div>
-        <div class="goal-chip"><div class="dot"></div>Push + pull</div>
-        <div class="goal-chip"><div class="dot"></div>Power</div>
-        <div class="goal-chip"><div class="dot"></div>Carry</div>
-        <div class="goal-chip"><div class="dot"></div>Core</div>
+        <div class="goal-chip"><div class="dot"></div>Posture</div>
+        <div class="goal-chip"><div class="dot"></div>Lung tren</div>
+        <div class="goal-chip"><div class="dot"></div>Vai sau</div>
+        <div class="goal-chip"><div class="dot"></div>Glute hold</div>
       </div>
-      <div class="section-title">Bài tập</div>
+      <div class="section-title">Bai tap</div>
       <div class="exercise-list" id="ex-thu6"></div>
     </div>
 
     <div id="page-thu7" class="page">
       <div class="day-header">
-        <div class="eyebrow">Saturday</div>
-        <h1>SPEED / PLYOMETRICS / CONDITIONING</h1>
-        <p class="subtitle">Chọn đúng option theo tình trạng chân hôm đó. Mục tiêu là thông minh, không phải lúc nào cũng cố nặng.</p>
+        <div class="eyebrow">Thu 7</div>
+        <h1>LONG CARDIO</h1>
+        <p class="subtitle">Buoi nay de giam mo ben vung. Uu tien incline walk, outdoor walk nhanh, bike, hoac easy run neu khop on.</p>
       </div>
       <div class="goals">
-        <div class="goal-chip"><div class="dot"></div>Explosiveness</div>
-        <div class="goal-chip"><div class="dot"></div>Running conditioning</div>
-        <div class="goal-chip"><div class="dot"></div>Decision making</div>
+        <div class="goal-chip"><div class="dot"></div>Dot mo</div>
+        <div class="goal-chip"><div class="dot"></div>Ben vung</div>
+        <div class="goal-chip"><div class="dot"></div>It risk</div>
       </div>
-      <div class="section-title">Bài tập</div>
+      <div class="section-title">Bai tap</div>
       <div class="exercise-list" id="ex-thu7"></div>
-      <div class="info-box note"><span style="font-size:12px;color:var(--muted);">Option A nếu chân fresh. Option B nếu không có bóng. Option C nếu chân mỏi.</span></div>
     </div>
 
     <div id="page-cn" class="page">
       <div class="day-header">
-        <div class="eyebrow">Sunday</div>
+        <div class="eyebrow">Chu nhat</div>
         <h1>REST</h1>
-        <p class="subtitle">Nghỉ ngơi là một phần của performance. Không hard training hôm nay.</p>
+        <p class="subtitle">Di bo nhe duoc. Khong tap nang. Hoi phuc va chuan bi cho tuan moi.</p>
       </div>
-      <div class="section-title">Bài tập</div>
+      <div class="section-title">Bai tap</div>
       <div class="exercise-list" id="ex-cn"></div>
-      <div class="info-box tip"><span style="font-size:12px;color:var(--muted);">Walk nhẹ, stretch nếu muốn, prep đồ ăn, ngủ sâu. That's enough.</span></div>
     </div>
 
     <div id="page-nutrition" class="page">
       <div class="day-header">
-        <div class="eyebrow">Fuel the plan</div>
-        <h1>NUTRITION RULES</h1>
-        <p class="subtitle">Muốn form kiểu striker thì phải lean, fast và đủ fuel. Không dirty bulk, không ăn cảm tính quá lâu.</p>
+        <div class="eyebrow">An uong</div>
+        <h1>DEFICIT NHE + PROTEIN CAO</h1>
+        <p class="subtitle">Day moi la phan lam mo xuong. Tap tot ma an khong kiem soat thi dang van kho dep len.</p>
       </div>
 
       <div class="nutr-grid">
         <div class="nutr-card">
-          <div class="n-val">1.4–2.0</div>
+          <div class="n-val">1.6-2.0</div>
           <span class="n-unit">g/kg/day</span>
           <div class="n-label">Protein</div>
         </div>
         <div class="nutr-card">
-          <div class="n-val">2+</div>
-          <span class="n-unit">carb meals</span>
-          <div class="n-label">Around training</div>
+          <div class="n-val">300-500</div>
+          <span class="n-unit">kcal/day</span>
+          <div class="n-label">Deficit</div>
         </div>
         <div class="nutr-card">
-          <div class="n-val">12</div>
+          <div class="n-val">8-12</div>
           <span class="n-unit">weeks</span>
           <div class="n-label">Stay consistent</div>
         </div>
       </div>
 
-      <div class="section-title">Protein targets</div>
-      <div class="table-scroll" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow-x:auto;overflow-y:hidden;margin-bottom:28px;">
-        <table class="goal-table">
-          <thead>
-            <tr>
-              <th>Body weight</th>
-              <th>Protein target</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>60 kg</td><td class="target">85–120 g/day</td></tr>
-            <tr><td>65 kg</td><td class="target">90–130 g/day</td></tr>
-            <tr><td>70 kg</td><td class="target">100–140 g/day</td></tr>
-            <tr><td>75 kg</td><td class="target">105–150 g/day</td></tr>
-            <tr><td>80 kg</td><td class="target">110–160 g/day</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="section-title">Calories</div>
-      <div class="rule-grid">
-        <div class="rule-card">
-          <h4>Choose by current body</h4>
-          <div class="rule-row"><span>Skinny</span><span class="val">Maintenance + small surplus</span></div>
-          <div class="rule-row"><span>Normal but soft</span><span class="val">Maintenance or small deficit</span></div>
-          <div class="rule-row"><span>Overweight</span><span class="val">Small/moderate deficit</span></div>
-          <div class="rule-row"><span>Already lean</span><span class="val">Maintenance and train hard</span></div>
-        </div>
-        <div class="rule-card">
-          <h4>Simple reminders</h4>
-          <div class="rule-row"><span>Carbs</span><span class="val">Put them around training</span></div>
-          <div class="rule-row"><span>Protein</span><span class="val">Every meal</span></div>
-          <div class="rule-row"><span>Dirty bulk</span><span class="val" style="color:var(--red)">No</span></div>
-          <div class="rule-row"><span>Hydration</span><span class="val">Daily</span></div>
-        </div>
-      </div>
-
-      <div class="section-title">Simple meal structure</div>
+      <div class="section-title">Nutrition rules</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <div class="info-box tip"><strong style="font-size:12px;color:var(--accent);">Breakfast</strong><p style="font-size:13px;color:var(--muted);margin-top:4px;">Eggs or Greek yogurt + oats + fruit</p></div>
-        <div class="info-box tip"><strong style="font-size:12px;color:var(--accent);">Lunch</strong><p style="font-size:13px;color:var(--muted);margin-top:4px;">Chicken / beef / fish / tofu + rice + vegetables</p></div>
-        <div class="info-box tip"><strong style="font-size:12px;color:var(--accent);">Pre-workout</strong><p style="font-size:13px;color:var(--muted);margin-top:4px;">Banana + coffee or yogurt</p></div>
-        <div class="info-box tip"><strong style="font-size:12px;color:var(--accent);">Post-workout</strong><p style="font-size:13px;color:var(--muted);margin-top:4px;">Protein + carbs</p></div>
-        <div class="info-box tip"><strong style="font-size:12px;color:var(--accent);">Dinner</strong><p style="font-size:13px;color:var(--muted);margin-top:4px;">Protein + potatoes/rice + vegetables</p></div>
-        <div class="info-box tip"><strong style="font-size:12px;color:var(--accent);">Snack</strong><p style="font-size:13px;color:var(--muted);margin-top:4px;">Yogurt, milk, cottage cheese, or whey</p></div>
+        <div class="info-box tip"><strong style="font-size:12px;color:var(--accent);">Protein cao</strong><p style="font-size:13px;color:var(--muted);margin-top:4px;">Khoang 1.6-2.0 g/kg can nang/ngay.</p></div>
+        <div class="info-box tip"><strong style="font-size:12px;color:var(--accent);">Hut calo nhe</strong><p style="font-size:13px;color:var(--muted);margin-top:4px;">Khoang 300-500 kcal/ngay.</p></div>
+        <div class="info-box tip"><strong style="font-size:12px;color:var(--accent);">Carb quanh buoi tap</strong><p style="font-size:13px;color:var(--muted);margin-top:4px;">Com, khoai, yen mach, trai cay quanh buoi tap de van co luc tap.</p></div>
+        <div class="info-box warn"><strong style="font-size:12px;color:var(--red);">Giam manh</strong><p style="font-size:13px;color:var(--muted);margin-top:4px;">Do ngot, nuoc ngot, tra sua, banh, snack, do chien, dau an qua tay.</p></div>
+        <div class="info-box note"><strong style="font-size:12px;color:var(--yellow);">Khong lam</strong><p style="font-size:13px;color:var(--muted);margin-top:4px;">Tap xong roi an bu thoai mai.</p></div>
       </div>
     </div>
 
     <div id="page-log" class="page">
       <div class="day-header">
-        <div class="eyebrow">Track what matters</div>
-        <h1>TRAINING LOG</h1>
-        <p class="subtitle">Ghi nhanh sau mỗi buổi. Dữ liệu tốt sẽ giúp mình biết có thật sự tiến bộ hay không.</p>
+        <div class="eyebrow">Theo doi hang tuan</div>
+        <h1>LOG & CHECK-IN</h1>
+        <p class="subtitle">Dung chi nhin guong. Theo doi so lieu de biet minh co that su gon hon va posture co tot len hay khong.</p>
       </div>
 
-      <div class="section-title">Body check today</div>
+      <div class="section-title">Body check hom nay</div>
       <div class="pain-tracker">
         <div class="pain-card">
-          <div class="part">Hamstring</div>
-          <div class="pain-val ok" id="pain-hamstring">0</div>
-          <div class="pain-scale" id="scale-hamstring"></div>
+          <div class="part">Co / dau</div>
+          <div class="pain-val ok" id="pain-neck">0</div>
+          <div class="pain-scale" id="scale-neck"></div>
         </div>
         <div class="pain-card">
-          <div class="part">Knee</div>
+          <div class="part">Goi</div>
           <div class="pain-val ok" id="pain-knee">0</div>
           <div class="pain-scale" id="scale-knee"></div>
         </div>
         <div class="pain-card">
-          <div class="part">Ankle</div>
-          <div class="pain-val ok" id="pain-ankle">0</div>
-          <div class="pain-scale" id="scale-ankle"></div>
+          <div class="part">Lung duoi</div>
+          <div class="pain-val ok" id="pain-back">0</div>
+          <div class="pain-scale" id="scale-back"></div>
         </div>
         <div class="pain-card">
           <div class="part">Energy</div>
@@ -1444,51 +1381,51 @@
         </div>
       </div>
 
-      <div class="section-title">Log buổi tập</div>
+      <div class="section-title">Log buoi tap</div>
       <div class="log-form">
         <div class="log-field">
-          <label>Ngày</label>
+          <label>Ngay</label>
           <input type="date" id="log-date">
         </div>
         <div class="log-field">
-          <label>Buổi tập</label>
+          <label>Buoi tap</label>
           <select id="log-session">
-            <option>Monday — Lower strength + acceleration</option>
-            <option>Tuesday — Upper athletic physique</option>
-            <option>Wednesday — Incline walk + mobility</option>
-            <option>Thursday — Football day</option>
-            <option>Friday — Full-body strength + power</option>
-            <option>Saturday — Speed / plyometrics / conditioning</option>
-            <option>Sunday — Rest</option>
+            <option>Thu 2 - Upper body + posture</option>
+            <option>Thu 3 - Cardio giam mo + core</option>
+            <option>Thu 4 - Lower body nhe</option>
+            <option>Thu 5 - Football hoac cardio</option>
+            <option>Thu 6 - Posture + upper/back + mobility</option>
+            <option>Thu 7 - Cardio dai</option>
+            <option>Chu nhat - Rest</option>
           </select>
         </div>
         <div class="log-field full">
           <label>Key work</label>
-          <textarea id="log-exercises" placeholder="VD: 10 m sprint × 6, squat 4 × 6, RDL 3 × 8"></textarea>
+          <textarea id="log-exercises" placeholder="VD: incline walk 50 phut, plank 3 x 60s, face pull 3 x 20"></textarea>
         </div>
         <div class="log-field">
           <label>Energy /10</label>
-          <input type="number" min="1" max="10" placeholder="8" id="log-energy-input">
+          <input type="number" min="1" max="10" placeholder="7" id="log-energy-input">
         </div>
         <div class="log-field">
           <label>Feeling</label>
           <select id="log-feeling">
-            <option>Rất tốt</option>
-            <option>Tốt</option>
-            <option>Bình thường</option>
-            <option>Mệt</option>
+            <option>Rat tot</option>
+            <option>Tot</option>
+            <option>Binh thuong</option>
+            <option>Met</option>
           </select>
         </div>
         <div class="log-field full">
           <label>Notes</label>
-          <textarea id="log-notes" placeholder="Tốc độ sprint hôm nay thế nào? Chân có nặng không? Football có quá tải không?"></textarea>
+          <textarea id="log-notes" placeholder="Eo thay doi the nao? Co va lung co do cung khong? Chan co bi pump qua khong?"></textarea>
         </div>
       </div>
       <div style="display:flex;gap:10px;margin-top:16px;">
-        <button class="btn" onclick="saveLog()">Lưu buổi tập</button>
+        <button class="btn" onclick="saveLog()">Luu buoi tap</button>
       </div>
 
-      <div class="section-title">Lịch sử gần đây</div>
+      <div class="section-title">Lich su gan day</div>
       <div id="log-history" style="display:flex;flex-direction:column;gap:8px;"></div>
     </div>
   </main>
@@ -1497,65 +1434,60 @@
 <script>
 const exercises = {
   thu2: [
-    { name: "Dynamic warm-up", sets: "1", reps: "10–15 min", weight: "", note: "Hip mobility, leg swings, A-skips, glute activation" },
-    { name: "10 m sprint", sets: "6", reps: "1 rep", note: "Sprint before lifting, while fresh", weight: "Rest 2–3 min" },
-    { name: "20 m sprint", sets: "4", reps: "1 rep", note: "Stop if speed drops", weight: "Rest 2–3 min" },
-    { name: "30 m sprint", sets: "2", reps: "1 rep", note: "Quality only", weight: "Rest 2–3 min" },
-    { name: "Squat or Leg Press", sets: "4", reps: "5–8", rpe: "7–8" },
-    { name: "Romanian Deadlift", sets: "3", reps: "6–10", rpe: "7–8" },
-    { name: "Bulgarian Split Squat", sets: "3", reps: "8/leg" },
-    { name: "Hamstring Curl or Nordic Curl", sets: "3", reps: "6–10" },
-    { name: "Standing Calf Raise", sets: "4", reps: "10–15" },
-    { name: "Plank", sets: "3", reps: "45–60 sec" }
+    { name: "Incline Dumbbell Press", sets: "3", reps: "8-12" },
+    { name: "Lat Pulldown or Pull-up", sets: "3", reps: "8-12" },
+    { name: "Chest-supported Row", sets: "3", reps: "10-12" },
+    { name: "Lateral Raise", sets: "3", reps: "12-20" },
+    { name: "Face Pull", sets: "3", reps: "15-20" },
+    { name: "Rear Delt Fly", sets: "2-3", reps: "15-20" },
+    { name: "Chin Tuck", sets: "3", reps: "10-15" },
+    { name: "Dead Bug", sets: "3", reps: "10/ben" }
   ],
   thu3: [
-    { name: "Incline Dumbbell Press", sets: "4", reps: "8–12", rpe: "7–9", note: "Upper chest first" },
-    { name: "Pull-ups or Lat Pulldown", sets: "4", reps: "6–12" },
-    { name: "Dumbbell Shoulder Press", sets: "3", reps: "8–10" },
-    { name: "Chest-supported Row", sets: "3", reps: "8–12" },
-    { name: "Lateral Raise", sets: "3", reps: "12–20" },
-    { name: "Push-ups or Dips", sets: "3", reps: "As many quality reps as you can" },
-    { name: "Hanging Knee Raise", sets: "3", reps: "10–15" }
+    { name: "Option 1 - Incline Walk", sets: "1", reps: "45-60 phut", note: "Chon 1 trong 3 option cardio" },
+    { name: "Option 2 - Easy Run", sets: "1", reps: "35-45 phut", note: "Chon 1 trong 3 option cardio" },
+    { name: "Option 3 - Bike", sets: "1", reps: "45-60 phut", note: "Chon 1 trong 3 option cardio" },
+    { name: "Plank", sets: "3", reps: "45-60 giay" },
+    { name: "Side Plank", sets: "3", reps: "30-45 giay/ben" },
+    { name: "Hip Flexor Stretch", sets: "2", reps: "45-60 giay/ben" }
   ],
   thu4: [
-    { name: "Incline Walk", sets: "1", reps: "30–45 min", note: "Incline 6–12%, brisk but controlled, still able to talk" },
-    { name: "Hip Flexor Stretch", sets: "2", reps: "45 sec/side" },
-    { name: "Hamstring Mobility", sets: "2", reps: "45 sec/side" },
-    { name: "Calf Stretch", sets: "2", reps: "45 sec/side" },
-    { name: "Copenhagen Plank", sets: "3", reps: "20–30 sec/side" },
-    { name: "Dead Bug", sets: "3", reps: "10/side" }
+    { name: "Romanian Deadlift", sets: "3", reps: "6-10" },
+    { name: "Hip Thrust or Glute Bridge", sets: "3", reps: "8-12" },
+    { name: "Hamstring Curl", sets: "3", reps: "10-15" },
+    { name: "Goblet Squat nhe or Trap-bar Deadlift", sets: "2", reps: "5-8", note: "Chi giu toi thieu, khong can pump chan" },
+    { name: "Standing Calf Raise", sets: "4", reps: "10-15" },
+    { name: "Seated Calf Raise", sets: "3", reps: "12-20" },
+    { name: "Tibialis Raise", sets: "3", reps: "15-25" }
   ],
   thu5: [
-    { name: "FIFA 11+ style warm-up", sets: "1", reps: "10–15 min", note: "Before football, sprinting, and hard change-of-direction work" },
-    { name: "Football / Match / Team Training", sets: "1", reps: "Main session", note: "Acceleration, cutting, repeated sprinting, and conditioning all come here" },
-    { name: "Cooldown walk + light stretch", sets: "1", reps: "5–10 min" },
-    { name: "Post-session recovery", sets: "1", reps: "Food + sleep", note: "No extra hard conditioning after football" }
+    { name: "Football", sets: "1", reps: "60-90 phut", note: "Neu co bong thi choi het buoi" },
+    { name: "Neu khong co bong - Easy Jog Warm-up", sets: "1", reps: "10 phut" },
+    { name: "Neu khong co bong - Easy Run", sets: "1", reps: "30-40 phut" },
+    { name: "Neu khong co bong - Strides nhe", sets: "4", reps: "20 giay" },
+    { name: "Cooldown", sets: "1", reps: "5-10 phut" }
   ],
   thu6: [
-    { name: "Trap-bar Deadlift or Deadlift", sets: "3", reps: "3–5", rpe: "7–8" },
-    { name: "Incline Bench Press or Flat Bench", sets: "3", reps: "5–8" },
-    { name: "Pull-ups or Lat Pulldown", sets: "3", reps: "6–10" },
-    { name: "Kettlebell Swing or Box Jump", sets: "4", reps: "4–6" },
-    { name: "Walking Lunge", sets: "3", reps: "10/leg" },
-    { name: "Farmer Carry", sets: "4", reps: "30–40 m" },
-    { name: "Cable Crunch", sets: "3", reps: "12–15" }
+    { name: "Cable Row or Machine Row", sets: "3", reps: "10-12" },
+    { name: "Lat Pulldown", sets: "3", reps: "10-12" },
+    { name: "Push-up or Machine Chest Press", sets: "2-3", reps: "10-15" },
+    { name: "Lateral Raise", sets: "3", reps: "15-20" },
+    { name: "Face Pull", sets: "3", reps: "15-20" },
+    { name: "Y-Raise or Wall Slide", sets: "2-3", reps: "10-15" },
+    { name: "Chin Tuck", sets: "3", reps: "10-15" },
+    { name: "Glute Bridge Hold", sets: "3", reps: "30-45 giay" },
+    { name: "Hip Flexor Stretch", sets: "2", reps: "60 giay/ben" }
   ],
   thu7: [
-    { name: "Option A — Pogo Jumps", sets: "3", reps: "20" },
-    { name: "Option A — Broad Jumps", sets: "4", reps: "3" },
-    { name: "Option A — Box Jumps", sets: "4", reps: "3" },
-    { name: "Option A — Flying Sprint", sets: "4–5", reps: "20 m build + 20 m fast" },
-    { name: "Option A — 5-10-5 Shuttle", sets: "4–5", reps: "1 rep" },
-    { name: "Option B — Easy Jog Warm-up", sets: "1", reps: "10 min" },
-    { name: "Option B — Strides", sets: "4", reps: "60 m smooth fast" },
-    { name: "Option B — Hard Run", sets: "6", reps: "30 sec", note: "90 sec easy walk/jog between reps" },
-    { name: "Option C — Easy Incline Walk + Mobility", sets: "1", reps: "30–45 min", note: "Use this if legs feel tired" }
+    { name: "Option 1 - Incline Walk", sets: "1", reps: "60 phut" },
+    { name: "Option 2 - Outdoor Walk nhanh", sets: "1", reps: "60-90 phut" },
+    { name: "Option 3 - Bike", sets: "1", reps: "60 phut" },
+    { name: "Option 4 - Easy Run neu khop on", sets: "1", reps: "40-50 phut" }
   ],
   cn: [
-    { name: "Light Walk", sets: "1", reps: "20–40 min", note: "Only if you want it" },
-    { name: "Stretch", sets: "1", reps: "5–10 min", note: "Optional" },
-    { name: "Prepare Food", sets: "1", reps: "For the week" },
-    { name: "Sleep Hard", sets: "1", reps: "7–9 hours", note: "No hard training today" }
+    { name: "Walk nhe neu muon", sets: "1", reps: "20-40 phut" },
+    { name: "Stretch nhe", sets: "1", reps: "5-10 phut" },
+    { name: "Rest", sets: "1", reps: "Khong tap nang" }
   ]
 };
 
@@ -1573,8 +1505,6 @@ function buildExercises(day) {
         <div class="ex-detail">
           <span class="tag tag-sets">${ex.sets} sets</span>
           <span class="tag tag-reps">${ex.reps} reps</span>
-          ${ex.rpe ? `<span class="tag tag-rpe">RPE ${ex.rpe}</span>` : ""}
-          ${ex.weight ? `<span class="tag tag-weight">${ex.weight}</span>` : ""}
         </div>
         ${ex.note ? `<div class="ex-note">${ex.note}</div>` : ""}
       </div>
@@ -1634,7 +1564,7 @@ function showPageByName(id) {
 }
 
 const pages = [
-  { id: "overview", label: "Tổng" },
+  { id: "overview", label: "Tong" },
   { id: "thu2", label: "T2" },
   { id: "thu3", label: "T3" },
   { id: "thu4", label: "T4" },
@@ -1658,7 +1588,7 @@ pages.forEach(p => {
   mobileTabsEl.appendChild(btn);
 });
 
-const painParts = ["hamstring", "knee", "ankle", "energy"];
+const painParts = ["neck", "knee", "back", "energy"];
 painParts.forEach(part => {
   const scale = document.getElementById("scale-" + part);
   if (!scale) return;
@@ -1709,7 +1639,7 @@ function renderLogs() {
   if (!el) return;
 
   if (!logs.length) {
-    el.innerHTML = '<div class="info-box" style="color:var(--muted);font-size:13px;">Chưa có log nào. Bắt đầu buổi đầu tiên thôi.</div>';
+    el.innerHTML = '<div class="info-box" style="color:var(--muted);font-size:13px;">Chua co log nao. Bat dau buoi dau tien thoi.</div>';
     return;
   }
 
