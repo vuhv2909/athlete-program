@@ -3,672 +3,239 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>CR7-Inspired 8-Week Plan</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>HELL BLOCK — 7 Week Winger Transformation</title>
 <style>
-:root {
-  --bg: #07090d;
-  --panel: rgba(20, 24, 33, .84);
-  --panel-2: #111722;
-  --line: rgba(255,255,255,.09);
-  --text: #f7f8fb;
-  --muted: #aab2c2;
-  --red: #ff3b4d;
-  --red-2: #ff6b4a;
-  --green: #35d07f;
-  --blue: #5ba7ff;
-  --yellow: #ffc857;
-  --purple: #ad7cff;
-  --shadow: 0 18px 70px rgba(0,0,0,.42);
+:root{
+  --bg:#07090d; --panel:#11151d; --panel2:#171c26; --line:rgba(255,255,255,.09);
+  --text:#f7f8fb; --muted:#9ba4b5; --red:#ff4056; --orange:#ff8a3d;
+  --green:#38d587; --blue:#5ea9ff; --yellow:#ffd05a; --shadow:0 16px 44px rgba(0,0,0,.42);
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(circle at 90% 0%, rgba(255,59,77,.20), transparent 35%),
-    radial-gradient(circle at 10% 25%, rgba(91,167,255,.12), transparent 32%),
-    linear-gradient(160deg, #07090d 0%, #0a0d14 48%, #06070a 100%);
-  min-height: 100vh;
-}
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: .22;
-  background-image:
-    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-.container { width: min(1180px, calc(100% - 28px)); margin: 0 auto; }
-.hero {
-  padding: 42px 0 24px;
-}
-.hero-card {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  padding: 32px;
-  background:
-    linear-gradient(135deg, rgba(255,59,77,.14), transparent 42%),
-    rgba(15,18,26,.82);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
-}
-.hero-card::after {
-  content: "8";
-  position: absolute;
-  right: 26px;
-  top: -34px;
-  font-size: 220px;
-  font-weight: 900;
-  line-height: 1;
-  color: rgba(255,255,255,.025);
-}
-.eyebrow {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  padding: 7px 11px;
-  border-radius: 999px;
-  background: rgba(255,59,77,.12);
-  border: 1px solid rgba(255,59,77,.25);
-  color: #ff97a2;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-h1 {
-  margin: 18px 0 10px;
-  max-width: 820px;
-  font-size: clamp(36px, 6vw, 72px);
-  line-height: .98;
-  letter-spacing: -.055em;
-}
-.gradient-text {
-  background: linear-gradient(90deg, #fff, #ff8995 48%, #ff6b4a);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-.hero p {
-  max-width: 760px;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.7;
-}
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-top: 26px;
-}
-.stat {
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 15px;
-  background: rgba(255,255,255,.035);
-}
-.stat strong { display: block; font-size: 20px; margin-bottom: 3px; }
-.stat span { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
-
-.section-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 20px;
-  margin: 26px 0 14px;
-}
-.section-title h2 { margin: 0; font-size: 26px; letter-spacing: -.03em; }
-.section-title p { margin: 0; color: var(--muted); font-size: 13px; }
-
-.week-tabs {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(112px, 1fr));
-  gap: 10px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-}
-.week-btn {
-  appearance: none;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.035);
-  color: var(--text);
-  border-radius: 16px;
-  min-width: 112px;
-  padding: 14px 12px;
-  cursor: pointer;
-  text-align: left;
-  transition: .22s ease;
-}
-.week-btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.18); }
-.week-btn.active {
-  background: linear-gradient(135deg, rgba(255,59,77,.26), rgba(255,107,74,.12));
-  border-color: rgba(255,92,92,.6);
-  box-shadow: 0 10px 30px rgba(255,59,77,.18);
-}
-.week-btn small { display: block; color: var(--muted); font-size: 11px; margin-top: 4px; }
-.week-btn b { font-size: 16px; }
-
-.week-overview {
-  margin-top: 16px;
-  display: grid;
-  grid-template-columns: 1.25fr .75fr;
-  gap: 14px;
-}
-.overview-card {
-  border: 1px solid var(--line);
-  background: var(--panel);
-  border-radius: 22px;
-  padding: 22px;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(16px);
-}
-.overview-card h3 { margin: 0 0 7px; font-size: 26px; letter-spacing: -.03em; }
-.overview-card p { margin: 0; color: var(--muted); line-height: 1.6; }
-.progress-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 16px;
-}
-.progress-track {
-  height: 9px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.07);
-  flex: 1;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--red), var(--red-2));
-  border-radius: inherit;
-  transition: width .3s ease;
-}
-.progress-label { min-width: 46px; text-align: right; font-size: 13px; color: var(--muted); }
-
-.rules {
-  display: grid;
-  gap: 9px;
-}
-.rule {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
-}
-.rule i {
-  display: inline-grid;
-  place-items: center;
-  min-width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: rgba(255,59,77,.12);
-  color: #ff9ca6;
-  font-style: normal;
-  font-weight: 800;
-}
-
-.days-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-  margin: 14px 0 34px;
-}
-.day-card {
-  border: 1px solid var(--line);
-  background: rgba(16,20,28,.86);
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 12px 38px rgba(0,0,0,.26);
-  transition: .2s ease;
-}
-.day-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.16); }
-.day-head {
-  width: 100%;
-  border: 0;
-  color: var(--text);
-  background: transparent;
-  padding: 18px 18px 16px;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 14px;
-  text-align: left;
-}
-.day-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 7px;
-}
-.day-name { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .11em; font-weight: 800; }
-.pill {
-  font-size: 11px;
-  font-weight: 800;
-  padding: 5px 8px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-}
-.pill.hard { color: #ff9aa4; background: rgba(255,59,77,.12); border-color: rgba(255,59,77,.24); }
-.pill.easy { color: #82c2ff; background: rgba(91,167,255,.11); border-color: rgba(91,167,255,.22); }
-.pill.recovery { color: #74e6aa; background: rgba(53,208,127,.10); border-color: rgba(53,208,127,.22); }
-.pill.moderate { color: #ffd77e; background: rgba(255,200,87,.10); border-color: rgba(255,200,87,.22); }
-.pill.rest { color: #c6a9ff; background: rgba(173,124,255,.10); border-color: rgba(173,124,255,.22); }
-.day-head h4 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
-.duration { color: var(--muted); font-size: 12px; margin-top: 5px; }
-.chevron {
-  width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
-  background: rgba(255,255,255,.055);
-  transition: transform .2s ease;
-}
-.day-card.open .chevron { transform: rotate(180deg); }
-.day-body {
-  display: none;
-  border-top: 1px solid var(--line);
-  padding: 12px 18px 18px;
-}
-.day-card.open .day-body { display: block; }
-.check-row {
-  display: grid;
-  grid-template-columns: 21px 1fr;
-  gap: 10px;
-  align-items: start;
-  padding: 9px 0;
-  color: #d9dde7;
-  font-size: 14px;
-  line-height: 1.45;
-}
-.check-row + .check-row { border-top: 1px dashed rgba(255,255,255,.06); }
-.check-row input {
-  appearance: none;
-  width: 18px; height: 18px; margin: 1px 0 0;
-  border: 1px solid rgba(255,255,255,.22);
-  border-radius: 6px;
-  background: rgba(255,255,255,.03);
-  cursor: pointer;
-  position: relative;
-}
-.check-row input:checked {
-  background: linear-gradient(135deg, var(--red), var(--red-2));
-  border-color: transparent;
-}
-.check-row input:checked::after {
-  content: "✓"; position: absolute; inset: 0; display: grid; place-items: center;
-  color: white; font-size: 12px; font-weight: 900;
-}
-.check-row.done span { opacity: .5; text-decoration: line-through; }
-.footer-note {
-  margin: 0 0 40px;
-  border: 1px solid rgba(255,200,87,.18);
-  background: rgba(255,200,87,.06);
-  border-radius: 18px;
-  padding: 16px 18px;
-  color: #d9d1bc;
-  font-size: 13px;
-  line-height: 1.6;
-}
-.toolbar {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.small-btn {
-  appearance: none;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.04);
-  color: var(--text);
-  border-radius: 12px;
-  padding: 9px 12px;
-  cursor: pointer;
-  font-weight: 700;
-}
-.small-btn:hover { border-color: rgba(255,255,255,.2); }
-@media (max-width: 920px) {
-  .stats { grid-template-columns: repeat(2, 1fr); }
-  .week-tabs { grid-template-columns: repeat(8, 124px); }
-  .week-overview { grid-template-columns: 1fr; }
-  .days-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 560px) {
-  .hero-card { padding: 24px 18px; border-radius: 22px; }
-  .stats { grid-template-columns: 1fr 1fr; }
-  .section-title { align-items: start; flex-direction: column; }
-  .overview-card { padding: 18px; }
-}
-
-/* iPhone / mobile optimization */
-button, input, label {
-  -webkit-tap-highlight-color: transparent;
-}
-button {
-  touch-action: manipulation;
-}
-body {
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-  padding-bottom: env(safe-area-inset-bottom);
-}
-.week-tabs {
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-.week-tabs::-webkit-scrollbar {
-  display: none;
-}
-.week-btn {
-  scroll-snap-align: start;
-  min-height: 58px;
-}
-.day-head,
-.small-btn {
-  min-height: 44px;
-}
-.check-row {
-  min-height: 44px;
-}
-.check-row input {
-  min-width: 22px;
-  width: 22px;
-  height: 22px;
-}
-@media (hover: none) {
-  .week-btn:hover,
-  .day-card:hover {
-    transform: none;
-  }
-}
-@media (max-width: 430px) {
-  .container {
-    width: min(100% - 18px, 1180px);
-  }
-  .hero {
-    padding: 14px 0 12px;
-  }
-  .hero-card {
-    padding: 21px 16px;
-    border-radius: 20px;
-  }
-  .hero-card::after {
-    right: 8px;
-    top: -10px;
-    font-size: 150px;
-  }
-  .eyebrow {
-    font-size: 10px;
-    padding: 6px 9px;
-  }
-  h1 {
-    margin-top: 14px;
-    font-size: 39px;
-    line-height: 1.01;
-  }
-  .hero p {
-    font-size: 14px;
-    line-height: 1.58;
-  }
-  .stats {
-    gap: 8px;
-    margin-top: 18px;
-  }
-  .stat {
-    padding: 12px 10px;
-    border-radius: 14px;
-  }
-  .stat strong {
-    font-size: 17px;
-  }
-  .stat span {
-    font-size: 10px;
-  }
-  .section-title {
-    margin: 18px 0 10px;
-    gap: 10px;
-  }
-  .section-title h2 {
-    font-size: 22px;
-  }
-  .section-title p {
-    font-size: 12px;
-  }
-  .toolbar {
-    width: 100%;
-  }
-  .small-btn {
-    flex: 1;
-    padding: 10px 12px;
-  }
-  .week-tabs {
-    margin-left: -9px;
-    margin-right: -9px;
-    padding: 2px 9px 8px;
-    grid-template-columns: repeat(8, 104px);
-    gap: 8px;
-  }
-  .week-btn {
-    min-width: 104px;
-    padding: 12px 10px;
-    border-radius: 14px;
-  }
-  .week-btn b {
-    font-size: 15px;
-  }
-  .week-overview {
-    gap: 10px;
-    margin-top: 10px;
-  }
-  .overview-card {
-    padding: 16px;
-    border-radius: 18px;
-  }
-  .overview-card h3 {
-    font-size: 22px;
-  }
-  .days-grid {
-    gap: 10px;
-    margin-top: 10px;
-  }
-  .day-card {
-    border-radius: 18px;
-  }
-  .day-head {
-    padding: 15px 14px;
-  }
-  .day-head h4 {
-    font-size: 18px;
-  }
-  .day-body {
-    padding: 8px 14px 14px;
-  }
-  .check-row {
-    grid-template-columns: 24px 1fr;
-    gap: 10px;
-    padding: 10px 0;
-    font-size: 14px;
-  }
-  .footer-note {
-    margin-bottom: calc(22px + env(safe-area-inset-bottom));
-    padding: 14px;
-    border-radius: 16px;
-  }
-}
-
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Inter,system-ui,sans-serif;background:
+ radial-gradient(circle at 92% -4%,rgba(255,64,86,.24),transparent 34%),
+ radial-gradient(circle at 0 32%,rgba(94,169,255,.10),transparent 30%),
+ linear-gradient(165deg,#080a0f 0%,#0b0e14 55%,#07080b 100%);min-height:100vh}
+button,input{font:inherit}
+.app{width:100%;max-width:414px;margin:0 auto;padding:calc(12px + env(safe-area-inset-top)) 12px calc(88px + env(safe-area-inset-bottom))}
+.hero{padding:18px 16px 16px;border:1px solid rgba(255,255,255,.10);border-radius:22px;background:linear-gradient(145deg,rgba(255,64,86,.16),rgba(17,21,29,.92) 42%,rgba(94,169,255,.08));box-shadow:var(--shadow);overflow:hidden;position:relative}
+.hero:after{content:"49 DAYS";position:absolute;right:-9px;top:9px;font-weight:900;font-size:36px;letter-spacing:-2px;color:rgba(255,255,255,.035);transform:rotate(90deg);transform-origin:center}
+.eyebrow{font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:#ff8b9b;font-weight:800}
+h1{font-size:31px;line-height:.98;margin:7px 0 9px;letter-spacing:-1.3px}.sub{font-size:13px;line-height:1.5;color:var(--muted);max-width:330px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.stat{padding:10px 8px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid var(--line)}.stat b{display:block;font-size:17px}.stat span{font-size:10px;color:var(--muted)}
+.startbox{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px 12px;border-radius:14px;background:rgba(0,0,0,.18);border:1px solid var(--line)}.startbox label{font-size:12px;color:var(--muted);flex:1}.startbox input{width:145px;border:0;background:#0b0f16;color:var(--text);padding:9px;border-radius:10px;min-height:40px}
+.sectionTitle{margin:18px 4px 8px;font-size:12px;letter-spacing:1.35px;text-transform:uppercase;color:var(--muted);font-weight:800}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rule{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:11px}.rule b{font-size:14px;display:block}.rule small{display:block;color:var(--muted);font-size:10px;margin-top:3px;line-height:1.35}
+.weekbar{position:sticky;top:0;z-index:20;margin:14px -12px 10px;padding:8px 12px;background:linear-gradient(to bottom,rgba(7,9,13,.98),rgba(7,9,13,.88),rgba(7,9,13,0));backdrop-filter:blur(10px)}
+.weekscroll{display:flex;gap:7px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}.weekscroll::-webkit-scrollbar{display:none}
+.weekbtn{flex:0 0 auto;min-width:57px;height:44px;border:1px solid var(--line);border-radius:13px;background:#121722;color:var(--muted);font-weight:800}.weekbtn.active{color:white;border-color:rgba(255,64,86,.55);background:linear-gradient(135deg,#ff4056,#d71f43);box-shadow:0 8px 22px rgba(255,64,86,.23)}
+.weekhead{display:flex;justify-content:space-between;align-items:flex-end;margin:9px 2px 10px}.weekhead h2{font-size:24px;margin:0;letter-spacing:-.7px}.phase{font-size:11px;font-weight:800;border:1px solid rgba(255,208,90,.25);color:var(--yellow);background:rgba(255,208,90,.08);border-radius:99px;padding:7px 9px}.weeknote{margin:-2px 2px 11px;color:var(--muted);font-size:12px;line-height:1.45}
+.progressWrap{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:11px 12px;margin-bottom:10px}.progressTop{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:8px}.progressTop b{color:var(--text)}.bar{height:8px;background:#090c11;border-radius:10px;overflow:hidden}.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--orange));border-radius:10px;transition:width .25s ease}
+.day{border:1px solid var(--line);border-radius:18px;background:rgba(17,21,29,.92);overflow:hidden;margin:9px 0;box-shadow:0 10px 28px rgba(0,0,0,.18)}
+.dayhead{width:100%;min-height:64px;border:0;background:transparent;color:inherit;display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:9px;padding:9px 11px;text-align:left}.dow{height:42px;width:42px;border-radius:12px;display:grid;place-items:center;background:#0c1017;font-size:11px;font-weight:900;color:var(--muted);border:1px solid var(--line)}.dayTitle b{font-size:15px}.dayTitle span{display:block;color:var(--muted);font-size:10px;margin-top:2px}.load{font-size:10px;font-weight:900;padding:6px 7px;border-radius:99px}.hard{background:rgba(255,64,86,.12);color:#ff8291}.medium{background:rgba(255,208,90,.10);color:var(--yellow)}.easy{background:rgba(56,213,135,.10);color:var(--green)}.rest{background:rgba(94,169,255,.10);color:var(--blue)}
+.daybody{display:none;border-top:1px solid var(--line);padding:10px 11px 12px}.day.open .daybody{display:block}.block{margin:8px 0 11px}.block h4{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#c5cbd6;margin:0 0 6px}.item{display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:start;padding:7px 3px;border-bottom:1px dashed rgba(255,255,255,.06);font-size:12px;line-height:1.42}.item:last-child{border-bottom:0}.tick{width:22px;height:22px;border-radius:7px;border:1px solid rgba(255,255,255,.18);background:#0b0f15;display:grid;place-items:center;cursor:pointer;color:white;font-size:13px}.tick.done{background:var(--green);border-color:var(--green)}.item.doneText .txt{text-decoration:line-through;color:#707887}.hint{padding:9px 10px;border-radius:12px;background:rgba(94,169,255,.07);border:1px solid rgba(94,169,255,.13);font-size:11px;line-height:1.45;color:#c8dbf2;margin-top:8px}.warning{background:rgba(255,208,90,.07);border-color:rgba(255,208,90,.15);color:#eee0a8}
+.nutrition{background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,64,86,.05));border:1px solid var(--line);border-radius:18px;padding:12px;margin-top:14px}.macrogrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.macro{background:#0c1017;border-radius:12px;padding:9px;text-align:center}.macro b{display:block;font-size:15px}.macro span{font-size:9px;color:var(--muted)}.nutriText{font-size:11px;line-height:1.55;color:var(--muted);margin-top:9px}
+.checklist{margin-top:10px;display:grid;gap:7px}.habit{display:flex;align-items:center;gap:9px;background:#0c1017;border-radius:12px;padding:9px 10px;min-height:44px;font-size:11px}.habit .tick{flex:0 0 22px}
+.footerNote{margin-top:14px;padding:12px;border:1px solid rgba(255,64,86,.16);background:rgba(255,64,86,.055);border-radius:16px;color:#d7dbe3;font-size:11px;line-height:1.5}.footerNote b{color:white}
+.bottom{position:fixed;z-index:30;left:50%;transform:translateX(-50%);bottom:0;width:min(414px,100%);padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(7,9,13,.99),rgba(7,9,13,.90));backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.06)}.bottomInner{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}.bottomText{font-size:10px;color:var(--muted)}.bottomText b{display:block;color:var(--text);font-size:12px}.reset{min-height:44px;border:1px solid var(--line);border-radius:12px;background:#121722;color:#c6ccd7;padding:0 12px;font-weight:700;font-size:11px}
+@media (max-width:360px){h1{font-size:27px}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}.rules{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="container">
-  <section class="hero">
-    <div class="hero-card">
-      <span class="eyebrow">8-Week Transformation</span>
-      <h1><span class="gradient-text">Lean Footballer</span><br/>Training Plan</h1>
-      <p>Giáo án 6 buổi/tuần, lấy cảm hứng từ vóc dáng tiền đạo bóng đá: gọn, mạnh, nhanh và bền. Buổi đá bóng Thứ 5 thay cho football conditioning.</p>
-      <div class="stats">
-        <div class="stat"><strong>8 tuần</strong><span>Duration</span></div>
-        <div class="stat"><strong>6 buổi</strong><span>Mỗi tuần</span></div>
-        <div class="stat"><strong>55–65 phút</strong><span>Trung bình/buổi</span></div>
-        <div class="stat"><strong>2 + 4</strong><span>Strength + Athletic</span></div>
-      </div>
+<div class="app">
+  <header class="hero">
+    <div class="eyebrow">Winger transformation camp</div>
+    <h1>HELL BLOCK<br>7 WEEKS</h1>
+    <div class="sub">49 ngày siết mạnh có kiểm soát: giữ strength, tăng engine, dùng treadmill incline để overload khi máy chạm trần 12 km/h.</div>
+    <div class="stats">
+      <div class="stat"><b>90 kg</b><span>START</span></div>
+      <div class="stat"><b>84.5–85.5</b><span>END RANGE*</span></div>
+      <div class="stat"><b>6 days</b><span>TRAIN / WEEK</span></div>
     </div>
-  </section>
+    <div class="startbox"><label>Ngày bắt đầu camp</label><input id="startDate" type="date" /></div>
+  </header>
 
-  <div class="section-title">
-    <div>
-      <h2>Chọn tuần tập</h2>
-      <p>Ấn vào từng tuần để mở toàn bộ lịch.</p>
-    </div>
-    <div class="toolbar">
-      <button class="small-btn" id="expandAll">Mở tất cả</button>
-      <button class="small-btn" id="resetWeek">Reset tuần</button>
-    </div>
+  <div class="sectionTitle">Non-negotiables</div>
+  <div class="rules">
+    <div class="rule"><b>10k steps</b><small>Sàn mỗi ngày. Target 12k.</small></div>
+    <div class="rule"><b>190g protein</b><small>Mỗi ngày, kể cả rest day.</small></div>
+    <div class="rule"><b>22:30 sleep</b><small>Recovery là một phần của camp.</small></div>
+    <div class="rule"><b>No failure</b><small>Compound giữ ~2 reps in reserve.</small></div>
   </div>
 
-  <div class="week-tabs" id="weekTabs"></div>
+  <div class="weekbar"><div class="weekscroll" id="weekTabs"></div></div>
+  <main id="weekView"></main>
 
-  <section class="week-overview">
-    <div class="overview-card">
-      <span class="eyebrow" id="weekBadge">Foundation</span>
-      <h3 id="weekTitle">Tuần 1 — Build the base</h3>
-      <p id="weekNote"></p>
-      <div class="progress-row">
-        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="progress-label" id="progressLabel">0%</div>
-      </div>
+  <div class="nutrition">
+    <div class="sectionTitle" style="margin:0 0 8px">Cut targets</div>
+    <div class="macrogrid">
+      <div class="macro"><b>2400</b><span>HARD DAY KCAL</span></div>
+      <div class="macro"><b>2200</b><span>LIGHT DAY KCAL</span></div>
+      <div class="macro"><b>2100</b><span>REST DAY KCAL</span></div>
     </div>
-    <div class="overview-card">
-      <h3 style="font-size:18px; margin-bottom:12px;">Luật của HLV</h3>
-      <div class="rules">
-        <div class="rule"><i>1</i><span>Hard = RPE 8–9, không phải phá kỹ thuật hoặc tập compound đến failure.</span></div>
-        <div class="rule"><i>2</i><span>Nếu không hoàn thành reps sạch, giảm 10% tải ngay trong buổi.</span></div>
-        <div class="rule"><i>3</i><span>Đau khớp, chóng mặt, tức ngực hoặc khó thở bất thường: dừng tập.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <main class="days-grid" id="daysGrid"></main>
-
-  <div class="footer-note">
-    Mức tạ trong giáo án là <strong>mốc khởi điểm đề xuất</strong>, không phải bài kiểm tra sức mạnh tối đa. Nếu tuần 1 đã làm sai kỹ thuật hoặc không còn khoảng 2 reps dự trữ, hãy giảm 10–20% rồi giữ đúng tiến trình. Checkboxes được lưu tự động trên thiết bị.
+    <div class="nutriText">Hard days: Mon / Tue / Thu / Sat. Light days: Wed / Fri. Sunday rest. Trung bình khoảng 2300 kcal/ngày. Fat tối thiểu 60–65g; phần calories còn lại ưu tiên carbs quanh buổi tập.</div>
+    <div class="checklist" id="dailyHabits"></div>
   </div>
+
+  <div class="footerNote"><b>Load rule:</b> các mức tạ bạn đã cung cấp được dùng làm baseline. Nếu form vỡ hoặc không còn ~2 reps dự trữ, giảm 5–10% ngay. Week 4 là reload bắt buộc; Week 7 giảm volume để “reveal”, không phải cố kiệt sức. Dừng bài nếu có đau nhói khớp, chóng mặt, đau ngực hoặc dáng chạy thay đổi.</div>
 </div>
+<div class="bottom"><div class="bottomInner"><div class="bottomText"><b id="bottomPhase">Week 1 · Enter Camp</b><span id="bottomProgress">0% completed</span></div><button class="reset" id="resetWeek">Reset week</button></div></div>
 
 <script>
-const weeks = [{"week": 1, "theme": "Build the base", "note": "Learn the movements, establish aerobic control, finish every session with clean technique.", "badge": "Foundation", "days": [{"day": "Thứ 2", "title": "Fast Intervals + Balance", "duration": "45–55 phút", "intensity": "Hard", "color": "hard", "items": ["Warm-up: Walk 5 phút @ 5.5 km/h, incline 1%", "Easy Run 5 phút @ 7.5 km/h, incline 1%", "Single-Leg Balance Reach: 2 × 5 mỗi chân", "Single-Leg Hop and Stick: 3 × 3 mỗi chân", "Pogo Jump: 2 × 15 giây", "Intervals: 6 vòng — 1 phút @ 11.5 km/h + 2 phút @ 6 km/h", "Easy Jog 8 phút @ 6.5–7 km/h", "Cool-down 5 phút @ 4.5 km/h"]}, {"day": "Thứ 3", "title": "Strength A + Core", "duration": "60–70 phút", "intensity": "Hard", "color": "hard", "items": ["Vertical Jump: 3 × 3", "Barbell Deadlift: 4 × 5 @ 50 kg", "Dumbbell Bench Press: 4 × 8 @ 12 kg/tay", "Lat Pulldown: 4 × 8 @ 35 kg", "Bulgarian Split Squat: 3 × 8/chân @ 6 kg/tay", "Standing Calf Raise: 3 × 12 @ 30 kg", "Ab Wheel Rollout: 3 × 8", "Pallof Press: 3 × 12/bên @ 10 kg", "Side Plank: 3 × 30 giây/bên"]}, {"day": "Thứ 4", "title": "Zone 2 Light", "duration": "50 phút", "intensity": "Easy", "color": "easy", "items": ["Warm-up: 5 phút @ 5 km/h, incline 1%", "Incline Walk: 40 phút @ 5.5 km/h, incline 4%", "Cool-down: 5 phút @ 4.5 km/h, incline 0%", "Target: nói được cả câu, không bám tay vịn"]}, {"day": "Thứ 5", "title": "Football Session", "duration": "60–90 phút", "intensity": "Hard", "color": "hard", "items": ["Dynamic warm-up 10 phút", "Đá bóng theo lịch của bạn", "Không thêm interval hoặc shuttle sau trận", "Cool-down walk 5–10 phút"]}, {"day": "Thứ 6", "title": "Recovery Cardio", "duration": "35–40 phút", "intensity": "Recovery", "color": "recovery", "items": ["Walk 30 phút @ 5.2 km/h, incline 2%", "Hip Flexor Stretch: 2 × 30 giây/bên", "Calf Stretch: 2 × 30 giây/bên", "Single-Leg Balance: 2 × 30 giây/chân"]}, {"day": "Thứ 7", "title": "Strength B + Core", "duration": "60–70 phút", "intensity": "Hard", "color": "hard", "items": ["Pogo Jump: 3 × 15 giây", "Barbell Back Squat: 4 × 6 @ 40 kg", "Romanian Deadlift: 3 × 8 @ 40 kg", "Incline Dumbbell Press: 4 × 10 @ 10 kg/tay", "Chest-Supported Row: 4 × 10 @ 30 kg", "Leg Curl: 3 × 12 @ 25 kg", "Dumbbell Lateral Raise: 2 × 15 @ 5 kg/tay", "Farmer Carry: 3 × 30 m @ 16 kg/tay", "Copenhagen Plank: 3 × 20 giây/bên", "Hanging Knee Raise: 3 × 10"]}, {"day": "Chủ nhật", "title": "Full Rest", "duration": "—", "intensity": "Rest", "color": "rest", "items": ["Nghỉ hoàn toàn", "Đi bộ nhẹ tùy thích", "Chuẩn bị đồ ăn và lịch tập tuần sau"]}]}, {"week": 2, "theme": "Add controlled volume", "note": "Tăng nhẹ tải và khối lượng nhưng không phá kỹ thuật.", "badge": "Progress", "days": [{"day": "Thứ 2", "title": "Fast Intervals + Balance", "duration": "50–55 phút", "intensity": "Hard", "color": "hard", "items": ["Warm-up: Walk 5 phút @ 5.5 km/h, incline 1%", "Easy Run 5 phút @ 7.5 km/h", "Single-Leg Balance Reach: 2 × 5 mỗi chân", "Single-Leg Hop and Stick: 3 × 3 mỗi chân", "Pogo Jump: 2 × 15 giây", "Intervals: 7 vòng — 1 phút @ 12 km/h + 2 phút @ 6 km/h", "Easy Jog 8 phút @ 6.5–7 km/h", "Cool-down 5 phút @ 4.5 km/h"]}, {"day": "Thứ 3", "title": "Strength A + Core", "duration": "60–70 phút", "intensity": "Hard", "color": "hard", "items": ["Vertical Jump: 3 × 3", "Barbell Deadlift: 4 × 5 @ 55 kg", "Dumbbell Bench Press: 4 × 8 @ 14 kg/tay", "Lat Pulldown: 4 × 8 @ 40 kg", "Bulgarian Split Squat: 3 × 8/chân @ 8 kg/tay", "Standing Calf Raise: 3 × 12 @ 35 kg", "Ab Wheel Rollout: 3 × 9", "Pallof Press: 3 × 12/bên @ 10 kg", "Side Plank: 3 × 35 giây/bên"]}, {"day": "Thứ 4", "title": "Zone 2 Light", "duration": "55 phút", "intensity": "Easy", "color": "easy", "items": ["Warm-up: 5 phút @ 5 km/h, incline 1%", "Incline Walk: 45 phút @ 5.5 km/h, incline 4%", "Cool-down: 5 phút @ 4.5 km/h", "Target: RPE 3–4/10"]}, {"day": "Thứ 5", "title": "Football Session", "duration": "60–90 phút", "intensity": "Hard", "color": "hard", "items": ["Dynamic warm-up 10 phút", "Đá bóng", "Không thêm conditioning sau trận", "Cool-down walk 5–10 phút"]}, {"day": "Thứ 6", "title": "Recovery Cardio", "duration": "40 phút", "intensity": "Recovery", "color": "recovery", "items": ["Walk 35 phút @ 5.2 km/h, incline 2%", "Hip Flexor Stretch: 2 × 30 giây/bên", "Calf Stretch: 2 × 30 giây/bên", "Single-Leg Balance: 2 × 35 giây/chân"]}, {"day": "Thứ 7", "title": "Strength B + Core", "duration": "60–70 phút", "intensity": "Hard", "color": "hard", "items": ["Pogo Jump: 3 × 15 giây", "Barbell Back Squat: 4 × 6 @ 45 kg", "Romanian Deadlift: 3 × 8 @ 45 kg", "Incline Dumbbell Press: 4 × 10 @ 12 kg/tay", "Chest-Supported Row: 4 × 10 @ 35 kg", "Leg Curl: 3 × 12 @ 30 kg", "Dumbbell Lateral Raise: 2 × 15 @ 6 kg/tay", "Farmer Carry: 3 × 30 m @ 18 kg/tay", "Copenhagen Plank: 3 × 25 giây/bên", "Hanging Knee Raise: 3 × 11"]}, {"day": "Chủ nhật", "title": "Full Rest", "duration": "—", "intensity": "Rest", "color": "rest", "items": ["Nghỉ hoàn toàn", "Ngủ đủ", "Chuẩn bị tuần 3"]}]}, {"week": 3, "theme": "Peak build phase", "note": "Tuần tải cao nhất của block đầu. Giữ form đẹp ở mọi rep.", "badge": "Build", "days": [{"day": "Thứ 2", "title": "Fast Intervals + Balance", "duration": "50–55 phút", "intensity": "Hard", "color": "hard", "items": ["Warm-up: Walk 5 phút @ 5.5 km/h", "Easy Run 5 phút @ 7.5 km/h", "Single-Leg Balance Reach: 2 × 5 mỗi chân", "Single-Leg Hop and Stick: 3 × 3 mỗi chân", "Pogo Jump: 2 × 15 giây", "Intervals: 6 vòng — 90 giây @ 12 km/h + 90 giây @ 6 km/h", "Easy Jog 10 phút @ 6.5–7 km/h", "Cool-down 5 phút @ 4.5 km/h"]}, {"day": "Thứ 3", "title": "Strength A + Core", "duration": "65–70 phút", "intensity": "Hard", "color": "hard", "items": ["Vertical Jump: 3 × 3", "Barbell Deadlift: 4 × 5 @ 60 kg", "Dumbbell Bench Press: 4 × 8 @ 16 kg/tay", "Lat Pulldown: 4 × 8 @ 45 kg", "Bulgarian Split Squat: 3 × 8/chân @ 10 kg/tay", "Standing Calf Raise: 3 × 12 @ 40 kg", "Ab Wheel Rollout: 3 × 10", "Pallof Press: 3 × 12/bên @ 12.5 kg", "Side Plank: 3 × 40 giây/bên"]}, {"day": "Thứ 4", "title": "Zone 2 Light", "duration": "55 phút", "intensity": "Easy", "color": "easy", "items": ["Warm-up: 5 phút @ 5 km/h", "Incline Walk: 45 phút @ 5.7 km/h, incline 5%", "Cool-down: 5 phút @ 4.5 km/h", "Target: không vượt RPE 4/10"]}, {"day": "Thứ 5", "title": "Football Session", "duration": "60–90 phút", "intensity": "Hard", "color": "hard", "items": ["Dynamic warm-up 10 phút", "Đá bóng", "Pacing thông minh 10 phút đầu", "Cool-down walk 5–10 phút"]}, {"day": "Thứ 6", "title": "Recovery Cardio", "duration": "40 phút", "intensity": "Recovery", "color": "recovery", "items": ["Walk 35 phút @ 5.4 km/h, incline 3%", "Hip Flexor Stretch: 2 × 30 giây/bên", "Calf Stretch: 2 × 30 giây/bên", "Single-Leg Balance: 2 × 40 giây/chân"]}, {"day": "Thứ 7", "title": "Strength B + Core", "duration": "65–70 phút", "intensity": "Hard", "color": "hard", "items": ["Pogo Jump: 3 × 15 giây", "Barbell Back Squat: 4 × 6 @ 50 kg", "Romanian Deadlift: 3 × 8 @ 50 kg", "Incline Dumbbell Press: 4 × 10 @ 14 kg/tay", "Chest-Supported Row: 4 × 10 @ 40 kg", "Leg Curl: 3 × 12 @ 35 kg", "Dumbbell Lateral Raise: 2 × 15 @ 7 kg/tay", "Farmer Carry: 3 × 30 m @ 20 kg/tay", "Copenhagen Plank: 3 × 30 giây/bên", "Hanging Knee Raise: 3 × 12"]}, {"day": "Chủ nhật", "title": "Full Rest", "duration": "—", "intensity": "Rest", "color": "rest", "items": ["Nghỉ hoàn toàn", "Theo dõi cân nặng trung bình", "Chuẩn bị deload"]}]}, {"week": 4, "theme": "Deload and consolidate", "note": "Giảm tải để cơ thể hấp thụ ba tuần trước. Không tự thêm bài.", "badge": "Deload", "days": [{"day": "Thứ 2", "title": "Light Intervals + Balance", "duration": "40–45 phút", "intensity": "Moderate", "color": "moderate", "items": ["Warm-up: Walk 5 phút @ 5.5 km/h", "Easy Run 5 phút @ 7.5 km/h", "Single-Leg Balance Reach: 2 × 4 mỗi chân", "Pogo Jump: 2 × 12 giây", "Intervals: 5 vòng — 1 phút @ 11.5 km/h + 2 phút @ 6 km/h", "Easy Jog 8 phút @ 6.5 km/h", "Cool-down 5 phút @ 4.5 km/h"]}, {"day": "Thứ 3", "title": "Strength A Deload", "duration": "50–60 phút", "intensity": "Moderate", "color": "moderate", "items": ["Vertical Jump: 2 × 3", "Barbell Deadlift: 3 × 5 @ 48 kg", "Dumbbell Bench Press: 3 × 8 @ 12 kg/tay", "Lat Pulldown: 3 × 8 @ 35 kg", "Bulgarian Split Squat: 2 × 8/chân @ 6 kg/tay", "Standing Calf Raise: 2 × 12 @ 30 kg", "Ab Wheel Rollout: 2 × 8", "Pallof Press: 2 × 10/bên @ 10 kg", "Side Plank: 2 × 30 giây/bên"]}, {"day": "Thứ 4", "title": "Zone 2 Deload", "duration": "45 phút", "intensity": "Easy", "color": "easy", "items": ["Warm-up: 5 phút @ 5 km/h", "Incline Walk: 35 phút @ 5.5 km/h, incline 3%", "Cool-down: 5 phút @ 4.5 km/h"]}, {"day": "Thứ 5", "title": "Football Session", "duration": "45–75 phút", "intensity": "Moderate", "color": "moderate", "items": ["Dynamic warm-up 10 phút", "Đá bóng nhưng tránh chơi hết sức nếu cơ thể mệt", "Không thêm conditioning", "Cool-down walk 5–10 phút"]}, {"day": "Thứ 6", "title": "Recovery Cardio", "duration": "30 phút", "intensity": "Recovery", "color": "recovery", "items": ["Walk 25 phút @ 5 km/h, incline 1%", "Mobility nhẹ 5–10 phút"]}, {"day": "Thứ 7", "title": "Strength B Deload", "duration": "50–60 phút", "intensity": "Moderate", "color": "moderate", "items": ["Pogo Jump: 2 × 12 giây", "Barbell Back Squat: 3 × 6 @ 40 kg", "Romanian Deadlift: 2 × 8 @ 40 kg", "Incline Dumbbell Press: 3 × 10 @ 10 kg/tay", "Chest-Supported Row: 3 × 10 @ 30 kg", "Leg Curl: 2 × 12 @ 25 kg", "Dumbbell Lateral Raise: 2 × 12 @ 5 kg/tay", "Farmer Carry: 2 × 30 m @ 16 kg/tay", "Copenhagen Plank: 2 × 20 giây/bên", "Hanging Knee Raise: 2 × 10"]}, {"day": "Chủ nhật", "title": "Full Rest", "duration": "—", "intensity": "Rest", "color": "rest", "items": ["Nghỉ hoàn toàn", "Ngủ đủ", "Chuẩn bị block 2"]}]}, {"week": 5, "theme": "Build phase 2", "note": "Quay lại tải cao với nền thể lực tốt hơn.", "badge": "Reload", "days": [{"day": "Thứ 2", "title": "Fast Intervals + Balance", "duration": "50–55 phút", "intensity": "Hard", "color": "hard", "items": ["Warm-up: Walk 5 phút @ 5.5 km/h", "Easy Run 5 phút @ 7.5 km/h", "Single-Leg Balance Reach: 2 × 5 mỗi chân", "Single-Leg Hop and Stick: 3 × 3 mỗi chân", "Pogo Jump: 2 × 15 giây", "Intervals: 8 vòng — 1 phút @ 12 km/h + 75 giây @ 6.5 km/h", "Easy Jog 8 phút @ 6.5–7 km/h", "Cool-down 5 phút @ 4.5 km/h"]}, {"day": "Thứ 3", "title": "Strength A + Core", "duration": "65–70 phút", "intensity": "Hard", "color": "hard", "items": ["Vertical Jump: 3 × 3", "Barbell Deadlift: 4 × 5 @ 62.5 kg", "Dumbbell Bench Press: 4 × 8 @ 16 kg/tay", "Lat Pulldown: 4 × 8 @ 45 kg", "Bulgarian Split Squat: 3 × 8/chân @ 10 kg/tay", "Standing Calf Raise: 3 × 12 @ 40 kg", "Ab Wheel Rollout: 3 × 10", "Pallof Press: 3 × 12/bên @ 12.5 kg", "Side Plank: 3 × 40 giây/bên"]}, {"day": "Thứ 4", "title": "Zone 2 Light", "duration": "55 phút", "intensity": "Easy", "color": "easy", "items": ["Warm-up: 5 phút @ 5 km/h", "Incline Walk: 45 phút @ 5.8 km/h, incline 5%", "Cool-down: 5 phút @ 4.5 km/h"]}, {"day": "Thứ 5", "title": "Football Session", "duration": "60–90 phút", "intensity": "Hard", "color": "hard", "items": ["Dynamic warm-up 10 phút", "Đá bóng", "Không thêm conditioning", "Cool-down walk 5–10 phút"]}, {"day": "Thứ 6", "title": "Recovery Cardio", "duration": "40 phút", "intensity": "Recovery", "color": "recovery", "items": ["Walk 35 phút @ 5.5 km/h, incline 3%", "Mobility nhẹ 5–10 phút"]}, {"day": "Thứ 7", "title": "Strength B + Core", "duration": "65–70 phút", "intensity": "Hard", "color": "hard", "items": ["Pogo Jump: 3 × 15 giây", "Barbell Back Squat: 4 × 6 @ 52.5 kg", "Romanian Deadlift: 3 × 8 @ 52.5 kg", "Incline Dumbbell Press: 4 × 10 @ 14 kg/tay", "Chest-Supported Row: 4 × 10 @ 40 kg", "Leg Curl: 3 × 12 @ 35 kg", "Dumbbell Lateral Raise: 2 × 15 @ 7 kg/tay", "Farmer Carry: 3 × 30 m @ 20 kg/tay", "Copenhagen Plank: 3 × 30 giây/bên", "Hanging Knee Raise: 3 × 12"]}, {"day": "Chủ nhật", "title": "Full Rest", "duration": "—", "intensity": "Rest", "color": "rest", "items": ["Nghỉ hoàn toàn", "Theo dõi phục hồi", "Chuẩn bị tuần 6"]}]}, {"week": 6, "theme": "Strength and engine", "note": "Tăng sức mạnh tương đối và khả năng duy trì tốc độ.", "badge": "Push", "days": [{"day": "Thứ 2", "title": "Fast Intervals + Balance", "duration": "50–55 phút", "intensity": "Hard", "color": "hard", "items": ["Warm-up: Walk 5 phút @ 5.5 km/h", "Easy Run 5 phút @ 7.5 km/h", "Single-Leg Balance Reach: 2 × 5 mỗi chân", "Single-Leg Hop and Stick: 3 × 3 mỗi chân", "Pogo Jump: 2 × 15 giây", "Intervals: 6 vòng — 2 phút @ 12 km/h + 90 giây @ 6.5 km/h", "Easy Jog 8 phút @ 6.5–7 km/h", "Cool-down 5 phút @ 4.5 km/h"]}, {"day": "Thứ 3", "title": "Strength A + Core", "duration": "65–70 phút", "intensity": "Hard", "color": "hard", "items": ["Vertical Jump: 3 × 3", "Barbell Deadlift: 4 × 5 @ 65 kg", "Dumbbell Bench Press: 4 × 8 @ 18 kg/tay", "Lat Pulldown: 4 × 8 @ 50 kg", "Bulgarian Split Squat: 3 × 8/chân @ 12 kg/tay", "Standing Calf Raise: 3 × 12 @ 45 kg", "Ab Wheel Rollout: 3 × 11", "Pallof Press: 3 × 12/bên @ 15 kg", "Side Plank: 3 × 45 giây/bên"]}, {"day": "Thứ 4", "title": "Zone 2 Light", "duration": "60 phút", "intensity": "Easy", "color": "easy", "items": ["Warm-up: 5 phút @ 5 km/h", "Incline Walk: 50 phút @ 5.8 km/h, incline 5%", "Cool-down: 5 phút @ 4.5 km/h"]}, {"day": "Thứ 5", "title": "Football Session", "duration": "60–90 phút", "intensity": "Hard", "color": "hard", "items": ["Dynamic warm-up 10 phút", "Đá bóng", "Không thêm conditioning", "Cool-down walk 5–10 phút"]}, {"day": "Thứ 6", "title": "Recovery Cardio", "duration": "45 phút", "intensity": "Recovery", "color": "recovery", "items": ["Walk 40 phút @ 5.5 km/h, incline 3%", "Mobility nhẹ 5 phút"]}, {"day": "Thứ 7", "title": "Strength B + Core", "duration": "65–70 phút", "intensity": "Hard", "color": "hard", "items": ["Pogo Jump: 3 × 15 giây", "Barbell Back Squat: 4 × 6 @ 55 kg", "Romanian Deadlift: 3 × 8 @ 55 kg", "Incline Dumbbell Press: 4 × 10 @ 16 kg/tay", "Chest-Supported Row: 4 × 10 @ 45 kg", "Leg Curl: 3 × 12 @ 40 kg", "Dumbbell Lateral Raise: 2 × 15 @ 8 kg/tay", "Farmer Carry: 3 × 30 m @ 22 kg/tay", "Copenhagen Plank: 3 × 35 giây/bên", "Hanging Knee Raise: 3 × 13"]}, {"day": "Chủ nhật", "title": "Full Rest", "duration": "—", "intensity": "Rest", "color": "rest", "items": ["Nghỉ hoàn toàn", "Ăn đủ protein", "Chuẩn bị tuần 7"]}]}, {"week": 7, "theme": "Peak week", "note": "Tuần thử thách nhất. Chỉ tăng tải nếu kỹ thuật vẫn sạch.", "badge": "Peak", "days": [{"day": "Thứ 2", "title": "Fast Intervals + Balance", "duration": "50–55 phút", "intensity": "Hard", "color": "hard", "items": ["Warm-up: Walk 5 phút @ 5.5 km/h", "Easy Run 5 phút @ 7.5 km/h", "Single-Leg Balance Reach: 2 × 5 mỗi chân", "Single-Leg Hop and Stick: 3 × 3 mỗi chân", "Pogo Jump: 2 × 15 giây", "Intervals: 10 vòng — 1 phút @ 12 km/h + 1 phút @ 6.5 km/h", "Easy Jog 8 phút @ 6.5–7 km/h", "Cool-down 5 phút @ 4.5 km/h"]}, {"day": "Thứ 3", "title": "Strength A + Core", "duration": "65–70 phút", "intensity": "Hard", "color": "hard", "items": ["Vertical Jump: 3 × 3", "Barbell Deadlift: 4 × 5 @ 67.5 kg", "Dumbbell Bench Press: 4 × 8 @ 20 kg/tay", "Lat Pulldown: 4 × 8 @ 55 kg", "Bulgarian Split Squat: 3 × 8/chân @ 14 kg/tay", "Standing Calf Raise: 3 × 12 @ 50 kg", "Ab Wheel Rollout: 3 × 12", "Pallof Press: 3 × 12/bên @ 15 kg", "Side Plank: 3 × 50 giây/bên"]}, {"day": "Thứ 4", "title": "Zone 2 Light", "duration": "60 phút", "intensity": "Easy", "color": "easy", "items": ["Warm-up: 5 phút @ 5 km/h", "Incline Walk: 50 phút @ 6 km/h, incline 6%", "Cool-down: 5 phút @ 4.5 km/h", "Nếu không nói được cả câu: giảm incline xuống 5%"]}, {"day": "Thứ 5", "title": "Football Session", "duration": "60–90 phút", "intensity": "Hard", "color": "hard", "items": ["Dynamic warm-up 10 phút", "Đá bóng", "Không thêm conditioning", "Cool-down walk 5–10 phút"]}, {"day": "Thứ 6", "title": "Recovery Cardio", "duration": "45 phút", "intensity": "Recovery", "color": "recovery", "items": ["Walk 40 phút @ 5.7 km/h, incline 4%", "Nếu chân nặng: giảm còn 30 phút @ 5.2 km/h, incline 2%"]}, {"day": "Thứ 7", "title": "Strength B + Core", "duration": "65–70 phút", "intensity": "Hard", "color": "hard", "items": ["Pogo Jump: 3 × 15 giây", "Barbell Back Squat: 4 × 6 @ 57.5 kg", "Romanian Deadlift: 3 × 8 @ 57.5 kg", "Incline Dumbbell Press: 4 × 10 @ 18 kg/tay", "Chest-Supported Row: 4 × 10 @ 50 kg", "Leg Curl: 3 × 12 @ 45 kg", "Dumbbell Lateral Raise: 2 × 15 @ 9 kg/tay", "Farmer Carry: 3 × 30 m @ 24 kg/tay", "Copenhagen Plank: 3 × 40 giây/bên", "Hanging Knee Raise: 3 × 14"]}, {"day": "Chủ nhật", "title": "Full Rest", "duration": "—", "intensity": "Rest", "color": "rest", "items": ["Nghỉ hoàn toàn", "Theo dõi mệt mỏi", "Chuẩn bị deload tuần 8"]}]}, {"week": 8, "theme": "Deload and reveal", "note": "Giảm tải, giữ chất lượng, đo lại cân nặng, vòng eo và ảnh tiến bộ.", "badge": "Deload", "days": [{"day": "Thứ 2", "title": "Light Intervals + Balance", "duration": "40–45 phút", "intensity": "Moderate", "color": "moderate", "items": ["Warm-up: Walk 5 phút @ 5.5 km/h", "Easy Run 5 phút @ 7.5 km/h", "Single-Leg Balance Reach: 2 × 4 mỗi chân", "Pogo Jump: 2 × 12 giây", "Intervals: 6 vòng — 1 phút @ 12 km/h + 90 giây @ 6 km/h", "Easy Jog 8 phút @ 6.5 km/h", "Cool-down 5 phút @ 4.5 km/h"]}, {"day": "Thứ 3", "title": "Strength A Deload", "duration": "50–60 phút", "intensity": "Moderate", "color": "moderate", "items": ["Vertical Jump: 2 × 3", "Barbell Deadlift: 3 × 5 @ 55 kg", "Dumbbell Bench Press: 3 × 8 @ 14 kg/tay", "Lat Pulldown: 3 × 8 @ 40 kg", "Bulgarian Split Squat: 2 × 8/chân @ 8 kg/tay", "Standing Calf Raise: 2 × 12 @ 35 kg", "Ab Wheel Rollout: 2 × 8", "Pallof Press: 2 × 10/bên @ 10 kg", "Side Plank: 2 × 30 giây/bên"]}, {"day": "Thứ 4", "title": "Zone 2 Deload", "duration": "50 phút", "intensity": "Easy", "color": "easy", "items": ["Warm-up: 5 phút @ 5 km/h", "Incline Walk: 40 phút @ 5.5 km/h, incline 4%", "Cool-down: 5 phút @ 4.5 km/h"]}, {"day": "Thứ 5", "title": "Football Session", "duration": "45–75 phút", "intensity": "Moderate", "color": "moderate", "items": ["Dynamic warm-up 10 phút", "Đá bóng có kiểm soát", "Không thêm conditioning", "Cool-down walk 5–10 phút"]}, {"day": "Thứ 6", "title": "Recovery Cardio", "duration": "35 phút", "intensity": "Recovery", "color": "recovery", "items": ["Walk 30 phút @ 5.2 km/h, incline 2%", "Mobility nhẹ 5–10 phút"]}, {"day": "Thứ 7", "title": "Strength B Deload", "duration": "50–60 phút", "intensity": "Moderate", "color": "moderate", "items": ["Pogo Jump: 2 × 12 giây", "Barbell Back Squat: 3 × 6 @ 45 kg", "Romanian Deadlift: 2 × 8 @ 45 kg", "Incline Dumbbell Press: 3 × 10 @ 12 kg/tay", "Chest-Supported Row: 3 × 10 @ 35 kg", "Leg Curl: 2 × 12 @ 30 kg", "Dumbbell Lateral Raise: 2 × 12 @ 6 kg/tay", "Farmer Carry: 2 × 30 m @ 18 kg/tay", "Copenhagen Plank: 2 × 20 giây/bên", "Hanging Knee Raise: 2 × 10"]}, {"day": "Chủ nhật", "title": "Full Rest + Review", "duration": "—", "intensity": "Rest", "color": "rest", "items": ["Nghỉ hoàn toàn", "Cân buổi sáng và đo vòng eo", "Chụp ảnh trước–nghiêng–sau", "So sánh với tuần 1"]}]}];
-let selectedWeek = Number(localStorage.getItem("selectedWeek") || 1);
-const weekTabs = document.getElementById("weekTabs");
-const daysGrid = document.getElementById("daysGrid");
-const weekTitle = document.getElementById("weekTitle");
-const weekNote = document.getElementById("weekNote");
-const weekBadge = document.getElementById("weekBadge");
-const progressFill = document.getElementById("progressFill");
-const progressLabel = document.getElementById("progressLabel");
-
-function stateKey(w, d, i) { return `plan_w${w}_d${d}_i${i}`; }
-
-function renderTabs() {
-  weekTabs.innerHTML = weeks.map(w => `
-    <button class="week-btn ${w.week === selectedWeek ? "active" : ""}" data-week="${w.week}">
-      <b>Tuần ${w.week}</b>
-      <small>${w.badge}</small>
-    </button>
-  `).join("");
-  weekTabs.querySelectorAll(".week-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      selectedWeek = Number(btn.dataset.week);
-      localStorage.setItem("selectedWeek", selectedWeek);
-      render();
-    });
-  });
-  requestAnimationFrame(() => {
-    const active = weekTabs.querySelector(".week-btn.active");
-    if (active && window.innerWidth <= 430) {
-      active.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-    }
-  });
+const PLAN = [
+{
+ week:1, phase:"ENTER CAMP", note:"Full volume đầu tiên. Mục tiêu: làm sạch toàn bộ reps, không chase failure.",
+ days:[
+  {d:"MON",title:"Hill Power + Hard Intervals",load:"VERY HARD",cls:"hard",blocks:[
+   ["Warm-up",["4 min — 6 km/h @ 0–2%","4 min — 8 km/h @ 0–2%","Pogo Jump — 2 × 15s"]],
+   ["Hill Power",["6 rounds: 30s — 12 km/h @ 6%","Recovery mỗi round: 90s — 6 km/h @ 2%","Sau block: 3 min — 6 km/h @ 2%"]],
+   ["Winger Engine",["6 rounds: 60s — 12 km/h @ 4%","Recovery mỗi round: 60s — 6 km/h @ 2%","Cooldown: 6 min — 4 km/h @ 0%"]]
+  ],hint:"Không bám tay vịn. Hill block = đạp mạnh, hơi nghiêng người tự nhiên. Nếu calf/Achilles đau nhói, dừng hill work."},
+  {d:"TUE",title:"Strength A + Incline Walk",load:"HARD",cls:"hard",blocks:[
+   ["Power",["Vertical Jump — 4 × 3 · rest 60–90s"]],
+   ["Strength",["Back Squat — 4 × 5 @ 60 kg","Incline DB Press — 3 × 8 @ 20 kg/hand","Chest-Supported Row — 3 × 10 @ 25 kg","Bulgarian Split Squat — 3 × 8/leg @ RPE 8","Standing Calf Raise — 3 × 12 @ RPE 8","Pallof Press — 3 × 12/side","Ab Wheel — 3 × 8–10"]],
+   ["Finisher",["Incline Walk — 10 min @ 6 km/h, 4%"]]
+  ],hint:"Squat nghỉ 2.5–3 min. Upper body 75–90s. Compound kết thúc còn khoảng 2 reps dự trữ."},
+  {d:"WED",title:"Long Zone 2",load:"VOLUME",cls:"medium",blocks:[
+   ["Treadmill",["Warm-up — 4 min @ 4 km/h","Main — 50 min @ 6 km/h, 4%","Cooldown — 4 min @ 4 km/h"]]
+  ],hint:"Talk test phải pass. Đây là volume để đốt và build engine, không phải ngày biến thành HIIT."},
+  {d:"THU",title:"Football / Winger Conditioning",load:"VERY HARD",cls:"hard",blocks:[
+   ["Option A — Có đá bóng",["Dynamic warm-up — 10 min","Football — 60–90 min","Không thêm interval sau trận"]],
+   ["Option B — Không có sân / không đá",["Warm-up — 8 min: 4 → 6 → 8 km/h","8 rounds: 30s — 12 km/h @ 4% + 60s — 8 km/h @ 2% + 60s — 4 km/h @ 2%","Lateral Bound and Stick — 3 × 4/side","Cooldown — 6 min @ 4 km/h"]]
+  ],hint:"Chỉ làm Option A hoặc Option B, không làm cả hai."},
+  {d:"FRI",title:"Recovery Cardio + Core",load:"EASY",cls:"easy",blocks:[
+   ["Recovery",["40 min — 6 km/h @ 2%"]],
+   ["Core + Balance — 3 rounds",["Single-Leg Balance Reach — 5/leg","Copenhagen Plank — 25s/side","Hanging Knee Raise — 10","Dead Bug — 10/side","Side Plank — 30s/side"]]
+  ],hint:"RPE khoảng 3/10. Kết thúc phải thấy tốt hơn lúc bắt đầu."},
+  {d:"SAT",title:"Strength B + Incline Walk",load:"HARD",cls:"hard",blocks:[
+   ["Power",["Pogo Jump — 3 × 15s","Broad Jump — 3 × 3"]],
+   ["Strength",["Romanian Deadlift — 4 × 6 @ 50 kg","Reverse Lunge — 3 × 8/leg @ RPE 8","DB Bench Press — 3 × 8 @ RPE 8","Lat Pulldown — 3 × 8 @ RPE 8","Leg Curl — 3 × 12 @ 30 kg","DB Lateral Raise — 2 × 12 @ 7.5 kg/hand","Farmer Carry — 3 × 30m @ RPE 8"]],
+   ["Finisher",["Incline Walk — 10 min @ 6 km/h, 4%"]]
+  ],hint:"Không tự thêm chest/shoulder/lat pump volume. Mục tiêu là compact + athletic."},
+  {d:"SUN",title:"Full Rest",load:"REST",cls:"rest",blocks:[["Recovery",["No structured training","Easy walking chỉ để sinh hoạt","Meal prep + sleep on time"]]],hint:"Rest day là một phần bắt buộc của block."}
+ ]
+},
+{
+ week:2, phase:"VOLUME UP", note:"Tăng rounds và thời lượng. Strength chưa cần tăng mọi bài — giữ chất lượng.",
+ days:[
+  {d:"MON",title:"Hill Power + Hard Intervals",load:"VERY HARD",cls:"hard",blocks:[["Warm-up",["4 min — 6 km/h @ 0–2%","4 min — 8 km/h @ 0–2%","Pogo Jump — 2 × 15s"]],["Hill Power",["7 rounds: 30s — 12 km/h @ 6%","90s — 6 km/h @ 2%","3 min reset @ 6 km/h, 2%"]],["Winger Engine",["7 rounds: 60s — 12 km/h @ 4%","60s — 6 km/h @ 2%","Cooldown — 6 min @ 4 km/h"]]],hint:"Mỗi rep phải vẫn kiểm soát được cadence. Không nắm rail."},
+  {d:"TUE",title:"Strength A + Incline Walk",load:"HARD",cls:"hard",blocks:[["Power",["Vertical Jump — 4 × 3"]],["Strength",["Back Squat — 4 × 5 @ 60 kg","Incline DB Press — 3 × 8 @ 20 kg/hand","Chest-Supported Row — 3 × 10 @ 25 kg","Bulgarian Split Squat — 3 × 8/leg @ RPE 8","Standing Calf Raise — 3 × 12 @ RPE 8","Pallof Press — 3 × 12/side","Ab Wheel — 3 × 10"]],["Finisher",["Incline Walk — 15 min @ 6 km/h, 4%"]]],hint:"Nếu 60 kg Squat quá nhẹ nhưng form tuyệt đối sạch, vẫn giữ tuần này; Week 3 mới tăng."},
+  {d:"WED",title:"Long Zone 2",load:"VOLUME",cls:"medium",blocks:[["Treadmill",["4 min @ 4 km/h","55 min @ 6 km/h, 4%","4 min @ 4 km/h"]]],hint:"Giữ talk test."},
+  {d:"THU",title:"Football / Winger Conditioning",load:"VERY HARD",cls:"hard",blocks:[["Football",["Có đá: 60–90 min + warm-up 10 min"]],["No football",["9 rounds: 30s — 12 km/h @ 4% + 60s — 8 km/h @ 2% + 60s — 4 km/h @ 2%","Lateral Bound and Stick — 3 × 4/side","Cooldown — 6 min @ 4 km/h"]]],hint:"Một option duy nhất."},
+  {d:"FRI",title:"Recovery Cardio + Core",load:"EASY",cls:"easy",blocks:[["Recovery",["40 min — 6 km/h @ 2%"]],["Core + Balance — 3 rounds",["Single-Leg Balance Reach — 5/leg","Copenhagen Plank — 25s/side","Hanging Knee Raise — 11","Dead Bug — 10/side","Side Plank — 35s/side"]]],hint:"Recovery không được chase calories."},
+  {d:"SAT",title:"Strength B + Incline Walk",load:"HARD",cls:"hard",blocks:[["Power",["Pogo Jump — 3 × 15s","Broad Jump — 3 × 3"]],["Strength",["Romanian Deadlift — 4 × 6 @ 52.5 kg","Reverse Lunge — 3 × 8/leg @ RPE 8","DB Bench Press — 3 × 8 @ RPE 8","Lat Pulldown — 3 × 8 @ RPE 8","Leg Curl — 3 × 12 @ 30 kg","DB Lateral Raise — 2 × 12 @ 7.5 kg/hand","Farmer Carry — 3 × 30m @ RPE 8"]],["Finisher",["Incline Walk — 15 min @ 6 km/h, 4%"]]],hint:"RDL tăng chỉ khi Week 1 còn ~2 reps in reserve và lưng/hamstring kiểm soát tốt."},
+  {d:"SUN",title:"Full Rest",load:"REST",cls:"rest",blocks:[["Recovery",["No structured training","Easy walking only","Sleep + meal prep"]]],hint:"Không bù bài bỏ lỡ vào Sunday."}
+ ]
+},
+{
+ week:3, phase:"OVERLOAD", note:"Tuần đầu thật sự nặng. Hill tăng dốc; Squat/RDL tăng vừa đủ để giữ strength signal.",
+ days:[
+  {d:"MON",title:"Hill Power + Hard Intervals",load:"PEAK HARD",cls:"hard",blocks:[["Warm-up",["4 min — 6 km/h","4 min — 8 km/h","Pogo Jump — 2 × 15s"]],["Hill Power",["8 rounds: 30s — 12 km/h @ 6%","90s — 6 km/h @ 2%","3 min reset"]],["Winger Engine",["8 rounds: 60s — 12 km/h @ 4%","60s — 6 km/h @ 2%","Cooldown — 6 min @ 4 km/h"]]],hint:"Đây là hard day. Không thêm cardio sau khi xong."},
+  {d:"TUE",title:"Strength A + Incline Walk",load:"HARD",cls:"hard",blocks:[["Power",["Vertical Jump — 4 × 3"]],["Strength",["Back Squat — 4 × 5 @ 62.5 kg","Incline DB Press — 3 × 8 @ 20 kg/hand","Chest-Supported Row — 3 × 10 @ 25 kg","Bulgarian Split Squat — 3 × 8/leg @ RPE 8","Standing Calf Raise — 3 × 12 @ RPE 8","Pallof Press — 3 × 12/side","Ab Wheel — 3 × 10"]],["Finisher",["Incline Walk — 20 min @ 6 km/h, 4%"]]],hint:"Không cố PR. Nếu 62.5 làm form xuống, quay về 60."},
+  {d:"WED",title:"Long Zone 2",load:"HIGH VOLUME",cls:"medium",blocks:[["Treadmill",["4 min @ 4 km/h","60 min @ 6 km/h, 6%","4 min @ 4 km/h"]]],hint:"Nếu không nói được câu hoàn chỉnh, incline xuống 4%."},
+  {d:"THU",title:"Football / Winger Conditioning",load:"VERY HARD",cls:"hard",blocks:[["Football",["Có đá: 60–90 min"]],["No football",["10 rounds: 30s — 12 km/h @ 4% + 60s — 8 km/h @ 2% + 60s — 4 km/h @ 2%","Lateral Bound and Stick — 3 × 4/side","Cooldown — 6 min @ 4 km/h"]]],hint:"Chất lượng > thêm rounds ngoài plan."},
+  {d:"FRI",title:"Recovery Cardio + Core",load:"EASY",cls:"easy",blocks:[["Recovery",["45 min — 6 km/h @ 2%"]],["Core + Balance — 3 rounds",["Single-Leg Balance Reach — 5/leg","Copenhagen Plank — 30s/side","Hanging Knee Raise — 12","Dead Bug — 10/side","Side Plank — 40s/side"]]],hint:"RPE 3/10."},
+  {d:"SAT",title:"Strength B + Incline Walk",load:"HARD",cls:"hard",blocks:[["Power",["Pogo Jump — 3 × 15s","Broad Jump — 3 × 3"]],["Strength",["Romanian Deadlift — 4 × 6 @ 55 kg","Reverse Lunge — 3 × 8/leg @ RPE 8","DB Bench Press — 3 × 8 @ RPE 8","Lat Pulldown — 3 × 8 @ RPE 8","Leg Curl — 3 × 12 @ 35 kg only if Week 2 clean","DB Lateral Raise — 2 × 12 @ 7.5 kg/hand","Farmer Carry — 3 × 30m @ RPE 8"]],["Finisher",["Incline Walk — 20 min @ 6 km/h, 4%"]]],hint:"Leg Curl 35 chỉ dùng nếu 30 kg tuần trước còn ≥2 reps dự trữ."},
+  {d:"SUN",title:"Full Rest",load:"REST",cls:"rest",blocks:[["Recovery",["No structured training","Check 7-day bodyweight average"]]],hint:"Đánh giá performance trước Week 4."}
+ ]
+},
+{
+ week:4, phase:"RELOAD", note:"Giảm 20–25% volume để hấp thụ 3 tuần đầu. Vẫn tập, không phải nghỉ nguyên tuần.",
+ days:[
+  {d:"MON",title:"Hill + Intervals Reload",load:"MODERATE",cls:"medium",blocks:[["Warm-up",["4 min — 6 km/h","4 min — 8 km/h"]],["Hill Power",["5 rounds: 30s — 12 km/h @ 4%","90s — 6 km/h @ 2%"]],["Intervals",["6 rounds: 60s — 12 km/h @ 2%","90s — 6 km/h @ 2%","Cooldown — 6 min @ 4 km/h"]]],hint:"Kết thúc còn cảm giác có thể làm thêm — đúng mục tiêu reload."},
+  {d:"TUE",title:"Strength A Reload",load:"MODERATE",cls:"medium",blocks:[["Power",["Vertical Jump — 3 × 3"]],["Strength",["Back Squat — 3 × 5 @ 55 kg","Incline DB Press — 2 × 8 @ 17.5–20 kg/hand","Chest-Supported Row — 2 × 10 @ 20–25 kg","Bulgarian Split Squat — 2 × 8/leg @ RPE 7","Calf Raise — 2 × 12","Pallof Press — 2 × 10/side","Ab Wheel — 2 × 8"]],["Finisher",["Incline Walk — 10 min @ 6 km/h, 4%"]]],hint:"Không biến deload thành test strength."},
+  {d:"WED",title:"Zone 2 Reload",load:"EASY",cls:"easy",blocks:[["Treadmill",["4 min @ 4 km/h","45 min @ 6 km/h, 4%","4 min @ 4 km/h"]]],hint:"Easy means easy."},
+  {d:"THU",title:"Football / Conditioning Reload",load:"MODERATE",cls:"medium",blocks:[["Football",["Có đá: 45–75 min, không chase extra runs"]],["No football",["6 rounds: 30s — 12 km/h @ 4% + 60s — 8 km/h @ 2% + 60s — 4 km/h @ 2%","Lateral Bound and Stick — 2 × 4/side"]]],hint:"Giảm volume nhưng giữ kỹ thuật."},
+  {d:"FRI",title:"Recovery",load:"EASY",cls:"easy",blocks:[["Recovery",["30–35 min — 6 km/h @ 2%","Core — 2 rounds only"]]],hint:"Tập xong phải fresh."},
+  {d:"SAT",title:"Strength B Reload",load:"MODERATE",cls:"medium",blocks:[["Power",["Pogo Jump — 2 × 12s","Broad Jump — 2 × 3"]],["Strength",["Romanian Deadlift — 3 × 6 @ 45 kg","Reverse Lunge — 2 × 8/leg @ RPE 7","DB Bench Press — 2 × 8 @ RPE 7","Lat Pulldown — 2 × 8 @ RPE 7","Leg Curl — 2 × 12 @ 25–30 kg","DB Lateral Raise — 2 × 12 @ 5–7.5 kg/hand","Farmer Carry — 2 × 30m"]],["Finisher",["Incline Walk — 10 min @ 6 km/h, 4%"]]],hint:"Reload bắt buộc để Week 5–6 thật sự mạnh."},
+  {d:"SUN",title:"Full Rest",load:"REST",cls:"rest",blocks:[["Recovery",["Rest","Sleep","Prepare for peak block"]]],hint:"Không thêm buổi bí mật."}
+ ]
+},
+{
+ week:5, phase:"PEAK I", note:"Quay lại full volume. Hill Power lên 8% — đây là resisted running, không bám rail.",
+ days:[
+  {d:"MON",title:"Hill Power + Hard Intervals",load:"PEAK HARD",cls:"hard",blocks:[["Warm-up",["4 min — 6 km/h","4 min — 8 km/h","Pogo Jump — 2 × 15s"]],["Hill Power",["8 rounds: 30s — 12 km/h @ 8%","90s — 6 km/h @ 2%","3 min reset"]],["Winger Engine",["8 rounds: 60s — 12 km/h @ 4%","60s — 6 km/h @ 2%","Cooldown — 6 min @ 4 km/h"]]],hint:"8% là trần hill-speed của block hiện tại."},
+  {d:"TUE",title:"Strength A + Incline Walk",load:"HARD",cls:"hard",blocks:[["Power",["Vertical Jump — 4 × 3"]],["Strength",["Back Squat — 4 × 5 @ 62.5 kg","Incline DB Press — 3 × 8 @ 20 kg/hand","Chest-Supported Row — 3 × 10 @ 25 kg","Bulgarian Split Squat — 3 × 8/leg @ RPE 8","Standing Calf Raise — 3 × 12 @ RPE 8","Pallof Press — 3 × 12/side","Ab Wheel — 3 × 10–12"]],["Finisher",["Incline Walk — 20 min @ 6 km/h, 4%"]]],hint:"Cutting phase: giữ strength signal, không chase hypertrophy."},
+  {d:"WED",title:"Long Zone 2",load:"HIGH VOLUME",cls:"medium",blocks:[["Treadmill",["4 min @ 4 km/h","60 min @ 6 km/h, 6%","4 min @ 4 km/h"]]],hint:"Talk test pass."},
+  {d:"THU",title:"Football / Winger Conditioning",load:"VERY HARD",cls:"hard",blocks:[["Football",["Có đá: 60–90 min"]],["No football",["10 rounds: 30s — 12 km/h @ 6% + 60s — 8 km/h @ 2% + 60s — 4 km/h @ 2%","Lateral Bound and Stick — 3 × 4/side","Cooldown — 6 min @ 4 km/h"]]],hint:"No football option tăng incline nhưng vẫn khác Monday: shorter repeated-run rhythm."},
+  {d:"FRI",title:"Recovery Cardio + Core",load:"EASY",cls:"easy",blocks:[["Recovery",["45 min — 6 km/h @ 2%"]],["Core + Balance — 3 rounds",["Single-Leg Balance Reach — 5/leg","Copenhagen Plank — 30s/side","Hanging Knee Raise — 12","Dead Bug — 12/side","Side Plank — 40s/side"]]],hint:"Easy."},
+  {d:"SAT",title:"Strength B + Incline Walk",load:"HARD",cls:"hard",blocks:[["Power",["Pogo Jump — 3 × 15s","Broad Jump — 3 × 3"]],["Strength",["Romanian Deadlift — 4 × 6 @ 55 kg","Reverse Lunge — 3 × 8/leg @ RPE 8","DB Bench Press — 3 × 8 @ RPE 8","Lat Pulldown — 3 × 8 @ RPE 8","Leg Curl — 3 × 12 @ 35 kg if clean","DB Lateral Raise — 2 × 12 @ 7.5 kg/hand","Farmer Carry — 3 × 30m @ RPE 8"]],["Finisher",["Incline Walk — 20 min @ 6 km/h, 4%"]]],hint:"Không thêm pump sets."},
+  {d:"SUN",title:"Full Rest",load:"REST",cls:"rest",blocks:[["Recovery",["Full rest","7-day weight average","Waist check"]]],hint:"Peak II bắt đầu sau rest."}
+ ]
+},
+{
+ week:6, phase:"PEAK II", note:"Tuần nặng nhất. Tăng work duration chứ không tăng speed vượt 12 km/h.",
+ days:[
+  {d:"MON",title:"Hill Power + Peak Engine",load:"MAX WEEK",cls:"hard",blocks:[["Warm-up",["4 min — 6 km/h","4 min — 8 km/h","Pogo Jump — 2 × 15s"]],["Hill Power",["8 rounds: 30s — 12 km/h @ 8%","90s — 6 km/h @ 2%","3 min reset"]],["Peak Engine",["8 rounds: 90s — 12 km/h @ 4%","60s — 6 km/h @ 2%","Cooldown — 6 min @ 4 km/h"]]],hint:"Đây là buổi khó nhất block. Không thêm bất cứ finisher nào."},
+  {d:"TUE",title:"Strength A + Incline Walk",load:"HARD",cls:"hard",blocks:[["Power",["Vertical Jump — 4 × 3"]],["Strength",["Back Squat — 4 × 5 @ 65 kg only if Week 5 clean","Incline DB Press — 3 × 8 @ 20 kg/hand","Chest-Supported Row — 3 × 10 @ 25 kg","Bulgarian Split Squat — 3 × 8/leg @ RPE 8","Standing Calf Raise — 3 × 12 @ RPE 8","Pallof Press — 3 × 12/side","Ab Wheel — 3 × 10–12"]],["Finisher",["Incline Walk — 20 min @ 6 km/h, 4%"]]],hint:"Nếu 65 kg không còn 2 reps dự trữ, dùng 62.5 kg."},
+  {d:"WED",title:"Longest Zone 2",load:"HIGH VOLUME",cls:"medium",blocks:[["Treadmill",["4 min @ 4 km/h","65 min @ 6 km/h, 6%","4 min @ 4 km/h"]]],hint:"Không để HR/RPE drift thành threshold."},
+  {d:"THU",title:"Football / Winger Conditioning",load:"VERY HARD",cls:"hard",blocks:[["Football",["Có đá: 60–90 min"]],["No football",["10 rounds: 30s — 12 km/h @ 6% + 60s — 8 km/h @ 2% + 60s — 4 km/h @ 2%","Lateral Bound and Stick — 3 × 4/side","Cooldown — 6 min @ 4 km/h"]]],hint:"Không thêm hill block thứ hai."},
+  {d:"FRI",title:"Recovery Cardio + Core",load:"EASY",cls:"easy",blocks:[["Recovery",["45 min — 6 km/h @ 2%"]],["Core + Balance — 3 rounds",["Single-Leg Balance Reach — 5/leg","Copenhagen Plank — 35s/side","Hanging Knee Raise — 12","Dead Bug — 12/side","Side Plank — 45s/side"]]],hint:"Giữ Friday nhẹ để Saturday còn chất lượng."},
+  {d:"SAT",title:"Strength B + Incline Walk",load:"HARD",cls:"hard",blocks:[["Power",["Pogo Jump — 3 × 15s","Broad Jump — 3 × 3"]],["Strength",["Romanian Deadlift — 4 × 6 @ 57.5 kg only if Week 5 clean","Reverse Lunge — 3 × 8/leg @ RPE 8","DB Bench Press — 3 × 8 @ RPE 8","Lat Pulldown — 3 × 8 @ RPE 8","Leg Curl — 3 × 12 @ 35 kg","DB Lateral Raise — 2 × 12 @ 7.5 kg/hand","Farmer Carry — 3 × 30m @ RPE 8"]],["Finisher",["Incline Walk — 20 min @ 6 km/h, 4%"]]],hint:"Nếu RDL 57.5 làm lưng thay hamstring chịu tải, quay 55."},
+  {d:"SUN",title:"Full Rest",load:"REST",cls:"rest",blocks:[["Recovery",["Full rest","Sleep 8h target","Prepare Reveal Week"]]],hint:"Đừng cố ăn ít hơn vì sắp hết camp."}
+ ]
+},
+{
+ week:7, phase:"REVEAL", note:"Giữ intensity nhưng giảm ~15–20% volume. Mục tiêu: bớt fatigue, giữ tốc độ và nhìn/feel sắc hơn.",
+ days:[
+  {d:"MON",title:"Hill + Intervals Taper",load:"HARD",cls:"hard",blocks:[["Warm-up",["4 min — 6 km/h","4 min — 8 km/h","Pogo Jump — 2 × 12s"]],["Hill Power",["6 rounds: 30s — 12 km/h @ 6%","90s — 6 km/h @ 2%"]],["Winger Engine",["6 rounds: 60s — 12 km/h @ 4%","60s — 6 km/h @ 2%","Cooldown — 6 min @ 4 km/h"]]],hint:"Nhanh và sạch. Không chase exhaustion."},
+  {d:"TUE",title:"Strength A Taper",load:"HARD",cls:"hard",blocks:[["Power",["Vertical Jump — 3 × 3"]],["Strength",["Back Squat — 3 × 5 @ 60–62.5 kg","Incline DB Press — 2 × 8 @ 20 kg/hand","Chest-Supported Row — 2 × 10 @ 25 kg","Bulgarian Split Squat — 2 × 8/leg @ RPE 8","Calf Raise — 2 × 12","Pallof Press — 2 × 12/side","Ab Wheel — 2 × 10"]],["Finisher",["Incline Walk — 10 min @ 6 km/h, 4%"]]],hint:"Giữ strength, giảm fatigue."},
+  {d:"WED",title:"Zone 2 Reveal",load:"VOLUME",cls:"medium",blocks:[["Treadmill",["4 min @ 4 km/h","50 min @ 6 km/h, 4%","4 min @ 4 km/h"]]],hint:"Nhẹ và đều."},
+  {d:"THU",title:"Football / Conditioning Taper",load:"HARD",cls:"hard",blocks:[["Football",["Có đá: 60–75 min"]],["No football",["7 rounds: 30s — 12 km/h @ 4% + 60s — 8 km/h @ 2% + 60s — 4 km/h @ 2%","Lateral Bound and Stick — 2 × 4/side","Cooldown — 6 min @ 4 km/h"]]],hint:"Không cần chứng minh gì trong tuần cuối."},
+  {d:"FRI",title:"Recovery + Core",load:"EASY",cls:"easy",blocks:[["Recovery",["35–40 min — 6 km/h @ 2%"]],["Core — 2 rounds",["Copenhagen Plank — 25s/side","Hanging Knee Raise — 10","Dead Bug — 10/side"]]],hint:"Freshness > calories burned."},
+  {d:"SAT",title:"Strength B Taper",load:"HARD",cls:"hard",blocks:[["Power",["Pogo Jump — 2 × 12s","Broad Jump — 2 × 3"]],["Strength",["Romanian Deadlift — 3 × 6 @ 55 kg","Reverse Lunge — 2 × 8/leg @ RPE 8","DB Bench Press — 2 × 8 @ RPE 8","Lat Pulldown — 2 × 8 @ RPE 8","Leg Curl — 2 × 12 @ 30 kg","DB Lateral Raise — 2 × 12 @ 7.5 kg/hand","Farmer Carry — 2 × 30m"]],["Finisher",["Incline Walk — 10 min @ 6 km/h, 4%"]]],hint:"Camp kết thúc bằng performance tốt, không phải failure."},
+  {d:"SUN",title:"Reveal + Full Rest",load:"REST",cls:"rest",blocks:[["Check-in",["Morning bodyweight","Waist measurement","Front / side / back photos","Full rest"]]],hint:"Sau hôm nay chuyển sang maintenance block 4–5 buổi/tuần, không kéo Hell Block vô hạn."}
+ ]
 }
+];
 
-function renderDays() {
-  const w = weeks.find(x => x.week === selectedWeek);
-  weekBadge.textContent = w.badge;
-  weekTitle.textContent = `Tuần ${w.week} — ${w.theme}`;
-  weekNote.textContent = w.note;
-  daysGrid.innerHTML = w.days.map((d, di) => `
-    <article class="day-card ${di === 0 ? "open" : ""}">
-      <button class="day-head" aria-expanded="${di === 0}">
-        <div>
-          <div class="day-meta">
-            <span class="day-name">${d.day}</span>
-            <span class="pill ${d.color}">${d.intensity}</span>
-          </div>
-          <h4>${d.title}</h4>
-          <div class="duration">${d.duration}</div>
-        </div>
-        <div class="chevron">⌄</div>
-      </button>
-      <div class="day-body">
-        ${d.items.map((item, ii) => {
-          const checked = localStorage.getItem(stateKey(w.week, di, ii)) === "1";
-          return `
-            <label class="check-row ${checked ? "done" : ""}">
-              <input type="checkbox" data-day="${di}" data-item="${ii}" ${checked ? "checked" : ""} />
-              <span>${item}</span>
-            </label>
-          `;
-        }).join("")}
-      </div>
-    </article>
-  `).join("");
+const $ = s => document.querySelector(s);
+const key = 'hellBlock7_v1';
+let state = JSON.parse(localStorage.getItem(key) || '{}');
+if(!state.done) state.done = {};
+if(!state.habits) state.habits = {};
+let activeWeek = Number(state.activeWeek || 1);
 
-  daysGrid.querySelectorAll(".day-head").forEach(head => {
-    head.addEventListener("click", () => {
-      const card = head.closest(".day-card");
-      card.classList.toggle("open");
-      head.setAttribute("aria-expanded", card.classList.contains("open"));
-    });
-  });
-
-  daysGrid.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-    cb.addEventListener("change", () => {
-      const k = stateKey(selectedWeek, cb.dataset.day, cb.dataset.item);
-      localStorage.setItem(k, cb.checked ? "1" : "0");
-      cb.closest(".check-row").classList.toggle("done", cb.checked);
-      updateProgress();
-    });
-  });
-  updateProgress();
+function save(){ state.activeWeek=activeWeek; localStorage.setItem(key, JSON.stringify(state)); }
+function weekDate(weekIndex, dayIndex){
+ const s=$('#startDate').value; if(!s) return '';
+ const d=new Date(s+'T12:00:00'); d.setDate(d.getDate() + weekIndex*7 + dayIndex);
+ return d.toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'});
 }
-
-function updateProgress() {
-  const checks = [...daysGrid.querySelectorAll('input[type="checkbox"]')];
-  const done = checks.filter(c => c.checked).length;
-  const pct = checks.length ? Math.round(done / checks.length * 100) : 0;
-  progressFill.style.width = pct + "%";
-  progressLabel.textContent = pct + "%";
+function renderTabs(){
+ const tabs=$('#weekTabs'); tabs.innerHTML='';
+ PLAN.forEach(w=>{const b=document.createElement('button'); b.className='weekbtn'+(w.week===activeWeek?' active':''); b.textContent='W'+w.week; b.onclick=()=>{activeWeek=w.week;save();render();}; tabs.appendChild(b);});
+ setTimeout(()=>tabs.querySelector('.active')?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'}),20);
 }
-
-function render() {
-  renderTabs();
-  renderDays();
+function itemId(w,di,bi,ii){return `w${w}-d${di}-b${bi}-i${ii}`}
+function render(){
+ renderTabs(); const w=PLAN[activeWeek-1];
+ let html=`<div class="weekhead"><h2>Week ${w.week}</h2><span class="phase">${w.phase}</span></div><div class="weeknote">${w.note}</div>`;
+ let total=0,done=0;
+ w.days.forEach((day,di)=>day.blocks.forEach((b,bi)=>b[1].forEach((_,ii)=>{total++; if(state.done[itemId(w.week,di,bi,ii)]) done++;})));
+ const pct=total?Math.round(done/total*100):0;
+ html+=`<div class="progressWrap"><div class="progressTop"><span>Week progress</span><b>${done}/${total} · ${pct}%</b></div><div class="bar"><i style="width:${pct}%"></i></div></div>`;
+ w.days.forEach((day,di)=>{
+   const date=weekDate(w.week-1,di);
+   html+=`<section class="day" id="day-${di}"><button class="dayhead" onclick="toggleDay(${di})"><span class="dow">${day.d}</span><span class="dayTitle"><b>${day.title}</b><span>${date?date+' · ':''}${day.blocks.length} block${day.blocks.length>1?'s':''}</span></span><span class="load ${day.cls}">${day.load}</span></button><div class="daybody">`;
+   day.blocks.forEach((bl,bi)=>{html+=`<div class="block"><h4>${bl[0]}</h4>`; bl[1].forEach((txt,ii)=>{const id=itemId(w.week,di,bi,ii),is=!!state.done[id];html+=`<div class="item ${is?'doneText':''}"><button class="tick ${is?'done':''}" onclick="toggleItem('${id}')">${is?'✓':''}</button><div class="txt">${txt}</div></div>`}); html+='</div>'});
+   html+=`<div class="hint ${day.cls==='hard'?'warning':''}">${day.hint}</div></div></section>`;
+ });
+ $('#weekView').innerHTML=html;
+ $('#bottomPhase').textContent=`Week ${w.week} · ${w.phase}`; $('#bottomProgress').textContent=`${pct}% completed`;
+ renderHabits();
 }
-
-document.getElementById("expandAll").addEventListener("click", () => {
-  document.querySelectorAll(".day-card").forEach(c => c.classList.add("open"));
-});
-document.getElementById("resetWeek").addEventListener("click", () => {
-  if (!confirm(`Reset toàn bộ đánh dấu của Tuần ${selectedWeek}?`)) return;
-  const w = weeks.find(x => x.week === selectedWeek);
-  w.days.forEach((d, di) => d.items.forEach((_, ii) => localStorage.removeItem(stateKey(selectedWeek, di, ii))));
-  renderDays();
-});
-
+window.toggleDay=di=>document.querySelector(`#day-${di}`).classList.toggle('open');
+window.toggleItem=id=>{state.done[id]=!state.done[id];save();render();};
+function renderHabits(){
+ const labels=['Calories đúng target','Protein ≥ 190g','Steps ≥ 10,000','Sleep target / recovery'];
+ const box=$('#dailyHabits'); box.innerHTML='';
+ labels.forEach((x,i)=>{const id=`w${activeWeek}-h${i}`,is=!!state.habits[id]; const div=document.createElement('div');div.className='habit';div.innerHTML=`<button class="tick ${is?'done':''}">${is?'✓':''}</button><span>${x}</span>`;div.querySelector('button').onclick=()=>{state.habits[id]=!state.habits[id];save();renderHabits()};box.appendChild(div)});
+}
+$('#resetWeek').onclick=()=>{if(confirm(`Reset toàn bộ checkbox Week ${activeWeek}?`)){Object.keys(state.done).filter(k=>k.startsWith(`w${activeWeek}-`)).forEach(k=>delete state.done[k]);Object.keys(state.habits).filter(k=>k.startsWith(`w${activeWeek}-`)).forEach(k=>delete state.habits[k]);save();render();}};
+const sd=$('#startDate'); sd.value=state.startDate||''; sd.onchange=()=>{state.startDate=sd.value;save();render();};
 render();
 </script>
 </body>
