@@ -2,775 +2,387 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Giáo án tuần — Athletic Lean</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0F1622">
+<title>Lịch tập — Lean Athletic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #12161a;
-    --surface: #1a2027;
-    --surface-2: #1f2730;
-    --line: rgba(255,255,255,0.08);
-    --line-soft: rgba(255,255,255,0.05);
-    --text: #eef2f4;
-    --text-mid: #b7c1c9;
-    --text-muted: #7c8892;
-    --turf: #57d97d;
-    --turf-dim: #2f5f42;
-    --amber: #ffb84d;
-    --font-display: 'Barlow Condensed', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --bg:#0F1622;
+    --surface:#16202E;
+    --surface-2:#1D2A3A;
+    --line:#2A3A4D;
+    --text:#E8E4DC;
+    --muted:#8B9BAD;
+    --amber:#E9A93C;
+    --sky:#6FB6D9;
+    --sage:#8FB98A;
+    --accent:var(--amber);
+    --r:14px;
   }
-
-  *{ box-sizing: border-box; }
-  html, body{ margin:0; padding:0; }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
   body{
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Barlow',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+    font-size:16px;line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:calc(28px + env(safe-area-inset-bottom));
   }
-  body::before{
-    content:"";
-    position: fixed;
-    inset: 0;
+  h1,h2,h3,.cond{font-family:'Barlow Condensed','Barlow',sans-serif;letter-spacing:.01em}
+
+  /* ---------- Hero ---------- */
+  header{
+    padding:calc(26px + env(safe-area-inset-top)) 18px 22px;
     background:
-      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(87,217,125,0.10), transparent 60%),
-      radial-gradient(ellipse 700px 500px at 100% 0%, rgba(255,184,77,0.05), transparent 55%);
-    pointer-events: none;
-    z-index: 0;
+      radial-gradient(120% 90% at 12% 0%, #24344A 0%, rgba(36,52,74,0) 62%),
+      var(--bg);
+    border-bottom:1px solid var(--line);
+  }
+  header .kicker{font-size:13px;color:var(--muted);margin:0 0 8px;letter-spacing:.04em}
+  header h1{
+    font-size:46px;line-height:.9;font-weight:700;margin:0;color:var(--text);
+  }
+  header h1 span{display:block;color:var(--amber)}
+  header p{margin:14px 0 0;font-size:14.5px;color:var(--muted);max-width:34ch}
+  .split{display:flex;gap:18px;margin-top:18px}
+  .split div{flex:1}
+  .split b{font-family:'Barlow Condensed';font-size:27px;font-weight:600;display:block;line-height:1;color:var(--text)}
+  .split small{font-size:12.5px;color:var(--muted)}
+
+  /* ---------- Day rail ---------- */
+  nav{
+    position:sticky;top:0;z-index:20;
+    background:rgba(15,22,34,.92);
+    backdrop-filter:saturate(150%) blur(12px);
+    -webkit-backdrop-filter:saturate(150%) blur(12px);
+    border-bottom:1px solid var(--line);
+    padding:9px 0;
+  }
+  .rail{display:flex;gap:7px;overflow-x:auto;padding:0 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .rail::-webkit-scrollbar{display:none}
+  .tab{
+    flex:0 0 auto;border:1px solid var(--line);background:var(--surface);
+    border-radius:999px;padding:8px 14px;
+    font-family:'Barlow Condensed';font-size:17px;font-weight:600;
+    display:flex;align-items:center;gap:7px;cursor:pointer;
+  }
+  .tab i{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.6;font-style:normal}
+  .tab[aria-selected="true"]{background:currentColor;border-color:currentColor}
+  .tab[aria-selected="true"] i{background:var(--bg);opacity:1}
+  .tab span.lbl{color:var(--muted)}
+  .tab[aria-selected="true"] span.lbl{color:var(--bg)}
+  .tab:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+  /* ---------- Day card ---------- */
+  main{padding:16px 14px 0}
+  .day[hidden]{display:none}
+  .head{
+    background:var(--surface);border-radius:var(--r) var(--r) 0 0;
+    padding:16px 16px 14px;border-bottom:1px solid var(--line);
+    border-left:4px solid var(--accent);
+  }
+  .head .d{font-size:12.5px;color:var(--muted);margin:0 0 2px}
+  .head h2{margin:0;font-size:31px;font-weight:700;line-height:1;color:var(--accent)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+  .chip{
+    font-size:12.5px;padding:4px 9px;border-radius:6px;
+    background:var(--surface-2);color:var(--muted);font-weight:500;
   }
 
-  .wrap{
-    position: relative;
-    z-index: 1;
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 28px 20px calc(64px + env(safe-area-inset-bottom));
+  .block{
+    background:var(--surface);padding:6px 16px 4px;
+    border-left:4px solid var(--accent);
   }
+  .block:last-of-type{border-radius:0 0 var(--r) var(--r);padding-bottom:14px}
+  .block > h3{
+    margin:14px 0 6px;font-size:15px;font-weight:600;color:var(--muted);
+    display:flex;align-items:center;gap:8px;
+  }
+  .block > h3::after{content:"";flex:1;height:1px;background:var(--line)}
 
-  /* ---------- Header ---------- */
-  header.hero{
-    padding: 6px 0 28px;
-    border-bottom: 1px solid var(--line);
+  ul{list-style:none;margin:0;padding:0}
+  li{border-bottom:1px solid rgba(255,255,255,.055)}
+  li:last-child{border-bottom:0}
+  .ex{
+    display:flex;align-items:center;gap:12px;width:100%;
+    background:none;border:0;padding:13px 2px;text-align:left;
+    font:inherit;color:var(--text);cursor:pointer;min-height:48px;
   }
-  .eyebrow{
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--turf);
-    letter-spacing: 0.02em;
+  .box{
+    flex:0 0 22px;height:22px;border:2px solid #3B4E63;border-radius:7px;
+    display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;
   }
-  h1{
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(42px, 9vw, 64px);
-    line-height: 0.98;
-    margin: 6px 0 10px;
-    letter-spacing: -0.01em;
-  }
-  .hero p{
-    font-size: 15px;
-    color: var(--text-mid);
-    max-width: 46ch;
-    margin: 0;
-  }
+  .box svg{width:13px;height:13px;stroke:var(--bg);stroke-width:3;fill:none;opacity:0;transform:scale(.6);transition:.15s}
+  .ex .t{flex:1;font-size:16.5px;line-height:1.25}
+  .ex .n{font-size:13px;color:var(--muted);display:block;margin-top:2px}
+  .ex[aria-pressed="true"] .box{background:var(--accent);border-color:var(--accent)}
+  .ex[aria-pressed="true"] .box svg{opacity:1;transform:scale(1)}
+  .ex[aria-pressed="true"] .t{color:#5D6C7C;text-decoration:line-through;text-decoration-color:#3B4E63}
+  .ex:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:8px}
 
-  /* ---------- Day tabs ---------- */
-  nav.days{
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    margin: 24px -20px 0;
-    padding: 0 20px 4px;
-    scrollbar-width: none;
-    scroll-snap-type: x proximity;
-    -webkit-overflow-scrolling: touch;
+  .cardio{
+    margin:12px 0 4px;padding:13px 14px;border-radius:10px;
+    background:var(--surface-2);border-left:3px solid var(--accent);
   }
-  nav.days::-webkit-scrollbar{ display:none; }
-  .day-btn{
-    flex: 0 0 auto;
-    background: transparent;
-    border: 1px solid var(--line);
-    color: var(--text-muted);
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 19px;
-    letter-spacing: 0.02em;
-    padding: 10px 16px 8px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color .15s ease, color .15s ease, background .15s ease;
-    text-align: left;
-    min-width: 84px;
-    scroll-snap-align: start;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-  }
-  .day-btn .d{ display:block; font-size: 22px; line-height: 1; }
-  .day-btn .f{
-    display:block;
-    font-family: var(--font-body);
-    font-size: 10.5px;
-    font-weight: 500;
-    color: var(--text-muted);
-    letter-spacing: 0;
-    margin-top: 3px;
-    white-space: nowrap;
-  }
-  .day-btn:hover{ border-color: rgba(255,255,255,0.22); color: var(--text); }
-  .day-btn.active{
-    border-color: var(--turf);
-    background: rgba(87,217,125,0.08);
-    color: var(--turf);
-  }
-  .day-btn.active .f{ color: var(--turf); opacity: 0.8; }
-  .day-btn.rest{ opacity: 0.55; }
-  .day-btn.rest.active{ border-color: var(--text-muted); background: rgba(255,255,255,0.04); color: var(--text); }
-  .day-btn.rest.active .f{ color: var(--text-muted); }
+  .cardio b{font-family:'Barlow Condensed';font-size:20px;font-weight:600;display:block;color:var(--accent)}
+  .cardio span{font-size:13.5px;color:var(--muted);line-height:1.55}
 
-  /* ---------- Session panel ---------- */
-  section.day-panel{ display:none; padding-top: 26px; }
-  section.day-panel.active{ display:block; }
+  .restcard{
+    background:var(--surface);border-radius:var(--r);padding:22px 18px;
+    border-left:4px solid #3B4E63;
+  }
+  .restcard h2{color:var(--text)}
+  .restcard p{margin:8px 0 0;color:var(--muted);font-size:15px}
 
-  .session-head{
-    display:flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 18px;
+  /* ---------- Rules ---------- */
+  .rules{margin:22px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px 6px}
+  .rules h2{margin:0;font-size:27px;color:var(--text);font-weight:700}
+  .rules ol{margin:14px 0 0;padding:0;list-style:none;counter-reset:r}
+  .rules li{border-bottom:1px solid var(--line);padding:11px 0 11px 30px;position:relative;font-size:15px;counter-increment:r;color:var(--text)}
+  .rules li::before{
+    content:counter(r);position:absolute;left:0;top:11px;
+    font-family:'Barlow Condensed';font-size:15px;color:var(--amber);font-weight:600;
   }
-  .session-title{
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 30px;
-    letter-spacing: -0.005em;
-  }
-  .session-meta{
-    font-size: 12.5px;
-    color: var(--text-muted);
-    white-space: nowrap;
-  }
-  .session-note{
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--turf);
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-size: 13.5px;
-    color: var(--text-mid);
-    margin-bottom: 20px;
-  }
-
-  /* ---------- Exercise list ---------- */
-  .ex-list{ display: flex; flex-direction: column; gap: 10px; }
-
-  details.ex{
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  details.ex[open]{ border-color: rgba(255,255,255,0.16); }
-
-  summary.ex-head{
-    list-style: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    padding: 14px 16px;
-    -webkit-tap-highlight-color: transparent;
-  }
-  summary.ex-head::-webkit-details-marker{ display:none; }
-
-  .ex-name-wrap{ display:flex; align-items:baseline; gap: 10px; min-width: 0; }
-  .ex-index{
-    font-family: var(--font-display);
-    font-size: 13px;
-    color: var(--text-muted);
-    flex: 0 0 auto;
-    width: 20px;
-  }
-  .ex-name{
-    font-size: 15.5px;
-    font-weight: 600;
-    color: var(--text);
-    overflow-wrap: anywhere;
-  }
-
-  .ex-right{ display:flex; align-items:center; gap: 12px; flex: 0 0 auto; }
-  .ex-setrep-wrap{ display:flex; flex-direction:column; align-items:flex-end; }
-  .ex-setrep{
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 20px;
-    color: var(--turf);
-    white-space: nowrap;
-    line-height: 1.1;
-  }
-  .ex-rest{
-    font-size: 10.5px;
-    color: var(--text-muted);
-    white-space: nowrap;
-    margin-top: 1px;
-  }
-  .chev{
-    width: 18px; height: 18px;
-    color: var(--text-muted);
-    transition: transform .18s ease;
-    flex: 0 0 auto;
-  }
-  details.ex[open] .chev{ transform: rotate(180deg); }
-
-  .ex-body{
-    padding: 0 16px 18px 46px;
-    display: grid;
-    gap: 12px;
-  }
-  .ex-block .label{
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-  }
-  .ex-block.technique .label{ color: var(--amber); }
-  .ex-block.benefit .label{ color: var(--turf); }
-  .ex-block p{
-    margin: 0;
-    font-size: 13.5px;
-    color: var(--text-mid);
-    line-height: 1.55;
-  }
-  .flag{
-    display: inline-block;
-    margin-top: 8px;
-    font-size: 12px;
-    color: var(--amber);
-    background: rgba(255,184,77,0.10);
-    border: 1px solid rgba(255,184,77,0.25);
-    border-radius: 6px;
-    padding: 4px 8px;
-  }
-
-  /* rest day */
-  .rest-card{
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 28px 20px;
-    text-align: center;
-    color: var(--text-mid);
-    font-size: 14px;
-  }
-  .rest-card .big{
-    font-family: var(--font-display);
-    font-size: 30px;
-    color: var(--text);
-    display:block;
-    margin-bottom: 6px;
-  }
-
-  /* legend */
-  .legend{
-    margin-top: 26px;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-  .legend span{ display:inline-flex; align-items:center; gap:6px; }
-  .legend .dot{ width:7px; height:7px; border-radius:50%; display:inline-block; }
-  .dot.turf{ background: var(--turf); }
-  .dot.amber{ background: var(--amber); }
-
-  footer{
-    max-width: 780px;
-    margin: 40px auto 0;
-    padding: 0 20px;
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-
-  /* ---------- iPhone 8 Plus & tương tự (~414px logical width) ---------- */
-  @media (max-width: 430px){
-    .wrap{ padding: 20px 16px calc(56px + env(safe-area-inset-bottom)); }
-
-    .eyebrow{ font-size: 12px; }
-    h1{ font-size: 40px; margin: 4px 0 8px; }
-    .hero p{ font-size: 14px; max-width: none; }
-
-    nav.days{ margin: 20px -16px 0; padding: 0 16px 4px; gap: 5px; }
-    .day-btn{ min-width: 70px; padding: 8px 12px 7px; }
-    .day-btn .d{ font-size: 19px; }
-    .day-btn .f{ font-size: 9.5px; }
-
-    .session-head{ flex-direction: column; align-items:flex-start; gap:3px; margin-bottom: 14px; }
-    .session-title{ font-size: 25px; }
-    .session-note{ font-size: 13px; padding: 11px 12px; }
-
-    summary.ex-head{ padding: 12px 12px; gap: 10px; }
-    .ex-index{ width: 16px; font-size: 12px; }
-    .ex-name{ font-size: 14.5px; }
-    .ex-setrep{ font-size: 17px; }
-    .ex-rest{ font-size: 9.5px; }
-    .ex-right{ gap: 8px; }
-    .chev{ width: 16px; height: 16px; }
-
-    .ex-body{ padding: 0 12px 15px 38px; gap: 10px; }
-    .ex-block .label{ font-size: 10.5px; }
-    .ex-block p{ font-size: 13px; }
-
-    .legend{ gap: 12px; margin-top: 20px; padding-top: 14px; }
-    footer{ padding: 0 16px; }
-  }
-
-  /* Đảm bảo không bao giờ tràn ngang, kể cả tên bài dài */
-  .ex-name, .ex-block p, .session-note{ word-break: break-word; }
+  .goal{padding:16px 0 18px;font-size:15.5px;color:var(--muted)}
+  .goal b{color:var(--amber);font-weight:600}
+  footer{text-align:center;font-size:12.5px;color:#5D6C7C;padding:20px 10px 0}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header class="hero">
-    <div class="eyebrow">Giáo án cá nhân — 22 tuổi · Gym đầy đủ</div>
-    <h1>Athletic&nbsp;Lean</h1>
-    <p>Lịch tập 6 buổi/tuần, 1 buổi/tối. Chạm vào từng bài để xem kỹ thuật và tác dụng.</p>
-  </header>
-
-  <nav class="days" id="dayNav"></nav>
-
-  <div id="panels"></div>
-
-  <div class="legend">
-    <span><i class="dot amber"></i>Kỹ thuật — cách thực hiện đúng</span>
-    <span><i class="dot turf"></i>Tác dụng — mục tiêu bài tập nhắm tới</span>
+<header>
+  <p class="kicker">Lịch tập 6 buổi / tuần</p>
+  <h1>Lean<span>Athletic</span></h1>
+  <p>Mạnh, nhanh, có conditioning và body fat thấp. Không đếm RIR, không tập theo kiểu bodybuilding.</p>
+  <div class="split">
+    <div><b>3</b><small>buổi hill / Zone 2</small></div>
+    <div><b>2</b><small>buổi explosive</small></div>
+    <div><b>1</b><small>ngày nghỉ</small></div>
   </div>
+</header>
 
-  <footer>Set × Rep là điểm khởi đầu — tăng tải khi hoàn thành hết rep với form tốt ở mọi set. Thời gian nghỉ hiển thị dưới số rep là mức khuyến nghị giữa các set.</footer>
-</div>
+<nav>
+  <div class="rail" role="tablist" aria-label="Chọn ngày tập">
+    <button class="tab" role="tab" data-day="d2" style="color:var(--amber)"><i></i><span class="lbl">T2</span></button>
+    <button class="tab" role="tab" data-day="d3" style="color:var(--sky)"><i></i><span class="lbl">T3</span></button>
+    <button class="tab" role="tab" data-day="d4" style="color:var(--sage)"><i></i><span class="lbl">T4</span></button>
+    <button class="tab" role="tab" data-day="d5" style="color:var(--amber)"><i></i><span class="lbl">T5</span></button>
+    <button class="tab" role="tab" data-day="d6" style="color:var(--sky)"><i></i><span class="lbl">T6</span></button>
+    <button class="tab" role="tab" data-day="d7" style="color:var(--sage)"><i></i><span class="lbl">T7</span></button>
+    <button class="tab" role="tab" data-day="cn" style="color:#5D6C7C"><i></i><span class="lbl">CN</span></button>
+  </div>
+</nav>
+
+<main>
+
+<!-- T2 -->
+<section class="day" id="d2" style="--accent:var(--amber)" hidden>
+  <div class="head">
+    <p class="d">Thứ 2</p>
+    <h2>Lower A + Hill</h2>
+    <div class="chips"><span class="chip">Chân</span><span class="chip">Sprint dốc</span><span class="chip">Unilateral</span></div>
+  </div>
+  <div class="block">
+    <h3>Khởi động</h3>
+    <ul><li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Đi bộ + mobility<span class="n">5 phút</span></span></button></li></ul>
+    <div class="cardio"><b>Hill sprint · 8 rounds</b><span>Hard: 12 km/h — 12% — 20 giây<br>Rest: 4 km/h — 12% — 60 giây</span></div>
+    <h3>Bài chính</h3>
+    <ul>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Bulgarian Split Squat</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-leg RDL</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Hip Thrust</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Leg Curl</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-leg Calf Raise</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Pallof Press<span class="n">Chống xoay, giữ core</span></span></button></li>
+    </ul>
+  </div>
+</section>
+
+<!-- T3 -->
+<section class="day" id="d3" style="--accent:var(--sky)" hidden>
+  <div class="head">
+    <p class="d">Thứ 3</p>
+    <h2>Upper A + Zone 2</h2>
+    <div class="chips"><span class="chip">Thân trên</span><span class="chip">Zone 2</span></div>
+  </div>
+  <div class="block">
+    <h3>Khởi động</h3>
+    <ul><li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Warm-up</span></button></li></ul>
+    <h3>Bài chính</h3>
+    <ul>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">DB Bench Press</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Lat Pulldown</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-arm Cable Row</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-arm DB Shoulder Press</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Cable Chest Fly</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Face Pull</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Suitcase Carry</span></button></li>
+    </ul>
+    <div class="cardio"><b>Zone 2 · 15–20 phút</b><span>Nhịp thở còn nói chuyện được</span></div>
+  </div>
+</section>
+
+<!-- T4 -->
+<section class="day" id="d4" style="--accent:var(--sage)" hidden>
+  <div class="head">
+    <p class="d">Thứ 4</p>
+    <h2>Athletic</h2>
+    <div class="chips"><span class="chip">Explosive</span><span class="chip">Ưu tiên tốc độ</span></div>
+  </div>
+  <div class="block">
+    <h3>Khởi động</h3>
+    <ul><li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Warm-up + mobility</span></button></li></ul>
+    <h3>Explosive — không đẩy tới failure</h3>
+    <ul>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Jump Squat</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Explosive Push-up</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Lateral Bound</span></button></li>
+    </ul>
+    <h3>Sức mạnh</h3>
+    <ul>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Bulgarian Split Squat</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Step-up</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Leg Curl</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-leg Calf Raise</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Copenhagen Plank</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Dead Bug</span></button></li>
+    </ul>
+  </div>
+</section>
+
+<!-- T5 -->
+<section class="day" id="d5" style="--accent:var(--amber)" hidden>
+  <div class="head">
+    <p class="d">Thứ 5</p>
+    <h2>Lower B + Hill</h2>
+    <div class="chips"><span class="chip">Chân</span><span class="chip">Máy</span><span class="chip">Sprint dốc</span></div>
+  </div>
+  <div class="block">
+    <h3>Khởi động</h3>
+    <ul><li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Warm-up</span></button></li></ul>
+    <h3>Bài chính</h3>
+    <ul>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Leg Press</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Reverse Lunge</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-leg RDL</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Hip Thrust</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Leg Extension</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Leg Curl</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Calf Press</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Cable Woodchop</span></button></li>
+    </ul>
+    <div class="cardio"><b>Hill sprint · 8 rounds</b><span>Hard: 12 km/h — 12% — 20 giây<br>Rest: 4 km/h — 12% — 60 giây</span></div>
+  </div>
+</section>
+
+<!-- T6 -->
+<section class="day" id="d6" style="--accent:var(--sky)" hidden>
+  <div class="head">
+    <p class="d">Thứ 6</p>
+    <h2>Upper B + Zone 2</h2>
+    <div class="chips"><span class="chip">Thân trên</span><span class="chip">Vai &amp; lưng trên</span><span class="chip">Zone 2</span></div>
+  </div>
+  <div class="block">
+    <h3>Bài chính</h3>
+    <ul>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Incline DB Press</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Seated Cable Row</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-arm Lat Pulldown</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-arm Cable Press</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Lateral Raise</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Face Pull / Reverse Fly</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Suitcase Carry</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Cable Woodchop</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Side Plank</span></button></li>
+    </ul>
+    <div class="cardio"><b>Zone 2 · 20–25 phút</b><span>Giữ đều nhịp, kết thúc vẫn thấy khoẻ</span></div>
+  </div>
+</section>
+
+<!-- T7 -->
+<section class="day" id="d7" style="--accent:var(--sage)" hidden>
+  <div class="head">
+    <p class="d">Thứ 7</p>
+    <h2>Full Body Athletic</h2>
+    <div class="chips"><span class="chip">Toàn thân</span><span class="chip">Explosive</span><span class="chip">Zone 2</span></div>
+  </div>
+  <div class="block">
+    <h3>Khởi động</h3>
+    <ul><li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Mobility</span></button></li></ul>
+    <h3>Explosive</h3>
+    <ul>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Jump Squat</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Lateral Bound</span></button></li>
+    </ul>
+    <h3>Sức mạnh</h3>
+    <ul>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Step-up</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-arm Cable Row</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">DB Bench Press</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Hip Thrust</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-leg Calf Raise</span></button></li>
+      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Pallof Press</span></button></li>
+    </ul>
+    <div class="cardio"><b>Zone 2 · 20–25 phút</b><span>Kết thúc tuần bằng nhịp nhẹ</span></div>
+  </div>
+</section>
+
+<!-- CN -->
+<section class="day" id="cn" hidden>
+  <div class="restcard">
+    <div class="head" style="background:none;border:0;padding:0">
+      <p class="d">Chủ nhật</p>
+      <h2>Nghỉ</h2>
+    </div>
+    <p>Không tập. Ngủ đủ, ăn đủ protein, đi bộ nhẹ nếu muốn. Đây là ngày cơ thể hồi phục và mạnh lên.</p>
+  </div>
+</section>
+
+<section class="rules">
+  <h2>Nguyên tắc tập</h2>
+  <ol>
+    <li>Không cần cố định 8–12 reps.</li>
+    <li>Làm reps chuẩn, đến khi rep tiếp theo không còn giữ được kỹ thuật thì dừng.</li>
+    <li>Lỡ chạm failure đôi lúc cũng không sao.</li>
+    <li>Bài explosive ưu tiên tốc độ, không đẩy tới failure.</li>
+    <li>Hill: hard nhưng kiểm soát.</li>
+    <li>Ăn maintenance hoặc thâm hụt nhẹ, đủ protein.</li>
+  </ol>
+  <p class="goal">Đích đến: <b>mạnh + nhanh + có conditioning + body fat thấp</b>. Lean athletic, không phải bodybuilding.</p>
+</section>
+
+<footer>Chạm vào tên bài để đánh dấu đã xong trong buổi tập.</footer>
+</main>
 
 <script>
-const DATA = [
-  {
-    id: "t2",
-    day: "Thứ 2",
-    focus: "Sức mạnh chân",
-    title: "Lower Body — Strength",
-    note: "Bài compound nặng vừa (70–85% 1RM), 6–8 rep — đủ nặng để kích thích sức mạnh & hormone mà không cần đến giới hạn tối đa.",
-    exercises: [
-      {
-        name: "Back Squat",
-        sr: "4×6–8",
-        rest: "90–120s",
-        technique: "Xuống đến khi đùi song song sàn (không cần sâu hơn), không khóa cứng gối ở đỉnh, ngực ưỡn, trọng lượng dồn đều cả bàn chân.",
-        benefit: "Nền tảng sức mạnh toàn thân dưới — bài tạo phản ứng testosterone mạnh nhất trong cả buổi tập."
-      },
-      {
-        name: "Hip Thrust",
-        sr: "3×6–8",
-        rest: "90s",
-        technique: "Vai tựa ghế, cằm hơi cụp, đẩy hông lên hết cỡ và siết mông ở đỉnh, không ưỡn lưng dưới quá mức.",
-        benefit: "Phát triển mông/hông — nhóm cơ quyết định lực bứt tốc, gần như không tạo áp lực lên cột sống."
-      },
-      {
-        name: "Single-leg Romanian Deadlift",
-        sr: "3×8–10 /chân",
-        rest: "75s",
-        technique: "Giữ lưng thẳng tự nhiên, gập hông đưa mông ra sau, chân trụ hơi khuỵu, chân kia duỗi thẳng ra sau để giữ thăng bằng.",
-        benefit: "Thay thế deadlift hai chân — giảm hẳn tải lên cột sống nhưng vẫn xây sức mạnh gân kheo và thăng bằng một chân kiểu vận động viên."
-      },
-      {
-        name: "Bulgarian Split Squat",
-        sr: "3×10 /chân",
-        rest: "75s",
-        technique: "Chân sau đặt lên ghế, hạ người thẳng xuống (không đổ người về trước), đầu gối trước không vượt quá mũi chân.",
-        benefit: "Sức mạnh đơn chân — mô phỏng lực đẩy khi chạy và đổi hướng trên sân."
-      },
-      {
-        name: "Walking Lunges đa hướng",
-        sr: "3×12 /chân",
-        rest: "60s",
-        technique: "Bước dài vừa phải, hạ gối sau gần chạm sàn, đổi hướng bước (trước / chéo / ngang) qua mỗi hiệp.",
-        benefit: "Sức mạnh & kiểm soát đa hướng — mô phỏng chuyển động thật khi thi đấu, không chỉ đi thẳng."
-      },
-      {
-        name: "Nordic Hamstring Curl",
-        sr: "3×6–8",
-        rest: "90s",
-        technique: "Quỳ, cố định cổ chân (người giữ hoặc móc dưới vật cố định), hạ người xuống thật chậm có kiểm soát, chống tay khi gần chạm sàn.",
-        benefit: "Phòng chấn thương gân kheo — bài quan trọng nhất cho ai có tập sprint, nên giữ xuyên suốt cả quá trình tập lâu dài."
-      },
-      {
-        name: "Standing Calf Raise",
-        sr: "4×15",
-        rest: "45s",
-        technique: "Nhón gót cao nhất có thể, giữ 1 giây ở đỉnh, hạ xuống chậm và có kiểm soát.",
-        benefit: "Sức mạnh bắp chân — hỗ trợ trực tiếp lực đẩy khi chạy và bật nhảy."
-      },
-      {
-        name: "Plank + Pallof Press",
-        sr: "3×45s + 3×12 /bên",
-        rest: "45s",
-        technique: "Plank: giữ thân thẳng từ vai đến gót, không võng lưng. Pallof Press: kéo cáp ngang hông ra trước, chống lại lực kéo xoay người.",
-        benefit: "Ổn định core chống xoay — nền tảng truyền lực giữa thân trên và thân dưới trong mọi động tác."
-      }
-    ]
-  },
-  {
-    id: "t3",
-    day: "Thứ 3",
-    focus: "Đẩy (Push)",
-    title: "Upper Body — Push",
-    note: "Rep trung bình–cao (10–15), tempo kiểm soát — săn chắc phần thân trên mà không tạo khối lượng thừa.",
-    exercises: [
-      {
-        name: "Incline Dumbbell Press",
-        sr: "4×10–12",
-        rest: "75–90s",
-        technique: "Ghế nghiêng 30–45°, hạ tạ chậm (đếm 3 giây) xuống ngực trên, khuỷu tay tạo góc ~45° với thân.",
-        benefit: "Phát triển ngực trên cân đối; tempo chậm giúp cơ săn chắc thay vì phình to."
-      },
-      {
-        name: "Overhead Press (đứng)",
-        sr: "3×10–12",
-        rest: "75s",
-        technique: "Siết bụng và mông để không ưỡn lưng dưới, đẩy tạ thẳng lên qua đỉnh đầu theo một đường thẳng.",
-        benefit: "Sức mạnh vai toàn diện, đồng thời rèn ổn định core khi đứng tự do."
-      },
-      {
-        name: "Dips (thân nghiêng)",
-        sr: "3×10–12",
-        rest: "75s",
-        technique: "Nghiêng thân về phía trước khi hạ người để nhắm vào ngực nhiều hơn vai/tay sau.",
-        benefit: "Ngực dưới và tay sau — bài compound hiệu quả không cần thêm tạ."
-      },
-      {
-        name: "Lateral Raise",
-        sr: "3×15",
-        rest: "45s",
-        technique: "Dùng tạ nhẹ, nâng ngang đến vai (không cao hơn), hơi khuỵu khuỷu tay suốt động tác.",
-        benefit: "Định hình vai tròn, gọn — không tạo khối vai to kiểu thể hình."
-      },
-      {
-        name: "Cable Tricep Pushdown",
-        sr: "3×12",
-        rest: "45s",
-        technique: "Khuỷu tay ép sát thân trong suốt hiệp, chỉ cẳng tay di chuyển.",
-        benefit: "Hoàn thiện đường nét tay sau."
-      },
-      {
-        name: "Wall Angel",
-        sr: "2×12",
-        rest: "30s",
-        technique: "Lưng, đầu và tay áp sát tường, trượt tay lên xuống theo hình chữ Y rồi chữ W.",
-        benefit: "Ổn định bả vai — bài dryland của dân bơi lội, phòng chấn thương vai."
-      },
-      {
-        name: "Hanging Leg Raise + Med Ball Rotational Throw",
-        sr: "3×12 + 3×8 /bên",
-        rest: "45s",
-        technique: "Leg Raise: nâng chân/hông không đung đưa người. Rotational Throw: xoay lực từ hông (không chỉ tay), ném dứt khoát vào tường hoặc đối tác.",
-        benefit: "Bụng dưới săn chắc kết hợp sức mạnh xoay thân kiểu vận động viên bóng chày."
-      }
-    ]
-  },
-  {
-    id: "t4",
-    day: "Thứ 4",
-    focus: "Sprint & Agility",
-    title: "Sprint / Agility",
-    note: "Phần tốc độ luôn làm ĐẦU buổi khi hệ thần kinh còn tươi nhất. Máy chạy dốc 15% ở 12km/h đã tạo sức cản tương đương resisted sprint ngoài trời — không cần dụng cụ agility chuyên dụng.",
-    exercises: [
-      {
-        name: "Khởi động động",
-        sr: "10–15 phút",
-        rest: "—",
-        technique: "Xoay khớp toàn thân, chạy nhẹ, lunge động, tăng dần cường độ trước khi vào phần sprint.",
-        benefit: "Giảm rõ rệt nguy cơ rách/căng cơ khi bước vào phần chạy tốc độ cao."
-      },
-      {
-        name: "Hill Sprint (máy chạy)",
-        sr: "6–8×20–30s",
-        rest: "60–90s",
-        technique: "Tốc độ 12km/h, độ dốc 15%. Gối nâng cao, tay đánh mạnh, thân hơi đổ về trước theo độ dốc. Nghỉ 60–90 giây giữa mỗi lần.",
-        benefit: "Dốc 15% tạo sức cản tự nhiên tương đương resisted sprint — phát triển trực tiếp sức mạnh bứt tốc."
-      },
-      {
-        name: "High Knees tại chỗ",
-        sr: "3×20s",
-        rest: "30s",
-        technique: "Gối nâng ngang hông, nhịp chân nhanh, tay phối hợp tự nhiên.",
-        benefit: "Tăng tần số bước chân, khởi động hệ thần kinh–cơ trước agility."
-      },
-      {
-        name: "Icky Shuffle",
-        sr: "3×20s",
-        rest: "30s",
-        technique: "Bước chân nhanh xen kẽ tại chỗ như đang di chuyển qua thang dây, giữ trọng tâm thấp.",
-        benefit: "Tốc độ bước chân và khả năng phối hợp — thay thế bài thang dây khi không có dụng cụ."
-      },
-      {
-        name: "Lateral Shuffle",
-        sr: "4×6 lượt",
-        rest: "30s",
-        technique: "Giữ người thấp, không bắt chéo chân, đổi hướng dứt khoát ở mỗi lượt.",
-        benefit: "Khả năng đổi hướng ngang — mô phỏng tình huống phòng ngự/tấn công trên sân."
-      },
-      {
-        name: "Carioca Step",
-        sr: "3×10m mỗi hướng",
-        rest: "30s",
-        technique: "Bước chéo chân qua lại liên tục, để hông xoay linh hoạt theo nhịp bước.",
-        benefit: "Linh hoạt hông và phối hợp chân chéo — nền tảng cho các pha đổi hướng phức tạp."
-      },
-      {
-        name: "Dead Bug + Side Plank",
-        sr: "3×10 + 3×30s /bên",
-        rest: "30–45s",
-        technique: "Dead Bug: lưng ép sát sàn, duỗi tay và chân đối diện chậm rãi. Side Plank: giữ thân thẳng, hông không võng xuống.",
-        benefit: "Ổn định core khi chuyển hướng ở tốc độ cao — giảm nguy cơ chấn thương vùng lưng/hông."
-      }
-    ]
-  },
-  {
-    id: "t5",
-    day: "Thứ 5",
-    focus: "Kéo (Pull)",
-    title: "Upper Body — Pull",
-    note: "Trọng tâm ổn định vai và độ dày lưng — vùng cơ dễ bị bỏ quên nhưng quyết định dáng đứng thẳng, gọn gàng.",
-    exercises: [
-      {
-        name: "Pull-up / Lat Pulldown",
-        sr: "4×10–12",
-        rest: "75–90s",
-        technique: "Kéo bằng lực của lưng chứ không phải tay, hướng ngực lên phía thanh xà.",
-        benefit: "Độ rộng và dày lưng xô — tạo dáng chữ V nhẹ tự nhiên, không cần tập vai to."
-      },
-      {
-        name: "Barbell / Dumbbell Row",
-        sr: "3×10",
-        rest: "75s",
-        technique: "Thân nghiêng khoảng 45°, kéo tạ về phía hông (không phải ngực), tránh dùng đà thân người.",
-        benefit: "Xây độ dày phần lưng giữa, hỗ trợ tư thế đứng thẳng."
-      },
-      {
-        name: "Face Pull",
-        sr: "3×15",
-        rest: "45s",
-        technique: "Kéo dây cáp về phía mặt, giữ khuỷu tay cao ngang vai, xoay ngoài vai ở cuối động tác.",
-        benefit: "Bài quan trọng nhất để phòng chấn thương vai — cân bằng lại nhóm cơ vai trước vốn bị tập nhiều hơn ở ngày Push."
-      },
-      {
-        name: "Single-arm Dumbbell Row",
-        sr: "3×10 /bên",
-        rest: "60s",
-        technique: "Một tay và một gối tựa lên ghế, kéo tạ sát thân người, giữ lưng phẳng suốt hiệp.",
-        benefit: "Cân bằng sức mạnh hai bên lưng, tránh lệch cơ."
-      },
-      {
-        name: "Band I-Y-T Raise",
-        sr: "2×10 mỗi tư thế",
-        rest: "30s",
-        technique: "Nằm sấp trên ghế nghiêng, nâng tay lần lượt theo hình chữ I, Y rồi T với dây kháng lực nhẹ.",
-        benefit: "Ổn định bả vai kiểu dryland bơi lội — phòng chấn thương vai lâu dài."
-      },
-      {
-        name: "Bicep Curl",
-        sr: "3×12",
-        rest: "45s",
-        technique: "Khuỷu tay cố định sát thân, không đung đưa người để tạo đà.",
-        benefit: "Hoàn thiện đường nét tay trước — không cần tập nặng để tay to."
-      },
-      {
-        name: "Ab Wheel / Cable Crunch + Bird Dog",
-        sr: "3×12 + 3×10 /bên",
-        rest: "45s",
-        technique: "Ab Wheel: lăn ra xa đến mức còn kiểm soát được, không để lưng võng. Bird Dog: duỗi tay và chân đối diện, giữ hông không xoay lệch.",
-        benefit: "Sức mạnh bụng sâu kết hợp ổn định cột sống khi chuyển động."
-      }
-    ]
-  },
-  {
-    id: "t6",
-    day: "Thứ 6",
-    focus: "Sức mạnh bùng nổ",
-    title: "Lower Body — Power",
-    note: "Làm phần jump/plyometric ĐẦU buổi khi cơ thể còn tươi nhất — luôn ưu tiên chất lượng tiếp đất hơn số lượng.",
-    exercises: [
-      {
-        name: "Box Jump",
-        sr: "4×5",
-        rest: "90–120s",
-        technique: "Bật bằng cả hai chân cùng lúc, tiếp đất êm với gối hơi khuỵu để hấp thụ lực, bước xuống (không nhảy xuống).",
-        benefit: "Sức bật thẳng đứng và phản xạ đàn hồi của cơ — nền tảng cho mọi pha tranh chấp trên không."
-      },
-      {
-        name: "Broad Jump",
-        sr: "4×5",
-        rest: "90–120s",
-        technique: "Bật xa hết sức về phía trước, tiếp đất bằng cả hai chân cùng lúc, gối khuỵu để hấp thụ lực.",
-        benefit: "Sức mạnh bùng nổ theo phương ngang — liên quan trực tiếp đến tốc độ bứt tốc."
-      },
-      {
-        name: "Depth Jump",
-        sr: "3×5",
-        rest: "120s",
-        technique: "Bước xuống từ bục thấp, chạm đất và bật lên ngay lập tức — thời gian tiếp đất càng ngắn càng tốt. Chỉ tập khi đã quen plyometric ≥2–3 tháng.",
-        benefit: "Phản xạ đàn hồi cơ (reactive strength) — yếu tố phân biệt vận động viên có tốc độ thật sự."
-      },
-      {
-        name: "Kettlebell Swing",
-        sr: "3×10",
-        rest: "75–90s",
-        technique: "Gập ở hông (không phải gối), đẩy hông về trước dứt khoát để tạo lực đưa tạ bay lên ngang vai.",
-        benefit: "Sức mạnh hông bùng nổ với áp lực lên cột sống thấp hơn nhiều so với deadlift."
-      },
-      {
-        name: "Single-leg Box Step-up",
-        sr: "3×8 /chân",
-        rest: "60s",
-        technique: "Đặt cả bàn chân lên bục, đẩy người lên hoàn toàn bằng chân trên bục, không đà từ chân dưới.",
-        benefit: "Sức mạnh đơn chân kiểu leo dốc/tăng tốc — không có pha tiếp đất nên nhẹ nhàng cho khớp gối."
-      },
-      {
-        name: "Sled Push / Pull",
-        sr: "4×20m",
-        rest: "90s",
-        technique: "Người đổ về phía trước, bước ngắn và nhanh khi đẩy, giữ lưng thẳng.",
-        benefit: "Sức mạnh đẩy toàn thân với tải trọng ổn định, ít tác động khớp hơn sprint tự do."
-      },
-      {
-        name: "Rotational Med Ball Throw",
-        sr: "3×8 /bên",
-        rest: "60–75s",
-        technique: "Xoay lực bắt đầu từ hông, không chỉ dùng tay, ném dứt khoát và hết lực.",
-        benefit: "Sức mạnh xoay thân bùng nổ — bổ trợ trực tiếp cho các pha sút bóng/xoay người tốc độ cao."
-      }
-    ]
-  },
-  {
-    id: "t7",
-    day: "Thứ 7",
-    focus: "Toàn thân nhẹ",
-    title: "Full Body & Mobility",
-    note: "Buổi phục hồi tích cực — cường độ thấp, tập trung vào chất lượng chuyển động và độ linh hoạt khớp.",
-    exercises: [
-      {
-        name: "Full Body Circuit",
-        sr: "3 vòng ×12",
-        rest: "10–20s giữa bài",
-        technique: "Goblet Squat → Push-up → Row → Lunge, tải nhẹ, nhịp đều, nghỉ tối thiểu giữa các bài trong vòng.",
-        benefit: "Phục hồi tích cực, duy trì kỹ thuật động tác mà không gây thêm mệt mỏi tích lũy."
-      },
-      {
-        name: "Mobility toàn thân",
-        sr: "20 phút",
-        rest: "—",
-        technique: "Hip opener, xoay ngực (thoracic rotation), mobility mắt cá — giữ mỗi tư thế 30–60 giây, thở sâu đều.",
-        benefit: "Duy trì độ linh hoạt khớp — yếu tố quyết định để tập bền vững nhiều năm không chấn thương."
-      },
-      {
-        name: "Foam Rolling toàn thân",
-        sr: "10 phút",
-        rest: "—",
-        technique: "Lăn chậm qua từng nhóm cơ lớn, dừng lại 20–30 giây ở điểm căng/cứng.",
-        benefit: "Giảm căng cơ, hỗ trợ quá trình hồi phục trước tuần tập mới."
-      },
-      {
-        name: "Tuỳ chọn: đá bóng / bơi / đạp xe nhẹ",
-        sr: "Tự do",
-        rest: "—",
-        technique: "Cường độ nhẹ–vừa, dừng lại nếu cảm thấy mệt thay vì cố hoàn thành.",
-        benefit: "Duy trì \"cảm giác vận động\" tự nhiên, đúng tinh thần thể thao thay vì chỉ tập gym thuần túy."
-      }
-    ]
-  },
-  {
-    id: "cn",
-    day: "CN",
-    focus: "Nghỉ",
-    title: "Nghỉ hoàn toàn",
-    rest: true,
-    restText: "Không tập tạ, không sprint. Có thể đi bộ nhẹ 30–45 phút nếu muốn vận động. Đây là ngày cơ thể thực sự hồi phục và phát triển từ 6 buổi trước đó."
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var days=[].slice.call(document.querySelectorAll('.day'));
+  function show(id){
+    days.forEach(function(d){d.hidden=(d.id!==id)});
+    tabs.forEach(function(t){
+      var on=t.dataset.day===id;
+      t.setAttribute('aria-selected',on?'true':'false');
+      if(on)t.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+    });
   }
-];
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.day)})});
+  var order=['cn','d2','d3','d4','d5','d6','d7'];
+  show(order[new Date().getDay()]);
 
-const nav = document.getElementById('dayNav');
-const panels = document.getElementById('panels');
-
-DATA.forEach((d, i) => {
-  const btn = document.createElement('button');
-  btn.className = 'day-btn' + (d.rest ? ' rest' : '') + (i === 0 ? ' active' : '');
-  btn.dataset.target = d.id;
-  btn.innerHTML = `<span class="d">${d.day}</span><span class="f">${d.focus}</span>`;
-  btn.addEventListener('click', () => selectDay(d.id));
-  nav.appendChild(btn);
-
-  const panel = document.createElement('section');
-  panel.className = 'day-panel' + (i === 0 ? ' active' : '');
-  panel.id = 'panel-' + d.id;
-
-  if (d.rest) {
-    panel.innerHTML = `
-      <div class="rest-card">
-        <span class="big">Chủ nhật — Nghỉ</span>
-        ${d.restText}
-      </div>`;
-  } else {
-    const items = d.exercises.map((ex, idx) => `
-      <details class="ex">
-        <summary class="ex-head">
-          <div class="ex-name-wrap">
-            <span class="ex-index">${String(idx + 1).padStart(2, '0')}</span>
-            <span class="ex-name">${ex.name}</span>
-          </div>
-          <div class="ex-right">
-            <div class="ex-setrep-wrap">
-              <span class="ex-setrep">${ex.sr}</span>
-              ${ex.rest && ex.rest !== '—' ? `<span class="ex-rest">nghỉ ${ex.rest}</span>` : ''}
-            </div>
-            <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </summary>
-        <div class="ex-body">
-          <div class="ex-block technique">
-            <div class="label">KỸ THUẬT</div>
-            <p>${ex.technique}</p>
-          </div>
-          <div class="ex-block benefit">
-            <div class="label">TÁC DỤNG</div>
-            <p>${ex.benefit}</p>
-          </div>
-        </div>
-      </details>`).join('');
-
-    panel.innerHTML = `
-      <div class="session-head">
-        <div class="session-title">${d.title}</div>
-        <div class="session-meta">${d.exercises.length} bài</div>
-      </div>
-      <div class="session-note">${d.note}</div>
-      <div class="ex-list">${items}</div>`;
-  }
-
-  panels.appendChild(panel);
-});
-
-function selectDay(id) {
-  document.querySelectorAll('.day-btn').forEach(b => b.classList.toggle('active', b.dataset.target === id));
-  document.querySelectorAll('.day-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + id));
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.ex');
+    if(!b)return;
+    b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');
+  });
+})();
 </script>
 </body>
 </html>
