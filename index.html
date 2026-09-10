@@ -1,388 +1,320 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0F1622">
-<title>Lịch tập — Lean Athletic</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lịch tập tuần</title>
 <style>
   :root{
-    --bg:#0F1622;
-    --surface:#16202E;
-    --surface-2:#1D2A3A;
-    --line:#2A3A4D;
-    --text:#E8E4DC;
-    --muted:#8B9BAD;
-    --amber:#E9A93C;
-    --sky:#6FB6D9;
-    --sage:#8FB98A;
-    --accent:var(--amber);
-    --r:14px;
+    --ink:#12161c;
+    --ink-2:#1b212a;
+    --line:#2b333f;
+    --paper:#f2f4f3;
+    --mute:#8d98a7;
+    --push:#5ad19a;
+    --pull:#5aa9f0;
+    --legs:#f4685f;
+    --rest:#a4adba;
   }
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Barlow',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
-    font-size:16px;line-height:1.45;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.5;
     -webkit-font-smoothing:antialiased;
-    padding-bottom:calc(28px + env(safe-area-inset-bottom));
   }
-  h1,h2,h3,.cond{font-family:'Barlow Condensed','Barlow',sans-serif;letter-spacing:.01em}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 80px}
 
-  /* ---------- Hero ---------- */
   header{
-    padding:calc(26px + env(safe-area-inset-top)) 18px 22px;
-    background:
-      radial-gradient(120% 90% at 12% 0%, #24344A 0%, rgba(36,52,74,0) 62%),
-      var(--bg);
-    border-bottom:1px solid var(--line);
+    display:flex;flex-wrap:wrap;align-items:flex-end;
+    justify-content:space-between;gap:16px;
+    padding-bottom:24px;border-bottom:1px solid var(--line);
   }
-  header .kicker{font-size:13px;color:var(--muted);margin:0 0 8px;letter-spacing:.04em}
-  header h1{
-    font-size:46px;line-height:.9;font-weight:700;margin:0;color:var(--text);
+  h1{
+    font-size:clamp(30px,5vw,46px);
+    font-weight:800;letter-spacing:-.03em;margin:0;
   }
-  header h1 span{display:block;color:var(--amber)}
-  header p{margin:14px 0 0;font-size:14.5px;color:var(--muted);max-width:34ch}
-  .split{display:flex;gap:18px;margin-top:18px}
-  .split div{flex:1}
-  .split b{font-family:'Barlow Condensed';font-size:27px;font-weight:600;display:block;line-height:1;color:var(--text)}
-  .split small{font-size:12.5px;color:var(--muted)}
+  .sub{color:var(--mute);font-size:14px;margin:6px 0 0}
+  .counter{
+    font-variant-numeric:tabular-nums;
+    font-size:14px;color:var(--mute);
+    border:1px solid var(--line);border-radius:999px;
+    padding:8px 16px;white-space:nowrap;
+  }
+  .counter b{color:var(--paper);font-size:18px}
 
-  /* ---------- Day rail ---------- */
-  nav{
-    position:sticky;top:0;z-index:20;
-    background:rgba(15,22,34,.92);
-    backdrop-filter:saturate(150%) blur(12px);
-    -webkit-backdrop-filter:saturate(150%) blur(12px);
-    border-bottom:1px solid var(--line);
-    padding:9px 0;
+  nav{display:flex;gap:8px;overflow-x:auto;padding:20px 0 4px;scrollbar-width:thin}
+  nav button{
+    flex:0 0 auto;cursor:pointer;
+    background:transparent;color:var(--mute);
+    border:1px solid var(--line);border-radius:10px;
+    padding:10px 16px;font:inherit;font-size:14px;font-weight:600;
+    display:flex;align-items:center;gap:9px;
+    transition:color .15s,border-color .15s,background .15s;
   }
-  .rail{display:flex;gap:7px;overflow-x:auto;padding:0 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-  .rail::-webkit-scrollbar{display:none}
-  .tab{
-    flex:0 0 auto;border:1px solid var(--line);background:var(--surface);
-    border-radius:999px;padding:8px 14px;
-    font-family:'Barlow Condensed';font-size:17px;font-weight:600;
-    display:flex;align-items:center;gap:7px;cursor:pointer;
-  }
-  .tab i{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.6;font-style:normal}
-  .tab[aria-selected="true"]{background:currentColor;border-color:currentColor}
-  .tab[aria-selected="true"] i{background:var(--bg);opacity:1}
-  .tab span.lbl{color:var(--muted)}
-  .tab[aria-selected="true"] span.lbl{color:var(--bg)}
-  .tab:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  nav button .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.9}
+  nav button[data-type=push]{color:var(--push)}
+  nav button[data-type=pull]{color:var(--pull)}
+  nav button[data-type=legs]{color:var(--legs)}
+  nav button[data-type=rest]{color:var(--rest)}
+  nav button:hover{border-color:currentColor}
+  nav button[aria-selected=true]{background:currentColor;border-color:currentColor}
+  nav button[aria-selected=true] span:not(.dot){color:var(--ink)}
+  nav button[aria-selected=true] .dot{background:var(--ink)}
+  nav button:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
 
-  /* ---------- Day card ---------- */
-  main{padding:16px 14px 0}
-  .day[hidden]{display:none}
-  .head{
-    background:var(--surface);border-radius:var(--r) var(--r) 0 0;
-    padding:16px 16px 14px;border-bottom:1px solid var(--line);
-    border-left:4px solid var(--accent);
-  }
-  .head .d{font-size:12.5px;color:var(--muted);margin:0 0 2px}
-  .head h2{margin:0;font-size:31px;font-weight:700;line-height:1;color:var(--accent)}
-  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
-  .chip{
-    font-size:12.5px;padding:4px 9px;border-radius:6px;
-    background:var(--surface-2);color:var(--muted);font-weight:500;
-  }
+  .day{display:none;padding-top:28px}
+  .day.active{display:block}
 
-  .block{
-    background:var(--surface);padding:6px 16px 4px;
-    border-left:4px solid var(--accent);
-  }
-  .block:last-of-type{border-radius:0 0 var(--r) var(--r);padding-bottom:14px}
+  .day-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:4px}
+  .day-head h2{margin:0;font-size:28px;letter-spacing:-.02em}
+  .flow{color:var(--mute);font-size:14px;margin:0 0 26px}
+
+  .block{margin-bottom:30px}
   .block > h3{
-    margin:14px 0 6px;font-size:15px;font-weight:600;color:var(--muted);
-    display:flex;align-items:center;gap:8px;
+    margin:0 0 12px;font-size:13px;font-weight:700;
+    letter-spacing:.04em;color:var(--mute);
+    display:flex;align-items:center;gap:10px;
   }
   .block > h3::after{content:"";flex:1;height:1px;background:var(--line)}
 
-  ul{list-style:none;margin:0;padding:0}
-  li{border-bottom:1px solid rgba(255,255,255,.055)}
-  li:last-child{border-bottom:0}
-  .ex{
-    display:flex;align-items:center;gap:12px;width:100%;
-    background:none;border:0;padding:13px 2px;text-align:left;
-    font:inherit;color:var(--text);cursor:pointer;min-height:48px;
+  ol.ex{list-style:none;margin:0;padding:0;counter-reset:n}
+  ol.ex li{counter-increment:n}
+  ol.ex label{
+    display:flex;align-items:center;gap:14px;cursor:pointer;
+    padding:13px 16px;border:1px solid var(--line);border-radius:12px;
+    margin-bottom:8px;background:var(--ink-2);
+    transition:border-color .15s,opacity .15s;
   }
-  .box{
-    flex:0 0 22px;height:22px;border:2px solid #3B4E63;border-radius:7px;
-    display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;
+  ol.ex label:hover{border-color:var(--mute)}
+  ol.ex .num{
+    font-variant-numeric:tabular-nums;font-size:12px;
+    color:var(--mute);min-width:18px;
   }
-  .box svg{width:13px;height:13px;stroke:var(--bg);stroke-width:3;fill:none;opacity:0;transform:scale(.6);transition:.15s}
-  .ex .t{flex:1;font-size:16.5px;line-height:1.25}
-  .ex .n{font-size:13px;color:var(--muted);display:block;margin-top:2px}
-  .ex[aria-pressed="true"] .box{background:var(--accent);border-color:var(--accent)}
-  .ex[aria-pressed="true"] .box svg{opacity:1;transform:scale(1)}
-  .ex[aria-pressed="true"] .t{color:#5D6C7C;text-decoration:line-through;text-decoration-color:#3B4E63}
-  .ex:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:8px}
+  ol.ex input{
+    appearance:none;-webkit-appearance:none;margin:0;
+    width:20px;height:20px;flex:0 0 20px;border-radius:6px;
+    border:1.5px solid var(--line);background:transparent;cursor:pointer;
+    display:grid;place-content:center;
+  }
+  ol.ex input::after{
+    content:"";width:10px;height:6px;
+    border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);
+    transform:rotate(-45deg) scale(0);transition:transform .12s;
+  }
+  ol.ex input:checked{background:var(--accent);border-color:var(--accent)}
+  ol.ex input:checked::after{transform:rotate(-45deg) scale(1)}
+  ol.ex input:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
+  ol.ex .name{font-weight:500}
+  ol.ex input:checked ~ .name{text-decoration:line-through;color:var(--mute)}
+  ol.ex .tag{
+    margin-left:auto;font-size:12px;color:var(--mute);
+    border:1px solid var(--line);border-radius:6px;padding:2px 8px;white-space:nowrap;
+  }
 
   .cardio{
-    margin:12px 0 4px;padding:13px 14px;border-radius:10px;
-    background:var(--surface-2);border-left:3px solid var(--accent);
+    border:1px solid var(--accent);border-radius:12px;padding:18px 20px;
+    background:color-mix(in srgb,var(--accent) 8%,transparent);
   }
-  .cardio b{font-family:'Barlow Condensed';font-size:20px;font-weight:600;display:block;color:var(--accent)}
-  .cardio span{font-size:13.5px;color:var(--muted);line-height:1.55}
+  .cardio h4{margin:0 0 6px;font-size:16px}
+  .cardio p{margin:0;color:var(--mute);font-size:14px}
+  .cardio .big{
+    font-size:15px;color:var(--paper);font-variant-numeric:tabular-nums;
+    margin-top:10px;display:flex;gap:20px;flex-wrap:wrap;
+  }
+  .note{color:var(--mute);font-size:14px;font-style:italic}
 
-  .restcard{
-    background:var(--surface);border-radius:var(--r);padding:22px 18px;
-    border-left:4px solid #3B4E63;
+  .rest-card{
+    border:1px dashed var(--line);border-radius:14px;
+    padding:48px 24px;text-align:center;
   }
-  .restcard h2{color:var(--text)}
-  .restcard p{margin:8px 0 0;color:var(--muted);font-size:15px}
+  .rest-card p{margin:8px 0 0;color:var(--mute)}
+  .rest-card .big{font-size:22px;font-weight:700;color:var(--paper)}
 
-  /* ---------- Rules ---------- */
-  .rules{margin:22px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px 6px}
-  .rules h2{margin:0;font-size:27px;color:var(--text);font-weight:700}
-  .rules ol{margin:14px 0 0;padding:0;list-style:none;counter-reset:r}
-  .rules li{border-bottom:1px solid var(--line);padding:11px 0 11px 30px;position:relative;font-size:15px;counter-increment:r;color:var(--text)}
-  .rules li::before{
-    content:counter(r);position:absolute;left:0;top:11px;
-    font-family:'Barlow Condensed';font-size:15px;color:var(--amber);font-weight:600;
+  .actions{margin-top:32px;padding-top:20px;border-top:1px solid var(--line)}
+  .reset{
+    background:transparent;border:1px solid var(--line);color:var(--mute);
+    border-radius:10px;padding:9px 16px;font:inherit;font-size:14px;cursor:pointer;
   }
-  .goal{padding:16px 0 18px;font-size:15.5px;color:var(--muted)}
-  .goal b{color:var(--amber);font-weight:600}
-  footer{text-align:center;font-size:12.5px;color:#5D6C7C;padding:20px 10px 0}
+  .reset:hover{color:var(--paper);border-color:var(--mute)}
+
+  @media (max-width:520px){
+    .wrap{padding:28px 16px 60px}
+    ol.ex .tag{display:none}
+  }
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<header>
-  <p class="kicker">Lịch tập 6 buổi / tuần</p>
-  <h1>Lean<span>Athletic</span></h1>
-  <p>Mạnh, nhanh, có conditioning và body fat thấp. Không đếm RIR, không tập theo kiểu bodybuilding.</p>
-  <div class="split">
-    <div><b>3</b><small>buổi hill / Zone 2</small></div>
-    <div><b>2</b><small>buổi explosive</small></div>
-    <div><b>1</b><small>ngày nghỉ</small></div>
-  </div>
-</header>
-
-<nav>
-  <div class="rail" role="tablist" aria-label="Chọn ngày tập">
-    <button class="tab" role="tab" data-day="d2" style="color:var(--amber)"><i></i><span class="lbl">T2</span></button>
-    <button class="tab" role="tab" data-day="d3" style="color:var(--sky)"><i></i><span class="lbl">T3</span></button>
-    <button class="tab" role="tab" data-day="d4" style="color:var(--sage)"><i></i><span class="lbl">T4</span></button>
-    <button class="tab" role="tab" data-day="d5" style="color:var(--amber)"><i></i><span class="lbl">T5</span></button>
-    <button class="tab" role="tab" data-day="d6" style="color:var(--sky)"><i></i><span class="lbl">T6</span></button>
-    <button class="tab" role="tab" data-day="d7" style="color:var(--sage)"><i></i><span class="lbl">T7</span></button>
-    <button class="tab" role="tab" data-day="cn" style="color:#5D6C7C"><i></i><span class="lbl">CN</span></button>
-  </div>
-</nav>
-
-<main>
-
-<!-- T2 -->
-<section class="day" id="d2" style="--accent:var(--amber)" hidden>
-  <div class="head">
-    <p class="d">Thứ 2</p>
-    <h2>Lower A + Hill</h2>
-    <div class="chips"><span class="chip">Chân</span><span class="chip">Sprint dốc</span><span class="chip">Unilateral</span></div>
-  </div>
-  <div class="block">
-    <h3>Khởi động</h3>
-    <ul><li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Đi bộ + mobility<span class="n">5 phút</span></span></button></li></ul>
-    <div class="cardio"><b>Hill sprint · 8 rounds</b><span>Hard: 12 km/h — 12% — 20 giây<br>Rest: 4 km/h — 12% — 60 giây</span></div>
-    <h3>Bài chính</h3>
-    <ul>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Bulgarian Split Squat</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-leg RDL</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Hip Thrust</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Leg Curl</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-leg Calf Raise</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Pallof Press<span class="n">Chống xoay, giữ core</span></span></button></li>
-    </ul>
-  </div>
-</section>
-
-<!-- T3 -->
-<section class="day" id="d3" style="--accent:var(--sky)" hidden>
-  <div class="head">
-    <p class="d">Thứ 3</p>
-    <h2>Upper A + Zone 2</h2>
-    <div class="chips"><span class="chip">Thân trên</span><span class="chip">Zone 2</span></div>
-  </div>
-  <div class="block">
-    <h3>Khởi động</h3>
-    <ul><li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Warm-up</span></button></li></ul>
-    <h3>Bài chính</h3>
-    <ul>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">DB Bench Press</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Lat Pulldown</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-arm Cable Row</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-arm DB Shoulder Press</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Cable Chest Fly</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Face Pull</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Suitcase Carry</span></button></li>
-    </ul>
-    <div class="cardio"><b>Zone 2 · 15–20 phút</b><span>Nhịp thở còn nói chuyện được</span></div>
-  </div>
-</section>
-
-<!-- T4 -->
-<section class="day" id="d4" style="--accent:var(--sage)" hidden>
-  <div class="head">
-    <p class="d">Thứ 4</p>
-    <h2>Athletic</h2>
-    <div class="chips"><span class="chip">Explosive</span><span class="chip">Ưu tiên tốc độ</span></div>
-  </div>
-  <div class="block">
-    <h3>Khởi động</h3>
-    <ul><li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Warm-up + mobility</span></button></li></ul>
-    <h3>Explosive — không đẩy tới failure</h3>
-    <ul>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Jump Squat</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Explosive Push-up</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Lateral Bound</span></button></li>
-    </ul>
-    <h3>Sức mạnh</h3>
-    <ul>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Bulgarian Split Squat</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Step-up</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Leg Curl</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-leg Calf Raise</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Copenhagen Plank</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Dead Bug</span></button></li>
-    </ul>
-  </div>
-</section>
-
-<!-- T5 -->
-<section class="day" id="d5" style="--accent:var(--amber)" hidden>
-  <div class="head">
-    <p class="d">Thứ 5</p>
-    <h2>Lower B + Hill</h2>
-    <div class="chips"><span class="chip">Chân</span><span class="chip">Máy</span><span class="chip">Sprint dốc</span></div>
-  </div>
-  <div class="block">
-    <h3>Khởi động</h3>
-    <ul><li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Warm-up</span></button></li></ul>
-    <h3>Bài chính</h3>
-    <ul>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Leg Press</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Reverse Lunge</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-leg RDL</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Hip Thrust</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Leg Extension</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Leg Curl</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Calf Press</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Cable Woodchop</span></button></li>
-    </ul>
-    <div class="cardio"><b>Hill sprint · 8 rounds</b><span>Hard: 12 km/h — 12% — 20 giây<br>Rest: 4 km/h — 12% — 60 giây</span></div>
-  </div>
-</section>
-
-<!-- T6 -->
-<section class="day" id="d6" style="--accent:var(--sky)" hidden>
-  <div class="head">
-    <p class="d">Thứ 6</p>
-    <h2>Upper B + Zone 2</h2>
-    <div class="chips"><span class="chip">Thân trên</span><span class="chip">Vai &amp; lưng trên</span><span class="chip">Zone 2</span></div>
-  </div>
-  <div class="block">
-    <h3>Bài chính</h3>
-    <ul>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Incline DB Press</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Seated Cable Row</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-arm Lat Pulldown</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-arm Cable Press</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Lateral Raise</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Face Pull / Reverse Fly</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Suitcase Carry</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Cable Woodchop</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Side Plank</span></button></li>
-    </ul>
-    <div class="cardio"><b>Zone 2 · 20–25 phút</b><span>Giữ đều nhịp, kết thúc vẫn thấy khoẻ</span></div>
-  </div>
-</section>
-
-<!-- T7 -->
-<section class="day" id="d7" style="--accent:var(--sage)" hidden>
-  <div class="head">
-    <p class="d">Thứ 7</p>
-    <h2>Full Body Athletic</h2>
-    <div class="chips"><span class="chip">Toàn thân</span><span class="chip">Explosive</span><span class="chip">Zone 2</span></div>
-  </div>
-  <div class="block">
-    <h3>Khởi động</h3>
-    <ul><li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Mobility</span></button></li></ul>
-    <h3>Explosive</h3>
-    <ul>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Jump Squat</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Lateral Bound</span></button></li>
-    </ul>
-    <h3>Sức mạnh</h3>
-    <ul>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Step-up</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-arm Cable Row</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">DB Bench Press</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Hip Thrust</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Single-leg Calf Raise</span></button></li>
-      <li><button class="ex"><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9"/></svg></span><span class="t">Pallof Press</span></button></li>
-    </ul>
-    <div class="cardio"><b>Zone 2 · 20–25 phút</b><span>Kết thúc tuần bằng nhịp nhẹ</span></div>
-  </div>
-</section>
-
-<!-- CN -->
-<section class="day" id="cn" hidden>
-  <div class="restcard">
-    <div class="head" style="background:none;border:0;padding:0">
-      <p class="d">Chủ nhật</p>
-      <h2>Nghỉ</h2>
+  <header>
+    <div>
+      <h1>Lịch tập tuần</h1>
+      <p class="sub">Push · Pull · Legs — 6 buổi, nghỉ chủ nhật</p>
     </div>
-    <p>Không tập. Ngủ đủ, ăn đủ protein, đi bộ nhẹ nếu muốn. Đây là ngày cơ thể hồi phục và mạnh lên.</p>
+    <div class="counter" id="counter">Hôm nay: <b>0</b>/0 bài</div>
+  </header>
+
+  <nav id="nav" role="tablist" aria-label="Chọn ngày"></nav>
+
+  <main id="days"></main>
+
+  <div class="actions">
+    <button class="reset" id="reset">Bỏ đánh dấu tất cả</button>
   </div>
-</section>
-
-<section class="rules">
-  <h2>Nguyên tắc tập</h2>
-  <ol>
-    <li>Không cần cố định 8–12 reps.</li>
-    <li>Làm reps chuẩn, đến khi rep tiếp theo không còn giữ được kỹ thuật thì dừng.</li>
-    <li>Lỡ chạm failure đôi lúc cũng không sao.</li>
-    <li>Bài explosive ưu tiên tốc độ, không đẩy tới failure.</li>
-    <li>Hill: hard nhưng kiểm soát.</li>
-    <li>Ăn maintenance hoặc thâm hụt nhẹ, đủ protein.</li>
-  </ol>
-  <p class="goal">Đích đến: <b>mạnh + nhanh + có conditioning + body fat thấp</b>. Lean athletic, không phải bodybuilding.</p>
-</section>
-
-<footer>Chạm vào tên bài để đánh dấu đã xong trong buổi tập.</footer>
-</main>
+</div>
 
 <script>
-(function(){
-  var tabs=[].slice.call(document.querySelectorAll('.tab'));
-  var days=[].slice.call(document.querySelectorAll('.day'));
-  function show(id){
-    days.forEach(function(d){d.hidden=(d.id!==id)});
-    tabs.forEach(function(t){
-      var on=t.dataset.day===id;
-      t.setAttribute('aria-selected',on?'true':'false');
-      if(on)t.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
-    });
+const PLAN = [
+  {
+    id:"t2", label:"Thứ 2", type:"push", title:"Push + Zone 2",
+    flow:"Warm-up → Push → Zone 2",
+    blocks:[
+      {name:"Sức mạnh", items:[
+        "DB Bench Press","Single-arm DB Shoulder Press","Incline DB Press",
+        "Cable Chest Fly","Lateral Raise",{n:"Explosive Push-up",tag:"bùng nổ"}
+      ]}
+    ],
+    cardio:{title:"Zone 2 — 30 phút", desc:"Nhịp tim đều, vẫn nói chuyện được."}
+  },
+  {
+    id:"t3", label:"Thứ 3", type:"pull", title:"Pull + Zone 2",
+    flow:"Warm-up → Pull → Zone 2",
+    blocks:[
+      {name:"Sức mạnh", items:[
+        "Lat Pulldown","Single-arm Cable Row","Single-arm Lat Pulldown",
+        "Face Pull","Reverse Fly",{n:"Suitcase Carry",tag:"chống xoay"},"Core"
+      ]}
+    ],
+    cardio:{title:"Zone 2 — 30 phút", desc:"Nhịp tim đều, vẫn nói chuyện được."}
+  },
+  {
+    id:"t4", label:"Thứ 4", type:"legs", title:"Legs + Bùng nổ + Hill HIIT",
+    flow:"Warm-up → Bùng nổ → Legs → Hill",
+    blocks:[
+      {name:"Bùng nổ", items:["Jump Squat","Lateral Bound"]},
+      {name:"Sức mạnh", items:[
+        "Bulgarian Split Squat","Single-leg RDL","Hip Thrust","Leg Curl","Calf Raise","Core"
+      ]}
+    ],
+    cardio:{title:"Hill HIIT", desc:"Không cần Zone 2 hôm nay.",
+      stats:["12 km/h","Dốc 12%","20s mạnh / 60s hồi","8 hiệp"]}
+  },
+  {
+    id:"t5", label:"Thứ 5", type:"push", title:"Push + Zone 2",
+    flow:"Warm-up → Push → Zone 2",
+    blocks:[
+      {name:"Sức mạnh", items:[
+        "Incline DB Press","DB Bench Press","Single-arm Cable Press",
+        "Single-arm Shoulder Press","Lateral Raise",{n:"Explosive Push-up",tag:"bùng nổ"}
+      ]}
+    ],
+    cardio:{title:"Zone 2 — 30 phút", desc:"Nhịp tim đều, vẫn nói chuyện được."}
+  },
+  {
+    id:"t6", label:"Thứ 6", type:"pull", title:"Pull + Zone 2",
+    flow:"Warm-up → Pull → Zone 2",
+    blocks:[
+      {name:"Sức mạnh", items:[
+        "Seated Cable Row","Lat Pulldown","Single-arm Cable Row","Face Pull / Reverse Fly"
+      ]},
+      {name:"Core", items:[
+        {n:"Suitcase Carry",tag:"chống xoay"},"Woodchop","Side Plank"
+      ]}
+    ],
+    cardio:{title:"Zone 2 — 30 phút", desc:"Nhịp tim đều, vẫn nói chuyện được."}
+  },
+  {
+    id:"t7", label:"Thứ 7", type:"legs", title:"Legs + Bùng nổ + Hill HIIT",
+    flow:"Warm-up → Bùng nổ → Legs → Hill",
+    blocks:[
+      {name:"Bùng nổ", items:["Jump Squat","Lateral Bound"]},
+      {name:"Sức mạnh", items:[
+        "Leg Press","Reverse Lunge","Single-leg RDL","Hip Thrust","Leg Curl","Calf Raise"
+      ]}
+    ],
+    cardio:{title:"Hill HIIT", desc:"Không cần Zone 2 hôm nay.",
+      stats:["12 km/h","Dốc 12%","20s mạnh / 60s hồi","8 hiệp"]}
+  },
+  {
+    id:"cn", label:"Chủ nhật", type:"rest", title:"Nghỉ",
+    flow:"", rest:true
   }
-  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.day)})});
-  var order=['cn','d2','d3','d4','d5','d6','d7'];
-  show(order[new Date().getDay()]);
+];
 
-  document.addEventListener('click',function(e){
-    var b=e.target.closest('.ex');
-    if(!b)return;
-    b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');
-  });
-})();
+const COLOR = {push:"var(--push)", pull:"var(--pull)", legs:"var(--legs)", rest:"var(--rest)"};
+const nav = document.getElementById("nav");
+const days = document.getElementById("days");
+const counter = document.getElementById("counter");
+
+PLAN.forEach((d,i)=>{
+  const b = document.createElement("button");
+  b.type="button"; b.role="tab"; b.dataset.type=d.type; b.dataset.id=d.id;
+  b.setAttribute("aria-selected","false");
+  b.innerHTML = `<span class="dot"></span><span>${d.label}</span>`;
+  b.addEventListener("click",()=>select(d.id));
+  nav.appendChild(b);
+
+  const s = document.createElement("section");
+  s.className="day"; s.id="day-"+d.id;
+  s.style.setProperty("--accent", COLOR[d.type]);
+
+  let html = `<div class="day-head"><h2>${d.label} — ${d.title}</h2></div>`;
+  if(d.flow) html += `<p class="flow">${d.flow}</p>`;
+
+  if(d.rest){
+    html += `<div class="rest-card"><div class="big">Nghỉ hoàn toàn</div>
+      <p>Ngủ đủ, ăn đủ đạm, đi bộ nhẹ nếu thấy bí chân.</p></div>`;
+  } else {
+    (d.blocks||[]).forEach(bl=>{
+      html += `<div class="block"><h3>${bl.name}</h3><ol class="ex">`;
+      bl.items.forEach((it,idx)=>{
+        const name = typeof it==="string"?it:it.n;
+        const tag = typeof it==="string"?"":`<span class="tag">${it.tag}</span>`;
+        html += `<li><label><span class="num">${String(idx+1).padStart(2,"0")}</span>
+          <input type="checkbox"><span class="name">${name}</span>${tag}</label></li>`;
+      });
+      html += `</ol></div>`;
+    });
+    if(d.cardio){
+      html += `<div class="block"><h3>Cardio</h3><div class="cardio">
+        <h4>${d.cardio.title}</h4><p>${d.cardio.desc}</p>` +
+        (d.cardio.stats?`<div class="big">${d.cardio.stats.map(s=>`<span>${s}</span>`).join("")}</div>`:"") +
+        `</div></div>`;
+    } else if(d.noCardio){
+      html += `<p class="note">${d.noCardio}</p>`;
+    }
+  }
+  s.innerHTML = html;
+  s.addEventListener("change",updateCount);
+  days.appendChild(s);
+});
+
+function select(id){
+  nav.querySelectorAll("button").forEach(b=>b.setAttribute("aria-selected", b.dataset.id===id));
+  days.querySelectorAll(".day").forEach(s=>s.classList.toggle("active", s.id==="day-"+id));
+  updateCount();
+}
+function updateCount(){
+  const cur = days.querySelector(".day.active");
+  if(!cur) return;
+  const all = cur.querySelectorAll('input[type=checkbox]');
+  const done = cur.querySelectorAll('input[type=checkbox]:checked').length;
+  counter.innerHTML = all.length
+    ? `Buổi này: <b>${done}</b>/${all.length} bài`
+    : `Hôm nay: <b>nghỉ</b>`;
+}
+document.getElementById("reset").addEventListener("click",()=>{
+  days.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
+  updateCount();
+});
+
+const todayIdx = (new Date().getDay()+6)%7; // 0 = thứ 2
+select(PLAN[todayIdx].id);
 </script>
 </body>
 </html>
