@@ -154,7 +154,7 @@
   <header>
     <div>
       <h1>Lịch tập tuần</h1>
-      <p class="sub">Push · Pull · Legs — 6 buổi, nghỉ chủ nhật</p>
+      <p class="sub">PPL + Upper/Lower — 5 buổi tạ, 1 buổi cardio, nghỉ chủ nhật</p>
     </div>
     <div class="counter" id="counter">Hôm nay: <b>0</b>/0 bài</div>
   </header>
@@ -171,74 +171,91 @@
 <script>
 const PLAN = [
   {
-    id:"t2", label:"Thứ 2", type:"push", title:"Push + Zone 2",
-    flow:"Warm-up → Push → Zone 2",
+    id:"t2", label:"Thứ 2", type:"push", title:"Push + Incline Walking",
+    flow:"Push → Incline walking (60 phút)",
     blocks:[
-      {name:"Sức mạnh", items:[
-        "DB Bench Press","Single-arm DB Shoulder Press","Incline DB Press",
-        "Cable Chest Fly","Lateral Raise",{n:"Explosive Push-up",tag:"bùng nổ"}
+      {name:"Bài tập", items:[
+        {n:"DB Bench Press", tag:"3 × 6–10"},
+        {n:"Incline DB Press", tag:"3 × 8–12"},
+        {n:"1-Arm DB Shoulder Press", tag:"3 × 8–12/bên"},
+        {n:"Cable Fly", tag:"2 × 10–15"},
+        {n:"DB/Cable Lateral Raise", tag:"3 × 12–20"},
+        {n:"Explosive Push-up", tag:"3 × 5–8"}
       ]}
     ],
-    cardio:{title:"Zone 2 — 30 phút", desc:"Nhịp tim đều, vẫn nói chuyện được."}
+    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc, tốc độ và độ dốc tự biến thiên."}
   },
   {
-    id:"t3", label:"Thứ 3", type:"pull", title:"Pull + Zone 2",
-    flow:"Warm-up → Pull → Zone 2",
+    id:"t3", label:"Thứ 3", type:"pull", title:"Pull + Incline Walking",
+    flow:"Pull → Incline walking (60 phút)",
     blocks:[
-      {name:"Sức mạnh", items:[
-        "Lat Pulldown","Single-arm Cable Row","Single-arm Lat Pulldown",
-        "Face Pull","Reverse Fly",{n:"Suitcase Carry",tag:"chống xoay"},"Core"
+      {name:"Bài tập", items:[
+        {n:"Lat Pulldown", tag:"3 × 6–10"},
+        {n:"1-Arm Cable Row", tag:"3 × 8–12/bên"},
+        {n:"1-Arm Lat Pulldown", tag:"2 × 10–15/bên"},
+        {n:"Face Pull", tag:"2 × 12–20"},
+        {n:"Reverse Fly", tag:"3 × 12–20"},
+        {n:"DB Curl", tag:"2 × 8–12"},
+        {n:"Suitcase Carry", tag:"3 lượt/bên"}
       ]}
     ],
-    cardio:{title:"Zone 2 — 30 phút", desc:"Nhịp tim đều, vẫn nói chuyện được."}
+    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc, tốc độ và độ dốc tự biến thiên."}
   },
   {
-    id:"t4", label:"Thứ 4", type:"legs", title:"Legs + Bùng nổ + Hill HIIT",
-    flow:"Warm-up → Bùng nổ → Legs → Hill",
+    id:"t4", label:"Thứ 4", type:"legs", title:"Legs + Incline Walking",
+    flow:"Legs → Incline walking (60 phút)",
     blocks:[
-      {name:"Bùng nổ", items:["Jump Squat","Lateral Bound"]},
-      {name:"Sức mạnh", items:[
-        "Bulgarian Split Squat","Single-leg RDL","Hip Thrust","Leg Curl","Calf Raise","Core"
+      {name:"Bài tập", items:[
+        {n:"Jump Squat", tag:"3 × 5–8"},
+        {n:"Bulgarian Split Squat", tag:"3 × 8–12/chân"},
+        {n:"Single-Leg RDL", tag:"3 × 8–12/chân"},
+        {n:"Hip Thrust", tag:"3 × 8–12"},
+        {n:"Leg Curl", tag:"3 × 10–15"},
+        {n:"Calf Raise", tag:"3 × 10–15"},
+        {n:"Core", tag:"3 sets"}
       ]}
     ],
-    cardio:{title:"Hill HIIT", desc:"Không cần Zone 2 hôm nay.",
-      stats:["12 km/h","Dốc 12%","20s mạnh / 60s hồi","8 hiệp"]}
+    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc, tốc độ và độ dốc tự biến thiên."}
   },
   {
-    id:"t5", label:"Thứ 5", type:"push", title:"Push + Zone 2",
-    flow:"Warm-up → Push → Zone 2",
-    blocks:[
-      {name:"Sức mạnh", items:[
-        "Incline DB Press","DB Bench Press","Single-arm Cable Press",
-        "Single-arm Shoulder Press","Lateral Raise",{n:"Explosive Push-up",tag:"bùng nổ"}
-      ]}
-    ],
-    cardio:{title:"Zone 2 — 30 phút", desc:"Nhịp tim đều, vẫn nói chuyện được."}
+    id:"t5", label:"Thứ 5", type:"rest", title:"Cardio Day",
+    flow:"Incline walking 2 tiếng",
+    cardio:{
+      title:"Incline walking — 2 tiếng",
+      desc:"Incline thấp → đi nhanh hơn; Incline cao → đi chậm lại (có thể lên tới 15%). Không cần cố giữ 15% cả buổi."
+    }
   },
   {
-    id:"t6", label:"Thứ 6", type:"pull", title:"Pull + Zone 2",
-    flow:"Warm-up → Pull → Zone 2",
+    id:"t6", label:"Thứ 6", type:"push", title:"Upper + Incline Walking",
+    flow:"Upper → Incline walking (60 phút)",
     blocks:[
-      {name:"Sức mạnh", items:[
-        "Seated Cable Row","Lat Pulldown","Single-arm Cable Row","Face Pull / Reverse Fly"
-      ]},
-      {name:"Core", items:[
-        {n:"Suitcase Carry",tag:"chống xoay"},"Woodchop","Side Plank"
+      {name:"Bài tập", items:[
+        {n:"DB Bench Press", tag:"3 × 6–10"},
+        {n:"Lat Pulldown", tag:"3 × 8–12"},
+        {n:"Incline DB Press", tag:"2 × 8–12"},
+        {n:"1-Arm Cable Row", tag:"3 × 8–12/bên"},
+        {n:"Lateral Raise", tag:"3 × 12–20"},
+        {n:"Face Pull / Reverse Fly", tag:"2 × 12–20"},
+        {n:"DB Curl", tag:"2 × 10–15"},
+        {n:"Triceps Pushdown", tag:"2 × 10–15"}
       ]}
     ],
-    cardio:{title:"Zone 2 — 30 phút", desc:"Nhịp tim đều, vẫn nói chuyện được."}
+    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc, tốc độ và độ dốc tự biến thiên."}
   },
   {
-    id:"t7", label:"Thứ 7", type:"legs", title:"Legs + Bùng nổ + Hill HIIT",
-    flow:"Warm-up → Bùng nổ → Legs → Hill",
+    id:"t7", label:"Thứ 7", type:"legs", title:"Lower + Incline Walking",
+    flow:"Lower → Incline walking (60 phút)",
     blocks:[
-      {name:"Bùng nổ", items:["Jump Squat","Lateral Bound"]},
-      {name:"Sức mạnh", items:[
-        "Leg Press","Reverse Lunge","Single-leg RDL","Hip Thrust","Leg Curl","Calf Raise"
+      {name:"Bài tập", items:[
+        {n:"Bulgarian Split Squat", tag:"3 × 8–12/chân"},
+        {n:"Hip Thrust", tag:"3 × 8–12"},
+        {n:"Single-Leg RDL", tag:"3 × 8–12/chân"},
+        {n:"Leg Curl", tag:"3 × 10–15"},
+        {n:"Calf Raise", tag:"3 × 10–15"},
+        {n:"Core", tag:"3 sets"}
       ]}
     ],
-    cardio:{title:"Hill HIIT", desc:"Không cần Zone 2 hôm nay.",
-      stats:["12 km/h","Dốc 12%","20s mạnh / 60s hồi","8 hiệp"]}
+    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc, tốc độ và độ dốc tự biến thiên."}
   },
   {
     id:"cn", label:"Chủ nhật", type:"rest", title:"Nghỉ",
@@ -268,7 +285,7 @@ PLAN.forEach((d,i)=>{
 
   if(d.rest){
     html += `<div class="rest-card"><div class="big">Nghỉ hoàn toàn</div>
-      <p>Ngủ đủ, ăn đủ đạm, đi bộ nhẹ nếu thấy bí chân.</p></div>`;
+      <p>Không cần cardio bù. Không cần gym.</p></div>`;
   } else {
     (d.blocks||[]).forEach(bl=>{
       html += `<div class="block"><h3>${bl.name}</h3><ol class="ex">`;
