@@ -156,7 +156,7 @@
   <header>
     <div>
       <h1>Lịch tập tuần</h1>
-      <p class="sub">PPL + Upper/Lower — 5 buổi tạ, 2 buổi hill sprint, 1 buổi cardio dài, nghỉ chủ nhật</p>
+      <p class="sub">PPL + Upper/Lower — 5 buổi tạ, 1 buổi hill sprint + cardio dài, nghỉ chủ nhật</p>
     </div>
     <div class="counter" id="counter">Hôm nay: <b>0</b>/0 bài</div>
   </header>
@@ -185,7 +185,7 @@ const PLAN = [
         {n:"Explosive Push-up", tag:"3 × 5–8"}
       ]}
     ],
-    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 15%, không vịn tay."}
+    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 12%, không vịn tay."}
   },
   {
     id:"t3", label:"Thứ 3", type:"pull", title:"Pull + Incline Walking",
@@ -201,11 +201,11 @@ const PLAN = [
         {n:"Suitcase Carry", tag:"3 lượt/bên"}
       ]}
     ],
-    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 15%, không vịn tay."}
+    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 12%, không vịn tay."}
   },
   {
-    id:"t4", label:"Thứ 4", type:"legs", title:"Hill Sprint + Legs",
-    flow:"Hill sprint → Legs",
+    id:"t4", label:"Thứ 4", type:"legs", title:"Legs + Incline Walking",
+    flow:"Legs → Incline walking (60 phút)",
     blocks:[
       {name:"Bài tập", items:[
         {n:"Jump Squat", tag:"3 × 5–8"},
@@ -218,14 +218,14 @@ const PLAN = [
         {n:"Pallof Press", tag:"3 × 10–12/bên"}
       ]}
     ],
-    cardio:{title:"Hill sprint", desc:"Tập trước buổi tạ. Khởi động 8–10 phút, rồi chạy 8 lượt: 20 giây chạy ở dốc 15%, tốc độ 12 km/h, nghỉ 120 giây. Dừng sớm nếu không giữ được tốc độ trọn 20 giây hoặc phải vịn tay."}
+    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 12%, không vịn tay."}
   },
   {
-    id:"t5", label:"Thứ 5", type:"cardio", title:"Cardio Day",
-    flow:"Incline walking 2 tiếng (15%)",
+    id:"t5", label:"Thứ 5", type:"cardio", title:"Hill Sprint + Cardio",
+    flow:"Khởi động → Hill sprint → Incline walking (tổng 2 tiếng)",
     cardio:{
-      title:"Incline walking — 2 tiếng",
-      desc:"Giữ dốc 15%, chỉnh tốc độ (khoảng 4–5.5 km/h). Mệt thì giảm tốc, không vịn tay. Hạ dốc 10–12% nếu đau gót hoặc căng bắp chân."
+      title:"Hill sprint + Incline walking — tổng 2 tiếng",
+      desc:"Khởi động 8–10 phút. Sprint 6 lượt: 20 giây ở dốc 12%, tốc độ 12 km/h, nghỉ 120 giây đi bộ 4 km/h (chỉ tính 20 giây khi băng đã đạt 12 km/h). Thời gian còn lại đi bộ dốc 12%, chỉnh tốc độ, không vịn tay. Hoãn sprint nếu bàn chân còn đau."
     }
   },
   {
@@ -243,11 +243,11 @@ const PLAN = [
         {n:"Triceps Pushdown", tag:"2 × 10–15"}
       ]}
     ],
-    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 15%, không vịn tay."}
+    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 12%, không vịn tay."}
   },
   {
-    id:"t7", label:"Thứ 7", type:"legs", title:"Hill Sprint + Lower",
-    flow:"Hill sprint → Lower",
+    id:"t7", label:"Thứ 7", type:"legs", title:"Lower + Incline Walking",
+    flow:"Lower → Incline walking (60 phút)",
     blocks:[
       {name:"Bài tập", items:[
         {n:"Leg Press", tag:"3 × 6–10"},
@@ -260,7 +260,7 @@ const PLAN = [
         {n:"Side Plank", tag:"3 × 30–45s/bên"}
       ]}
     ],
-    cardio:{title:"Hill sprint", desc:"Tập trước buổi tạ. Khởi động 8–10 phút, rồi chạy 8 lượt: 20 giây chạy ở dốc 15%, tốc độ 12 km/h, nghỉ 120 giây. Dừng sớm nếu không giữ được tốc độ trọn 20 giây hoặc phải vịn tay."}
+    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 12%, không vịn tay."}
   },
   {
     id:"cn", label:"Chủ nhật", type:"rest", title:"Nghỉ",
