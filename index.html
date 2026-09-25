@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lịch tập tuần</title>
+<title>Lịch tập tuần — Lean Athletic & Match Simulation</title>
 <style>
   :root{
     --ink:#12161c;
@@ -11,11 +11,12 @@
     --line:#2b333f;
     --paper:#f2f4f3;
     --mute:#8d98a7;
-    --push:#5ad19a;
-    --pull:#5aa9f0;
-    --legs:#f4685f;
+    --fb-a:#5ad19a;
+    --fb-b:#5aa9f0;
+    --fb-c:#a78bfa;
     --rest:#a4adba;
     --cardio:#f2b84b;
+    --match:#ff6b4a;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -35,7 +36,7 @@
     padding-bottom:24px;border-bottom:1px solid var(--line);
   }
   h1{
-    font-size:clamp(30px,5vw,46px);
+    font-size:clamp(24px,4.2vw,38px);
     font-weight:800;letter-spacing:-.03em;margin:0;
   }
   .sub{color:var(--mute);font-size:14px;margin:6px 0 0}
@@ -57,11 +58,12 @@
     transition:color .15s,border-color .15s,background .15s;
   }
   nav button .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.9}
-  nav button[data-type=push]{color:var(--push)}
-  nav button[data-type=pull]{color:var(--pull)}
-  nav button[data-type=legs]{color:var(--legs)}
-  nav button[data-type=rest]{color:var(--rest)}
+  nav button[data-type=fba]{color:var(--fb-a)}
+  nav button[data-type=fbb]{color:var(--fb-b)}
+  nav button[data-type=fbc]{color:var(--fb-c)}
   nav button[data-type=cardio]{color:var(--cardio)}
+  nav button[data-type=match]{color:var(--match)}
+  nav button[data-type=rest]{color:var(--rest)}
   nav button:hover{border-color:currentColor}
   nav button[aria-selected=true]{background:currentColor;border-color:currentColor}
   nav button[aria-selected=true] span:not(.dot){color:var(--ink)}
@@ -72,10 +74,10 @@
   .day.active{display:block}
 
   .day-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:4px}
-  .day-head h2{margin:0;font-size:28px;letter-spacing:-.02em}
-  .flow{color:var(--mute);font-size:14px;margin:0 0 26px}
+  .day-head h2{margin:0;font-size:26px;letter-spacing:-.02em}
+  .flow{color:var(--mute);font-size:14px;margin:0 0 24px}
 
-  .block{margin-bottom:30px}
+  .block{margin-bottom:28px}
   .block > h3{
     margin:0 0 12px;font-size:13px;font-weight:700;
     letter-spacing:.04em;color:var(--mute);
@@ -120,14 +122,10 @@
   .cardio{
     border:1px solid var(--accent);border-radius:12px;padding:18px 20px;
     background:color-mix(in srgb,var(--accent) 8%,transparent);
+    margin-bottom:12px;
   }
   .cardio h4{margin:0 0 6px;font-size:16px}
-  .cardio p{margin:0;color:var(--mute);font-size:14px}
-  .cardio .big{
-    font-size:15px;color:var(--paper);font-variant-numeric:tabular-nums;
-    margin-top:10px;display:flex;gap:20px;flex-wrap:wrap;
-  }
-  .note{color:var(--mute);font-size:14px;font-style:italic}
+  .cardio p{margin:0;color:var(--mute);font-size:14px;white-space:pre-line}
 
   .rest-card{
     border:1px dashed var(--line);border-radius:14px;
@@ -147,7 +145,6 @@
     .wrap{padding:28px 16px 60px}
     ol.ex .tag{display:none}
   }
-  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
@@ -155,10 +152,10 @@
 
   <header>
     <div>
-      <h1>Lịch tập tuần</h1>
-      <p class="sub">PPL + Upper/Lower — 5 buổi tạ, 1 buổi hill sprint + cardio dài, nghỉ chủ nhật</p>
+      <h1>Lịch tập tuần — Lean Athletic</h1>
+      <p class="sub">3 Full Body (2 Sets to Failure) • 2 Zone 2 Recovery • 1 Match Day 90 Phút • 1 Nghỉ</p>
     </div>
-    <div class="counter" id="counter">Hôm nay: <b>0</b>/0 bài</div>
+    <div class="counter" id="counter">Buổi này: <b>0</b>/0 bài</div>
   </header>
 
   <nav id="nav" role="tablist" aria-label="Chọn ngày"></nav>
@@ -173,107 +170,94 @@
 <script>
 const PLAN = [
   {
-    id:"t2", label:"Thứ 2", type:"push", title:"Push + Incline Walking",
-    flow:"Push → Incline walking (60 phút)",
+    id:"t2", label:"Thứ 2", type:"fba", title:"Full Body A + Zone 2",
+    flow:"Khởi động (5p) → Tạ (35p) → Incline Walking (30p)",
     blocks:[
-      {name:"Bài tập", items:[
-        {n:"DB Bench Press", tag:"3 × 6–10"},
-        {n:"Incline DB Press", tag:"3 × 8–12"},
-        {n:"1-Arm DB Shoulder Press", tag:"3 × 8–12/bên"},
-        {n:"Cable Fly", tag:"2 × 10–15"},
-        {n:"DB/Cable Lateral Raise", tag:"3 × 12–20"},
-        {n:"Explosive Push-up", tag:"3 × 5–8"}
+      {name:"Bài tập (Khởi động riêng, 2 working sets to failure)", items:[
+        {n:"DB Flat Bench Press", tag:"2 × 6–8"},
+        {n:"Lat Pulldown", tag:"2 × 6–8"},
+        {n:"Bulgarian Split Squat / Leg Press", tag:"2 × 8–10/chân"},
+        {n:"DB Lateral Raise", tag:"2 × 12–15"},
+        {n:"Ab Wheel Rollout / Plank", tag:"2 × 8–12"}
       ]}
     ],
-    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 12%, không vịn tay."}
-  },
-  {
-    id:"t3", label:"Thứ 3", type:"pull", title:"Pull + Incline Walking",
-    flow:"Pull → Incline walking (60 phút)",
-    blocks:[
-      {name:"Bài tập", items:[
-        {n:"Lat Pulldown", tag:"3 × 6–10"},
-        {n:"1-Arm Cable Row", tag:"3 × 8–12/bên"},
-        {n:"1-Arm Lat Pulldown", tag:"2 × 10–15/bên"},
-        {n:"Face Pull", tag:"2 × 12–20"},
-        {n:"Reverse Fly", tag:"3 × 12–20"},
-        {n:"DB Curl", tag:"2 × 8–12"},
-        {n:"Suitcase Carry", tag:"3 lượt/bên"}
-      ]}
-    ],
-    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 12%, không vịn tay."}
-  },
-  {
-    id:"t4", label:"Thứ 4", type:"legs", title:"Legs + Incline Walking",
-    flow:"Legs → Incline walking (60 phút)",
-    blocks:[
-      {name:"Bài tập", items:[
-        {n:"Jump Squat", tag:"3 × 5–8"},
-        {n:"Bulgarian Split Squat", tag:"3 × 8–12/chân"},
-        {n:"Single-Leg RDL", tag:"3 × 8–12/chân"},
-        {n:"Hip Thrust", tag:"3 × 8–12"},
-        {n:"Leg Curl", tag:"3 × 10–15"},
-        {n:"Calf Raise", tag:"3 × 10–15"},
-        {n:"Ab Wheel Rollout (hoặc Plank)", tag:"3 × 6–12 / 30–60s"},
-        {n:"Pallof Press", tag:"3 × 10–12/bên"}
-      ]}
-    ],
-    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 12%, không vịn tay."}
-  },
-  {
-    id:"t5", label:"Thứ 5", type:"cardio", title:"Hill Sprint + Cardio",
-    flow:"Khởi động → Hill sprint → Incline walking (tổng 2 tiếng)",
     cardio:{
-      title:"Hill sprint + Incline walking — tổng 2 tiếng",
-      desc:"Khởi động 8–10 phút. Sprint 6 lượt: 20 giây ở dốc 12%, tốc độ 12 km/h, nghỉ 120 giây đi bộ 4 km/h (chỉ tính 20 giây khi băng đã đạt 12 km/h). Thời gian còn lại đi bộ dốc 12%, chỉnh tốc độ, không vịn tay. Hoãn sprint nếu bàn chân còn đau."
+      title:"Incline Walking Zone 2 — 30 phút", 
+      desc:"• Dốc: 8% – 10%\n• Tốc độ: 4.0 km/h\n• Không vịn tay, thở mũi đều."
     }
   },
   {
-    id:"t6", label:"Thứ 6", type:"push", title:"Upper + Incline Walking",
-    flow:"Upper → Incline walking (60 phút)",
-    blocks:[
-      {name:"Bài tập", items:[
-        {n:"DB Bench Press", tag:"3 × 6–10"},
-        {n:"Lat Pulldown", tag:"3 × 8–12"},
-        {n:"Incline DB Press", tag:"2 × 8–12"},
-        {n:"1-Arm Cable Row", tag:"3 × 8–12/bên"},
-        {n:"Lateral Raise", tag:"3 × 12–20"},
-        {n:"Face Pull / Reverse Fly", tag:"2 × 12–20"},
-        {n:"DB Curl", tag:"2 × 10–15"},
-        {n:"Triceps Pushdown", tag:"2 × 10–15"}
-      ]}
-    ],
-    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 12%, không vịn tay."}
+    id:"t3", label:"Thứ 3", type:"cardio", title:"Zone 2 Recovery (60 Phút)",
+    flow:"Không tập tạ → Incline walking Zone 2",
+    cardio:{
+      title:"Incline Walking Zone 2 — 60 phút",
+      desc:"• Dốc: 8% – 10%\n• Tốc độ: 4.0 km/h\n• Không vịn tay, duy trì nhịp tim Zone 2 liên tục."
+    }
   },
   {
-    id:"t7", label:"Thứ 7", type:"legs", title:"Lower + Incline Walking",
-    flow:"Lower → Incline walking (60 phút)",
+    id:"t4", label:"Thứ 4", type:"fbb", title:"Full Body B + Zone 2",
+    flow:"Khởi động (5p) → Tạ (40p) → Incline Walking (30p)",
     blocks:[
-      {name:"Bài tập", items:[
-        {n:"Leg Press", tag:"3 × 6–10"},
-        {n:"Bulgarian Split Squat", tag:"3 × 8–12/chân"},
-        {n:"Hip Thrust", tag:"3 × 8–12"},
-        {n:"Single-Leg RDL", tag:"3 × 8–12/chân"},
-        {n:"Leg Curl", tag:"3 × 10–15"},
-        {n:"Calf Raise", tag:"3 × 10–15"},
-        {n:"Hanging Knee/Leg Raise", tag:"3 × 8–15"},
-        {n:"Side Plank", tag:"3 × 30–45s/bên"}
+      {name:"Bài tập (Khởi động riêng, 2 working sets to failure)", items:[
+        {n:"Incline DB Bench Press", tag:"2 × 8–10"},
+        {n:"1-Arm Cable Row", tag:"2 × 8–10/bên"},
+        {n:"Single-Leg RDL", tag:"2 × 8–10/chân"},
+        {n:"Lying / Seated Leg Curl", tag:"2 × 10–12"},
+        {n:"1-Arm DB Shoulder Press", tag:"2 × 8–10/bên"},
+        {n:"Incline DB Curl", tag:"2 × 8–10"}
       ]}
     ],
-    cardio:{title:"Incline walking — 60 phút", desc:"Đi bộ dốc 12%, không vịn tay."}
+    cardio:{
+      title:"Incline Walking Zone 2 — 30 phút", 
+      desc:"• Dốc: 8% – 10%\n• Tốc độ: 4.0 km/h\n• Không vịn tay, hạ nhiệt cơ bắp."
+    }
   },
   {
-    id:"cn", label:"Chủ nhật", type:"rest", title:"Nghỉ",
-    flow:"", rest:true
+    id:"t5", label:"Thứ 5", type:"cardio", title:"Zone 2 Recovery (75–90 Phút)",
+    flow:"Không tập tạ → Incline walking Zone 2",
+    cardio:{
+      title:"Incline Walking Zone 2 — 75 đến 90 phút",
+      desc:"• Dốc: 8% – 10%\n• Tốc độ: 4.0 km/h\n• Không vịn tay, thở mũi đều đặn, bù đủ nước khoáng."
+    }
+  },
+  {
+    id:"t6", label:"Thứ 6", type:"fbc", title:"Full Body C (Dưỡng Chân Cho Thứ 7)",
+    flow:"Khởi động (5p) → Tạ thân trên & bắp chân (30p) → Incline Walking (20p)",
+    blocks:[
+      {name:"Bài tập (2 working sets to failure — không tập đùi nặng)", items:[
+        {n:"Cable Chest Fly", tag:"2 × 10–12"},
+        {n:"Face Pull / Reverse Fly", tag:"2 × 12–15"},
+        {n:"Standing Calf Raise", tag:"2 × 12–15"},
+        {n:"Triceps Rope Pushdown", tag:"2 × 10–12"},
+        {n:"Cable Pallof Press", tag:"2 × 10–12/bên"}
+      ]}
+    ],
+    cardio:{
+      title:"Incline Walking thả lỏng — 20–25 phút", 
+      desc:"• Dốc: 6% – 8%\n• Tốc độ: 4.0 km/h\n• Bước chậm rãi thư giãn."
+    }
+  },
+  {
+    id:"t7", label:"Thứ 7", type:"match", title:"Match Simulation (90 Phút)",
+    flow:"Khởi động (10p) → Hiệp 1 (45p) → Nghỉ (10p) → Hiệp 2 (35p)",
+    cardio:{
+      title:"Công thức 90 phút (Max speed 12 km/h)",
+      desc:"• KHỞI ĐỘNG (10p): 5p dốc 1% chạy 4.5 → 7.0 km/h + 5p giãn cơ.\n\n• HIỆP 1 (45p — Dốc 3% cố định):\nLặp lại chu kỳ 5 phút (×9 lần):\n  - 2:00: Đi bộ 5.0–5.5 km/h\n  - 1:30: Chạy 9.5–10.5 km/h\n  - 0:30: Sprint 12.0 km/h\n  - 1:00: Đi bộ 4.0 km/h\n\n• NGHỈ GIỮA HIỆP (10p): Uống 250ml nước dừa / điện giải, đi lại nhẹ nhàng.\n\n• HIỆP 2 (35p — Dốc 8% cố định):\nLặp lại chu kỳ 6 phút (×5 lần):\n  - 4:00: Đi bộ dốc 5.0–5.5 km/h\n  - 1:00: Chạy dốc 8.5–9.5 km/h\n  - 1:00: Đi bộ chậm 3.8–4.0 km/h\nBù giờ (5p): Hạ dốc 0%, đi bộ 4.0 → 3.0 km/h."
+    }
+  },
+  {
+    id:"cn", label:"Chủ nhật", type:"rest", title:"Nghỉ Ngơi Hoàn Toàn",
+    flow:"Phục hồi hệ thần kinh, tái tạo cơ bắp và trục nội tiết",
+    rest:true
   }
 ];
 
-const COLOR = {push:"var(--push)", pull:"var(--pull)", legs:"var(--legs)", rest:"var(--rest)", cardio:"var(--cardio)"};
+const COLOR = {fba:"var(--fb-a)", fbb:"var(--fb-b)", fbc:"var(--fb-c)", cardio:"var(--cardio)", match:"var(--match)", rest:"var(--rest)"};
 const nav = document.getElementById("nav");
 const days = document.getElementById("days");
 const counter = document.getElementById("counter");
 
-PLAN.forEach((d,i)=>{
+PLAN.forEach((d)=>{
   const b = document.createElement("button");
   b.type="button"; b.role="tab"; b.dataset.type=d.type; b.dataset.id=d.id;
   b.setAttribute("aria-selected","false");
@@ -289,8 +273,8 @@ PLAN.forEach((d,i)=>{
   if(d.flow) html += `<p class="flow">${d.flow}</p>`;
 
   if(d.rest){
-    html += `<div class="rest-card"><div class="big">Nghỉ hoàn toàn</div>
-      <p>Không cần cardio bù. Không cần gym.</p></div>`;
+    html += `<div class="rest-card"><div class="big">Nghỉ Hoàn Toàn</div>
+      <p>Không tập gym, không cardio. Ngủ sâu giấc, nạp đủ đạm, mỡ tốt và tinh bột sạch.</p></div>`;
   } else {
     (d.blocks||[]).forEach(bl=>{
       html += `<div class="block"><h3>${bl.name}</h3><ol class="ex">`;
@@ -303,12 +287,8 @@ PLAN.forEach((d,i)=>{
       html += `</ol></div>`;
     });
     if(d.cardio){
-      html += `<div class="block"><h3>Cardio</h3><div class="cardio">
-        <h4>${d.cardio.title}</h4><p>${d.cardio.desc}</p>` +
-        (d.cardio.stats?`<div class="big">${d.cardio.stats.map(s=>`<span>${s}</span>`).join("")}</div>`:"") +
-        `</div></div>`;
-    } else if(d.noCardio){
-      html += `<p class="note">${d.noCardio}</p>`;
+      html += `<div class="block"><h3>Nội dung Tim Mạch / Chạy bộ</h3><div class="cardio">
+        <h4>${d.cardio.title}</h4><p>${d.cardio.desc}</p></div></div>`;
     }
   }
   s.innerHTML = html;
@@ -328,14 +308,14 @@ function updateCount(){
   const done = cur.querySelectorAll('input[type=checkbox]:checked').length;
   counter.innerHTML = all.length
     ? `Buổi này: <b>${done}</b>/${all.length} bài`
-    : `Hôm nay: <b>nghỉ</b>`;
+    : `Hôm nay: <b>Cardio / Nghỉ</b>`;
 }
 document.getElementById("reset").addEventListener("click",()=>{
   days.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
   updateCount();
 });
 
-const todayIdx = (new Date().getDay()+6)%7; // 0 = thứ 2
+const todayIdx = (new Date().getDay()+6)%7; // 0 = Thứ 2
 select(PLAN[todayIdx].id);
 </script>
 </body>
