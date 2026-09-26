@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lịch tập tuần — Lean Athletic & Match Simulation</title>
+<title>Lịch tập tuần — Lean Athletic & Spine Shield</title>
 <style>
   :root{
     --ink:#12161c;
@@ -153,7 +153,7 @@
   <header>
     <div>
       <h1>Lịch tập tuần — Lean Athletic</h1>
-      <p class="sub">3 Full Body (2 Sets to Failure) • 2 Zone 2 Recovery • 1 Match Day 90 Phút • 1 Nghỉ</p>
+      <p class="sub">3 Full Body • Zone 2 (90p T3/T5) • Match Day 90p T7 • Khóa bảo vệ cột sống (Side Plank cuối buổi)</p>
     </div>
     <div class="counter" id="counter">Buổi này: <b>0</b>/0 bài</div>
   </header>
@@ -171,60 +171,72 @@
 const PLAN = [
   {
     id:"t2", label:"Thứ 2", type:"fba", title:"Full Body A + Zone 2",
-    flow:"Khởi động (5p) → Tạ (35p) → Incline Walking (30p)",
+    flow:"Khởi động (5p) → Tạ (35p) → Incline Walking (30p) → Side Plank khóa lưng",
     blocks:[
-      {name:"Bài tập (Khởi động riêng, 2 working sets to failure)", items:[
+      {name:"Bài tập chính (2 working sets to failure)", items:[
         {n:"DB Flat Bench Press", tag:"2 × 6–8"},
         {n:"Lat Pulldown", tag:"2 × 6–8"},
         {n:"Bulgarian Split Squat / Leg Press", tag:"2 × 8–10/chân"},
         {n:"DB Lateral Raise", tag:"2 × 12–15"},
-        {n:"Ab Wheel Rollout / Plank", tag:"2 × 8–12"}
+        {n:"Ab Wheel Rollout / McGill Curl-up", tag:"2 × 8–12"}
       ]}
     ],
     cardio:{
       title:"Incline Walking Zone 2 — 30 phút", 
       desc:"• Dốc: 8% – 10%\n• Tốc độ: 4.0 km/h\n• Không vịn tay, thở mũi đều."
-    }
+    },
+    finisher:[
+      {n:"Side Plank (Khóa bảo vệ đĩa đệm lưng dưới)", tag:"2 × 20–30s/bên"}
+    ]
   },
   {
-    id:"t3", label:"Thứ 3", type:"cardio", title:"Zone 2 Recovery (60 Phút)",
-    flow:"Không tập tạ → Incline walking Zone 2",
+    id:"t3", label:"Thứ 3", type:"cardio", title:"Zone 2 Tối Ưu Mỡ Thừa (90 Phút)",
+    flow:"Không tập tạ → Incline walking 90p → Side Plank khóa lưng",
     cardio:{
-      title:"Incline Walking Zone 2 — 60 phút",
-      desc:"• Dốc: 8% – 10%\n• Tốc độ: 4.0 km/h\n• Không vịn tay, duy trì nhịp tim Zone 2 liên tục."
-    }
+      title:"Incline Walking Zone 2 — 90 phút trọn vẹn",
+      desc:"• Dốc: 8% – 10%\n• Tốc độ: 4.0 km/h\n• Chuẩn bị bình nước khoáng, nhấp ngụm nhỏ mỗi 20–30 phút\n• Giữ nhịp thở mũi đều đặn, không vịn tay."
+    },
+    finisher:[
+      {n:"Side Plank (Ổn định cột sống sau đi bộ dài)", tag:"2 × 20–30s/bên"}
+    ]
   },
   {
     id:"t4", label:"Thứ 4", type:"fbb", title:"Full Body B + Zone 2",
-    flow:"Khởi động (5p) → Tạ (40p) → Incline Walking (30p)",
+    flow:"Khởi động (5p) → Tạ (40p) → Incline Walking (30p) → Side Plank khóa lưng",
     blocks:[
-      {name:"Bài tập (Khởi động riêng, 2 working sets to failure)", items:[
+      {name:"Bài tập chính (2 working sets to failure)", items:[
         {n:"Incline DB Bench Press", tag:"2 × 8–10"},
         {n:"1-Arm Cable Row", tag:"2 × 8–10/bên"},
         {n:"Single-Leg RDL", tag:"2 × 8–10/chân"},
-        {n:"Lying / Seated Leg Curl", tag:"2 × 10–12"},
+        {n:"Lying / Seated Leg Curl (2 chân)", tag:"2 × 10–12"},
         {n:"1-Arm DB Shoulder Press", tag:"2 × 8–10/bên"},
         {n:"Incline DB Curl", tag:"2 × 8–10"}
       ]}
     ],
     cardio:{
       title:"Incline Walking Zone 2 — 30 phút", 
-      desc:"• Dốc: 8% – 10%\n• Tốc độ: 4.0 km/h\n• Không vịn tay, hạ nhiệt cơ bắp."
-    }
+      desc:"• Dốc: 8% – 10%\n• Tốc độ: 4.0 km/h\n• Thả lỏng thân trên, bước đều chân."
+    },
+    finisher:[
+      {n:"Side Plank (Khóa bảo vệ đĩa đệm lưng dưới)", tag:"2 × 20–30s/bên"}
+    ]
   },
   {
-    id:"t5", label:"Thứ 5", type:"cardio", title:"Zone 2 Recovery (75–90 Phút)",
-    flow:"Không tập tạ → Incline walking Zone 2",
+    id:"t5", label:"Thứ 5", type:"cardio", title:"Zone 2 Tối Ưu Mỡ Thừa (90 Phút)",
+    flow:"Không tập tạ → Incline walking 90p → Side Plank khóa lưng",
     cardio:{
-      title:"Incline Walking Zone 2 — 75 đến 90 phút",
-      desc:"• Dốc: 8% – 10%\n• Tốc độ: 4.0 km/h\n• Không vịn tay, thở mũi đều đặn, bù đủ nước khoáng."
-    }
+      title:"Incline Walking Zone 2 — 90 phút trọn vẹn",
+      desc:"• Dốc: 8% – 10%\n• Tốc độ: 4.0 km/h\n• Đốt mỡ sâu và tăng sinh ty thể tế bào\n• Bổ sung nước khoáng đều đặn suốt buổi."
+    },
+    finisher:[
+      {n:"Side Plank (Ổn định cột sống sau đi bộ dài)", tag:"2 × 20–30s/bên"}
+    ]
   },
   {
     id:"t6", label:"Thứ 6", type:"fbc", title:"Full Body C (Dưỡng Chân Cho Thứ 7)",
-    flow:"Khởi động (5p) → Tạ thân trên & bắp chân (30p) → Incline Walking (20p)",
+    flow:"Khởi động (5p) → Tạ thân trên & bắp chân (30p) → Incline Walking (20p) → Side Plank khóa lưng",
     blocks:[
-      {name:"Bài tập (2 working sets to failure — không tập đùi nặng)", items:[
+      {name:"Bài tập chính (2 sets to failure — dưỡng chân cho Thứ 7)", items:[
         {n:"Cable Chest Fly", tag:"2 × 10–12"},
         {n:"Face Pull / Reverse Fly", tag:"2 × 12–15"},
         {n:"Standing Calf Raise", tag:"2 × 12–15"},
@@ -233,21 +245,27 @@ const PLAN = [
       ]}
     ],
     cardio:{
-      title:"Incline Walking thả lỏng — 20–25 phút", 
-      desc:"• Dốc: 6% – 8%\n• Tốc độ: 4.0 km/h\n• Bước chậm rãi thư giãn."
-    }
+      title:"Incline Walking nhẹ nhàng — 20–25 phút", 
+      desc:"• Dốc: 6% – 8%\n• Tốc độ: 4.0 km/h\n• Bước thong thả xả mỏi."
+    },
+    finisher:[
+      {n:"Side Plank (Khóa bảo vệ đĩa đệm lưng dưới)", tag:"2 × 20–30s/bên"}
+    ]
   },
   {
     id:"t7", label:"Thứ 7", type:"match", title:"Match Simulation (90 Phút)",
-    flow:"Khởi động (10p) → Hiệp 1 (45p) → Nghỉ (10p) → Hiệp 2 (35p)",
+    flow:"Khởi động (10p) → Hiệp 1 (45p) → Nghỉ (10p) → Hiệp 2 (35p) → Side Plank khóa lưng",
     cardio:{
-      title:"Công thức 90 phút (Max speed 12 km/h)",
+      title:"Công thức 90 phút (Trần tốc độ 12 km/h)",
       desc:"• KHỞI ĐỘNG (10p): 5p dốc 1% chạy 4.5 → 7.0 km/h + 5p giãn cơ.\n\n• HIỆP 1 (45p — Dốc 3% cố định):\nLặp lại chu kỳ 5 phút (×9 lần):\n  - 2:00: Đi bộ 5.0–5.5 km/h\n  - 1:30: Chạy 9.5–10.5 km/h\n  - 0:30: Sprint 12.0 km/h\n  - 1:00: Đi bộ 4.0 km/h\n\n• NGHỈ GIỮA HIỆP (10p): Uống 250ml nước dừa / điện giải, đi lại nhẹ nhàng.\n\n• HIỆP 2 (35p — Dốc 8% cố định):\nLặp lại chu kỳ 6 phút (×5 lần):\n  - 4:00: Đi bộ dốc 5.0–5.5 km/h\n  - 1:00: Chạy dốc 8.5–9.5 km/h\n  - 1:00: Đi bộ chậm 3.8–4.0 km/h\nBù giờ (5p): Hạ dốc 0%, đi bộ 4.0 → 3.0 km/h."
-    }
+    },
+    finisher:[
+      {n:"Side Plank (Tái cố định đai lưng sau trận đấu)", tag:"2 × 20–30s/bên"}
+    ]
   },
   {
     id:"cn", label:"Chủ nhật", type:"rest", title:"Nghỉ Ngơi Hoàn Toàn",
-    flow:"Phục hồi hệ thần kinh, tái tạo cơ bắp và trục nội tiết",
+    flow:"Phục hồi hệ thần kinh, tái tạo cơ bắp và bảo dưỡng cột sống",
     rest:true
   }
 ];
@@ -274,21 +292,29 @@ PLAN.forEach((d)=>{
 
   if(d.rest){
     html += `<div class="rest-card"><div class="big">Nghỉ Hoàn Toàn</div>
-      <p>Không tập gym, không cardio. Ngủ sâu giấc, nạp đủ đạm, mỡ tốt và tinh bột sạch.</p></div>`;
+      <p>Không tập gym, không cardio. Ngủ sâu giấc, nạp đủ đạm, khoáng chất và cho cột sống nghỉ ngơi hoàn toàn.</p></div>`;
   } else {
     (d.blocks||[]).forEach(bl=>{
       html += `<div class="block"><h3>${bl.name}</h3><ol class="ex">`;
       bl.items.forEach((it,idx)=>{
-        const name = typeof it==="string"?it:it.n;
-        const tag = typeof it==="string"?"":`<span class="tag">${it.tag}</span>`;
+        const tag = `<span class="tag">${it.tag}</span>`;
         html += `<li><label><span class="num">${String(idx+1).padStart(2,"0")}</span>
-          <input type="checkbox"><span class="name">${name}</span>${tag}</label></li>`;
+          <input type="checkbox"><span class="name">${it.n}</span>${tag}</label></li>`;
       });
       html += `</ol></div>`;
     });
     if(d.cardio){
-      html += `<div class="block"><h3>Nội dung Tim Mạch / Chạy bộ</h3><div class="cardio">
+      html += `<div class="block"><h3>Nội dung Tim Mạch / Cardio</h3><div class="cardio">
         <h4>${d.cardio.title}</h4><p>${d.cardio.desc}</p></div></div>`;
+    }
+    if(d.finisher){
+      html += `<div class="block"><h3>Khóa Cột Sống Cuối Buổi (Spine Lock)</h3><ol class="ex">`;
+      d.finisher.forEach((it,idx)=>{
+        const tag = `<span class="tag">${it.tag}</span>`;
+        html += `<li><label><span class="num">★</span>
+          <input type="checkbox"><span class="name">${it.n}</span>${tag}</label></li>`;
+      });
+      html += `</ol></div>`;
     }
   }
   s.innerHTML = html;
@@ -307,15 +333,15 @@ function updateCount(){
   const all = cur.querySelectorAll('input[type=checkbox]');
   const done = cur.querySelectorAll('input[type=checkbox]:checked').length;
   counter.innerHTML = all.length
-    ? `Buổi này: <b>${done}</b>/${all.length} bài`
-    : `Hôm nay: <b>Cardio / Nghỉ</b>`;
+    ? `Buổi này: <b>${done}</b>/${all.length} mục hoàn thành`
+    : `Hôm nay: <b>Nghỉ ngơi hoàn toàn</b>`;
 }
 document.getElementById("reset").addEventListener("click",()=>{
   days.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
   updateCount();
 });
 
-const todayIdx = (new Date().getDay()+6)%7; // 0 = Thứ 2
+const todayIdx = (new Date().getDay()+6)%7;
 select(PLAN[todayIdx].id);
 </script>
 </body>
