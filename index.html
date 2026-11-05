@@ -1,400 +1,642 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Lịch Tập">
-<meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f4f3ef" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0e0f11" media="(prefers-color-scheme: dark)">
-<title>Lịch Tập Gym</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#f4f3ef; --surface:#ffffff; --surface-2:#f0efea; --line:#e3e1da;
-  --text:#16181b; --muted:#6b6f76; --faint:#9a9ea5;
-  --accent:#d4ff3a; --accent-ink:#1a1f00; --accent-soft:#eefcc0;
-  --orange:#ff6b35; --blue:#3b82f6; --done:#22a45d;
-  --done-line:#9fd8b8; --warm:#e6f5a4; --cool:#eef6cf;
-  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
-  --radius:18px;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0e0f11; --surface:#17191c; --surface-2:#1f2226; --line:#2a2d32;
-    --text:#f2f3f5; --muted:#9aa0a8; --faint:#646a72;
-    --accent:#d4ff3a; --accent-ink:#141800; --accent-soft:#2a3310;
-    --done-line:#1f5a3a; --warm:#7a922a; --cool:#4a5726; color-scheme:dark;
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0e0f11; --surface:#17191c; --surface-2:#1f2226; --line:#2a2d32;
-  --text:#f2f3f5; --muted:#9aa0a8; --faint:#646a72;
-  --accent:#d4ff3a; --accent-ink:#141800; --accent-soft:#2a3310;
-  --done-line:#1f5a3a; --warm:#7a922a; --cool:#4a5726; color-scheme:dark;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);color:var(--text);font-family:"Be Vietnam Pro",-apple-system,system-ui,sans-serif;line-height:1.45;min-height:100vh;padding-bottom:calc(60px + env(safe-area-inset-bottom));-webkit-font-smoothing:antialiased}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none}
-input{font:inherit;color:inherit}
-.wrap{max-width:760px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left)) 0 max(16px,env(safe-area-inset-right))}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Match Pace</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --card: #121214;
+      --card-hover: #1c1c1f;
+      --text: #f5f5f7;
+      --subtext: #86868b;
+      --border: #262629;
+      
+      --c-walk: #30d158;    /* 4 km/h - Green */
+      --c-jog: #0a84ff;     /* 6 km/h - Blue */
+      --c-cruise: #ffd60a;  /* 8 km/h - Yellow */
+      --c-press: #ff9f0a;   /* 10 km/h - Orange */
+      --c-sprint: #ff453a;  /* 12 km/h - Red */
+    }
 
-/* header */
-header{padding:calc(20px + env(safe-area-inset-top)) 0 0}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
-h1{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-top:4px}
-h1 span{background:var(--accent);color:var(--accent-ink);padding:0 8px;border-radius:8px}
-.icon-btn{width:44px;height:44px;border-radius:12px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;flex-shrink:0}
-.icon-btn svg{width:18px;height:18px}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
 
-.weekbar{display:flex;align-items:center;justify-content:space-between;margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:6px}
-.weekbar button{width:44px;height:44px;border-radius:10px;display:grid;place-items:center}
-.weekbar button:active{background:var(--surface-2)}
-.weekbar button:disabled{opacity:.3;cursor:default;background:none}
-.weeklabel{text-align:center;font-size:14px;font-weight:600}
-.weeklabel small{display:block;font-size:11px;color:var(--muted);font-weight:500}
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+      height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
-/* day tabs */
-.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);margin:0 -16px;padding:12px 16px 10px}
-.day{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 0 9px;text-align:center;position:relative;transition:.15s}
-@media (hover:hover){.day:hover{transform:translateY(-1px)}}
-.day:active{transform:scale(.96)}
-.day b{display:block;font-size:13px;font-weight:700}
-.day i{display:block;font-style:normal;font-size:10px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 3px}
-.day .pip{position:absolute;left:50%;bottom:-3px;transform:translateX(-50%);width:18px;height:4px;border-radius:4px;background:var(--line)}
-.day.today .pip{background:var(--orange)}
-.day.full .pip{background:var(--done)}
-.day.active{background:var(--text);color:var(--bg);border-color:var(--text)}
-.day.active i{color:var(--bg);opacity:.7}
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 460px;
+      height: 100%;
+      padding: 36px 24px;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-/* day hero */
-.hero{margin-top:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:var(--accent);opacity:.18}
-.hero .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--accent-soft);color:var(--text)}
-.hero h2{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-top:10px}
-.hero p{color:var(--muted);font-size:14px;margin-top:2px}
-.prog{margin-top:16px;display:flex;align-items:center;gap:12px}
-.bar{flex:1;height:10px;background:var(--surface-2);border-radius:99px;overflow:hidden}
-.bar div{height:100%;background:var(--accent);border-radius:99px;transition:width .35s ease}
-.prog span{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700}
+    .screen.active {
+      display: flex;
+    }
 
-/* list */
-.list{margin-top:14px;display:flex;flex-direction:column;gap:10px}
-.ex{background:var(--surface);border:1px solid var(--line);border-radius:16px;transition:.2s}
-.ex.done{border-color:var(--done-line)}
-.ex-head{display:flex;align-items:center;gap:12px;padding:14px 14px 14px 12px}
-.check{width:34px;height:34px;border-radius:10px;border:2px solid var(--line);display:grid;place-items:center;flex-shrink:0;transition:.15s}
-.check svg{width:16px;height:16px;opacity:0;transform:scale(.6);transition:.15s}
-.ex.done .check{background:var(--done);border-color:var(--done);color:#fff}
-.ex.done .check svg{opacity:1;transform:none}
-.ex-main{flex:1;min-width:0;text-align:left;padding:4px 0}
-.ex-name{font-weight:700;font-size:15px}
-.ex.done .ex-name{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1.5px}
-.ex-sub{font-size:12px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.badge{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;background:var(--surface-2);padding:6px 10px;border-radius:10px;white-space:nowrap}
-.badge.cardio{background:var(--accent);color:var(--accent-ink)}
-.chev{width:36px;height:40px;margin-right:-6px;display:grid;place-items:center;border-radius:8px;color:var(--faint);flex-shrink:0;transition:transform .2s}
-.ex.open .chev{transform:rotate(180deg)}
-.ex-body{display:none;padding:0 14px 16px;border-top:1px dashed var(--line);margin:0 12px}
-.ex.open .ex-body{display:block}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-/* log table */
-.prev{font-size:12px;color:var(--muted);margin:12px 0 8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.prev b{color:var(--text);font-family:"JetBrains Mono",monospace;font-weight:700}
-.sets{display:grid;grid-template-columns:40px 1fr 1fr;gap:6px 8px;align-items:center}
-.sets .h{font-size:11px;color:var(--faint);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
-.sets .n{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--muted);text-align:center;background:var(--surface-2);border-radius:8px;padding:12px 0}
-.sets input{width:100%;background:var(--surface-2);border:1.5px solid transparent;border-radius:10px;padding:11px 12px;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:16px;outline:none;transition:.15s;-webkit-appearance:none;appearance:none;min-height:46px}
-.sets input:focus{border-color:var(--text);background:var(--surface)}
-.sets input::placeholder{color:var(--faint);font-weight:500}
-.hint{font-size:12px;color:var(--muted);margin-top:10px;padding:9px 11px;background:var(--surface-2);border-radius:10px}
-.hint.up{background:var(--accent-soft);color:var(--text)}
+    .header-group {
+      margin-top: 12px;
+    }
 
-/* cardio */
-.phasebar{display:flex;gap:3px;height:40px;margin:14px 0 12px;border-radius:12px;overflow:hidden}
-.phasebar div{display:grid;place-items:center;font-size:10px;font-weight:700;color:var(--accent-ink);min-width:24px}
-.ph-warm{background:var(--warm)}
-.ph-main{background:var(--accent)}
-.ph-hard{background:var(--orange);color:#fff!important}
-.ph-cool{background:var(--cool)}
-.phases{display:flex;flex-direction:column;gap:8px}
-.phase{display:grid;grid-template-columns:8px 1fr;gap:12px;background:var(--surface-2);border-radius:12px;padding:11px 12px 11px 10px}
-.phase .dot{border-radius:4px}
-.phase h4{font-size:14px;font-weight:700;display:flex;justify-content:space-between;gap:8px}
-.phase h4 em{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:13px}
-.stats{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
-.stat{font-size:12px;background:var(--surface);border-radius:8px;padding:4px 8px;color:var(--muted)}
-.stat b{color:var(--text);font-family:"JetBrains Mono",monospace}
-.phase p{font-size:12px;color:var(--muted);margin-top:6px}
-.loop{border:2px dashed var(--orange);border-radius:14px;padding:8px;display:flex;flex-direction:column;gap:6px;position:relative;margin-top:6px}
-.loop-label{position:absolute;top:-11px;right:12px;background:var(--orange);color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px;font-family:"JetBrains Mono",monospace}
-.note{font-size:13px;margin-top:12px;padding:10px 12px;border-left:3px solid var(--accent);background:var(--surface-2);border-radius:0 10px 10px 0}
+    .eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--subtext);
+      margin-bottom: 6px;
+    }
 
-/* rest */
-.rest{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:36px 20px;text-align:center}
-.rest .big{font-size:48px}
-.rest h3{font-size:20px;font-weight:800;margin-top:6px}
-.rest p{color:var(--muted);font-size:14px;margin-top:4px}
+    h1 {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      line-height: 1.15;
+    }
 
-/* rules */
-details.rules{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-details.rules summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
-details.rules summary::-webkit-details-marker{display:none}
-details.rules[open] summary svg{transform:rotate(180deg)}
-details.rules summary svg{transition:.2s;width:18px;height:18px;color:var(--faint)}
-.rules-body{padding:0 18px 18px;display:grid;gap:10px}
-.rule{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:14px}
-.rule .num{width:28px;height:28px;border-radius:9px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:800;font-size:13px}
-.rule p{color:var(--muted)} .rule b{color:var(--text)}
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: auto 0;
+    }
 
-.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;background:var(--text);color:var(--bg);padding:9px 16px;border-radius:99px;font-size:13px;font-weight:600;transition:.25s;pointer-events:none;z-index:9}
-.toast.show{opacity:1;transform:translate(-50%,0)}
+    .option-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px 24px;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-@media (max-width:480px){
-  h1{font-size:28px}
-  .ex-sub{white-space:normal}
-  .phase h4{flex-wrap:wrap}
-  .day i{display:none}
-  .day{padding:11px 0}
-  .hero h2{font-size:22px}
-  .ex-head{gap:10px;padding:12px 10px}
-  .badge{font-size:12px;padding:5px 8px}
-}
-</style>
+    .option-card:active {
+      transform: scale(0.98);
+      background: var(--card-hover);
+    }
+
+    .option-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .option-desc {
+      font-size: 14px;
+      color: var(--subtext);
+      line-height: 1.35;
+    }
+
+    .option-badge {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 6px 12px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      margin-left: 12px;
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      color: var(--subtext);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 12px 0;
+      text-align: center;
+    }
+
+    .workout-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .pill-info {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--subtext);
+      letter-spacing: 0.4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pill-info span {
+      color: var(--text);
+    }
+
+    .ring-container {
+      position: relative;
+      width: 310px;
+      height: 310px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    svg.progress-ring {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke: #161618;
+      stroke-width: 10;
+    }
+
+    .ring-bar {
+      fill: none;
+      stroke: var(--c-walk);
+      stroke-width: 10;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.3s linear, stroke 0.4s ease;
+    }
+
+    .speed-label {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      margin-bottom: -4px;
+      transition: color 0.4s ease;
+    }
+
+    .speed-value {
+      font-size: 112px;
+      font-weight: 700;
+      letter-spacing: -4px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      margin: 4px 0;
+    }
+
+    .speed-unit {
+      font-size: 15px;
+      color: var(--subtext);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .phase-timer {
+      font-size: 30px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    .workout-bottom {
+      width: 100%;
+    }
+
+    .controls-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .ctrl-btn {
+      flex: 1;
+      padding: 18px;
+      border-radius: 18px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      transition: transform 0.12s ease, background 0.2s ease;
+    }
+
+    .ctrl-btn:active {
+      transform: scale(0.97);
+      background: var(--card-hover);
+    }
+
+    .ctrl-btn.danger {
+      color: #ff453a;
+    }
+
+    @keyframes pulseScreen {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.045); }
+      100% { transform: scale(1); }
+    }
+    .pulse {
+      animation: pulseScreen 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="top">
-      <div>
-        <div class="eyebrow">Lean · Athletic · 6 buổi/tuần</div>
-        <h1>Lịch <span>Tập</span></h1>
+
+  <!-- STEP 1: CHỌN ĐỘ KHÓ -->
+  <div id="screen-diff" class="screen active">
+    <div class="header-group">
+      <div class="eyebrow">Bước 1 / 2</div>
+      <h1>Chọn Cường Độ</h1>
+    </div>
+
+    <div class="options-list">
+      <div class="option-card" onclick="selectDifficulty('amateur')">
+        <div>
+          <div class="option-title">Amateur</div>
+          <div class="option-desc">20 phút (2 hiệp x 10p)<br>Gợi ý gạt dốc cố định: 3% - 4%</div>
+        </div>
+        <div class="option-badge">20m</div>
       </div>
-      <button class="icon-btn" id="themeBtn" aria-label="Đổi giao diện sáng/tối">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      </button>
+
+      <div class="option-card" onclick="selectDifficulty('pro')">
+        <div>
+          <div class="option-title">Pro</div>
+          <div class="option-desc">30 phút (2 hiệp x 15p)<br>Gợi ý gạt dốc cố định: 5% - 6%</div>
+        </div>
+        <div class="option-badge">30m</div>
+      </div>
+
+      <div class="option-card" onclick="selectDifficulty('elite')">
+        <div>
+          <div class="option-title">Elite</div>
+          <div class="option-desc">45 phút (2 hiệp x 22.5p)<br>Gợi ý gạt dốc cố định: 7% - 8%</div>
+        </div>
+        <div class="option-badge">45m</div>
+      </div>
     </div>
-    <div class="weekbar">
-      <button id="prevWeek" aria-label="Tuần trước"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg></button>
-      <div class="weeklabel" id="weekLabel"></div>
-      <button id="nextWeek" aria-label="Tuần sau"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></button>
+
+    <div class="back-btn" style="opacity: 0; pointer-events: none;">.</div>
+  </div>
+
+  <!-- STEP 2: CHỌN VỊ TRÍ -->
+  <div id="screen-role" class="screen">
+    <div class="header-group">
+      <div class="eyebrow">Bước 2 / 2</div>
+      <h1>Vị Trí Thi Đấu</h1>
     </div>
-    <nav class="days" id="days"></nav>
-  </header>
 
-  <main id="main"></main>
+    <div class="options-list">
+      <div class="option-card" onclick="startMatch('striker')">
+        <div>
+          <div class="option-title">Striker</div>
+          <div class="option-desc">Đi bộ rình rập (4-6 km/h) xen kẽ các pha bứt tốc 12 km/h bất ngờ.</div>
+        </div>
+        <div class="option-badge">HIIT</div>
+      </div>
 
-  <details class="rules">
-    <summary>Nguyên tắc tập
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-    </summary>
-    <div class="rules-body">
-      <div class="rule"><div class="num">1</div><p><b>Chọn tạ còn 1–2 rep.</b> Làm trong khoảng rep cho sẵn mà cảm giác chỉ còn 1–2 rep nữa là hết sức.</p></div>
-      <div class="rule"><div class="num">2</div><p><b>Đủ rep cao nhất ở mọi hiệp → tăng tạ.</b> Buổi sau tăng một nấc nhỏ, quay về rep thấp rồi leo dần lên.</p></div>
-      <div class="rule"><div class="num">3</div><p><b>Form xấu đi thì dừng hiệp.</b> Xuống chậm 2–3 giây, không thả rơi tạ.</p></div>
-      <div class="rule"><div class="num">4</div><p><b>Back squat là bài kỹ thuật.</b> Box squat, tăng 2.5 kg khi cả 4 hiệp đều sạch.</p></div>
-      <div class="rule"><div class="num">5</div><p><b>Ngoài phòng tập:</b> 8.000–10.000 bước/ngày, đạm 140–160 g/ngày, cân buổi sáng 3–4 lần/tuần.</p></div>
+      <div class="option-card" onclick="startMatch('midfielder')">
+        <div>
+          <div class="option-title">Midfielder</div>
+          <div class="option-desc">Bao sân bền bỉ. Duy trì 8-10 km/h liên tục, rất ít nghỉ đi bộ.</div>
+        </div>
+        <div class="option-badge">Tempo</div>
+      </div>
+
+      <div class="option-card" onclick="startMatch('winger')">
+        <div>
+          <div class="option-title">Winger</div>
+          <div class="option-desc">Biến tốc linh hoạt dọc biên, kết hợp dốc sức và thả lỏng.</div>
+        </div>
+        <div class="option-badge">Wave</div>
+      </div>
     </div>
-  </details>
-</div>
-<div class="toast" id="toast"></div>
 
-<script>
-const CARDIO = {
-  incline:{title:"Incline Treadmill Walk",dur:"20–25 min",phases:[
-    {k:"warm",l:"Khởi động",t:"3 phút",m:3,s:"4.5 km/h",i:"0–2%"},
-    {k:"main",l:"Đi dốc",t:"17–20 phút",m:18,s:"4.5–5.5 km/h",i:"8–12%",p:"Không bám tay vịn. Thở hơi nhanh nhưng vẫn nói được."},
-    {k:"cool",l:"Thả lỏng",t:"2 phút",m:2,s:"4 km/h",i:"0%"}],
-    note:"Mỗi tuần thử tăng 0.5% độ dốc hoặc 0.2 km/h khi thấy nhẹ."},
-  easy:{title:"Easy Treadmill Walk",dur:"15 min",phases:[
-    {k:"warm",l:"Khởi động",t:"2 phút",m:2,s:"4.5 km/h",i:"0%"},
-    {k:"main",l:"Đi nhẹ",t:"11 phút",m:11,s:"5–5.5 km/h",i:"3–5%",p:"Nhẹ nhàng để chân hồi phục sau buổi tạ."},
-    {k:"cool",l:"Thả lỏng",t:"2 phút",m:2,s:"4.5 km/h",i:"0%"}]},
-  interval:{title:"Treadmill Intervals",dur:"~30 min",loop:8,phases:[
-    {k:"warm",l:"Khởi động",t:"8 phút",m:8,s:"5.5–6 km/h",i:"1%",p:"Đi nhanh, vài phút cuối chạy chậm nhẹ."},
-    {k:"hard",l:"Chạy nhanh",t:"30–45 giây",m:.6,s:"10–12 km/h",i:"1%",loop:true,p:"Gắng sức khoảng 8/10."},
-    {k:"cool",l:"Đi bộ hồi",t:"90 giây",m:1.5,s:"5 km/h",i:"1%",loop:true},
-    {k:"cool",l:"Thả lỏng",t:"5 phút",m:5,s:"4.5 km/h",i:"0%"}],
-    note:"Mới bắt đầu thì làm 6 vòng. Mẹo: đứng hai chân lên thành máy khi đổi tốc độ, đợi băng chạy đạt tốc rồi mới bước vào."},
-  zone2:{title:"Zone 2 Treadmill",dur:"35–45 min",phases:[
-    {k:"warm",l:"Khởi động",t:"5 phút",m:5,s:"5 km/h",i:"1%"},
-    {k:"main",l:"Zone 2",t:"25–35 phút",m:30,s:"7–8.5 km/h",i:"1%",p:"Chạy chậm. Nếu chưa chạy liên tục được: đi dốc 6–10% ở 5.5–6 km/h. Thước đo: vẫn nói được thành câu, thở được bằng mũi."},
-    {k:"cool",l:"Thả lỏng",t:"5 phút",m:5,s:"4.5 km/h",i:"0%"}],
-    note:"Đây là buổi đốt mỡ dài, đừng chạy nhanh. Mệt quá thì giảm tốc chứ không dừng."}
-};
+    <button class="back-btn" onclick="showScreen('screen-diff')">← Quay lại chọn độ khó</button>
+  </div>
 
-const L=(name,sets,reps,sub,log=true)=>({name,sets,reps,sub,log});
-const C=key=>({cardio:key});
-const PLAN=[
-  {short:"T2",name:"Upper A",focus:"Ngực · Vai · Lưng",items:[
-    L("Dumbbell Bench Press",4,"10–15"),L("Chest-Supported Row",4,"10–15"),
-    L("Seated Dumbbell Shoulder Press",3,"10–15"),L("Lat Pulldown",3,"10–15"),
-    L("Face Pull",3,"12–20","Bài chính cho vai tròn"),L("Bicep Curl",3,"12–20"),
-    L("Tricep Pushdown",3,"12–20"),C("incline")]},
-  {short:"T3",name:"Lower A",focus:"Squat · Đùi trước",items:[
-    L("Back Squat (box)",4,"8","Luyện kỹ thuật · tăng 2.5 kg khi sạch"),L("Smith Machine Squat",3,"10–15"),
-    L("Leg Press",3,"15–20"),L("Bulgarian Split Squat",3,"10–12/leg"),
-    L("Leg Curl",3,"12–15"),L("Calf Raise",3,"12–20"),
-    L("Dead Bug",3,"8/side","Giữ lưng dưới sát sàn",false),C("easy")]},
-  {short:"T4",name:"Conditioning",focus:"Interval · Core · Tư thế",items:[
-    C("interval"),L("Pallof Press",3,"10/side"),L("Side Plank",3,"30s/side","",false),
-    L("Back Extension",3,"12–15","Siết mông, không ưỡn lưng"),L("Couch Stretch",2,"45s/side","Giãn cơ gập hông",false),
-    L("Open Book Stretch",2,"10/side","Xoay lưng trên",false)]},
-  {short:"T5",name:"Upper B",focus:"Lưng chữ V · Vai",items:[
-    L("Pull-Up (assisted)",4,"6–12","Ghi kg hỗ trợ, giảm dần theo tuần"),L("Incline Dumbbell Press",3,"10–15"),
-    L("Single-Arm Dumbbell Row",3,"10–15/side"),L("Cable Lateral Raise",3,"12–20"),
-    L("Pec Deck",2,"12–20"),L("Rear Delt Fly",3,"15–20"),
-    L("Hammer Curl",3,"12–20"),L("Overhead Tricep Extension",3,"12–20"),C("incline")]},
-  {short:"T6",name:"Lower B",focus:"Đùi sau · Mông",items:[
-    L("Romanian Deadlift",4,"10–15"),L("Hip Thrust",3,"10–15"),
-    L("Reverse Lunge",3,"10–12/leg"),L("Leg Extension",3,"12–20"),
-    L("Single-Leg RDL",2,"8–10/leg"),L("Hanging Knee Raise",3,"10–15","",false),C("easy")]},
-  {short:"T7",name:"Full Body",focus:"Athletic · Cardio dài",items:[
-    L("Broad Jump",4,"4","Nhảy thật bật, nghỉ đủ",false),L("Kettlebell Swing",4,"12–15"),
-    L("Dumbbell Bench Press",3,"10–12"),L("Seated Cable Row",3,"10–12"),
-    L("Farmer Carry",4,"30–40 m"),C("zone2")]},
-  {short:"CN",name:"Nghỉ",focus:"Hồi phục",rest:true,items:[]}
-];
-PLAN.forEach((d,di)=>d.items.forEach((it,ii)=>{
-  it.id=di+"-"+(it.cardio?"c-"+it.cardio:it.name.toLowerCase().replace(/[^a-z0-9]+/g,"-"));
-}));
+  <!-- STEP 3: MÀN HÌNH CHẠY TỰ ĐỘNG (KHÔNG BÁO TRƯỚC) -->
+  <div id="screen-workout" class="screen">
+    <div class="workout-top">
+      <div class="pill-info" id="half-indicator">H1 • <span>00:00</span></div>
+      <div class="pill-info">Incline <span id="incline-hint">5%</span></div>
+    </div>
 
-/* storage */
-const KEY="gym-tracker-v1";
-function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
-let DB=load(); DB.weeks=DB.weeks||{};
+    <div class="ring-container" id="ring-box">
+      <svg class="progress-ring" viewBox="0 0 310 310">
+        <circle class="ring-bg" cx="155" cy="155" r="142"></circle>
+        <circle class="ring-bar" id="ring-bar" cx="155" cy="155" r="142" stroke-dasharray="892.21" stroke-dashoffset="0"></circle>
+      </svg>
+      <div class="speed-label" id="phase-name">KICK OFF</div>
+      <div class="speed-value" id="speed-val">6</div>
+      <div class="speed-unit">km/h</div>
+      <div class="phase-timer" id="phase-timer">01:00</div>
+    </div>
 
-/* dates */
-const pad=n=>String(n).padStart(2,"0");
-const fmt=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
-function monday(d){const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x}
-const TODAY=new Date(); const THIS_MON=monday(TODAY);
-const todayIdx=(TODAY.getDay()+6)%7;
-let weekOffset=0, dayIdx=todayIdx, openId=null;
+    <div class="workout-bottom">
+      <div class="controls-row">
+        <button class="ctrl-btn" id="pause-btn" onclick="togglePause()">Tạm dừng</button>
+        <button class="ctrl-btn danger" onclick="endWorkout()">Kết thúc</button>
+      </div>
+    </div>
+  </div>
 
-function curMon(){const m=new Date(THIS_MON);m.setDate(m.getDate()+weekOffset*7);return m}
-const wk=()=>fmt(curMon());
-const W=()=>DB.weeks[wk()]||(DB.weeks[wk()]={});
-const entry=id=>{const w=W();return w[id]||(w[id]={done:false,sets:[]})};
-const peek=id=>(DB.weeks[wk()]||{})[id];
+  <script>
+    const DIFF_CONFIG = {
+      amateur: { halfSeconds: 600, incline: '3-4%', sprintBonus: 0, restBonus: 15 },
+      pro:     { halfSeconds: 900, incline: '5-6%', sprintBonus: 10, restBonus: 0 },
+      elite:   { halfSeconds: 1350, incline: '7-8%', sprintBonus: 15, restBonus: -10 }
+    };
 
-function prevLog(id){
-  const keys=Object.keys(DB.weeks).filter(k=>k<wk()).sort().reverse();
-  for(const k of keys){const e=DB.weeks[k][id];if(e&&e.sets&&e.sets.some(s=>s&&(s.w||s.r)))return{k,e}}
-  return null;
-}
-const parseTop=r=>{const m=String(r).match(/(\d+)\D*$/);const a=String(r).match(/^(\d+)/);return{lo:a?+a[1]:0,hi:m?+m[1]:0}};
+    const SPEED_META = {
+      4:  { label: 'WALK',     color: 'var(--c-walk)',   minDur: 45, maxDur: 70 },
+      6:  { label: 'JOG',      color: 'var(--c-jog)',    minDur: 50, maxDur: 75 },
+      8:  { label: 'CRUISE',   color: 'var(--c-cruise)', minDur: 55, maxDur: 85 },
+      10: { label: 'PRESSING', color: 'var(--c-press)',  minDur: 45, maxDur: 70 },
+      12: { label: 'SPRINT',   color: 'var(--c-sprint)', minDur: 35, maxDur: 55 }
+    };
 
-/* render */
-function renderWeek(){
-  const m=curMon(),s=new Date(m);s.setDate(s.getDate()+6);
-  const lbl=weekOffset===0?"Tuần này":weekOffset===-1?"Tuần trước":weekOffset>0?"Tuần sau":Math.abs(weekOffset)+" tuần trước";
-  document.getElementById("weekLabel").innerHTML=`${lbl}<small>${pad(m.getDate())}/${pad(m.getMonth()+1)} – ${pad(s.getDate())}/${pad(s.getMonth()+1)}</small>`;
-  document.getElementById("nextWeek").disabled=weekOffset>=1;
-}
-function dayProgress(d){
-  if(d.rest)return{done:0,total:0};
-  const total=d.items.length,done=d.items.filter(it=>peek(it.id)&&peek(it.id).done).length;return{done,total};
-}
-function renderDays(){
-  document.getElementById("days").innerHTML=PLAN.map((d,i)=>{
-    const p=dayProgress(d);
-    const cls=["day",i===dayIdx?"active":"",(i===todayIdx&&weekOffset===0)?"today":"",(p.total&&p.done===p.total)?"full":""].join(" ");
-    return `<button class="${cls}" data-d="${i}"><b>${d.short}</b><i>${d.name}</i><span class="pip"></span></button>`;
-  }).join("");
-}
-const chk=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg>`;
-const chev=`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>`;
+    const ROLE_WEIGHTS = {
+      striker: {
+        normal:    [{ s: 4, w: 30 }, { s: 6, w: 20 }, { s: 8, w: 15 }, { s: 10, w: 10 }, { s: 12, w: 25 }],
+        afterHigh: [{ s: 4, w: 65 }, { s: 6, w: 35 }],
+        afterLow:  [{ s: 8, w: 25 }, { s: 10, w: 25 }, { s: 12, w: 50 }]
+      },
+      midfielder: {
+        normal:    [{ s: 4, w: 5 },  { s: 6, w: 15 }, { s: 8, w: 40 }, { s: 10, w: 30 }, { s: 12, w: 10 }],
+        afterHigh: [{ s: 6, w: 40 }, { s: 8, w: 60 }],
+        afterLow:  [{ s: 8, w: 55 }, { s: 10, w: 35 }, { s: 12, w: 10 }]
+      },
+      winger: {
+        normal:    [{ s: 4, w: 15 }, { s: 6, w: 25 }, { s: 8, w: 25 }, { s: 10, w: 15 }, { s: 12, w: 20 }],
+        afterHigh: [{ s: 4, w: 45 }, { s: 6, w: 55 }],
+        afterLow:  [{ s: 8, w: 40 }, { s: 10, w: 35 }, { s: 12, w: 25 }]
+      }
+    };
 
-function cardioBody(c){
-  const flat=[];c.phases.forEach(p=>{if(p.loop){for(let i=0;i<(c.loop||1);i++)flat.push(p)}else flat.push(p)});
-  const bar=`<div class="phasebar">${(()=>{const out=[];let i=0;
-    while(i<flat.length){const p=flat[i];
-      if(p.loop){let n=0;while(i<flat.length&&flat[i].loop){n+=flat[i].m;i++}out.push(`<div class="ph-hard" style="flex:${n}">×${c.loop}</div>`)}
-      else{out.push(`<div class="ph-${p.k}" style="flex:${p.m}">${p.m>=4?p.t.replace(" phút","′"):""}</div>`);i++}}
-    return out.join("")})()}</div>`;
-  const ph=p=>`<div class="phase"><div class="dot ph-${p.k}"></div><div><h4>${p.l}<em>${p.t}</em></h4>
-    <div class="stats"><span class="stat">Tốc độ <b>${p.s}</b></span><span class="stat">Độ dốc <b>${p.i}</b></span></div>${p.p?`<p>${p.p}</p>`:""}</div></div>`;
-  let list="",inLoop=[];
-  c.phases.forEach((p,i)=>{
-    if(p.loop){inLoop.push(p);if(!c.phases[i+1]||!c.phases[i+1].loop){list+=`<div class="loop"><span class="loop-label">× ${c.loop} vòng</span>${inLoop.map(ph).join("")}</div>`;inLoop=[]}}
-    else list+=ph(p);
-  });
-  return bar+`<div class="phases">${list}</div>`+(c.note?`<div class="note">${c.note}</div>`:"");
-}
-function liftBody(it){
-  const e=peek(it.id)||{sets:[]};const pv=prevLog(it.id);
-  let prev=pv?`Lần trước: ${pv.e.sets.filter(s=>s&&(s.w||s.r)).map(s=>`<b>${s.w||"–"}×${s.r||"–"}</b>`).join(" ")}`:"Chưa có dữ liệu tuần trước";
-  let rows=`<span class="h">Hiệp</span><span class="h">kg</span><span class="h">Rep</span>`;
-  for(let i=0;i<it.sets;i++){const s=e.sets[i]||{};
-    const ph=pv&&pv.e.sets[i]?pv.e.sets[i]:{};
-    rows+=`<span class="n">${i+1}</span><input inputmode="decimal" data-id="${it.id}" data-i="${i}" data-f="w" value="${s.w||""}" placeholder="${ph.w||"kg"}"><input inputmode="numeric" data-id="${it.id}" data-i="${i}" data-f="r" value="${s.r||""}" placeholder="${ph.r||it.reps}">`;}
-  return `<div class="prev">${prev}</div><div class="sets">${rows}</div>${hintFor(it)}`;
-}
-function hintFor(it){
-  const e=peek(it.id);const {hi}=parseTop(it.reps);
-  if(e&&hi&&e.sets.length>=it.sets&&e.sets.slice(0,it.sets).every(s=>s&&+s.r>=hi))
-    return `<div class="hint up">Đủ ${hi} rep ở mọi hiệp. Buổi sau tăng tạ một nấc.</div>`;
-  return `<div class="hint">Mục tiêu ${it.reps} rep, còn 1–2 rep nữa là hết sức.</div>`;
-}
-function render(){
-  renderWeek();renderDays();
-  const d=PLAN[dayIdx],p=dayProgress(d),main=document.getElementById("main");
-  if(d.rest){main.innerHTML=`<div class="rest"><div class="big">🛌</div><h3>Ngày nghỉ</h3><p>Đi bộ thoải mái, ngủ đủ, ăn đủ đạm. Cơ phát triển lúc nghỉ.</p></div>`;return}
-  const pct=p.total?Math.round(p.done/p.total*100):0;
-  main.innerHTML=`<section class="hero"><span class="tag">${d.short==="T7"?"Thứ 7":"Thứ "+(dayIdx+2)}</span><h2>${d.name}</h2><p>${d.focus}</p>
-    <div class="prog"><div class="bar"><div style="width:${pct}%"></div></div><span>${p.done}/${p.total}</span></div></section>
-    <div class="list">${d.items.map(it=>{
-      const e=peek(it.id)||{};const isC=!!it.cardio;const c=isC?CARDIO[it.cardio]:null;
-      const name=isC?c.title:it.name;const badge=isC?c.dur:`${it.sets} × ${it.reps}`;
-      const sub=isC?"Bấm để xem setup máy chạy":(it.sub||(it.log?"Bấm để ghi tạ":""));
-      const expandable=isC||it.log;
-      return `<div class="ex ${e.done?"done":""} ${openId===it.id?"open":""}" data-id="${it.id}">
-        <div class="ex-head"><button class="check" data-act="done" aria-label="Đánh dấu xong">${chk}</button>
-        <button class="ex-main" data-act="${expandable?"open":"done"}"><div class="ex-name">${name}</div>${sub?`<div class="ex-sub">${sub}</div>`:""}</button>
-        <span class="badge ${isC?"cardio":""}">${badge}</span>
-        ${expandable?`<button class="chev" data-act="open" aria-label="Mở">${chev}</button>`:""}</div>
-        ${expandable?`<div class="ex-body">${isC?cardioBody(c):liftBody(it)}</div>`:""}</div>`;
-    }).join("")}</div>`;
-}
+    const RING_CIRCUMFERENCE = 892.21; // 2 * PI * 142
+    let selectedDiff = 'pro';
+    let timeline = [];
+    let currentIdx = 0;
+    let phaseRemaining = 0;
+    let phaseTotal = 0;
+    let totalElapsed = 0;
+    let timerInterval = null;
+    let isPaused = false;
+    let audioCtx = null;
+    let wakeLock = null;
 
-/* events */
-let toastT;function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),1400)}
-document.getElementById("days").addEventListener("click",e=>{const b=e.target.closest("[data-d]");if(!b)return;dayIdx=+b.dataset.d;openId=null;render()});
-document.getElementById("prevWeek").onclick=()=>{weekOffset--;openId=null;render()};
-document.getElementById("nextWeek").onclick=()=>{if(weekOffset<1){weekOffset++;openId=null;render()}};
-document.getElementById("main").addEventListener("click",e=>{
-  const b=e.target.closest("[data-act]");if(!b)return;const id=b.closest(".ex").dataset.id;
-  if(b.dataset.act==="done"){const en=entry(id);en.done=!en.done;save();
-    const d=PLAN[dayIdx],p=dayProgress(d);if(en.done&&p.done===p.total)toast("Xong buổi hôm nay 💪");render()}
-  else{openId=openId===id?null:id;render();if(openId){const el=document.querySelector('.ex[data-id="'+openId+'"]');if(el){const r=el.getBoundingClientRect();if(r.top<70||r.top>innerHeight-120)window.scrollBy({top:r.top-80,behavior:"smooth"})}}}
-});
-document.getElementById("main").addEventListener("input",e=>{
-  const t=e.target;if(!t.dataset.id)return;const en=entry(t.dataset.id);const i=+t.dataset.i;
-  en.sets[i]=en.sets[i]||{};en.sets[i][t.dataset.f]=t.value.replace(",",".");save();
-  const it=PLAN[dayIdx].items.find(x=>x.id===t.dataset.id);const h=t.closest(".ex-body").querySelector(".hint");
-  if(h)h.outerHTML=hintFor(it);
-});
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
 
-/* theme */
-function applyTheme(t){if(t)document.documentElement.setAttribute("data-theme",t);else document.documentElement.removeAttribute("data-theme");
-  document.querySelectorAll('meta[name="theme-color"]').forEach(m=>{if(t)m.setAttribute("content",t==="dark"?"#0e0f11":"#f4f3ef");else m.setAttribute("content",m.media.indexOf("dark")>-1?"#0e0f11":"#f4f3ef")})}
-let theme=null;try{theme=localStorage.getItem(KEY+"-theme")}catch(e){}applyTheme(theme);
-document.getElementById("themeBtn").onclick=()=>{
-  const dark=theme?theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
-  theme=dark?"light":"dark";applyTheme(theme);try{localStorage.setItem(KEY+"-theme",theme)}catch(e){}
-};
-render();
-</script>
+    function selectDifficulty(diff) {
+      selectedDiff = diff;
+      showScreen('screen-role');
+    }
+
+    function pickWeightedSpeed(pool, prevSpeed, isFinalMinutes) {
+      let filtered = pool.filter(item => item.s !== prevSpeed);
+      if (filtered.length === 0) filtered = pool;
+
+      const adjusted = filtered.map(item => {
+        let weight = item.w;
+        if (isFinalMinutes && item.s >= 10) weight *= 2.2;
+        return { s: item.s, w: weight };
+      });
+
+      const totalWeight = adjusted.reduce((sum, item) => sum + item.w, 0);
+      let rand = Math.random() * totalWeight;
+      for (const item of adjusted) {
+        if (rand < item.w) return item.s;
+        rand -= item.w;
+      }
+      return adjusted[0].s;
+    }
+
+    function randomDuration(min, max) {
+      const steps = Math.floor((max - min) / 5) + 1;
+      return min + Math.floor(Math.random() * steps) * 5;
+    }
+
+    function buildTimeline(diffKey, roleKey) {
+      const cfg = DIFF_CONFIG[diffKey];
+      const role = ROLE_WEIGHTS[roleKey];
+      const list = [];
+
+      function generateHalf(halfName, targetSeconds) {
+        let acc = 0;
+        list.push({ speed: 6, duration: 60, label: 'KICK OFF', half: halfName });
+        acc += 60;
+        let prevSpeed = 6;
+
+        while (acc < targetSeconds) {
+          const remaining = targetSeconds - acc;
+          const isFinalMinutes = remaining <= 180;
+
+          let pool = role.normal;
+          if (prevSpeed >= 10) pool = role.afterHigh;
+          else if (prevSpeed <= 6) pool = role.afterLow;
+
+          const nextSpeed = pickWeightedSpeed(pool, prevSpeed, isFinalMinutes);
+          const meta = SPEED_META[nextSpeed];
+
+          let dur = randomDuration(meta.minDur, meta.maxDur);
+          if (nextSpeed >= 10) dur += cfg.sprintBonus;
+          if (nextSpeed <= 6) dur = Math.max(35, dur + cfg.restBonus);
+
+          if (remaining - dur < 35) {
+            dur = remaining;
+          }
+
+          list.push({
+            speed: nextSpeed,
+            duration: dur,
+            label: isFinalMinutes && nextSpeed >= 10 ? 'FINAL PUSH' : meta.label,
+            half: halfName
+          });
+
+          acc += dur;
+          prevSpeed = nextSpeed;
+        }
+      }
+
+      generateHalf('H1', cfg.halfSeconds);
+      list.push({ speed: 4, duration: 90, label: 'HALF TIME', half: 'HT' });
+      generateHalf('H2', cfg.halfSeconds);
+      list.push({ speed: 4, duration: 60, label: 'COOL DOWN', half: 'FT' });
+
+      return list;
+    }
+
+    function playChime(speed) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        const freqMap = { 4: 440, 6: 523.25, 8: 659.25, 10: 783.99, 12: 987.77 };
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freqMap[speed] || 587.33, now);
+
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.exponentialRampToValueAtTime(0.3, now + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.6);
+
+        if (speed === 12) {
+          const osc2 = audioCtx.createOscillator();
+          const gain2 = audioCtx.createGain();
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(1174.66, now + 0.16);
+          gain2.gain.setValueAtTime(0.001, now + 0.16);
+          gain2.gain.exponentialRampToValueAtTime(0.35, now + 0.18);
+          gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+          osc2.connect(gain2);
+          gain2.connect(audioCtx.destination);
+          osc2.start(now + 0.16);
+          osc2.stop(now + 0.75);
+        }
+      } catch (e) {}
+    }
+
+    async function requestWakeLock() {
+      try {
+        if ('wakeLock' in navigator) {
+          wakeLock = await navigator.wakeLock.request('screen');
+        }
+      } catch (e) {}
+    }
+
+    function startMatch(roleKey) {
+      timeline = buildTimeline(selectedDiff, roleKey);
+      currentIdx = 0;
+      totalElapsed = 0;
+      isPaused = false;
+      document.getElementById('incline-hint').textContent = DIFF_CONFIG[selectedDiff].incline;
+      document.getElementById('pause-btn').textContent = 'Tạm dừng';
+
+      showScreen('screen-workout');
+      requestWakeLock();
+      loadPhase(0);
+
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(tick, 1000);
+    }
+
+    function loadPhase(idx) {
+      if (idx >= timeline.length) {
+        finishMatch();
+        return;
+      }
+      const current = timeline[idx];
+      phaseTotal = current.duration;
+      phaseRemaining = current.duration;
+
+      const meta = SPEED_META[current.speed] || { color: '#ffffff' };
+      document.getElementById('phase-name').textContent = current.label;
+      document.getElementById('phase-name').style.color = meta.color;
+      document.getElementById('speed-val').textContent = current.speed;
+      document.getElementById('ring-bar').style.stroke = meta.color;
+
+      const ringBox = document.getElementById('ring-box');
+      ringBox.classList.remove('pulse');
+      void ringBox.offsetWidth;
+      ringBox.classList.add('pulse');
+
+      playChime(current.speed);
+      updateUI();
+    }
+
+    function tick() {
+      if (isPaused) return;
+
+      phaseRemaining--;
+      totalElapsed++;
+
+      if (phaseRemaining <= 0) {
+        currentIdx++;
+        loadPhase(currentIdx);
+      } else {
+        updateUI();
+      }
+    }
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60).toString().padStart(2, '0');
+      const s = (sec % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function updateUI() {
+      const current = timeline[currentIdx];
+      if (!current) return;
+
+      document.getElementById('phase-timer').textContent = formatTime(phaseRemaining);
+      document.getElementById('half-indicator').innerHTML = `${current.half} • <span>${formatTime(totalElapsed)}</span>`;
+
+      const offset = RING_CIRCUMFERENCE - (phaseRemaining / phaseTotal) * RING_CIRCUMFERENCE;
+      document.getElementById('ring-bar').style.strokeDashoffset = offset;
+    }
+
+    function togglePause() {
+      isPaused = !isPaused;
+      document.getElementById('pause-btn').textContent = isPaused ? 'Tiếp tục' : 'Tạm dừng';
+    }
+
+    function finishMatch() {
+      clearInterval(timerInterval);
+      document.getElementById('phase-name').textContent = 'FULL TIME';
+      document.getElementById('speed-val').textContent = 'DONE';
+      document.getElementById('phase-timer').textContent = '00:00';
+      playChime(8);
+    }
+
+    function endWorkout() {
+      clearInterval(timerInterval);
+      if (wakeLock) wakeLock.release().catch(() => {});
+      showScreen('screen-diff');
+    }
+  </script>
 </body>
 </html>
