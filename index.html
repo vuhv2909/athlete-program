@@ -1,642 +1,139 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Match Pace</title>
-  <style>
-    :root {
-      --bg: #000000;
-      --card: #121214;
-      --card-hover: #1c1c1f;
-      --text: #f5f5f7;
-      --subtext: #86868b;
-      --border: #262629;
-      
-      --c-walk: #30d158;    /* 4 km/h - Green */
-      --c-jog: #0a84ff;     /* 6 km/h - Blue */
-      --c-cruise: #ffd60a;  /* 8 km/h - Yellow */
-      --c-press: #ff9f0a;   /* 10 km/h - Orange */
-      --c-sprint: #ff453a;  /* 12 km/h - Red */
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
-      height: 100dvh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .screen {
-      display: none;
-      width: 100%;
-      max-width: 460px;
-      height: 100%;
-      padding: 36px 24px;
-      flex-direction: column;
-      justify-content: space-between;
-      animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .screen.active {
-      display: flex;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .header-group {
-      margin-top: 12px;
-    }
-
-    .eyebrow {
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      color: var(--subtext);
-      margin-bottom: 6px;
-    }
-
-    h1 {
-      font-size: 34px;
-      font-weight: 700;
-      letter-spacing: -0.6px;
-      line-height: 1.15;
-    }
-
-    .options-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin: auto 0;
-    }
-
-    .option-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 22px 24px;
-      text-align: left;
-      cursor: pointer;
-      transition: transform 0.15s ease, background 0.2s ease;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .option-card:active {
-      transform: scale(0.98);
-      background: var(--card-hover);
-    }
-
-    .option-title {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: var(--text);
-    }
-
-    .option-desc {
-      font-size: 14px;
-      color: var(--subtext);
-      line-height: 1.35;
-    }
-
-    .option-badge {
-      background: rgba(255, 255, 255, 0.08);
-      padding: 6px 12px;
-      border-radius: 99px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      white-space: nowrap;
-      margin-left: 12px;
-    }
-
-    .back-btn {
-      background: none;
-      border: none;
-      color: var(--subtext);
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      padding: 12px 0;
-      text-align: center;
-    }
-
-    .workout-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-
-    .pill-info {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 8px 16px;
-      border-radius: 99px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--subtext);
-      letter-spacing: 0.4px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .pill-info span {
-      color: var(--text);
-    }
-
-    .ring-container {
-      position: relative;
-      width: 310px;
-      height: 310px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    svg.progress-ring {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
-    }
-
-    .ring-bg {
-      fill: none;
-      stroke: #161618;
-      stroke-width: 10;
-    }
-
-    .ring-bar {
-      fill: none;
-      stroke: var(--c-walk);
-      stroke-width: 10;
-      stroke-linecap: round;
-      transition: stroke-dashoffset 0.3s linear, stroke 0.4s ease;
-    }
-
-    .speed-label {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 2.2px;
-      text-transform: uppercase;
-      margin-bottom: -4px;
-      transition: color 0.4s ease;
-    }
-
-    .speed-value {
-      font-size: 112px;
-      font-weight: 700;
-      letter-spacing: -4px;
-      line-height: 1;
-      font-variant-numeric: tabular-nums;
-      margin: 4px 0;
-    }
-
-    .speed-unit {
-      font-size: 15px;
-      color: var(--subtext);
-      font-weight: 500;
-      margin-bottom: 14px;
-    }
-
-    .phase-timer {
-      font-size: 30px;
-      font-weight: 600;
-      font-variant-numeric: tabular-nums;
-      color: var(--text);
-      letter-spacing: -0.5px;
-    }
-
-    .workout-bottom {
-      width: 100%;
-    }
-
-    .controls-row {
-      display: flex;
-      gap: 12px;
-    }
-
-    .ctrl-btn {
-      flex: 1;
-      padding: 18px;
-      border-radius: 18px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      background: var(--card);
-      color: var(--text);
-      border: 1px solid var(--border);
-      transition: transform 0.12s ease, background 0.2s ease;
-    }
-
-    .ctrl-btn:active {
-      transform: scale(0.97);
-      background: var(--card-hover);
-    }
-
-    .ctrl-btn.danger {
-      color: #ff453a;
-    }
-
-    @keyframes pulseScreen {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.045); }
-      100% { transform: scale(1); }
-    }
-    .pulse {
-      animation: pulseScreen 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101713">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lean Athletic">
+<meta name="description" content="Theo dõi lịch tập Lean Athletic theo tuần.">
+<title>Lean Athletic — Training Tracker</title>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23101713'/%3E%3Cpath d='M35 90h110M54 65v50M126 65v50M35 78v24M145 78v24' stroke='%2396e6b3' stroke-width='12' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:dark;--bg:#0d120f;--panel:#151d18;--panel2:#1b2620;--line:#29372e;--text:#f1f6f2;--muted:#9aaba0;--green:#96e6b3;--green2:#c5f5d5;--orange:#f4bd78;--red:#ff8e8e;--radius:19px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at top,#18251c 0,#0d120f 45%);color:var(--text);font:16px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;padding:0 0 calc(28px + env(safe-area-inset-bottom))}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{width:min(760px,100%);margin:auto;padding:env(safe-area-inset-top) 16px 0}
+header{padding:20px 2px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px}.eyebrow{font-size:11px;letter-spacing:.17em;color:var(--green);font-weight:800}.brand{font-size:25px;font-weight:850;letter-spacing:-.045em;margin-top:3px}.brand span{color:var(--green)}.top-pill{border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:8px 11px;font-size:11px;white-space:nowrap}
+.hero{background:linear-gradient(135deg,#1b2b20,#17221b 70%);border:1px solid #314638;border-radius:24px;padding:19px;margin:7px 0 16px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:150px;height:150px;border:1px solid #42634c;border-radius:50%;right:-65px;top:-75px;box-shadow:0 0 0 18px #ffffff05,0 0 0 38px #ffffff03}.hero h1{font-size:25px;line-height:1.08;letter-spacing:-.04em;margin:8px 0}.hero p{color:#b7c8bc;font-size:13px;max-width:390px;margin:8px 0 15px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#0e1711a8;border:1px solid #314638;border-radius:14px;padding:10px}.stat b{display:block;font-size:20px;color:var(--green2)}.stat small{font-size:10px;color:var(--muted)}
+.tabs{display:flex;gap:7px;overflow:auto;padding:2px 0 13px;scrollbar-width:none}.tabs button{border:1px solid var(--line);background:#111914;color:var(--muted);padding:9px 13px;border-radius:999px;white-space:nowrap;font-size:12px;font-weight:700}.tabs button.active{background:var(--green);border-color:var(--green);color:#102017}
+.section{display:none}.section.active{display:block}.section-head{display:flex;justify-content:space-between;align-items:end;margin:8px 2px 12px}.section-head h2{font-size:19px;letter-spacing:-.03em;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:3px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px;margin:10px 0}.day-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.day-name{font-size:15px;font-weight:800}.day-focus{font-size:11px;color:var(--muted);margin-top:2px}.tag{font-size:10px;color:var(--green);background:#203629;border-radius:99px;padding:5px 8px;font-weight:800}.tag.rest{color:var(--orange);background:#382b1d}
+.exercise{display:grid;grid-template-columns:minmax(0,1fr) 68px 68px;gap:8px;align-items:center;padding:11px 0;border-top:1px solid #27332b;margin-top:9px}.exercise:first-of-type{margin-top:13px}.exname{font-size:13px;font-weight:700}.exmeta{font-size:10px;color:var(--muted);margin-top:2px}.mini-label{font-size:9px;color:var(--muted);display:block;margin-bottom:4px}.field{width:100%;background:#0d140f;border:1px solid #304036;color:var(--text);border-radius:10px;padding:9px 7px;outline:none;min-width:0;font-size:13px}.field:focus{border-color:var(--green)}.done-row{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:11px;margin-top:10px}.done-row input{accent-color:var(--green);width:17px;height:17px}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.metric input{width:100%}.wide{grid-column:1/-1}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.btn{border:0;border-radius:13px;padding:12px 15px;font-weight:800;font-size:12px;background:var(--green);color:#102017}.btn.secondary{background:#202c24;border:1px solid var(--line);color:var(--text)}.btn.danger{background:#3b2222;color:#ffb5b5;border:1px solid #603535}.btn:active{transform:scale(.98)}
+.note{width:100%;min-height:76px;resize:vertical;background:#0d140f;border:1px solid #304036;color:var(--text);border-radius:12px;padding:11px;font-size:13px}
+.history-item{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid var(--line);padding:12px 0}.history-item:first-child{border-top:0}.history-item b{font-size:13px}.history-item small{display:block;color:var(--muted);font-size:10px;margin-top:3px}.history-item button{padding:8px 10px;border-radius:10px;background:#202c24;color:var(--text);border:1px solid var(--line);font-size:11px}
+.progress{height:8px;background:#263229;border-radius:99px;overflow:hidden;margin:10px 0}.progress>i{display:block;height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}.empty{color:var(--muted);font-size:12px;text-align:center;padding:22px 10px}.hint{font-size:11px;color:var(--muted);line-height:1.55}.footer{text-align:center;color:#718078;font-size:10px;padding:20px 10px}
+@media(min-width:600px){.wrap{padding-left:22px;padding-right:22px}.exercise{grid-template-columns:minmax(0,1fr) 90px 90px}.hero{padding:24px}.brand{font-size:29px}}
+</style>
 </head>
 <body>
+<div class="wrap">
+<header><div><div class="eyebrow">YOUR LONG-TERM FITNESS SYSTEM</div><div class="brand">LEAN <span>ATHLETIC</span></div></div><div class="top-pill">TRAINING LOG · 01</div></header>
+<div class="hero">
+  <div class="eyebrow">STRONG · FIT · SUSTAINABLE</div>
+  <h1>Build a body<br>that lasts.</h1>
+  <p>4 buổi sức mạnh · 2 buổi cardio & vận động · 1 ngày phục hồi. Tập đều, tiến bộ từ từ.</p>
+  <div class="stats"><div class="stat"><b>06</b><small>NGÀY / TUẦN</small></div><div class="stat"><b>4 + 2</b><small>STRENGTH / CARDIO</small></div><div class="stat"><b>75–90′</b><small>TỐI ĐA / BUỔI</small></div></div>
+</div>
+<nav class="tabs" aria-label="Điều hướng">
+<button class="active" data-tab="plan">Lịch tập</button><button data-tab="week">Theo dõi tuần</button><button data-tab="history">Lịch sử</button>
+</nav>
 
-  <!-- STEP 1: CHỌN ĐỘ KHÓ -->
-  <div id="screen-diff" class="screen active">
-    <div class="header-group">
-      <div class="eyebrow">Bước 1 / 2</div>
-      <h1>Chọn Cường Độ</h1>
-    </div>
+<section id="plan" class="section active">
+<div class="section-head"><div><h2>Lịch tập hàng tuần</h2><div class="sub">Chạm vào từng bài để ghi mức tạ và reps.</div></div></div>
+<div id="planDays"></div>
+<div class="card"><b style="font-size:13px">Quy tắc tập luyện</b><p class="hint">• Giữ khoảng 2–3 reps dự trữ, không cần tập đến kiệt sức.<br>• Bài chính nghỉ 2–3 phút; bài phụ 60–90 giây.<br>• Tăng reps trước, sau đó mới tăng tạ khi kỹ thuật vẫn tốt.<br>• Nếu đau bất thường, dừng bài và điều chỉnh. 75–90 phút là mức tối đa, không phải thời lượng bắt buộc.</p></div>
+</section>
 
-    <div class="options-list">
-      <div class="option-card" onclick="selectDifficulty('amateur')">
-        <div>
-          <div class="option-title">Amateur</div>
-          <div class="option-desc">20 phút (2 hiệp x 10p)<br>Gợi ý gạt dốc cố định: 3% - 4%</div>
-        </div>
-        <div class="option-badge">20m</div>
-      </div>
+<section id="week" class="section">
+<div class="section-head"><div><h2>Tuần hiện tại</h2><div class="sub">Dữ liệu tự lưu trên thiết bị này.</div></div><span class="tag" id="weekLabel">WEEK</span></div>
+<div class="card">
+ <div class="day-head"><div><div class="day-name">Tiến độ tập luyện</div><div class="day-focus" id="completionText">0 / 6 buổi hoàn thành</div></div><b id="completionPct" style="color:var(--green)">0%</b></div>
+ <div class="progress"><i id="progressBar"></i></div>
+</div>
+<div class="card">
+ <b style="font-size:14px">Chỉ số cơ thể & sức khỏe</b>
+ <div class="sub" style="margin-bottom:13px">Ghi một lần mỗi tuần, tốt nhất cùng thời điểm.</div>
+ <div class="metrics">
+  <div class="metric"><label>Cân nặng (kg)</label><input class="field" type="number" step="0.1" id="weight" placeholder="Ví dụ 88.0"></div>
+  <div class="metric"><label>Vòng eo (cm)</label><input class="field" type="number" step="0.5" id="waist" placeholder="Ví dụ 88"></div>
+  <div class="metric"><label>Nhịp tim nghỉ (bpm)</label><input class="field" type="number" id="rhr" placeholder="Ví dụ 65"></div>
+  <div class="metric"><label>Phút cardio trong tuần</label><input class="field" type="number" id="cardio" placeholder="Ví dụ 120"></div>
+  <div class="metric"><label>Giấc ngủ TB (giờ/đêm)</label><input class="field" type="number" step="0.1" id="sleep" placeholder="Ví dụ 7.5"></div>
+  <div class="metric"><label>Năng lượng (1–5)</label><input class="field" type="number" min="1" max="5" id="energy" placeholder="1 đến 5"></div>
+  <div class="metric wide"><label>Ghi chú tuần này</label><textarea class="note" id="weeklyNote" placeholder="Cảm giác cơ thể, bài tập tiến bộ, điều cần điều chỉnh..."></textarea></div>
+ </div>
+ <div class="actions"><button class="btn" id="saveWeek">Lưu tuần này</button><button class="btn secondary" id="clearWeek">Xóa dữ liệu tuần</button></div>
+ <div class="hint">Dữ liệu được lưu tự động khi bạn nhập. Nút “Lưu tuần này” tạo bản ghi để xem lại trong Lịch sử.</div>
+</div>
+<div class="card">
+ <b style="font-size:14px">Ghi kết quả từng buổi</b>
+ <div class="sub">Đánh dấu khi hoàn thành. Có thể ghi chú cảm nhận.</div>
+ <div id="sessionChecks"></div>
+</div>
+</section>
 
-      <div class="option-card" onclick="selectDifficulty('pro')">
-        <div>
-          <div class="option-title">Pro</div>
-          <div class="option-desc">30 phút (2 hiệp x 15p)<br>Gợi ý gạt dốc cố định: 5% - 6%</div>
-        </div>
-        <div class="option-badge">30m</div>
-      </div>
-
-      <div class="option-card" onclick="selectDifficulty('elite')">
-        <div>
-          <div class="option-title">Elite</div>
-          <div class="option-desc">45 phút (2 hiệp x 22.5p)<br>Gợi ý gạt dốc cố định: 7% - 8%</div>
-        </div>
-        <div class="option-badge">45m</div>
-      </div>
-    </div>
-
-    <div class="back-btn" style="opacity: 0; pointer-events: none;">.</div>
-  </div>
-
-  <!-- STEP 2: CHỌN VỊ TRÍ -->
-  <div id="screen-role" class="screen">
-    <div class="header-group">
-      <div class="eyebrow">Bước 2 / 2</div>
-      <h1>Vị Trí Thi Đấu</h1>
-    </div>
-
-    <div class="options-list">
-      <div class="option-card" onclick="startMatch('striker')">
-        <div>
-          <div class="option-title">Striker</div>
-          <div class="option-desc">Đi bộ rình rập (4-6 km/h) xen kẽ các pha bứt tốc 12 km/h bất ngờ.</div>
-        </div>
-        <div class="option-badge">HIIT</div>
-      </div>
-
-      <div class="option-card" onclick="startMatch('midfielder')">
-        <div>
-          <div class="option-title">Midfielder</div>
-          <div class="option-desc">Bao sân bền bỉ. Duy trì 8-10 km/h liên tục, rất ít nghỉ đi bộ.</div>
-        </div>
-        <div class="option-badge">Tempo</div>
-      </div>
-
-      <div class="option-card" onclick="startMatch('winger')">
-        <div>
-          <div class="option-title">Winger</div>
-          <div class="option-desc">Biến tốc linh hoạt dọc biên, kết hợp dốc sức và thả lỏng.</div>
-        </div>
-        <div class="option-badge">Wave</div>
-      </div>
-    </div>
-
-    <button class="back-btn" onclick="showScreen('screen-diff')">← Quay lại chọn độ khó</button>
-  </div>
-
-  <!-- STEP 3: MÀN HÌNH CHẠY TỰ ĐỘNG (KHÔNG BÁO TRƯỚC) -->
-  <div id="screen-workout" class="screen">
-    <div class="workout-top">
-      <div class="pill-info" id="half-indicator">H1 • <span>00:00</span></div>
-      <div class="pill-info">Incline <span id="incline-hint">5%</span></div>
-    </div>
-
-    <div class="ring-container" id="ring-box">
-      <svg class="progress-ring" viewBox="0 0 310 310">
-        <circle class="ring-bg" cx="155" cy="155" r="142"></circle>
-        <circle class="ring-bar" id="ring-bar" cx="155" cy="155" r="142" stroke-dasharray="892.21" stroke-dashoffset="0"></circle>
-      </svg>
-      <div class="speed-label" id="phase-name">KICK OFF</div>
-      <div class="speed-value" id="speed-val">6</div>
-      <div class="speed-unit">km/h</div>
-      <div class="phase-timer" id="phase-timer">01:00</div>
-    </div>
-
-    <div class="workout-bottom">
-      <div class="controls-row">
-        <button class="ctrl-btn" id="pause-btn" onclick="togglePause()">Tạm dừng</button>
-        <button class="ctrl-btn danger" onclick="endWorkout()">Kết thúc</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const DIFF_CONFIG = {
-      amateur: { halfSeconds: 600, incline: '3-4%', sprintBonus: 0, restBonus: 15 },
-      pro:     { halfSeconds: 900, incline: '5-6%', sprintBonus: 10, restBonus: 0 },
-      elite:   { halfSeconds: 1350, incline: '7-8%', sprintBonus: 15, restBonus: -10 }
-    };
-
-    const SPEED_META = {
-      4:  { label: 'WALK',     color: 'var(--c-walk)',   minDur: 45, maxDur: 70 },
-      6:  { label: 'JOG',      color: 'var(--c-jog)',    minDur: 50, maxDur: 75 },
-      8:  { label: 'CRUISE',   color: 'var(--c-cruise)', minDur: 55, maxDur: 85 },
-      10: { label: 'PRESSING', color: 'var(--c-press)',  minDur: 45, maxDur: 70 },
-      12: { label: 'SPRINT',   color: 'var(--c-sprint)', minDur: 35, maxDur: 55 }
-    };
-
-    const ROLE_WEIGHTS = {
-      striker: {
-        normal:    [{ s: 4, w: 30 }, { s: 6, w: 20 }, { s: 8, w: 15 }, { s: 10, w: 10 }, { s: 12, w: 25 }],
-        afterHigh: [{ s: 4, w: 65 }, { s: 6, w: 35 }],
-        afterLow:  [{ s: 8, w: 25 }, { s: 10, w: 25 }, { s: 12, w: 50 }]
-      },
-      midfielder: {
-        normal:    [{ s: 4, w: 5 },  { s: 6, w: 15 }, { s: 8, w: 40 }, { s: 10, w: 30 }, { s: 12, w: 10 }],
-        afterHigh: [{ s: 6, w: 40 }, { s: 8, w: 60 }],
-        afterLow:  [{ s: 8, w: 55 }, { s: 10, w: 35 }, { s: 12, w: 10 }]
-      },
-      winger: {
-        normal:    [{ s: 4, w: 15 }, { s: 6, w: 25 }, { s: 8, w: 25 }, { s: 10, w: 15 }, { s: 12, w: 20 }],
-        afterHigh: [{ s: 4, w: 45 }, { s: 6, w: 55 }],
-        afterLow:  [{ s: 8, w: 40 }, { s: 10, w: 35 }, { s: 12, w: 25 }]
-      }
-    };
-
-    const RING_CIRCUMFERENCE = 892.21; // 2 * PI * 142
-    let selectedDiff = 'pro';
-    let timeline = [];
-    let currentIdx = 0;
-    let phaseRemaining = 0;
-    let phaseTotal = 0;
-    let totalElapsed = 0;
-    let timerInterval = null;
-    let isPaused = false;
-    let audioCtx = null;
-    let wakeLock = null;
-
-    function showScreen(id) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
-    function selectDifficulty(diff) {
-      selectedDiff = diff;
-      showScreen('screen-role');
-    }
-
-    function pickWeightedSpeed(pool, prevSpeed, isFinalMinutes) {
-      let filtered = pool.filter(item => item.s !== prevSpeed);
-      if (filtered.length === 0) filtered = pool;
-
-      const adjusted = filtered.map(item => {
-        let weight = item.w;
-        if (isFinalMinutes && item.s >= 10) weight *= 2.2;
-        return { s: item.s, w: weight };
-      });
-
-      const totalWeight = adjusted.reduce((sum, item) => sum + item.w, 0);
-      let rand = Math.random() * totalWeight;
-      for (const item of adjusted) {
-        if (rand < item.w) return item.s;
-        rand -= item.w;
-      }
-      return adjusted[0].s;
-    }
-
-    function randomDuration(min, max) {
-      const steps = Math.floor((max - min) / 5) + 1;
-      return min + Math.floor(Math.random() * steps) * 5;
-    }
-
-    function buildTimeline(diffKey, roleKey) {
-      const cfg = DIFF_CONFIG[diffKey];
-      const role = ROLE_WEIGHTS[roleKey];
-      const list = [];
-
-      function generateHalf(halfName, targetSeconds) {
-        let acc = 0;
-        list.push({ speed: 6, duration: 60, label: 'KICK OFF', half: halfName });
-        acc += 60;
-        let prevSpeed = 6;
-
-        while (acc < targetSeconds) {
-          const remaining = targetSeconds - acc;
-          const isFinalMinutes = remaining <= 180;
-
-          let pool = role.normal;
-          if (prevSpeed >= 10) pool = role.afterHigh;
-          else if (prevSpeed <= 6) pool = role.afterLow;
-
-          const nextSpeed = pickWeightedSpeed(pool, prevSpeed, isFinalMinutes);
-          const meta = SPEED_META[nextSpeed];
-
-          let dur = randomDuration(meta.minDur, meta.maxDur);
-          if (nextSpeed >= 10) dur += cfg.sprintBonus;
-          if (nextSpeed <= 6) dur = Math.max(35, dur + cfg.restBonus);
-
-          if (remaining - dur < 35) {
-            dur = remaining;
-          }
-
-          list.push({
-            speed: nextSpeed,
-            duration: dur,
-            label: isFinalMinutes && nextSpeed >= 10 ? 'FINAL PUSH' : meta.label,
-            half: halfName
-          });
-
-          acc += dur;
-          prevSpeed = nextSpeed;
-        }
-      }
-
-      generateHalf('H1', cfg.halfSeconds);
-      list.push({ speed: 4, duration: 90, label: 'HALF TIME', half: 'HT' });
-      generateHalf('H2', cfg.halfSeconds);
-      list.push({ speed: 4, duration: 60, label: 'COOL DOWN', half: 'FT' });
-
-      return list;
-    }
-
-    function playChime(speed) {
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-
-        const now = audioCtx.currentTime;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        const freqMap = { 4: 440, 6: 523.25, 8: 659.25, 10: 783.99, 12: 987.77 };
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freqMap[speed] || 587.33, now);
-
-        gain.gain.setValueAtTime(0.001, now);
-        gain.gain.exponentialRampToValueAtTime(0.3, now + 0.02);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start(now);
-        osc.stop(now + 0.6);
-
-        if (speed === 12) {
-          const osc2 = audioCtx.createOscillator();
-          const gain2 = audioCtx.createGain();
-          osc2.type = 'sine';
-          osc2.frequency.setValueAtTime(1174.66, now + 0.16);
-          gain2.gain.setValueAtTime(0.001, now + 0.16);
-          gain2.gain.exponentialRampToValueAtTime(0.35, now + 0.18);
-          gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
-          osc2.connect(gain2);
-          gain2.connect(audioCtx.destination);
-          osc2.start(now + 0.16);
-          osc2.stop(now + 0.75);
-        }
-      } catch (e) {}
-    }
-
-    async function requestWakeLock() {
-      try {
-        if ('wakeLock' in navigator) {
-          wakeLock = await navigator.wakeLock.request('screen');
-        }
-      } catch (e) {}
-    }
-
-    function startMatch(roleKey) {
-      timeline = buildTimeline(selectedDiff, roleKey);
-      currentIdx = 0;
-      totalElapsed = 0;
-      isPaused = false;
-      document.getElementById('incline-hint').textContent = DIFF_CONFIG[selectedDiff].incline;
-      document.getElementById('pause-btn').textContent = 'Tạm dừng';
-
-      showScreen('screen-workout');
-      requestWakeLock();
-      loadPhase(0);
-
-      if (timerInterval) clearInterval(timerInterval);
-      timerInterval = setInterval(tick, 1000);
-    }
-
-    function loadPhase(idx) {
-      if (idx >= timeline.length) {
-        finishMatch();
-        return;
-      }
-      const current = timeline[idx];
-      phaseTotal = current.duration;
-      phaseRemaining = current.duration;
-
-      const meta = SPEED_META[current.speed] || { color: '#ffffff' };
-      document.getElementById('phase-name').textContent = current.label;
-      document.getElementById('phase-name').style.color = meta.color;
-      document.getElementById('speed-val').textContent = current.speed;
-      document.getElementById('ring-bar').style.stroke = meta.color;
-
-      const ringBox = document.getElementById('ring-box');
-      ringBox.classList.remove('pulse');
-      void ringBox.offsetWidth;
-      ringBox.classList.add('pulse');
-
-      playChime(current.speed);
-      updateUI();
-    }
-
-    function tick() {
-      if (isPaused) return;
-
-      phaseRemaining--;
-      totalElapsed++;
-
-      if (phaseRemaining <= 0) {
-        currentIdx++;
-        loadPhase(currentIdx);
-      } else {
-        updateUI();
-      }
-    }
-
-    function formatTime(sec) {
-      const m = Math.floor(sec / 60).toString().padStart(2, '0');
-      const s = (sec % 60).toString().padStart(2, '0');
-      return `${m}:${s}`;
-    }
-
-    function updateUI() {
-      const current = timeline[currentIdx];
-      if (!current) return;
-
-      document.getElementById('phase-timer').textContent = formatTime(phaseRemaining);
-      document.getElementById('half-indicator').innerHTML = `${current.half} • <span>${formatTime(totalElapsed)}</span>`;
-
-      const offset = RING_CIRCUMFERENCE - (phaseRemaining / phaseTotal) * RING_CIRCUMFERENCE;
-      document.getElementById('ring-bar').style.strokeDashoffset = offset;
-    }
-
-    function togglePause() {
-      isPaused = !isPaused;
-      document.getElementById('pause-btn').textContent = isPaused ? 'Tiếp tục' : 'Tạm dừng';
-    }
-
-    function finishMatch() {
-      clearInterval(timerInterval);
-      document.getElementById('phase-name').textContent = 'FULL TIME';
-      document.getElementById('speed-val').textContent = 'DONE';
-      document.getElementById('phase-timer').textContent = '00:00';
-      playChime(8);
-    }
-
-    function endWorkout() {
-      clearInterval(timerInterval);
-      if (wakeLock) wakeLock.release().catch(() => {});
-      showScreen('screen-diff');
-    }
-  </script>
-</body>
-</html>
+<section id="history" class="section">
+<div class="section-head"><div><h2>Lịch sử tiến độ</h2><div class="sub">So sánh những tuần đã lưu.</div></div></div>
+<div class="card"><div id="historyList"><div class="empty">Chưa có tuần nào được lưu.</div></div></div>
+<div class="card">
+ <b style="font-size:14px">Sao lưu dữ liệu</b>
+ <p class="hint">Xuất file JSON để giữ bản sao hoặc chuyển dữ liệu sang thiết bị khác. Dữ liệu trong trình duyệt có thể mất nếu xóa dữ liệu website.</p>
+ <div class="actions"><button class="btn secondary" id="exportBtn">Xuất bản sao</button><button class="btn secondary" id="importBtn">Nhập bản sao</button><input type="file" id="importFile" accept="application/json" hidden></div>
+</div>
+</section>
+<div class="footer">LEAN ATHLETIC · CONSISTENCY OVER INTENSITY</div>
+</div>
+<script>
+const days=[
+ {id:"mon",day:"Thứ 2",name:"Upper A",focus:"Thân trên · sức mạnh",type:"STRENGTH",ex:[["Dumbbell Bench Press","3 × 8–12"],["Lat Pulldown","3 × 8–12"],["Seated Cable Row","3 × 10–12"],["Shoulder Press Machine","2 × 8–12"],["Lateral Raise","3 × 12–15"],["Triceps Pushdown","2 × 10–15"],["Dumbbell Curl","2 × 10–15"]]},
+ {id:"tue",day:"Thứ 3",name:"Lower A",focus:"Chân · mông · core",type:"STRENGTH",ex:[["Leg Press","3 × 8–12"],["Dumbbell Romanian Deadlift","3 × 8–12"],["Seated Leg Curl","3 × 10–15"],["Leg Extension","2 × 12–15"],["Standing Calf Raise","3 × 12–15"],["Plank","3 × 30–45 giây"]]},
+ {id:"wed",day:"Thứ 4",name:"Cardio + Mobility",focus:"Tim mạch · linh hoạt",type:"CARDIO",ex:[["Zone 2 Cardio","40–45 phút"],["Hip Mobility","5 phút"],["Ankle Mobility","5 phút"],["Thoracic Mobility","5 phút"]]},
+ {id:"thu",day:"Thứ 5",name:"Upper B",focus:"Thân trên · phát triển cơ",type:"STRENGTH",ex:[["Incline Dumbbell Press","3 × 8–12"],["Chest Supported Row","3 × 8–12"],["Neutral Grip Lat Pulldown","2 × 10–12"],["Pec Deck","2 × 12–15"],["Lateral Raise","3 × 12–15"],["Rear Delt Fly","2 × 12–15"],["Biceps Curl","2 × 10–15"],["Triceps Extension","2 × 10–15"]]},
+ {id:"fri",day:"Thứ 6",name:"Lower B",focus:"Chân · hông · ổn định",type:"STRENGTH",ex:[["Goblet Squat","3 × 8–12"],["Hip Thrust","3 × 8–12"],["Bulgarian Split Squat","2 × 8–10 mỗi chân"],["Seated Leg Curl","3 × 10–15"],["Calf Raise","3 × 12–15"],["Dead Bug","3 × 10 mỗi bên"]]},
+ {id:"sat",day:"Thứ 7",name:"Cardio + Athletic",focus:"Sức bền · vận động",type:"CARDIO",ex:[["Zone 2 Cardio","35–40 phút"],["Farmer’s Walk","3 × 30 giây"],["Single-leg Balance","2 × 30 giây mỗi chân"],["Mobility","10 phút"]]},
+ {id:"sun",day:"Chủ nhật",name:"Rest",focus:"Nghỉ ngơi / đi bộ nhẹ",type:"REST",ex:[]}
+];
+const $=id=>document.getElementById(id);
+const KEY="leanAthleticTracker_v1";
+let db=JSON.parse(localStorage.getItem(KEY)||'{"weeks":{},"history":[]}');
+const today=new Date();
+function mondayOf(d){let x=new Date(d);x.setHours(0,0,0,0);x.setDate(x.getDate()-((x.getDay()+6)%7));return x}
+function keyOf(d){return mondayOf(d).toISOString().slice(0,10)}
+let currentKey=keyOf(today);
+function weekText(k){const d=new Date(k+"T12:00:00");return "Tuần bắt đầu "+d.toLocaleDateString("vi-VN",{day:"2-digit",month:"2-digit",year:"numeric"})}
+function current(){if(!db.weeks[currentKey])db.weeks[currentKey]={metrics:{},sessions:{},logs:{},note:""};return db.weeks[currentKey]}
+function persist(){localStorage.setItem(KEY,JSON.stringify(db))}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderPlan(){
+ $("planDays").innerHTML=days.map(d=>`<article class="card"><div class="day-head"><div><div class="day-name">${d.day} — ${d.name}</div><div class="day-focus">${d.focus}</div></div><span class="tag ${d.type==="REST"?"rest":""}">${d.type}</span></div>${d.ex.map((e,i)=>`<div class="exercise"><div><div class="exname">${e[0]}</div><div class="exmeta">${e[1]}</div></div><div><label class="mini-label">Tạ</label><input class="field log-input" data-day="${d.id}" data-i="${i}" data-k="load" placeholder="kg" inputmode="decimal"></div><div><label class="mini-label">Reps</label><input class="field log-input" data-day="${d.id}" data-i="${i}" data-k="reps" placeholder="reps" inputmode="numeric"></div></div>`).join("")}<label class="done-row"><input type="checkbox" class="session-check" data-day="${d.id}"> Đánh dấu hoàn thành buổi này</label></article>`).join("");
+ document.querySelectorAll(".log-input").forEach(el=>el.addEventListener("input",()=>{const w=current();w.logs[el.dataset.day+"_"+el.dataset.i]??={};w.logs[el.dataset.day+"_"+el.dataset.i][el.dataset.k]=el.value;persist()}));
+ document.querySelectorAll(".session-check").forEach(el=>el.addEventListener("change",()=>{current().sessions[el.dataset.day]=el.checked;persist();updateProgress();renderChecks()}));
+}
+function renderWeek(){
+ $("weekLabel").textContent=weekText(currentKey);
+ const w=current();
+ ["weight","waist","rhr","cardio","sleep","energy"].forEach(k=>$(k).value=w.metrics[k]??"");
+ $("weeklyNote").value=w.note||"";
+ document.querySelectorAll(".log-input").forEach(el=>{const v=w.logs[el.dataset.day+"_"+el.dataset.i]?.[el.dataset.k];el.value=v??""});
+ document.querySelectorAll(".session-check").forEach(el=>el.checked=!!w.sessions[el.dataset.day]);
+ updateProgress();renderChecks();
+}
+function updateProgress(){let count=days.filter(d=>d.id!=="sun"&&current().sessions[d.id]).length;let pct=Math.round(count/6*100);$("completionText").textContent=count+" / 6 buổi hoàn thành";$("completionPct").textContent=pct+"%";$("progressBar").style.width=pct+"%"}
+function renderChecks(){$("sessionChecks").innerHTML=days.filter(d=>d.id!=="sun").map(d=>`<label class="done-row" style="padding:7px 0;border-top:1px solid var(--line)"><input type="checkbox" class="session-check2" data-day="${d.id}" ${current().sessions[d.id]?"checked":""}> <span style="flex:1">${d.day} · ${d.name}</span><span style="color:${current().sessions[d.id]?"var(--green)":"var(--muted)"}">${current().sessions[d.id]?"Hoàn thành":"Chưa tập"}</span></label>`).join("");document.querySelectorAll(".session-check2").forEach(el=>el.addEventListener("change",()=>{current().sessions[el.dataset.day]=el.checked;persist();document.querySelectorAll('.session-check[data-day="'+el.dataset.day+'"]').forEach(x=>x.checked=el.checked);updateProgress();renderChecks()}))}
+["weight","waist","rhr","cardio","sleep","energy"].forEach(k=>$(k).addEventListener("input",()=>{current().metrics[k]=$(k).value;persist()}));
+$("weeklyNote").addEventListener("input",()=>{current().note=$("weeklyNote").value;persist()});
+$("saveWeek").addEventListener("click",()=>{const w=current();const entry={key:currentKey,metrics:{...w.metrics},sessions:{...w.sessions},logs:{...w.logs},note:w.note,savedAt:new Date().toISOString()};db.history=db.history.filter(x=>x.key!==currentKey);db.history.push(entry);db.history.sort((a,b)=>a.key.localeCompare(b.key));persist();renderHistory();alert("Đã lưu "+weekText(currentKey))});
+$("clearWeek").addEventListener("click",()=>{if(confirm("Xóa toàn bộ dữ liệu tuần này?")){db.weeks[currentKey]={metrics:{},sessions:{},logs:{},note:""};persist();renderWeek()}});
+function renderHistory(){const arr=[...db.history].sort((a,b)=>b.key.localeCompare(a.key));$("historyList").innerHTML=arr.length?arr.map((x,i)=>`<div class="history-item"><div><b>${weekText(x.key)}</b><small>${x.metrics.weight?x.metrics.weight+" kg": "Chưa ghi cân nặng"} · ${Object.values(x.sessions||{}).filter(Boolean).length}/6 buổi · ${x.metrics.cardio||0} phút cardio</small></div><button data-open="${x.key}">Xem</button></div>`).join(""):'<div class="empty">Chưa có tuần nào được lưu.</div>';document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>showHistory(b.dataset.open)))}
+function showHistory(k){const x=db.history.find(v=>v.key===k);if(!x)return;const m=x.metrics||{};alert(weekText(k)+"\\nCân nặng: "+(m.weight||"—")+" kg\\nVòng eo: "+(m.waist||"—")+" cm\\nNhịp tim nghỉ: "+(m.rhr||"—")+" bpm\\nCardio: "+(m.cardio||"—")+" phút\\nNgủ: "+(m.sleep||"—")+" giờ\\nNăng lượng: "+(m.energy||"—")+"/5\\nBuổi hoàn thành: "+Object.values(x.sessions||{}).filter(Boolean).length+"/6\\nGhi chú: "+(x.note||"—"))}
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===b.dataset.tab));if(b.dataset.tab==="week")renderWeek();if(b.dataset.tab==="history")renderHistory();window.scrollTo({top:0,behavior:"smooth"})}));
+$("exportBtn").addEventListener("click",()=>{const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="lean-athletic-backup.json";a.click();URL.revokeObjectURL(a.href)});
+$("importBtn").addEventListener("click",()=>$("importFile").click());
+$("importFile").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;try{const parsed=JSON.parse(await f.text());if(!parsed.weeks||!parsed.history)throw Error();if(confirm("Nhập bản sao sẽ thay thế dữ liệu hiện tại. Tiếp tục?")){db=parsed;persist();renderWeek();renderHistory();alert("Đã nhập dữ liệu.")}}catch(_){alert("File sao lưu không hợp lệ.")}e.target.value=""});
+renderPlan();renderWeek();renderHistory();persist();
+</script>
+</body></html>
